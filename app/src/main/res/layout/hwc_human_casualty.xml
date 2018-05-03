@@ -1,0 +1,1000 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar3" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                card_view:cardBackgroundColor="@color/transparent"
+                card_view:cardElevation="1dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="20dp"
+                    android:orientation="vertical"
+                    android:padding="5dp">
+
+                    <!--project code-->
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/ProjectCode"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="45dp"
+                            android:hint="Project Code"
+                            android:inputType="text" />
+                    </android.support.design.widget.TextInputLayout>
+
+                    <!--Landscape-->
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginTop="10dp">
+
+                        <TextView
+                            android:id="@+id/landScape"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignBottom="@+id/human_casualty_landscape"
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentStart="true"
+                            android:layout_alignParentTop="true"
+                            android:gravity="center_vertical"
+                            android:paddingLeft="5dp"
+                            android:text="Landscape"
+                            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                        <Spinner
+                            android:id="@+id/human_casualty_landscape"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_alignParentTop="true"
+                            android:layout_toEndOf="@+id/landScape"
+                            android:layout_toRightOf="@+id/landScape" />
+
+                    </RelativeLayout>
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="20dp">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/OtherlandscapeName"
+                            android:layout_width="200dp"
+                            android:layout_height="wrap_content"
+                            android:hint="Landscape Name"
+                            android:inputType="textMultiLine"
+                            android:visibility="invisible"
+
+                            />
+                    </android.support.design.widget.TextInputLayout>
+
+                    <!--Agreement No-->
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/human_casualty_text_input_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/human_casualty_Agreement_No"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentBottom="true"
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentStart="true"
+                            android:hint="Agreement Number"
+                            android:inputType="number" />
+                    </android.support.design.widget.TextInputLayout>
+
+                    <!--grantee Name-->
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/granteeName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/human_casualty_Grantee_Name"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="45dp"
+                            android:hint="Grantee Name"
+                            android:inputType="textPersonName" />
+                    </android.support.design.widget.TextInputLayout>
+
+                    <!--Funding Source-->
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/human_casualty_fundingSource"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="45dp"
+                            android:hint="Funding Source"
+                            android:inputType="text" />
+                    </android.support.design.widget.TextInputLayout>
+
+                    <!--fiscal year-->
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/fiscal_year_text_input_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/human_casualty_fiscal_Year"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="45dp"
+                            android:hint="Fiscal Year"
+                            android:inputType="date" />
+                    </android.support.design.widget.TextInputLayout>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/human_wildLife_conflict_light"
+                        android:gravity="center"
+                        android:padding="5dp"
+                        android:text="DOUBLE TAP EDITTEXT TO SELECT DATE"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:textColor="#ffffff" />
+                    <!--date-->
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/date_text_input_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/human_casualty_date"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="45dp"
+                            android:hint="Date"
+                            android:inputType="date" />
+                    </android.support.design.widget.TextInputLayout>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/human_wildLife_conflict_light"
+                        android:gravity="center"
+                        android:padding="5dp"
+                        android:text="DOUBLE TAP EDITTEXT TO SELECT TIME"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:textColor="#ffffff" />
+                    <!--time-->
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/time_text_input_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/human_casualty_time"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="45dp"
+                            android:hint="Time"
+                            android:inputType="date" />
+                    </android.support.design.widget.TextInputLayout>
+
+                    <!--District Name-->
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/DistrictName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/human_casualty_DistrictName"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="45dp"
+                            android:hint="District Name"
+                            android:inputType="textPersonName" />
+                    </android.support.design.widget.TextInputLayout>
+
+                    <!--VDC /Municipality Name-->
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/Vdc_nagarpalika"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/human_casualty_Vdc_Municipality_Name"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="45dp"
+                            android:hint="VDC / Municipality"
+                            android:inputType="textPersonName" />
+                    </android.support.design.widget.TextInputLayout>
+
+                    <!--Location of incidence-->
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/Location_of_incidence"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/human_casualty_location"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="45dp"
+                            android:hint="Location of Incidence (Specify)"
+                            android:inputType="textPersonName" />
+                    </android.support.design.widget.TextInputLayout>
+
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <!--get Gps Location House hold-->
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                card_view:cardBackgroundColor="@color/transparent"
+                card_view:cardElevation="1dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:orientation="vertical"
+                    android:padding="5dp">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_centerVertical="true"
+                        android:layout_margin="@dimen/layout_margin"
+                        android:padding="5dp">
+
+                        <Button
+                            android:id="@+id/human_casualty_GpsStart"
+                            android:layout_width="212dp"
+                            android:layout_height="wrap_content"
+                            android:layout_centerHorizontal="true"
+                            android:background="@drawable/button_pressed_hwc_light"
+                            android:gravity="center"
+                            android:text="Get gps location"
+                            android:textColor="#ffffff" />
+
+                    </RelativeLayout>
+
+                    <Button
+                        android:id="@+id/human_casualty_preview_map"
+                        android:layout_width="212dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:background="@drawable/button_pressed_hwc_light"
+                        android:text="Preview Map"
+                        android:textColor="#ffffff" />
+
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <!--Wildlife causing HWC-->
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                card_view:cardBackgroundColor="@color/transparent"
+                card_view:cardElevation="1dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:layout_margin="@dimen/layout_margin"
+                    android:padding="5dp">
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/human_casualty_wildlife_causing_HWC"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="45dp"
+                            android:hint="Wildlife Species causing HWC"
+                            android:inputType="text" />
+                    </android.support.design.widget.TextInputLayout>
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
+
+            <!--Name of wildlife victim-->
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                card_view:cardBackgroundColor="@color/transparent"
+                card_view:cardElevation="1dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:layout_margin="@dimen/layout_margin"
+                    android:padding="5dp">
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/human_casualty_name_of_wildlife_victim"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="45dp"
+                            android:hint="Name of wildlife victim"
+                            android:inputType="text" />
+                    </android.support.design.widget.TextInputLayout>
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
+            <!--Gender-->
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                card_view:cardBackgroundColor="@color/transparent"
+                card_view:cardElevation="1dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:layout_margin="@dimen/layout_margin"
+                    android:padding="5dp">
+
+                    <TextView
+                        android:id="@+id/casualty_gender"
+                        android:layout_width="200dp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:gravity="center_vertical"
+                        android:paddingLeft="5dp"
+                        android:text="Gender"
+                        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                    <Spinner
+                        android:id="@+id/human_casualty_gender"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_toEndOf="@+id/casualty_gender"
+                        android:layout_toRightOf="@+id/casualty_gender" />
+
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
+
+            <!--age-->
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                card_view:cardBackgroundColor="@color/transparent"
+                card_view:cardElevation="1dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:layout_margin="@dimen/layout_margin"
+                    android:padding="5dp">
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/human_casualty_age"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="45dp"
+                            android:hint="Age"
+                            android:inputType="number" />
+                    </android.support.design.widget.TextInputLayout>
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
+
+            <!--Economic well being-->
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                card_view:cardBackgroundColor="@color/transparent"
+                card_view:cardElevation="1dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:layout_margin="@dimen/layout_margin"
+                    android:padding="5dp">
+
+                    <TextView
+                        android:id="@+id/economicWellBeing"
+                        android:layout_width="250dp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:gravity="center_vertical"
+                        android:paddingLeft="5dp"
+                        android:text="Economic Well Being"
+                        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                    <Spinner
+                        android:id="@+id/human_casualty_economicWellBeing"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_toEndOf="@+id/economicWellBeing"
+                        android:layout_toRightOf="@+id/economicWellBeing" />
+
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
+
+            <!--Type of casualty-->
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                card_view:cardBackgroundColor="@color/transparent"
+                card_view:cardElevation="1dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:layout_margin="@dimen/layout_margin"
+                    android:padding="5dp">
+
+                    <TextView
+                        android:id="@+id/CasaultyType"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBottom="@+id/human_casualty_type"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:gravity="center_vertical"
+                        android:paddingLeft="5dp"
+                        android:text="Casualty Type"
+                        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                    <Spinner
+                        android:id="@+id/human_casualty_type"
+                        android:layout_width="220dp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_toEndOf="@+id/CasaultyType"
+                        android:layout_toRightOf="@+id/CasaultyType" />
+
+                </RelativeLayout>
+
+            </android.support.v7.widget.CardView>
+
+            <!--Photograph of the site, victim and wild animal-->
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                card_view:cardBackgroundColor="@color/transparent"
+                card_view:cardElevation="1dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:layout_margin="@dimen/layout_margin"
+                    android:padding="5dp">
+
+                    <TextView
+                        android:id="@+id/forestProtectionPhotographSiteLable"
+                        android:layout_width="200dp"
+                        android:layout_height="50dp"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:gravity="center_vertical"
+                        android:paddingLeft="5dp"
+                        android:text="Photograph"
+                        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                    <ImageButton
+                        android:id="@+id/human_casualty_photo_site"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_alignBottom="@+id/forestProtectionPhotographSiteLable"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:background="@drawable/cam4"
+                        android:src="@drawable/button_pressed_transparent" />
+
+                    <ImageView
+                        android:id="@+id/human_casualty_PhotographSiteimageViewPreview"
+                        android:layout_width="200dp"
+                        android:layout_height="200dp"
+                        android:layout_below="@+id/forestProtectionPhotographSiteLable"
+                        android:layout_centerHorizontal="true" />
+
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
+
+            <!--Remarks (How did the incident occur?) -->
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                card_view:cardBackgroundColor="@color/transparent"
+                card_view:cardElevation="1dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/layout_margin">
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/human_casualty_remarks"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="45dp"
+                            android:hint="Remarks (Describe how did the incident occur?)"
+                            android:inputType="text" />
+                    </android.support.design.widget.TextInputLayout>
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
+
+            <!--Compensation-->
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                card_view:cardBackgroundColor="@color/transparent"
+                card_view:cardElevation="1dp"
+                android:layout_margin="10dp">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_margin="@dimen/layout_margin"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:padding="5dp">
+
+                    <TextView
+                        android:id="@+id/human_casualty_compensation"
+                        android:layout_width="240dp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:gravity="center_vertical"
+                        android:paddingLeft="5dp"
+                        android:text="Compensation"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:layout_alignParentTop="true" />
+
+                    <Spinner
+                        android:id="@+id/human_casualty_spinner_compensation"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_toEndOf="@+id/human_casualty_compensation"
+                        android:layout_toRightOf="@+id/human_casualty_compensation"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentBottom="true" />
+
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
+
+            <!--Compensated Amount-->
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                card_view:cardBackgroundColor="@color/transparent"
+                card_view:cardElevation="1dp"
+                android:layout_margin="10dp">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/layout_margin">
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/human_casualty_compensated_amount"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Compensated Amount (NRs)"
+                            android:inputType="number"
+                            android:layout_marginTop="45dp"
+                            />
+                    </android.support.design.widget.TextInputLayout>
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
+
+            <!--Compensation source-->
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                card_view:cardBackgroundColor="@color/transparent"
+                card_view:cardElevation="1dp"
+                android:layout_margin="10dp">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/layout_margin">
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/human_casualty_compensation_source"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Compensation Source"
+                            android:inputType="textPersonName"
+                            android:layout_marginTop="45dp"
+                            />
+                    </android.support.design.widget.TextInputLayout>
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
+
+
+            <!--Ethnicity-->
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                card_view:cardBackgroundColor="@color/transparent"
+                card_view:cardElevation="1dp">
+
+                <!--Ethnicity (Dalit, Janajati, Others)-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:orientation="vertical"
+                    android:padding="5dp">
+
+                    <TextView
+                        android:id="@+id/hwc_human_casualty_ethnicity_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:paddingLeft="5dp"
+                        android:text="ETHNICITY"
+                        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                    <!--Dalit Number-->
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/DalitNumber_text_input_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/hwc_human_casualty_ethnicity_text">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/human_casualty_ethnicity_dalit_number"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:hint="Number of Dalit"
+                            android:inputType="number" />
+                    </android.support.design.widget.TextInputLayout>
+
+                    <!--Janajati Number-->
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/JanajatiNumber_text_input_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/DalitNumber_text_input_layout">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/human_casualty_ethnicity_janajati_number"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:hint="Number of Janajati"
+                            android:inputType="number" />
+                    </android.support.design.widget.TextInputLayout>
+
+                    <!--Others Number-->
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/OthersNumber_text_input_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/human_casualty_ethnicity_others_number"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:hint="Others(Number)"
+                            android:inputType="number" />
+                    </android.support.design.widget.TextInputLayout>
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <!--Add RRT name-->
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                card_view:cardBackgroundColor="@color/transparent"
+                card_view:cardElevation="1dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:layout_margin="@dimen/layout_margin"
+                    android:padding="5dp">
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/human_casualty_RRT_name"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="45dp"
+                            android:hint="Add RRT name"
+                            android:inputType="textPersonName" />
+                    </android.support.design.widget.TextInputLayout>
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
+
+            <!--Facilation Support-->
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_weight="0.12"
+                card_view:cardBackgroundColor="@color/transparent"
+                card_view:cardElevation="1dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="20dp"
+                    android:orientation="vertical"
+                    android:padding="5dp">
+
+                    <!--Checkbox items selection-->
+                    <RelativeLayout
+                        android:id="@+id/human_casualty_facilation_support"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp">
+
+                        <TextView
+                            android:id="@+id/textView5"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentTop="true"
+                            android:layout_centerHorizontal="true"
+                            android:text="FACILATION SUPPORT"
+                            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentStart="true"
+                            android:layout_below="@+id/textView5"
+                            android:background="@color/wild_life_trade_control_light"
+                            android:gravity="center"
+                            android:padding="5dp"
+                            android:text="CLICK TO SELECT ITEMS"
+                            android:textAppearance="?android:attr/textAppearanceSmall"
+                            android:textColor="#ffffff" />
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginTop="10dp">
+
+                        <EditText
+                            android:id="@+id/human_casualty_facilation_support_used"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Selected Facilation Support Name"
+                            android:inputType="textMultiLine" />
+                    </RelativeLayout>
+
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+
+            <!--Funding Source-->
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                card_view:cardBackgroundColor="@color/transparent"
+                card_view:cardElevation="1dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:orientation="vertical"
+                    android:padding="5dp">
+
+                    <TextView
+                        android:id="@+id/human_casualtylabel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:paddingLeft="5dp"
+                        android:text="FUNDING SOURCE (Nrs)"
+                        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/human_casualty_Tal"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="TAL"
+                            android:inputType="numberDecimal" />
+                    </android.support.design.widget.TextInputLayout>
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/human_casualty_CommunityContribution"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Community Contribution"
+                            android:inputType="numberDecimal" />
+                    </android.support.design.widget.TextInputLayout>
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/human_casualty_FundOthers"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Others"
+                            android:inputType="text" />
+                    </android.support.design.widget.TextInputLayout>
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+
+            
+            <!--Others /  Note  -->
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                card_view:cardBackgroundColor="@color/transparent"
+                card_view:cardElevation="1dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/layout_margin">
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/human_casualty_others"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="45dp"
+                            android:hint="Others / Notes"
+                            android:inputType="text" />
+                    </android.support.design.widget.TextInputLayout>
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
+            <!--save / send-->
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                card_view:cardBackgroundColor="@color/transparent"
+                card_view:cardElevation="1dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:layout_margin="@dimen/layout_margin"
+                    android:padding="5dp">
+
+                    <Button
+                        android:id="@+id/human_casualty_save"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentTop="true"
+                        android:background="@drawable/button_pressed_hwc_light"
+                        android:text="Save"
+                        android:textColor="#ffffff" />
+
+                    <Button
+                        android:id="@+id/human_casualty_send"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/button_pressed_hwc_light"
+                        android:text="Send"
+                        android:textColor="#ffffff" />
+
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

@@ -1,0 +1,543 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <!--Agreement No-->
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                card_view:cardBackgroundColor="@android:color/transparent"
+                card_view:cardElevation="1dp">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/layout_margin"
+                android:padding="5dp">
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/to_text_input_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <AutoCompleteTextView
+                        android:id="@+id/autoCompleteTextViewTo"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Agreement Number"
+                        android:inputType="number"
+                        android:layout_marginTop="45dp"
+                        />
+                </android.support.design.widget.TextInputLayout>
+            </RelativeLayout>
+            </android.support.v7.widget.CardView>
+<!--Guarentee Name-->
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                card_view:cardBackgroundColor="@android:color/transparent"
+                card_view:cardElevation="1dp">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/layout_margin"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:padding="5dp">
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/garenteeName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <AutoCompleteTextView
+                        android:id="@+id/autoCompleteTextViewGarentee"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Garentee Name"
+                        android:inputType="textPersonName"
+                        android:layout_marginTop="45dp"
+                        />
+                </android.support.design.widget.TextInputLayout>
+            </RelativeLayout>
+            </android.support.v7.widget.CardView>
+<!--Fiscal Year-->
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                card_view:cardBackgroundColor="@android:color/transparent"
+                card_view:cardElevation="1dp">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/layout_margin"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:padding="5dp">
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/fiscal_year_text_input_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <AutoCompleteTextView
+                        android:id="@+id/autoCompleteTextViewFiscalYear"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Fiscal Year"
+                        android:inputType="date"
+                        android:layout_marginTop="45dp"
+                        />
+                </android.support.design.widget.TextInputLayout>
+            </RelativeLayout>
+            </android.support.v7.widget.CardView>
+<!--Name of pa-->
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                card_view:cardBackgroundColor="@android:color/transparent"
+                card_view:cardElevation="1dp">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/layout_margin"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:padding="5dp">
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/NameOfBZ_text_input_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <AutoCompleteTextView
+                        android:id="@+id/autoCompleteTextViewNameOfBz"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Name Of PA/BZ/CORRIDOR/CF"
+                        android:inputType="text"
+                        android:layout_marginTop="45dp"
+                        />
+                </android.support.design.widget.TextInputLayout>
+            </RelativeLayout>
+            </android.support.v7.widget.CardView>
+<!--Photograph Of the Site-->
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                card_view:cardBackgroundColor="@android:color/transparent"
+                card_view:cardElevation="1dp">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_margin="@dimen/layout_margin"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:padding="5dp">
+
+                <TextView
+                    android:id="@+id/forestProtectionPhotographSiteLable"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/forestProtectionPhotographSite"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignTop="@+id/forestProtectionPhotographSite"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="5dp"
+                    android:text="Photograph Of the Site"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <ImageButton
+                    android:id="@+id/forestProtectionPhotographSite"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginLeft="50dp"
+                    android:layout_marginStart="50dp"
+                    android:layout_toEndOf="@+id/forestProtectionPhotographSiteLable"
+                    android:layout_toRightOf="@+id/forestProtectionPhotographSiteLable"
+                    android:background="@drawable/cam1" />
+
+            </RelativeLayout>
+            </android.support.v7.widget.CardView>
+<!--Fench/ Tracing Dropdown-->
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                card_view:cardBackgroundColor="@android:color/transparent"
+                card_view:cardElevation="1dp">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_margin="@dimen/layout_margin"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:padding="5dp">
+
+                <TextView
+                    android:id="@+id/forestProtectionFenchingTrencingLable"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignTop="@+id/forestProtectionFenchingTrencing"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="5dp"
+                    android:text="Fencing/Trencing"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <Spinner
+                    android:id="@+id/forestProtectionFenchingTrencing"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_toEndOf="@+id/forestProtectionFenchingTrencingLable"
+                    android:layout_toRightOf="@+id/forestProtectionFenchingTrencingLable" />
+
+            </RelativeLayout>
+            </android.support.v7.widget.CardView>
+<!--Length of fench Km-->
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                card_view:cardBackgroundColor="@android:color/transparent"
+                card_view:cardElevation="1dp">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/layout_margin"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:padding="5dp">
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/LengthOfFench_text_input_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <AutoCompleteTextView
+                        android:id="@+id/autoCompleteTextViewLengthOfFench"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Length (Km) of Fench/Trench"
+                        android:inputType="numberDecimal"
+                        android:layout_marginTop="45dp"
+                        />
+                </android.support.design.widget.TextInputLayout>
+            </RelativeLayout>
+            </android.support.v7.widget.CardView>
+<!--Photograph Of Fench-->
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                card_view:cardBackgroundColor="@android:color/transparent"
+                card_view:cardElevation="1dp">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_margin="@dimen/layout_margin"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:padding="5dp">
+
+                <TextView
+                    android:id="@+id/forestProtectionPhotographFenchLable"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/forestProtectionPhotographFench"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="5dp"
+                    android:text="Photograph of fence/trench"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:layout_alignParentTop="true" />
+
+                <ImageButton
+                    android:id="@+id/forestProtectionPhotographFench"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginLeft="50dp"
+                    android:layout_marginStart="50dp"
+                    android:layout_toEndOf="@+id/forestProtectionPhotographFenchLable"
+                    android:layout_toRightOf="@+id/forestProtectionPhotographFenchLable"
+                    android:background="@drawable/cam1" />
+
+            </RelativeLayout>
+            </android.support.v7.widget.CardView>
+<!--monitoring Date-->
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                card_view:cardBackgroundColor="@android:color/transparent"
+                card_view:cardElevation="1dp">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/layout_margin"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:padding="5dp">
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/MonitoringDate_text_input_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <AutoCompleteTextView
+                        android:id="@+id/autoCompleteTextViewMonitoringDate"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Monitoring Date"
+                        android:inputType="date"
+                        android:layout_marginTop="45dp"
+                        />
+                </android.support.design.widget.TextInputLayout>
+            </RelativeLayout>
+            </android.support.v7.widget.CardView>
+<!--status of fench-->
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                card_view:cardBackgroundColor="@android:color/transparent"
+                card_view:cardElevation="1dp">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/layout_margin"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:padding="5dp">
+
+                <TextView
+                    android:id="@+id/forestProtectionStatusFenchingTrencingLable"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignTop="@+id/forestProtectionStatusFenchingTrencing"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="5dp"
+                    android:text="Status of the Fence/Trench(Good/broken) "
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <Spinner
+                    android:id="@+id/forestProtectionStatusFenchingTrencing"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_toEndOf="@+id/forestProtectionStatusFenchingTrencingLable"
+                    android:layout_toRightOf="@+id/forestProtectionStatusFenchingTrencingLable" />
+
+            </RelativeLayout>
+            </android.support.v7.widget.CardView>
+<!--Recommendation-->
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                card_view:cardBackgroundColor="@android:color/transparent"
+                card_view:cardElevation="1dp">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/layout_margin"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:padding="5dp">
+
+                <TextView
+                    android:id="@+id/forestProtectionRecomendationLable"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="5dp"
+                    android:text="Recomendation "
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:layout_alignTop="@+id/forestProtectionRecomendationYes"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignBottom="@+id/forestProtectionRecomendationYes" />
+
+                <Button
+                    android:id="@+id/forestProtectionRecomendationNo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:text="No" />
+
+                <Button
+                    android:id="@+id/forestProtectionRecomendationYes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Yes"
+                    android:layout_alignParentTop="true"
+                    android:layout_toLeftOf="@+id/forestProtectionRecomendationNo"
+                    android:layout_toStartOf="@+id/forestProtectionRecomendationNo" />
+
+            </RelativeLayout>
+            </android.support.v7.widget.CardView>
+<!--Implementation of recommendation-->
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                card_view:cardBackgroundColor="@android:color/transparent"
+                card_view:cardElevation="1dp">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/layout_margin"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:padding="5dp">
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/ImplementationOfRecommendation_text_input_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <AutoCompleteTextView
+                        android:id="@+id/autoCompleteTextViewImplementationOfRecommendation"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Implementation Of Recommendation"
+                        android:inputType="text"
+                        android:layout_marginTop="45dp"
+                        />
+                </android.support.design.widget.TextInputLayout>
+            </RelativeLayout>
+            </android.support.v7.widget.CardView>
+<!--photograph of trace of fench-->
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                card_view:cardBackgroundColor="@android:color/transparent"
+                card_view:cardElevation="1dp">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/layout_margin"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:padding="5dp">
+
+                <TextView
+                    android:id="@+id/forestProtectionPhotographMonitoringLable"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/forestProtectionPhotographMonitoring"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignTop="@+id/forestProtectionPhotographMonitoring"
+                    android:gravity="center"
+                    android:paddingLeft="5dp"
+                    android:text="Photograph of fence/trench"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <ImageButton
+                    android:id="@+id/forestProtectionPhotographMonitoring"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginLeft="50dp"
+                    android:layout_marginStart="50dp"
+                    android:layout_toEndOf="@+id/forestProtectionPhotographMonitoringLable"
+                    android:layout_toRightOf="@+id/forestProtectionPhotographMonitoringLable"
+                    android:background="@drawable/cam1" />
+
+            </RelativeLayout>
+            </android.support.v7.widget.CardView>
+<!--get Gps Location-->
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                card_view:cardBackgroundColor="@android:color/transparent"
+                card_view:cardElevation="1dp">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/layout_margin"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:padding="5dp">
+
+                <TextView
+                    android:id="@+id/forestProtectionGetGpsCoordinate"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="5dp"
+                    android:text="Get Gps Location "
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true" />
+
+                <Button
+                    android:id="@+id/forestProtectionGpsEnd"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="End"
+                    android:layout_below="@+id/forestProtectionGetGpsCoordinate"
+                    android:layout_alignRight="@+id/forestProtectionGetGpsCoordinate"
+                    android:layout_alignEnd="@+id/forestProtectionGetGpsCoordinate" />
+
+                <Button
+                    android:id="@+id/forestProtectionGpsStart"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Start"
+                    android:layout_below="@+id/forestProtectionGetGpsCoordinate"
+                    android:layout_alignLeft="@+id/forestProtectionGetGpsCoordinate"
+                    android:layout_alignStart="@+id/forestProtectionGetGpsCoordinate" />
+
+            </RelativeLayout>
+            </android.support.v7.widget.CardView>
+<!--others-->
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                card_view:cardBackgroundColor="@android:color/transparent"
+                card_view:cardElevation="1dp">
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/forestProtectionOthers"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <AutoCompleteTextView
+                        android:id="@+id/autoCompleteTextViewForestProtectionOthers"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Implementation Of Recommendation"
+                        android:inputType="text"
+                        android:layout_marginTop="45dp"
+                        />
+                </android.support.design.widget.TextInputLayout>
+            </android.support.v7.widget.CardView>
+        </LinearLayout>
+    </ScrollView>
+
+
+</LinearLayout>

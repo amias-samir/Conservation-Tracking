@@ -1,0 +1,509 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="#20009688">
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/layout_margin"
+                android:padding="5dp">
+
+                <TextView
+                    android:id="@+id/forestProtectionAgreementNoLable"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/forestProtectionAgreementNo"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="5dp"
+                    android:text="Agreement No. "
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <EditText
+                    android:id="@+id/forestProtectionAgreementNo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_toEndOf="@+id/forestProtectionAgreementNoLable"
+                    android:layout_toRightOf="@+id/forestProtectionAgreementNoLable"
+                    android:ems="10"
+                    android:inputType="number" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/layout_margin"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:padding="5dp">
+
+                <TextView
+                    android:id="@+id/forestProtectionNameOfGranteeLable"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/forestProtectionNameOfGrantee"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="5dp"
+                    android:text="Name Of Garentee "
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <EditText
+                    android:id="@+id/forestProtectionNameOfGrantee"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_toEndOf="@+id/forestProtectionNameOfGranteeLable"
+                    android:layout_toRightOf="@+id/forestProtectionNameOfGranteeLable"
+                    android:ems="10"
+                    android:inputType="textPersonName" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/layout_margin"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:padding="5dp">
+
+                <TextView
+                    android:id="@+id/forestProtectionFiscalYearLable"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/forestProtectionFiscalYear"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="5dp"
+                    android:text="Fiscal Year"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <EditText
+                    android:id="@+id/forestProtectionFiscalYear"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_toEndOf="@+id/forestProtectionFiscalYearLable"
+                    android:layout_toRightOf="@+id/forestProtectionFiscalYearLable"
+                    android:ems="10"
+                    android:inputType="date" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/layout_margin"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:padding="5dp">
+
+                <TextView
+                    android:id="@+id/forestProtectionNameOfBZPACFLable"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/forestProtectionNameOfBZPACF"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="5dp"
+                    android:text="Name of PA/BZ/Corridor/CF"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <EditText
+                    android:id="@+id/forestProtectionNameOfBZPACF"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_toEndOf="@+id/forestProtectionNameOfBZPACFLable"
+                    android:layout_toRightOf="@+id/forestProtectionNameOfBZPACFLable"
+                    android:ems="10"
+                    android:inputType="text" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_margin="@dimen/layout_margin"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:padding="5dp">
+
+                <TextView
+                    android:id="@+id/forestProtectionPhotographSiteLable"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/forestProtectionPhotographSite"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignTop="@+id/forestProtectionPhotographSite"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="5dp"
+                    android:text="Photograph Of the Site"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <ImageButton
+                    android:id="@+id/forestProtectionPhotographSite"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginLeft="50dp"
+                    android:layout_marginStart="50dp"
+                    android:layout_toEndOf="@+id/forestProtectionPhotographSiteLable"
+                    android:layout_toRightOf="@+id/forestProtectionPhotographSiteLable"
+                    android:background="@drawable/cam1" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_margin="@dimen/layout_margin"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:padding="5dp">
+
+                <TextView
+                    android:id="@+id/forestProtectionFenchingTrencingLable"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignTop="@+id/forestProtectionFenchingTrencing"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="5dp"
+                    android:text="Fencing/Trencing"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <Spinner
+                    android:id="@+id/forestProtectionFenchingTrencing"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_toEndOf="@+id/forestProtectionFenchingTrencingLable"
+                    android:layout_toRightOf="@+id/forestProtectionFenchingTrencingLable" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/layout_margin"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:padding="5dp">
+
+                <TextView
+                    android:id="@+id/forestProtectionLengthOfFenchTrenceLable"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/forestProtectionLengthOfFenchTrence"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="5dp"
+                    android:text="Length (Km)Fenced/Trenched"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <EditText
+                    android:id="@+id/forestProtectionLengthOfFenchTrence"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_toEndOf="@+id/forestProtectionLengthOfFenchTrenceLable"
+                    android:layout_toRightOf="@+id/forestProtectionLengthOfFenchTrenceLable"
+                    android:ems="10"
+                    android:inputType="numberDecimal" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_margin="@dimen/layout_margin"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:padding="5dp">
+
+                <TextView
+                    android:id="@+id/forestProtectionPhotographFenchLable"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/forestProtectionPhotographFench"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignTop="@+id/forestProtectionPhotographFench"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="5dp"
+                    android:text="Photograph of fence/trench"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <ImageButton
+                    android:id="@+id/forestProtectionPhotographFench"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginLeft="50dp"
+                    android:layout_marginStart="50dp"
+                    android:layout_toEndOf="@+id/forestProtectionPhotographFenchLable"
+                    android:layout_toRightOf="@+id/forestProtectionPhotographFenchLable"
+                    android:background="@drawable/cam1" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/layout_margin"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:padding="5dp">
+
+                <TextView
+                    android:id="@+id/forestProtectionMonitoringDateLable"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/forestProtectionMonitoringDate"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="5dp"
+                    android:text="Monitoring Date"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <EditText
+                    android:id="@+id/forestProtectionMonitoringDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_toEndOf="@+id/forestProtectionMonitoringDateLable"
+                    android:layout_toRightOf="@+id/forestProtectionMonitoringDateLable"
+                    android:ems="10"
+                    android:inputType="date" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_margin="@dimen/layout_margin"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:padding="5dp">
+
+                <TextView
+                    android:id="@+id/forestProtectionStatusFenchingTrencingLable"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignTop="@+id/forestProtectionStatusFenchingTrencing"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="5dp"
+                    android:text="Status of the Fence/Trench(Good/broken) "
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <Spinner
+                    android:id="@+id/forestProtectionStatusFenchingTrencing"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_toEndOf="@+id/forestProtectionStatusFenchingTrencingLable"
+                    android:layout_toRightOf="@+id/forestProtectionStatusFenchingTrencingLable" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/layout_margin"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:padding="5dp">
+
+                <TextView
+                    android:id="@+id/forestProtectionRecomendationLable"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="5dp"
+                    android:text="Recomendation "
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:layout_alignTop="@+id/forestProtectionRecomendationYes"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignBottom="@+id/forestProtectionRecomendationYes" />
+
+                <Button
+                    android:id="@+id/forestProtectionRecomendationYes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Yes"
+                    android:layout_alignParentTop="true"
+                    android:layout_toLeftOf="@+id/forestProtectionRecomendationNo"
+                    android:layout_toStartOf="@+id/forestProtectionRecomendationNo" />
+
+                <Button
+                    android:id="@+id/forestProtectionRecomendationNo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:text="No" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/layout_margin"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:padding="5dp">
+
+                <TextView
+                    android:id="@+id/forestProtectionImplementationRecommendationLabel"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/forestProtectionImplementationRecommendation"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="5dp"
+                    android:text="Implementation of Recommendation"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <EditText
+                    android:id="@+id/forestProtectionImplementationRecommendation"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_toEndOf="@+id/forestProtectionImplementationRecommendationLabel"
+                    android:layout_toRightOf="@+id/forestProtectionImplementationRecommendationLabel"
+                    android:ems="10"
+                    android:inputType="date" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/layout_margin"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:padding="5dp">
+
+                <TextView
+                    android:id="@+id/forestProtectionPhotographMonitoringLable"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/forestProtectionPhotographMonitoring"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignTop="@+id/forestProtectionPhotographMonitoring"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="5dp"
+                    android:text="Photograph of fence/trench"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <ImageButton
+                    android:id="@+id/forestProtectionPhotographMonitoring"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginLeft="50dp"
+                    android:layout_marginStart="50dp"
+                    android:layout_toEndOf="@+id/forestProtectionPhotographMonitoringLable"
+                    android:layout_toRightOf="@+id/forestProtectionPhotographMonitoringLable"
+                    android:background="@drawable/cam1" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/layout_margin"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:padding="5dp">
+
+                <TextView
+                    android:id="@+id/forestProtectionGetGpsCoordinate"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="5dp"
+                    android:text="Get Gps Location "
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignBottom="@+id/forestProtectionGpsStart" />
+
+                <Button
+                    android:id="@+id/forestProtectionGpsStart"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Start"
+                    android:layout_alignParentBottom="true"
+                    android:layout_toLeftOf="@+id/forestProtectionGpsEnd"
+                    android:layout_toStartOf="@+id/forestProtectionGpsEnd" />
+
+                <Button
+                    android:id="@+id/forestProtectionGpsEnd"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:text="End" />
+
+            </RelativeLayout>
+        </LinearLayout>
+    </ScrollView>
+
+
+</LinearLayout>

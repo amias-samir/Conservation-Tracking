@@ -1,0 +1,886 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar1" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                card_view:cardBackgroundColor="@color/transparent"
+                card_view:cardElevation="1dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="20dp"
+                    android:orientation="vertical"
+                    android:padding="5dp">
+
+                    <!--project code-->
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/GrasslandProjectCode"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="45dp"
+                            android:hint="Project Code"
+                            android:inputType="text" />
+                    </android.support.design.widget.TextInputLayout>
+
+                    <!--Landscape-->
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginTop="10dp">
+
+                        <TextView
+                            android:id="@+id/landScape"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignBottom="@+id/wmm_grassland_management_detail_landscape"
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentStart="true"
+                            android:layout_alignParentTop="true"
+                            android:gravity="center_vertical"
+                            android:paddingLeft="5dp"
+                            android:text="Landscape"
+                            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                        <Spinner
+                            android:id="@+id/wmm_grassland_management_detail_landscape"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_alignParentTop="true"
+                            android:layout_toEndOf="@+id/landScape"
+                            android:layout_toRightOf="@+id/landScape" />
+
+                    </RelativeLayout>
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="20dp">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/OtherlandscapeName"
+                            android:layout_width="200dp"
+                            android:layout_height="wrap_content"
+                            android:hint="Landscape Name"
+                            android:inputType="textMultiLine"
+                            android:visibility="invisible"
+
+                            />
+                    </android.support.design.widget.TextInputLayout>
+
+                    <!--Agreement No-->
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/to_text_input_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/wmm_grassland_management_detail_Agreement_No"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="15dp"
+                            android:hint="Agreement Number"
+                            android:inputType="number" />
+                    </android.support.design.widget.TextInputLayout>
+
+                    <!--Guarentee Name-->
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/garenteeName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/wmm_grassland_management_detail_Grantee_Name"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:hint="Grantee Name"
+                            android:inputType="textPersonName" />
+                    </android.support.design.widget.TextInputLayout>
+
+                    <!--Funding Source-->
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/wmm_grassland_management_detail_fundingSource"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="45dp"
+                            android:hint="Funding Source"
+                            android:inputType="text" />
+                    </android.support.design.widget.TextInputLayout>
+
+                    <!--fiscal year-->
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/fiscal_year_text_input_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/wmm_grassland_management_Detail_fiscal_Year"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:hint="Fiscal Year"
+                            android:inputType="date" />
+                    </android.support.design.widget.TextInputLayout>
+
+                    <!--date-->
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp">
+
+                        <!--date-->
+                        <TextView
+                            android:id="@+id/wmm_grassland_management_Detail_date"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentStart="true"
+                            android:layout_below="@+id/datelabel"
+                            android:hint="_ _ _ _ _ _ _ _ _"
+                            android:inputType="date" />
+
+                        <Button
+                            android:id="@+id/wmm_grassland_management_Detail_btn"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:background="@drawable/button_pressed_wmm_light"
+                            android:text="Choose Date"
+                            android:textColor="#ffffff" />
+
+                        <TextView
+                            android:id="@+id/datelabel"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentStart="true"
+                            android:layout_alignParentTop="true"
+                            android:text="Date" />
+
+                    </RelativeLayout>
+
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/nameofgrassland"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/wmm_grassland_management_detail_nameofgrassland"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:hint="Name of Grassland"
+                            android:inputType="text" />
+                    </android.support.design.widget.TextInputLayout>
+
+                    <!--Name of BZ Park/Corriodr/CF-->
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/NameOfBZ_text_input_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/wmm_grassland_management_detail_nameof_bzForestCorridor"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:hint="Name of PA/BZ/CF"
+                            android:inputType="text" />
+                    </android.support.design.widget.TextInputLayout>
+
+                    <!--District Name-->
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/DistrictName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/wmm_grassland_management_detail_DistrictName"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:hint="District Name"
+                            android:inputType="textPersonName" />
+                    </android.support.design.widget.TextInputLayout>
+
+                    <!--VDC /Municipality Name-->
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/Vdc_nagarpalika"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/wmm_grassland_management_detail_Vdc_Municipality_Name"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:hint="VDC / Municipality"
+                            android:inputType="textPersonName" />
+                    </android.support.design.widget.TextInputLayout>
+
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <!--Photograph Of the Site-->
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                card_view:cardBackgroundColor="@color/transparent"
+                card_view:cardElevation="1dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:layout_margin="@dimen/layout_margin"
+                    android:padding="5dp">
+
+                    <TextView
+                        android:id="@+id/wmm_grassland_management_PhotographSiteLable"
+                        android:layout_width="200dp"
+                        android:layout_height="50dp"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:gravity="center_vertical"
+                        android:paddingLeft="5dp"
+                        android:text="Photograph of site"
+                        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                    <ImageButton
+                        android:id="@+id/wmm_grassland_management_detail_before_photo_site"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_alignBottom="@+id/wmm_grassland_management_PhotographSiteLable"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:background="@drawable/cam2"
+                        android:src="@drawable/button_pressed_transparent" />
+
+                    <ImageView
+                        android:id="@+id/wmm_grassland_management_detail_PhotographimageViewPreview"
+                        android:layout_width="200dp"
+                        android:layout_height="200dp"
+                        android:layout_below="@+id/wmm_grassland_management_PhotographSiteLable"
+                        android:layout_centerHorizontal="true" />
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
+
+            <!--get Gps Location-->
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                card_view:cardBackgroundColor="@color/transparent"
+                card_view:cardElevation="1dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="20dp"
+                    android:orientation="vertical"
+                    android:padding="5dp">
+
+                    <TextView
+                        android:id="@+id/wmm_grassland_management_detail_GetGpsCoordinate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="@string/gps_tracking"
+                        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_centerVertical="true"
+                        android:layout_margin="@dimen/layout_margin"
+                        android:padding="5dp">
+
+                        <Button
+                            android:id="@+id/wmm_grassland_management_detail_GpsEnd"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_alignParentRight="true"
+                            android:layout_alignTop="@+id/wmm_grassland_management_detail_GpsStart"
+                            android:background="@drawable/button_pressed_wmm_light"
+                            android:text="End"
+                            android:textColor="#ffffff" />
+
+                        <Button
+                            android:id="@+id/wmm_grassland_management_detail_GpsStart"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/button_pressed_wmm_light"
+                            android:text="Start"
+                            android:textColor="#ffffff" />
+
+                        <ProgressBar
+                            android:id="@+id/progressBar"
+                            style="?android:attr/progressBarStyleSmall"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerHorizontal="true"
+                            android:layout_centerVertical="true" />
+
+                    </RelativeLayout>
+
+                    <Button
+                        android:id="@+id/wmm_grassland_management_detail_preview_map"
+                        android:layout_width="212dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:background="@drawable/button_pressed_wmm_light"
+                        android:text="Preview Map"
+                        android:textColor="#ffffff" />
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="20dp">
+
+                        <TextView
+
+                            android:id="@+id/wmm_grassland_management_detail_boundry_using_gps"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Area using GPS : " />
+                    </android.support.design.widget.TextInputLayout>
+
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+            <!--Photograph management-->
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                card_view:cardBackgroundColor="@color/transparent"
+                card_view:cardElevation="1dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:layout_margin="@dimen/layout_margin"
+                    android:padding="5dp">
+
+                    <TextView
+                        android:id="@+id/ManagementPhoto"
+                        android:layout_width="200dp"
+                        android:layout_height="50dp"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:gravity="center_vertical"
+                        android:paddingLeft="5dp"
+                        android:text="Photograph (Management)"
+                        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                    <ImageButton
+                        android:id="@+id/wmm_grassland_management_ManagementPhoto"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_alignBottom="@+id/ManagementPhoto"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:background="@drawable/cam2"
+                        android:src="@drawable/button_pressed_transparent" />
+
+                    <ImageView
+                        android:id="@+id/wmm_grassland_management_ManageimageViewPreview"
+                        android:layout_width="200dp"
+                        android:layout_height="200dp"
+                        android:layout_below="@+id/ManagementPhoto"
+                        android:layout_centerHorizontal="true" />
+
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
+
+
+            <!--Management practices (Grasses Cut/Trees Uprooted/old grass burnt)/New grass seeding-->
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                card_view:cardBackgroundColor="@color/transparent"
+                card_view:cardElevation="1dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp">
+
+                        <TextView
+                            android:id="@+id/wmm_grassland_managementPracticesLable"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentStart="true"
+                            android:layout_centerVertical="true"
+                            android:padding="5dp"
+                            android:text="Management practices"
+                            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                        <Button
+                            android:id="@+id/select_management_practices_btn"
+                            style="?android:attr/buttonStyleSmall"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_alignParentRight="true"
+                            android:layout_alignParentTop="true"
+                            android:background="@drawable/button_pressed_wmm_light"
+                            android:text="Select"
+                            android:textColor="#ffffff" />
+
+                    </RelativeLayout>
+
+                    <TextView
+                        android:id="@+id/wmm_grassland_management_detail_managementPractices"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:padding="5dp" />
+
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <!--Additional interventions (if any mention) eg. Solar recharger, water  sprinkler-->
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                card_view:cardBackgroundColor="@color/transparent"
+                card_view:cardElevation="1dp"
+                android:visibility="gone">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp">
+
+                        <TextView
+                            android:id="@+id/wmm_grassland_additionalLable"
+                            android:layout_width="180dp"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentStart="true"
+                            android:layout_centerVertical="true"
+                            android:padding="5dp"
+                            android:text="Additional interventions (if any mention)"
+                            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                        <Button
+                            android:id="@+id/select_additional_btn"
+                            style="?android:attr/buttonStyleSmall"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_alignParentRight="true"
+                            android:layout_alignParentTop="true"
+                            android:background="@drawable/button_pressed_wmm_light"
+                            android:text="Select"
+                            android:textColor="#ffffff" />
+
+                    </RelativeLayout>
+
+                    <TextView
+                        android:id="@+id/wmm_grassland_management_detail_additional_interventions"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:padding="5dp" />
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <!--Wild life used (frequently/rearely used/ Not used at all-->
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                card_view:cardBackgroundColor="@color/transparent"
+                card_view:cardElevation="1dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:layout_margin="@dimen/layout_margin"
+                    android:padding="5dp">
+
+                    <TextView
+                        android:id="@+id/wmm_grassland_management_wildlifeLable"
+                        android:layout_width="200dp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:gravity="center_vertical"
+                        android:paddingLeft="5dp"
+                        android:text="Wildlife use"
+                        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                    <Spinner
+                        android:id="@+id/wmm_grassland_management_detail_wildlife_use"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_toEndOf="@+id/wmm_grassland_management_wildlifeLable"
+                        android:layout_toRightOf="@+id/wmm_grassland_management_wildlifeLable" />
+
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
+
+
+            <!--Species Name-->
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                card_view:cardBackgroundColor="@color/transparent"
+                android:layout_margin="10dp"
+                card_view:cardElevation="1dp">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/layout_margin"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:padding="5dp">
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/wmm_grassland_management_species_name"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Species Name"
+                            android:inputType="text"
+                            android:layout_marginTop="15dp"
+                            />
+                    </android.support.design.widget.TextInputLayout>
+
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
+
+
+            <!--Grassland Status Good/Moderate/Poor -->
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                card_view:cardBackgroundColor="@color/transparent"
+                card_view:cardElevation="1dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:layout_margin="@dimen/layout_margin"
+                    android:padding="5dp">
+
+                    <TextView
+                        android:id="@+id/wmm_grassland_management_grasslandStatusLable"
+                        android:layout_width="230dp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:gravity="center_vertical"
+                        android:paddingLeft="5dp"
+                        android:text="Grassland Status"
+                        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                    <Spinner
+                        android:id="@+id/wmm_grassland_management_detail_grasslandStatus"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_toEndOf="@+id/wmm_grassland_management_grasslandStatusLable"
+                        android:layout_toRightOf="@+id/wmm_grassland_management_grasslandStatusLable" />
+
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
+
+            <!--Photograph (Monitoring)-->
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                card_view:cardBackgroundColor="@color/transparent"
+                card_view:cardElevation="1dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:layout_margin="@dimen/layout_margin"
+                    android:padding="5dp">
+
+                    <TextView
+                        android:id="@+id/PhotographSiteLableMonitoring"
+                        android:layout_width="200dp"
+                        android:layout_height="50dp"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:gravity="center_vertical"
+                        android:paddingLeft="5dp"
+                        android:text="Photograph (Monitoring)"
+                        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                    <ImageButton
+                        android:id="@+id/wmm_grassland_management_Monitoring"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_alignBottom="@+id/PhotographSiteLableMonitoring"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:background="@drawable/cam2"
+                        android:src="@drawable/button_pressed_transparent" />
+
+                    <ImageView
+                        android:id="@+id/wmm_grassland_management_detail_imageViewPreviewMonitoring"
+                        android:layout_width="200dp"
+                        android:layout_height="200dp"
+                        android:layout_below="@+id/PhotographSiteLableMonitoring"
+                        android:layout_centerHorizontal="true" />
+
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
+
+            <!--Monitoring Date-->
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                card_view:cardBackgroundColor="@color/transparent"
+                card_view:cardElevation="1dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp">
+
+                    <!--date-->
+                    <TextView
+                        android:id="@+id/wmm_grassland_management_Detail_monitoring_date"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_below="@+id/datelabel1"
+                        android:hint="_ _ _ _ _ _ _ _ _"
+                        android:inputType="date" />
+
+                    <Button
+                        android:id="@+id/wmm_grassland_management_Detail_monitoring_date_btn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:background="@drawable/button_pressed_wmm_light"
+                        android:text="Choose Date"
+                        android:textColor="#ffffff" />
+
+                    <TextView
+                        android:id="@+id/datelabel1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:text=" Monitoring Date" />
+
+                </RelativeLayout>
+
+            </android.support.v7.widget.CardView>
+
+            <!--Funding Source-->
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                card_view:cardBackgroundColor="@color/transparent"
+                card_view:cardElevation="1dp"
+                android:layout_margin="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_margin="10dp"
+                    android:padding="5dp">
+
+                    <TextView
+                        android:id="@+id/wmm_grassland_management_detaillabel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:paddingLeft="5dp"
+                        android:text="FUNDING SOURCE (Nrs)"
+                        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/wmm_grassland_management_detail_Tal"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="TAL"
+                            android:inputType="numberDecimal" />
+                    </android.support.design.widget.TextInputLayout>
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/wmm_grassland_management_detail_CommunityContribution"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Community Contribution"
+                            android:inputType="numberDecimal" />
+                    </android.support.design.widget.TextInputLayout>
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/wmm_grassland_management_detail_FundOthers"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Others"
+                            android:inputType="text" />
+                    </android.support.design.widget.TextInputLayout>
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+            
+            <!--others-->
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                card_view:cardBackgroundColor="@color/transparent"
+                card_view:cardElevation="1dp">
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/layout_margin"
+                    android:padding="5dp">
+
+                    <AutoCompleteTextView
+                        android:id="@+id/wmm_grassland_management_detail_notes"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:hint="Notes / Remarks"
+                        android:inputType="text" />
+                </android.support.design.widget.TextInputLayout>
+            </android.support.v7.widget.CardView>
+
+            <!--save / send-->
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                card_view:cardBackgroundColor="@color/transparent"
+                card_view:cardElevation="1dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:layout_margin="@dimen/layout_margin"
+                    android:padding="5dp">
+
+                    <Button
+                        android:id="@+id/wmm_grassland_management_detail_save"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentTop="true"
+                        android:background="@drawable/button_pressed_wmm_light"
+                        android:text="Save"
+                        android:textColor="#ffffff" />
+
+                    <Button
+                        android:id="@+id/wmm_grassland_management_detail_send"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/button_pressed_wmm_light"
+                        android:text="Send"
+                        android:textColor="#ffffff" />
+
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

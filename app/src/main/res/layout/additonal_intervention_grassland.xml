@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_margin="20dp">
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Solar Recharger"
+                android:id="@+id/solar_recharger_id"
+                android:checked="false" />
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Water Sprinkler"
+                android:id="@+id/water_sprinkler_id"
+                android:checked="false" />
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Others"
+                android:id="@+id/other_additional_id"
+                android:checked="false" />
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <AutoCompleteTextView
+                    android:id="@+id/wmm_grassland_management_Detail_OtherIntervention"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:hint="Others (Specify)"
+                    android:inputType="textMultiLine" />
+            </android.support.design.widget.TextInputLayout>
+
+            <Button
+                android:id="@+id/wmm_grassland_management_additional_ok_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_margin="20dp"
+                android:background="@drawable/button_pressed_wmt_light"
+                android:gravity="center_horizontal"
+                android:text="done"
+                android:textColor="#ffffff" />
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

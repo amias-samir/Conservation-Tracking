@@ -1,0 +1,406 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar7" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <!--main layout-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!--layout above gps-->
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                card_view:cardBackgroundColor="@color/transparent"
+                card_view:cardElevation="1dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="20dp"
+                    android:orientation="vertical"
+                    android:padding="5dp">
+
+                    <!--project code-->
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/scat_collection_details_project_code"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="45dp"
+                            android:hint="Project Code"
+                            android:inputType="text" />
+                    </android.support.design.widget.TextInputLayout>
+
+
+                    <!--name of the collector-->
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/scat_collection_details_name_of_collector"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="45dp"
+                            android:hint="Name of the collector"
+                            android:inputType="text" />
+                    </android.support.design.widget.TextInputLayout>
+
+                    <!--block name-->
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/scat_collection_details_block_name"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="45dp"
+                            android:hint="Block Name"
+                            android:inputType="text" />
+                    </android.support.design.widget.TextInputLayout>
+
+                    <!--grid no-->
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/scat_collection_details_grid_no"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="45dp"
+                            android:hint="Grid No."
+                            android:inputType="text" />
+                    </android.support.design.widget.TextInputLayout>
+
+                    <!--date-->
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/scat_collection_details_date"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="45dp"
+                            android:hint="Date"
+                            android:inputType="date"
+                            android:focusable="false"/>
+                    </android.support.design.widget.TextInputLayout>
+
+                    <!--sample id-->
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/scat_collection_details_sample_id"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="45dp"
+                            android:hint="Sample ID"
+                            android:inputType="text" />
+                    </android.support.design.widget.TextInputLayout>
+
+                    <!--Diameter (cm)-->
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/scat_collection_details_diameter"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="45dp"
+                            android:hint="Diameter (cm)"
+                            android:inputType="number" />
+                    </android.support.design.widget.TextInputLayout>
+
+
+                    <!--Segmentation-->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginTop="10dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/segmentation"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical"
+                            android:paddingLeft="5dp"
+                            android:text="Segmentation"
+                            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                        <Spinner
+                            android:id="@+id/scat_collection_details_segmentation"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true" />
+
+                    </LinearLayout>
+
+                    <!--age-->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginTop="10dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/age"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical"
+                            android:paddingLeft="5dp"
+                            android:text="Age"
+                            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                        <Spinner
+                            android:id="@+id/scat_collection_details_age"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true" />
+
+                    </LinearLayout>
+
+                    <!--site type-->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginTop="10dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/site_type"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentStart="true"
+                            android:layout_alignParentTop="true"
+                            android:gravity="center_vertical"
+                            android:paddingLeft="5dp"
+                            android:text="Site Type"
+                            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                        <Spinner
+                            android:id="@+id/scat_collection_details_site_type"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_below="@id/site_type" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <!--get Gps Location-->
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                card_view:cardBackgroundColor="@color/transparent"
+                card_view:cardElevation="1dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:orientation="vertical"
+                    android:padding="5dp">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_centerVertical="true"
+                        android:layout_margin="@dimen/layout_margin"
+                        android:padding="5dp">
+
+                        <Button
+                            android:id="@+id/scat_collection_details_GpsStart"
+                            android:layout_width="212dp"
+                            android:layout_height="wrap_content"
+                            android:layout_centerHorizontal="true"
+                            android:background="@drawable/button_pressed_wmt_light"
+                            android:gravity="center"
+                            android:text="Get gps location"
+                            android:textColor="#ffffff" />
+
+                    </RelativeLayout>
+
+                    <Button
+                        android:id="@+id/scat_collection_details_preview_map"
+                        android:layout_width="212dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:background="@drawable/button_pressed_wmt_light"
+                        android:text="Preview Map"
+                        android:textColor="#ffffff" />
+
+                    <!--elevation in meter-->
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/scat_collection_details_elevation"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="45dp"
+                            android:hint="Elevation (meter)"
+                            android:inputType="numberDecimal" />
+                    </android.support.design.widget.TextInputLayout>
+
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <!--below gps layout  -->
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                card_view:cardBackgroundColor="@color/transparent"
+                card_view:cardElevation="1dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/layout_margin"
+                    android:orientation="vertical">
+
+
+                    <!--associated sign-->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginTop="10dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/associated_sign"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical"
+                            android:paddingLeft="5dp"
+                            android:text="Associated Sign"
+                            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                        <Spinner
+                            android:id="@+id/scat_collection_details_associated_sign"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true" />
+
+                    </LinearLayout>
+
+                    <!--confidence-->
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/scat_collection_details_confidencce"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="45dp"
+                            android:hint="Confidence (%)"
+                            android:inputType="number" />
+                    </android.support.design.widget.TextInputLayout>
+
+                    <!--comments-->
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/scat_collection_details_comments"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="45dp"
+                            android:hint="Comments"
+                            android:inputType="text" />
+                    </android.support.design.widget.TextInputLayout>
+
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+
+            <!--save / send-->
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                card_view:cardBackgroundColor="@color/transparent"
+                card_view:cardElevation="1dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:layout_margin="@dimen/layout_margin"
+                    android:padding="5dp">
+
+                    <Button
+                        android:id="@+id/scat_collection_details_save"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentTop="true"
+                        android:background="@drawable/button_pressed_wmt_light"
+                        android:text="Save"
+                        android:textColor="#ffffff" />
+
+                    <Button
+                        android:id="@+id/scat_collection_details_send"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/button_pressed_wmt_light"
+                        android:text="Send"
+                        android:textColor="#ffffff" />
+
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
+
+
+        </LinearLayout>
+
+    </ScrollView>
+</LinearLayout>
+
+
+

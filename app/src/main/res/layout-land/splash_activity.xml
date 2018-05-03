@@ -1,0 +1,41 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background_landscape">
+
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/panda_logo"
+        android:layout_centerVertical="true"
+        android:layout_toLeftOf="@+id/shimmer_tv"
+        android:layout_toStartOf="@+id/shimmer_tv" />
+
+    <TextView
+        android:id="@+id/shimmer_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:text="@string/shimmew"
+        android:textColor="#ffffff"
+        android:textSize="25dp"
+        android:textStyle="bold"
+        android:layout_centerVertical="true"
+        android:layout_alignLeft="@+id/textView2"
+        android:layout_alignStart="@+id/textView2" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="WWF Nepal"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="#ffffff"
+        android:textSize="35dp"
+        android:textStyle="bold"
+        android:layout_above="@+id/shimmer_tv"
+        android:layout_centerHorizontal="true" />
+</RelativeLayout>

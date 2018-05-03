@@ -1,0 +1,734 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar5" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                card_view:cardBackgroundColor="@color/transparent"
+                card_view:cardElevation="1dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="20dp"
+                    android:orientation="vertical"
+                    android:padding="5dp">
+
+                    <!--project code-->
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/ProjectCode"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="45dp"
+                            android:hint="Project Code"
+                            android:inputType="text" />
+                    </android.support.design.widget.TextInputLayout>
+
+                    <!--Landscape-->
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginTop="10dp">
+
+                        <TextView
+                            android:id="@+id/landScape"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignBottom="@+id/wmm_wildlife_rescue_release_detail_landscape"
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentStart="true"
+                            android:layout_alignParentTop="true"
+                            android:gravity="center_vertical"
+                            android:paddingLeft="5dp"
+                            android:text="Landscape"
+                            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                        <Spinner
+                            android:id="@+id/cs_cb_detail_landscape"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_alignParentTop="true"
+                            android:layout_toEndOf="@+id/landScape"
+                            android:layout_toRightOf="@+id/landScape" />
+
+                    </RelativeLayout>
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="20dp">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/OtherlandscapeName"
+                            android:layout_width="200dp"
+                            android:layout_height="wrap_content"
+                            android:hint="Landscape Name"
+                            android:inputType="textMultiLine"
+                            android:visibility="invisible"
+
+                            />
+                    </android.support.design.widget.TextInputLayout>
+
+                    <!--Agreement No-->
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/to_text_input_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/cs_cb_Agreement_No"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="15dp"
+                            android:hint="Agreement Number"
+                            android:inputType="number" />
+                    </android.support.design.widget.TextInputLayout>
+
+                    <!--Guarentee Name-->
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/garenteeName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/cs_cb_Grantee_Name"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:hint="Grantee Name"
+                            android:inputType="textPersonName" />
+                    </android.support.design.widget.TextInputLayout>
+
+                    <!--Funding Source-->
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/cs_cb_detail_fundingSource"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="45dp"
+                            android:hint="Funding Source"
+                            android:inputType="text" />
+                    </android.support.design.widget.TextInputLayout>
+
+                    <!--fiscal year-->
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/fiscal_year_text_input_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/cs_cb_fiscal_Year"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:hint="Fiscal Year"
+                            android:inputType="date" />
+                    </android.support.design.widget.TextInputLayout>
+
+                    <!--Date (Start - To)-->
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/community_support_light"
+                        android:gravity="center"
+                        android:padding="5dp"
+                        android:text="DOUBLE TAP EDITTEXT TO SELECT DATE"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:textColor="#ffffff" />
+
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/Startdate_text_input_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/cs_cb_Startdate"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:hint="Date (Start)"
+                            android:inputType="date" />
+                    </android.support.design.widget.TextInputLayout>
+
+                    <!--End Date-->
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/Enddate_text_input_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/cs_cb_Enddate"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:hint="Date (End)"
+                            android:inputType="date" />
+                    </android.support.design.widget.TextInputLayout>
+
+                    <!--Location Name-->
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/LocationName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/cs_cb_detail_LocationtName"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:hint="Locaiton Name"
+                            android:inputType="textPersonName" />
+                    </android.support.design.widget.TextInputLayout>
+
+                    <!--District Name-->
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/DistrictName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/cs_cb_detail_DistrictName"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:hint="District Name"
+                            android:inputType="textPersonName" />
+                    </android.support.design.widget.TextInputLayout>
+
+                    <!--VDC /Municipality Name-->
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/Vdc_nagarpalika"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/cs_cb_detail_Vdc_Municipality_Name"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:hint="VDC / Municipality"
+                            android:inputType="textPersonName" />
+                    </android.support.design.widget.TextInputLayout>
+
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+
+            <!--Activity type Training, Orientation, Workshop, Meeting,Study Tour/others-->
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_weight="0.12"
+                card_view:cardBackgroundColor="@color/transparent"
+                card_view:cardElevation="1dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_centerHorizontal="true"
+                        android:layout_centerVertical="true"
+                        android:layout_margin="@dimen/layout_margin"
+                        android:padding="5dp">
+
+                        <TextView
+                            android:id="@+id/cs_cb_typeStatusLable"
+                            android:layout_width="200dp"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentBottom="true"
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentStart="true"
+                            android:layout_alignParentTop="true"
+                            android:gravity="center_vertical"
+                            android:paddingLeft="5dp"
+                            android:text="Activity type"
+                            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                        <Spinner
+                            android:id="@+id/cs_cb_spinner_detail_typeStatus"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentBottom="true"
+                            android:layout_alignParentEnd="true"
+                            android:layout_alignParentRight="true"
+                            android:layout_alignParentTop="true"
+                            android:layout_toEndOf="@+id/cs_cb_typeStatusLable"
+                            android:layout_toRightOf="@+id/cs_cb_typeStatusLable" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/layout_margin"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp">
+
+                        <android.support.design.widget.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="20dp">
+
+
+                            <AutoCompleteTextView
+                                android:id="@+id/cs_cb_otheractivity"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="Activity Name (Specify)"
+                                android:inputType="textMultiLine"
+                                android:visibility="invisible"
+
+                                />
+                        </android.support.design.widget.TextInputLayout>
+                    </RelativeLayout>
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <!--get Gps Location House hold-->
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                card_view:cardBackgroundColor="@color/transparent"
+                card_view:cardElevation="1dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:orientation="vertical"
+                    android:padding="5dp">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_centerVertical="true"
+                        android:layout_margin="@dimen/layout_margin"
+                        android:padding="5dp">
+
+                        <Button
+                            android:id="@+id/cs_cb_GpsStart"
+                            android:layout_width="212dp"
+                            android:layout_height="wrap_content"
+                            android:layout_centerHorizontal="true"
+                            android:background="@drawable/button_pressed_cs_light"
+                            android:gravity="center"
+                            android:text="Get gps location"
+                            android:textColor="#ffffff" />
+
+                    </RelativeLayout>
+
+                    <Button
+                        android:id="@+id/cs_cb_preview_map"
+                        android:layout_width="212dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:background="@drawable/button_pressed_cs_light"
+                        android:text="Preview Map"
+                        android:textColor="#ffffff" />
+
+
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <!--T.Participant-->
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                card_view:cardBackgroundColor="@color/transparent"
+                card_view:cardElevation="1dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="20dp"
+                    android:orientation="vertical"
+                    android:padding="5dp">
+
+                    <TextView
+                        android:id="@+id/cs_cb_detail_totalparticipant"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="Total Participant"
+                        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                    <!-- Male-->
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/layout_margin">
+
+                        <android.support.design.widget.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <AutoCompleteTextView
+                                android:id="@+id/cs_cb_male"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="10dp"
+                                android:hint="Male"
+                                android:inputType="numberDecimal" />
+                        </android.support.design.widget.TextInputLayout>
+                    </RelativeLayout>
+
+                    <!--Female-->
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/layout_margin">
+
+                        <android.support.design.widget.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <AutoCompleteTextView
+                                android:id="@+id/cs_cb_female"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="10dp"
+                                android:hint="Female"
+                                android:inputType="numberDecimal" />
+                        </android.support.design.widget.TextInputLayout>
+                    </RelativeLayout>
+
+                    <!--Total-->
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/layout_margin">
+
+                        <android.support.design.widget.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <AutoCompleteTextView
+                                android:id="@+id/cs_cb_totalparticipant"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="10dp"
+                                android:hint="Total Participant"
+                                android:inputType="numberDecimal" />
+                        </android.support.design.widget.TextInputLayout>
+                    </RelativeLayout>
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <!--Affiliation Government, Civil Society organization, others-->
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                card_view:cardBackgroundColor="@color/transparent"
+                card_view:cardElevation="1dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="20dp"
+                    android:orientation="vertical"
+                    android:padding="5dp">
+
+                    <TextView
+                        android:id="@+id/cs_cb_detail_Affiliation"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="Affiliation"
+                        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                    <!-- Male-->
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/layout_margin">
+
+                        <android.support.design.widget.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <AutoCompleteTextView
+                                android:id="@+id/cs_cb_AffiliationGovt"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="10dp"
+                                android:hint="Affiliation Government"
+                                android:inputType="numberDecimal" />
+                        </android.support.design.widget.TextInputLayout>
+                    </RelativeLayout>
+
+                    <!--Female-->
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/layout_margin">
+
+                        <android.support.design.widget.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <AutoCompleteTextView
+                                android:id="@+id/cs_cb_AffiliationCivilSociety"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="10dp"
+                                android:hint="Affiliation Civil Society"
+                                android:inputType="numberDecimal" />
+                        </android.support.design.widget.TextInputLayout>
+                    </RelativeLayout>
+
+                    <!--Total-->
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/layout_margin">
+
+                        <android.support.design.widget.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <AutoCompleteTextView
+                                android:id="@+id/cs_cb_AffiliationOtherst"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="10dp"
+                                android:hint="Affiliation others"
+                                android:inputType="numberDecimal" />
+                        </android.support.design.widget.TextInputLayout>
+                    </RelativeLayout>
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <!--Funding Source-->
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                card_view:cardBackgroundColor="@color/transparent"
+                card_view:cardElevation="1dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="20dp"
+                    android:orientation="vertical"
+                    android:padding="5dp">
+
+                    <TextView
+                        android:id="@+id/cs_cb_detail_funding"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="FUNDING SOURCE"
+                        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                    <!--TAL-->
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/layout_margin">
+
+                        <android.support.design.widget.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <AutoCompleteTextView
+                                android:id="@+id/cs_cb_tal"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="10dp"
+                                android:hint="TAL"
+                                android:inputType="numberDecimal" />
+                        </android.support.design.widget.TextInputLayout>
+                    </RelativeLayout>
+
+                    <!--Community contribution-->
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/layout_margin">
+
+                        <android.support.design.widget.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <AutoCompleteTextView
+                                android:id="@+id/cs_cb_detail_community_contribution"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="10dp"
+                                android:hint="Park/Community contribution"
+                                android:inputType="numberDecimal" />
+                        </android.support.design.widget.TextInputLayout>
+                    </RelativeLayout>
+
+                    <!--other-->
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/layout_margin">
+
+                        <android.support.design.widget.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <AutoCompleteTextView
+                                android:id="@+id/cs_cb_detail_FundOthers"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="Others"
+                                android:inputType="text" />
+                        </android.support.design.widget.TextInputLayout>
+                    </RelativeLayout>
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+            .
+            <!--Photographs of the capacity buidling program-->
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                card_view:cardBackgroundColor="@color/transparent"
+                card_view:cardElevation="1dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:layout_margin="@dimen/layout_margin"
+                    android:padding="5dp">
+
+                    <TextView
+                        android:id="@+id/cs_cb_PhotographLable"
+                        android:layout_width="200dp"
+                        android:layout_height="50dp"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:gravity="center_vertical"
+                        android:paddingLeft="5dp"
+                        android:text="Photograph"
+                        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                    <ImageButton
+                        android:id="@+id/cs_cb_detail_photo"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_alignBottom="@+id/cs_cb_PhotographLable"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:background="@drawable/cam6"
+                        android:src="@drawable/button_pressed_transparent" />
+
+                    <ImageView
+                        android:id="@+id/cs_cb_detail_PhotographSiteimageViewPreview"
+                        android:layout_width="200dp"
+                        android:layout_height="200dp"
+                        android:layout_below="@+id/cs_cb_PhotographLable"
+                        android:layout_centerHorizontal="true" />
+
+
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
+
+            <!--others-->
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                card_view:cardBackgroundColor="@color/transparent"
+                card_view:cardElevation="1dp">
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/layout_margin"
+                    android:padding="5dp">
+
+                    <AutoCompleteTextView
+                        android:id="@+id/cs_cb_detail_notes"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:hint="Notes / Remarks"
+                        android:inputType="text" />
+                </android.support.design.widget.TextInputLayout>
+            </android.support.v7.widget.CardView>
+
+            <!--save / send-->
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                card_view:cardBackgroundColor="@color/transparent"
+                card_view:cardElevation="1dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:layout_margin="@dimen/layout_margin"
+                    android:padding="5dp">
+
+                    <Button
+                        android:id="@+id/cs_cb_detail_save"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentTop="true"
+                        android:background="@drawable/button_pressed_cs_light"
+                        android:text="Save"
+                        android:textColor="#ffffff" />
+
+                    <Button
+                        android:id="@+id/cs_cb_detail_send"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/button_pressed_cs_light"
+                        android:text="Send"
+                        android:textColor="#ffffff" />
+
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

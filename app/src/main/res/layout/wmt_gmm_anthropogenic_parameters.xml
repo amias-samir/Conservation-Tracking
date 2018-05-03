@@ -1,0 +1,907 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar7" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                card_view:cardBackgroundColor="@color/transparent"
+                android:layout_margin="10dp"
+                card_view:cardElevation="1dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="5dp"
+                    android:layout_margin="20dp">
+
+                    <!--project code-->
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/wmt_gmm_anthropogenic_parameters_detail_ProjectCode"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Project Code"
+                            android:inputType="text"
+                            android:layout_marginTop="45dp"/>
+                    </android.support.design.widget.TextInputLayout>
+
+                    <!--Landscape-->
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp">
+
+                        <TextView
+                            android:id="@+id/landScape"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignBottom="@+id/wmm_wildlife_rescue_release_detail_landscape"
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentStart="true"
+                            android:layout_alignParentTop="true"
+                            android:gravity="center_vertical"
+                            android:paddingLeft="5dp"
+                            android:text="Landscape"
+                            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                        <Spinner
+                            android:id="@+id/wmt_gmm_anthropogenic_parameters_detail_landscape"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentTop="true"
+                            android:layout_alignParentRight="true"
+                            android:layout_toRightOf="@+id/landScape"
+                            android:layout_toEndOf="@+id/landScape" />
+
+                    </RelativeLayout>
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="20dp"
+                        >
+
+                        <AutoCompleteTextView
+                            android:visibility="invisible"
+                            android:id="@+id/OtherlandscapeName"
+                            android:layout_width="200dp"
+                            android:layout_height="wrap_content"
+                            android:hint="Landscape Name"
+                            android:inputType="textMultiLine"
+
+                            />
+                    </android.support.design.widget.TextInputLayout>
+
+                    <!--Funding Source-->
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/wmt_gmm_anthropogenic_parameters_detail_fundingSource"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Funding Source"
+                            android:inputType="text"
+                            android:layout_marginTop="45dp"/>
+                    </android.support.design.widget.TextInputLayout>
+
+                    <!--Observers Name-->
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/NameOfBZ_text_input_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/wmt_gmm_anthropogenic_parameters_detail_ObserverName"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Observers Name"
+                            android:inputType="text"
+                            android:layout_marginTop="10dp"
+                            />
+                    </android.support.design.widget.TextInputLayout>
+
+                    <!--Date-->
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="DOUBLE TAP EDITTEXT TO SELECT DATE"
+                        android:gravity="center"
+                        android:textColor="#ffffff"
+                        android:padding="5dp"
+                        android:background="@color/wildlife_monitoring_technique_light"
+                        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/Date_text_input_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/wmt_gmm_anthropogenic_parameters_Detail_date"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Date"
+                            android:inputType="date"
+                            android:layout_marginTop="10dp"
+                            />
+                    </android.support.design.widget.TextInputLayout>
+
+                    <!--Weather-->
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/weather_text_input_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/wmt_gmm_anthropogenic_parameters_detail_weather"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Weather"
+                            android:inputType="text"
+                            android:layout_marginTop="10dp"
+                            />
+                    </android.support.design.widget.TextInputLayout>
+
+                    <!--River Name-->
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/rivername_text_input_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/wmt_gmm_anthropogenic_parameters_detail_RiverName"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="River Name"
+                            android:inputType="text"
+                            android:layout_marginTop="10dp"
+                            />
+                    </android.support.design.widget.TextInputLayout>
+
+                    <!--Segment Name-->
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/segmentname_text_input_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/wmt_gmm_anthropogenic_parameters_detail_SegmentName"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Segment Name"
+                            android:inputType="text"
+                            android:layout_marginTop="10dp"
+                            />
+                    </android.support.design.widget.TextInputLayout>
+
+                    <!--Replicate Every-->
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/replicate_text_input_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/wmt_gmm_anthropogenic_parameters_detail_Replicate"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Replicate Every"
+                            android:inputType="text"
+                            android:layout_marginTop="10dp"
+                            />
+                    </android.support.design.widget.TextInputLayout>
+
+                    <!--Location Name-->
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/locationname_text_input_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/wmt_gmm_anthropogenic_parameters_detail_LocationName"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Location Name"
+                            android:inputType="text"
+                            android:layout_marginTop="10dp"
+                            />
+                    </android.support.design.widget.TextInputLayout>
+
+                    <!--Start time-->
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="DOUBLE TAP EDITTEXT TO SELECT TIME"
+                        android:gravity="center"
+                        android:textColor="#ffffff"
+                        android:padding="5dp"
+                        android:background="@color/wildlife_monitoring_technique_light"
+                        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/starttime_text_input_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/wmt_gmm_anthropogenic_parameters_Detail_StartTime"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Start Time"
+                            android:inputType="time"
+                            android:layout_marginTop="10dp"
+                            />
+                    </android.support.design.widget.TextInputLayout>
+
+                    <!--End time-->
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="DOUBLE TAP EDITTEXT TO SELECT TIME"
+                        android:gravity="center"
+                        android:textColor="#ffffff"
+                        android:padding="5dp"
+                        android:background="@color/wildlife_monitoring_technique_light"
+                        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/endTime_text_input_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/wmt_gmm_anthropogenic_parameters_Detail_EndTime"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="End Time"
+                            android:inputType="time"
+                            android:layout_marginTop="10dp"
+                            />
+                    </android.support.design.widget.TextInputLayout>
+
+                    <!--District Name-->
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/DistrictName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/wmt_gmm_anthropogenic_parameters_detail_DistrictName"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="District Name"
+                            android:inputType="textPersonName"
+                            android:layout_marginTop="10dp"
+                            />
+                    </android.support.design.widget.TextInputLayout>
+
+                    <!--VDC /Municipality Name-->
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/Vdc_nagarpalika"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/wmt_gmm_anthropogenic_parameters_detail_Vdc_Municipality_Name"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="VDC / Municipality"
+                            android:inputType="textPersonName"
+                            android:layout_marginTop="10dp"
+                            />
+                    </android.support.design.widget.TextInputLayout>
+
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <!--get Gps Location-->
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                card_view:cardBackgroundColor="@color/transparent"
+                card_view:cardElevation="1dp"
+                android:layout_margin="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_margin="20dp"
+                    android:padding="5dp">
+
+                    <TextView
+                        android:id="@+id/wmt_gmm_anthropogenic_parameters_detail_GetGpsCoordinate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="@string/gps_tracking"
+                        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_centerVertical="true"
+                        android:layout_margin="@dimen/layout_margin"
+                        android:padding="5dp">
+
+                        <Button
+                            android:id="@+id/wmt_gmm_anthropogenic_parameters_detail_GpsEnd"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="End"
+                            android:textColor="#ffffff"
+                            android:background="@drawable/button_pressed_wmt_light"
+                            android:layout_alignParentTop="true"
+                            android:layout_alignParentRight="true"
+                            android:layout_alignParentEnd="true" />
+
+                        <Button
+                            android:id="@+id/wmt_gmm_anthropogenic_parameters_detail_GpsStart"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="#ffffff"
+                            android:background="@drawable/button_pressed_wmt_light"
+                            android:text="Start" />
+
+                        <ProgressBar
+                            style="?android:attr/progressBarStyleSmall"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/progressBar"
+                            android:layout_centerVertical="true"
+                            android:layout_centerHorizontal="true" />
+
+                    </RelativeLayout>
+
+                    <Button
+                        android:layout_width="212dp"
+                        android:layout_height="wrap_content"
+                        android:text="Preview Map"
+                        android:textColor="#ffffff"
+                        android:background="@drawable/button_pressed_wmt_light"
+                        android:layout_gravity="center"
+                        android:id="@+id/wmt_gmm_anthropogenic_parameters_detail_preview_map" />
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="20dp">
+
+                        <TextView
+                            android:id="@+id/wmt_gmm_anthropogenic_parameters_detail_boundry_using_gps"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Area using GPS : (Hectares)" />
+                    </android.support.design.widget.TextInputLayout>
+
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <!--Habitat Type -->
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                card_view:cardBackgroundColor="@color/transparent"
+                card_view:cardElevation="1dp"
+                android:layout_margin="10dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:layout_margin="@dimen/layout_margin"
+                    android:padding="5dp">
+
+                    <TextView
+                        android:id="@+id/habitat_type_lable"
+                        android:layout_width="200dp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBottom="@+id/wmt_gmm_anthropogenic_parameters_detail_habitatType"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:gravity="center_vertical"
+                        android:paddingLeft="5dp"
+                        android:text="Habitat Type"
+                        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                    <Spinner
+                        android:id="@+id/wmt_gmm_anthropogenic_parameters_detail_habitatType"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_toEndOf="@+id/habitat_type_lable"
+                        android:layout_toRightOf="@+id/habitat_type_lable" />
+
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
+
+            <!--Presence of gharial or mugger -->
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                card_view:cardBackgroundColor="@color/transparent"
+                card_view:cardElevation="1dp"
+                android:layout_margin="10dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:layout_margin="@dimen/layout_margin"
+                    android:padding="5dp">
+
+                    <TextView
+                        android:id="@+id/PresenceOfGharialOrMugger_lable"
+                        android:layout_width="200dp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBottom="@+id/wmt_gmm_anthropogenic_parameters_detail_PresenceOfGharialOrMugger"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:gravity="center_vertical"
+                        android:paddingLeft="5dp"
+                        android:text="Presence Of Gharial Or Mugger"
+                        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                    <Spinner
+                        android:id="@+id/wmt_gmm_anthropogenic_parameters_detail_PresenceOfGharialOrMugger"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_toEndOf="@+id/PresenceOfGharialOrMugger_lable"
+                        android:layout_toRightOf="@+id/PresenceOfGharialOrMugger_lable" />
+
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
+
+            <!--Number-->
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                card_view:cardBackgroundColor="@color/transparent"
+                card_view:cardElevation="1dp"
+                android:layout_margin="10dp">
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/layout_margin"
+                    android:padding="5dp">
+
+                    <AutoCompleteTextView
+                        android:id="@+id/wmt_gmm_anthropogenic_parameters_detail_Number"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="45dp"
+                        android:hint="Number"
+                        android:inputType="numberDecimal" />
+                </android.support.design.widget.TextInputLayout>
+
+            </android.support.v7.widget.CardView>
+
+            <!--Anthropogenic Parameters-->
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                card_view:cardBackgroundColor="@color/transparent"
+                card_view:cardElevation="1dp"
+                android:layout_margin="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:layout_margin="20dp"
+                    android:padding="5dp">
+                    <TextView
+                        android:id="@+id/AnthropogenicParameter_lable"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="Anthropogenic Parameter"
+                        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                    <!--Washing/Bathing/Swimming Number-->
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/layout_margin"
+                        android:padding="5dp">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/wmt_gmm_anthropogenic_parameters_detail_WashBathSwim"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="45dp"
+                            android:hint="Washing/Bathing/Swimming Number"
+                            android:inputType="numberDecimal" />
+                    </android.support.design.widget.TextInputLayout>
+
+                    <!--Cattle grazing Number-->
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/layout_margin"
+                        android:padding="5dp">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/wmt_gmm_anthropogenic_parameters_detail_CattleGraze"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="45dp"
+                            android:hint="Cattle grazing Number"
+                            android:inputType="numberDecimal" />
+                    </android.support.design.widget.TextInputLayout>
+
+                    <!--Sand mining/Stone Quarrying Number-->
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/layout_margin"
+                        android:padding="5dp">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/wmt_gmm_anthropogenic_parameters_detail_SandMiningStoneQuarying"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="45dp"
+                            android:hint="Sand mining/Stone Quarrying Number"
+                            android:inputType="numberDecimal" />
+                    </android.support.design.widget.TextInputLayout>
+
+                    <!--Sand bank encroachment (Fishermen huts) Number-->
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/layout_margin"
+                        android:padding="5dp">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/wmt_gmm_anthropogenic_parameters_detail_SandBankEncroachment"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="45dp"
+                            android:hint="Sand bank encroachment (Fishermen huts) Number"
+                            android:inputType="numberDecimal" />
+                    </android.support.design.widget.TextInputLayout>
+
+                    <!--River Pollution-->
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_centerVertical="true"
+                        android:layout_margin="@dimen/layout_margin"
+                        android:padding="5dp">
+
+                        <TextView
+                            android:id="@+id/riverPollution_lable"
+                            android:layout_width="200dp"
+                            android:layout_height="wrap_content"
+                            android:layout_alignBottom="@+id/wmt_gmm_anthropogenic_parameters_detail_RiverPollution"
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentStart="true"
+                            android:layout_alignParentTop="true"
+                            android:gravity="center_vertical"
+                            android:paddingLeft="5dp"
+                            android:text="River Pollution"
+                            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                        <Spinner
+                            android:id="@+id/wmt_gmm_anthropogenic_parameters_detail_RiverPollution"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentTop="true"
+                            android:layout_alignParentRight="true"
+                            android:layout_toEndOf="@+id/riverPollution_lable"
+                            android:layout_toRightOf="@+id/riverPollution_lable" />
+
+                    </RelativeLayout>
+
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <!--Fishing Type Number-->
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                card_view:cardBackgroundColor="@color/transparent"
+                card_view:cardElevation="1dp"
+                android:layout_margin="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:layout_margin="20dp"
+                    android:padding="5dp">
+                    <TextView
+                        android:id="@+id/FishingTypeNumber_lable"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="Fishing Type Number"
+                        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                    <!--Gill net-->
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/layout_margin"
+                        android:padding="5dp">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/wmt_gmm_anthropogenic_parameters_detail_GillNet"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="45dp"
+                            android:hint="Gill net Number"
+                            android:inputType="numberDecimal" />
+                    </android.support.design.widget.TextInputLayout>
+
+                    <!--Hand Net-->
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/layout_margin"
+                        android:padding="5dp">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/wmt_gmm_anthropogenic_parameters_detail_HandNet"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="45dp"
+                            android:hint="Hand Net Number"
+                            android:inputType="numberDecimal" />
+                    </android.support.design.widget.TextInputLayout>
+
+                    <!--Hook-->
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/layout_margin"
+                        android:padding="5dp">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/wmt_gmm_anthropogenic_parameters_detail_Hook"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="45dp"
+                            android:hint="Hook Number"
+                            android:inputType="numberDecimal" />
+                    </android.support.design.widget.TextInputLayout>
+
+                    <!--Poisoning-->
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/layout_margin"
+                        android:padding="5dp">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/wmt_gmm_anthropogenic_parameters_detail_Poisoning"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="45dp"
+                            android:hint="Poisoning Number"
+                            android:inputType="numberDecimal" />
+                    </android.support.design.widget.TextInputLayout>
+
+                    <!--Electrocution Number-->
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/layout_margin"
+                        android:padding="5dp">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/wmt_gmm_anthropogenic_parameters_detail_Electrocution"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="45dp"
+                            android:hint="Electrocution Number"
+                            android:inputType="numberDecimal" />
+                    </android.support.design.widget.TextInputLayout>
+
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <!--Presence of sand bank-->
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                card_view:cardBackgroundColor="@color/transparent"
+                card_view:cardElevation="1dp"
+                android:layout_margin="10dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:layout_margin="@dimen/layout_margin"
+                    android:padding="5dp">
+
+                    <TextView
+                        android:id="@+id/Habitat_Sub_stratum_lable"
+                        android:layout_width="200dp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBottom="@+id/wmt_gmm_anthropogenic_parameters_detail_PresenceOfSandBank"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:gravity="center_vertical"
+                        android:paddingLeft="5dp"
+                        android:text="Presence of sand bank"
+                        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                    <Spinner
+                        android:id="@+id/wmt_gmm_anthropogenic_parameters_detail_PresenceOfSandBank"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_toEndOf="@+id/Habitat_Sub_stratum_lable"
+                        android:layout_toRightOf="@+id/Habitat_Sub_stratum_lable" />
+
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
+
+            <!--Funding Source-->
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                card_view:cardBackgroundColor="@color/transparent"
+                card_view:cardElevation="1dp"
+                android:layout_margin="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_margin="10dp"
+                    android:padding="5dp">
+
+                    <TextView
+                        android:id="@+id/wmt_gmm_anthropogenic_parameters_detaillabel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:paddingLeft="5dp"
+                        android:text="FUNDING SOURCE (NRs)"
+                        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/wmt_gmm_anthropogenic_parameters_detail_Tal"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="TAL (NRs)"
+                            android:inputType="numberDecimal" />
+                    </android.support.design.widget.TextInputLayout>
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/wmt_gmm_anthropogenic_parameters_detail_CommunityContribution"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Community Contribution (NRs)"
+                            android:inputType="numberDecimal" />
+                    </android.support.design.widget.TextInputLayout>
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/wmt_gmm_anthropogenic_parameters_detail_FundOthers"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Others Specify"
+                            android:inputType="text" />
+                    </android.support.design.widget.TextInputLayout>
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+            
+            <!--others-->
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                card_view:cardBackgroundColor="@color/transparent"
+                card_view:cardElevation="1dp"
+                android:layout_margin="10dp">
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/layout_margin"
+                    android:padding="5dp">
+
+                    <AutoCompleteTextView
+                        android:id="@+id/wmt_gmm_anthropogenic_parameters_detail_notes"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="45dp"
+                        android:hint="Notes / Remarks"
+                        android:inputType="text" />
+                </android.support.design.widget.TextInputLayout>
+            </android.support.v7.widget.CardView>
+
+            <!--save / send-->
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                card_view:cardBackgroundColor="@color/transparent"
+                card_view:cardElevation="1dp"
+                android:layout_margin="10dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:layout_margin="@dimen/layout_margin"
+                    android:padding="5dp">
+
+                    <Button
+                        android:id="@+id/wmt_gmm_anthropogenic_parameters_detail_save"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentTop="true"
+                        android:textColor="#ffffff"
+                        android:background="@drawable/button_pressed_wmt_light"
+                        android:text="Save" />
+
+                    <Button
+                        android:id="@+id/wmt_gmm_anthropogenic_parameters_detail_send"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="#ffffff"
+                        android:background="@drawable/button_pressed_wmt_light"
+                        android:text="Send" />
+
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

@@ -1,0 +1,134 @@
+<resources>
+    <string name="app_name">Conservation Tracking</string>
+    <string name="api_host_url">"http://cta.wwfnepal.org.np/cta/api/enter_record"</string>
+    <!--<string name="api_host_url">"http://naxa.com.np/cta/api/enter_record"</string>-->
+    <string name="select_option">Select option</string>
+
+    <string name="dialog_default_title">Here\'s a message!</string>
+    <string name="dialog_ok">OK</string>
+    <string name="dialog_cancel">Cancel</string>
+    <string name="LOADING">Loading...</string>
+    <string name="default_progressbar">Default Progressbar:</string>
+    <string name="sweet_dialog">Sweet Dialog</string>
+
+    <string name="app_updates">App Updates</string>
+    <string name="about_us">About Us</string>
+
+    <string name="gps_tracking">GPS TRACKING</string>
+
+
+    <string name="home">Home</string>
+    <string name="my_forms">My Forms</string>
+    <string name="form_one">Form Option One</string>
+    <string name="form_two">Form Option Two</string>
+    <string name="form_three">Form Option Three</string>
+    <string name="shimmew">Conservation Tracking Application</string>
+    <string name="forest">Forest</string>
+    <string name="gps_Info">GPS Information</string>
+    <string name="wildlife_monitoring_techniques">Wildlife Monitoring Techniques</string>
+    <string name="wildlife_trade_control">Wildlife Trade Control</string>
+    <string name="human_wildlife_conflict_mgmt">Human Wildlife Conflict Management</string>
+    <string name="climate_change">Climate Change</string>
+    <string name="community_support">Community support</string>
+    <string name="conservation_education">Conservation Education</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="wildlife_mgmt_n_monitoring">Wildlife Management and Monitoring</string>
+    <string name="save_form">Saved Forms</string>
+    <string name="general_form">General Form</string>
+
+    <string name="select_choices">Select Choices</string>
+    <string name="truck">Truck</string>
+    <string name="tractor">Tractor</string>
+    <string name="axe">Axe</string>
+    <string name="shaw">Saw</string>
+    <string name="sickle">Sickle</string>
+    <string name="timber">Timber (cu. ft.)</string>
+    <string name="gun">Gun</string>
+    <string name="done">Done</string>
+
+    <string name="select_choices_film">Select Choices</string>
+    <string name="cement_fund_support">Cement Dund Support</string>
+    <string name="artificial_insemination">Artificial Insemination</string>
+    <string name="productive_cattle_breed">Productive Cattle Breed</string>
+
+    <string name="select_choices_nursery">Select Choices</string>
+    <string name="amala">Amala</string>
+    <string name="bans">Bans</string>
+    <string name="bet">Bet</string>
+    <string name="bel">Bel</string>
+    <string name="amriso">Amriso</string>
+    <string name="harro">Harro</string>
+    <string name="kurilo">Kurilo</string>
+    <string name="nim">Nim</string>
+    <string name="raktachandan">Raktachandan</string>
+    <string name="rittha">Rittha</string>
+    <string name="sarpagandha">Sarpagandha</string>
+    <string name="tejpat">Tejpat</string>
+    <string name="bakaino">Bakaino</string>
+    <string name="badhahar">Badhahar</string>
+    <string name="kavro">Kavro</string>
+    <string name="kimbu">Kimbu</string>
+    <string name="koiralo">Koiralo</string>
+    <string name="nimaro">Nimaro</string>
+    <string name="tanki">Tanki</string>
+    <string name="asna">Asna</string>
+    <string name="ashok">Ashok</string>
+    <string name="bijaysal">Bijaysal</string>
+    <string name="chiuri">Chiuri</string>
+    <string name="dhupi">Dhupi</string>
+    <string name="haldu">Haldu</string>
+    <string name="jamun">Jamun</string>
+    <string name="khayer">Khayer</string>
+    <string name="kusum">Kusum</string>
+    <string name="mahuwa">Mahuwa</string>
+    <string name="rajbrikssha">Rajbrikssha</string>
+    <string name="satisal">Satisal</string>
+    <string name="siris">Siris</string>
+    <string name="sissoo">Sissoo</string>
+    <string name="simal">Simal</string>
+    <string name="sindhure">Sindhure</string>
+    <string name="bayer">Bayer</string>
+    <string name="lapsi">Lapsi</string>
+    <string name="katahar">Katahar</string>
+    <string name="mewa">Mewa</string>
+
+    <string name="select_choices_nursery1">Select Choices</string>
+    <string name="babiyo">Babiyo</string>
+    <string name="napier">Napier</string>
+
+    <string name="select_choices_poachingdetails_methods">Select Choices</string>
+    <string name="gun_shot">Gun Shot</string>
+    <string name="snares">Snares</string>
+    <string name="khabar_nets">Khabar Nets</string>
+    <string name="leg_hole_traps">Leg Hole Traps</string>
+    <string name="poisoning">Poisoning</string>
+
+    <string name="select_choices_poachingdetails_items">Select Choices</string>
+    <string name="guns">Guns</string>
+    <string name="Bullets">Bullets</string>
+    <string name="dead_animal">Dead animal or its body parts</string>
+
+    <string name="select_choices_mitigation_support">Select Choices</string>
+    <string name="electric">Electric</string>
+    <string name="solar">Solar</string>
+    <string name="bio_fencing">Bio Fencing</string>
+    <string name="machan">Machan</string>
+    <string name="trench">Trench</string>
+    <string name="grain_storage">Grain Storage</string>
+    <string name="improved_corral">Improved Corral</string>
+    <string name="watch_tower">Watch Tower</string>
+
+    <string name="select_choices_human_casualty">Select Choices</string>
+    <string name="mass_control">Mass Control</string>
+    <string name="hospital_transfer">Hospital Transfer</string>
+    <string name="first_aid">First Aid</string>
+    <string name="other">Other</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="dialog_success">Job done!</string>
+    <string name="dialog_sent">Data sent successfully.</string>
+    <string name="dialog_saved">Data saved successfully</string>
+    <string name="dialog_error">Failed!</string>
+    <string name="dialog_error_desc">No internet or Authentication failed!</string>
+</resources>

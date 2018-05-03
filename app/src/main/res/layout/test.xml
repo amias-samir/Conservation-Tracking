@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_margin="@dimen/layout_margin"
+        android:padding="5dp">
+
+        <TextView
+            android:id="@+id/forest_encroachment_actionStatusLable"
+            android:layout_width="240dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:gravity="center_vertical"
+            android:paddingLeft="5dp"
+            android:text="Any action taken for eviction"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <Spinner
+            android:id="@+id/forest_encroachment_actionStatus"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:layout_toEndOf="@+id/forest_encroachment_actionStatusLable"
+            android:layout_toRightOf="@+id/forest_encroachment_actionStatusLable" />
+
+    </RelativeLayout>
+</LinearLayout>

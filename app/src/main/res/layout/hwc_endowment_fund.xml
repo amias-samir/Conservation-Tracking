@@ -1,0 +1,688 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar3" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                card_view:cardBackgroundColor="@color/transparent"
+                card_view:cardElevation="1dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="5dp"
+                    android:layout_margin="20dp">
+
+                    <!--project code-->
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/HWCEndoFundProjectCode"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Project Code"
+                            android:inputType="text"
+                            android:layout_marginTop="45dp"/>
+                    </android.support.design.widget.TextInputLayout>
+
+                    <!--Landscape-->
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp">
+
+                        <TextView
+                            android:id="@+id/landScape"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignBottom="@+id/hwc_endowment_fund_landscape"
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentStart="true"
+                            android:layout_alignParentTop="true"
+                            android:gravity="center_vertical"
+                            android:paddingLeft="5dp"
+                            android:text="Landscape"
+                            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                        <Spinner
+                            android:id="@+id/hwc_endowment_fund_landscape"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentTop="true"
+                            android:layout_alignParentRight="true"
+                            android:layout_toRightOf="@+id/landScape"
+                            android:layout_toEndOf="@+id/landScape" />
+
+                    </RelativeLayout>
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="20dp"
+                        >
+
+                        <AutoCompleteTextView
+                            android:visibility="invisible"
+                            android:id="@+id/OtherlandscapeName"
+                            android:layout_width="200dp"
+                            android:layout_height="wrap_content"
+                            android:hint="Landscape Name"
+                            android:inputType="textMultiLine"
+
+                            />
+                    </android.support.design.widget.TextInputLayout>
+
+                    <!--Agreement No-->
+                        <android.support.design.widget.TextInputLayout
+                            android:id="@+id/hwc_endowment_fund_text_input_layout"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/hwc_endowment_fund_Agreement_No"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Agreement Number"
+                            android:inputType="number"
+                            android:layout_alignParentBottom="true"
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentStart="true" />
+                    </android.support.design.widget.TextInputLayout>
+
+                    <!--grantee Name-->
+                        <android.support.design.widget.TextInputLayout
+                            android:id="@+id/granteeName"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <AutoCompleteTextView
+                                android:id="@+id/hwc_endowment_fund_Grantee_Name"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="Grantee Name"
+                                android:inputType="textPersonName"
+                                android:layout_marginTop="45dp"
+                                />
+                        </android.support.design.widget.TextInputLayout>
+
+                    <!--Funding Source-->
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/hwc_endowment_fund_fundingSource"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Funding Source"
+                            android:inputType="text"
+                            android:layout_marginTop="45dp"/>
+                    </android.support.design.widget.TextInputLayout>
+
+                    <!--fiscal year-->
+                        <android.support.design.widget.TextInputLayout
+                            android:id="@+id/fiscal_year_text_input_layout"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <AutoCompleteTextView
+                                android:id="@+id/hwc_endowment_fund_fiscal_Year"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="Fiscal Year"
+                                android:inputType="date"
+                                android:layout_marginTop="45dp"
+                                />
+                        </android.support.design.widget.TextInputLayout>
+
+                    <!--District Name-->
+                        <android.support.design.widget.TextInputLayout
+                            android:id="@+id/DistrictName"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <AutoCompleteTextView
+                                android:id="@+id/hwc_endowment_fund_DistrictName"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="District Name"
+                                android:inputType="textPersonName"
+                                android:layout_marginTop="45dp"
+                                />
+                        </android.support.design.widget.TextInputLayout>
+
+                    <!--VDC /Municipality Name-->
+                        <android.support.design.widget.TextInputLayout
+                            android:id="@+id/Vdc_nagarpalika"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <AutoCompleteTextView
+                                android:id="@+id/hwc_endowment_fund_Vdc_Municipality_Name"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="VDC / Municipality"
+                                android:inputType="textPersonName"
+                                android:layout_marginTop="45dp"
+                                />
+                        </android.support.design.widget.TextInputLayout>
+
+                    <!--Name BZUC/CFCC-->
+                        <android.support.design.widget.TextInputLayout
+                            android:id="@+id/NameOfBZUC_CFCC"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <AutoCompleteTextView
+                                android:id="@+id/hwc_endowment_fund_name_of_bzuc_cfcc"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="Name BZUC/CFCC"
+                                android:inputType="textPersonName"
+                                android:layout_marginTop="45dp"
+                                />
+                        </android.support.design.widget.TextInputLayout>
+
+                    <!--Year of establishment-->
+                        <android.support.design.widget.TextInputLayout
+                            android:id="@+id/year_of_establishment_text_input_layout"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <AutoCompleteTextView
+                                android:id="@+id/hwc_endowment_fund_establishment_year"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="Year of Establishment"
+                                android:inputType="date"
+                                android:layout_marginTop="45dp"
+                                />
+                        </android.support.design.widget.TextInputLayout>
+
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <!--HWC endowment fund Contribution-->
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                card_view:cardBackgroundColor="@color/transparent"
+                card_view:cardElevation="1dp"
+                android:layout_margin="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:layout_margin="20dp"
+                    android:padding="5dp">
+
+                    <TextView
+                        android:id="@+id/hwc_endowment_fund_hwc_fund_contribution"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="FUNDING SOURCE"
+                        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                    <!--tal-->
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/layout_margin">
+                        <android.support.design.widget.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <AutoCompleteTextView
+                                android:id="@+id/hwc_endowment_fund_tal"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="Tal (NRs)"
+                                android:inputType="number"
+                                android:layout_marginTop="45dp"
+                                />
+                        </android.support.design.widget.TextInputLayout>
+                    </RelativeLayout>
+                    <!--BZUC/CFCC-->
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/layout_margin">
+                        <android.support.design.widget.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <AutoCompleteTextView
+                                android:id="@+id/hwc_endowment_fund_bzuc_cfcc"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="BZUC/CFCCs"
+                                android:inputType="textPersonName"
+                                android:layout_marginTop="45dp"
+                                />
+                        </android.support.design.widget.TextInputLayout>
+                    </RelativeLayout>
+                    <!--total fund-->
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/layout_margin">
+                        <android.support.design.widget.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <AutoCompleteTextView
+                                android:id="@+id/hwc_endowment_fund_total_fund"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="Total Fund"
+                                android:inputType="textPersonName"
+                                android:layout_marginTop="45dp"
+                                />
+                        </android.support.design.widget.TextInputLayout>
+                    </RelativeLayout>
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+
+            <!--get Gps Location House hold-->
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                card_view:cardBackgroundColor="@color/transparent"
+                card_view:cardElevation="1dp"
+                android:layout_margin="20dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_margin="10dp"
+                    android:padding="5dp">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_centerVertical="true"
+                        android:layout_margin="@dimen/layout_margin"
+                        android:padding="5dp">
+
+                        <Button
+                            android:id="@+id/hwc_endowment_fund_GpsStart"
+                            android:layout_width="212dp"
+                            android:layout_height="wrap_content"
+                            android:layout_centerHorizontal="true"
+                            android:background="@drawable/button_pressed_hwc_light"
+                            android:textColor="#ffffff"
+                            android:text="Get gps location" />
+
+                    </RelativeLayout>
+
+                    <Button
+                        android:layout_width="212dp"
+                        android:layout_height="wrap_content"
+                        android:text="Preview Map"
+                        android:background="@drawable/button_pressed_hwc_light"
+                        android:textColor="#ffffff"
+                        android:layout_gravity="center"
+                        android:id="@+id/hwc_endowment_fund_preview_map" />
+
+
+
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <!--Post Monitoring-->
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                card_view:cardBackgroundColor="@color/transparent"
+                card_view:cardElevation="1dp"
+                android:layout_margin="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:layout_margin="20dp"
+                    android:padding="5dp">
+
+                    <TextView
+                        android:id="@+id/hwc_endowment_fund_post_monitoring"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="POST MONITORING"
+                        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                    <!--Support through HWC Endowment Fund (Name)-->
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/layout_margin">
+                        <android.support.design.widget.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <AutoCompleteTextView
+                                android:id="@+id/hwc_endowment_fund_support_through_hwc_fund"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="Support through HWC Endowment Fund (Name)"
+                                android:inputType="number"
+                                android:layout_marginTop="45dp"
+                                />
+                        </android.support.design.widget.TextInputLayout>
+                    </RelativeLayout>
+
+
+                    <!--Reason (Death/ Injury/Others specify)-->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/layout_margin"
+                        android:orientation="vertical">
+
+
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                          >
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Reason"
+                                    android:gravity="center_horizontal"
+                                    android:layout_marginRight="10dp"
+                                    android:layout_alignParentLeft="true"
+                                    android:textAppearance="?android:attr/textAppearanceMedium"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Number"
+                                android:layout_gravity="center_horizontal"
+                                android:layout_marginLeft="10dp"
+                                android:layout_alignParentRight="true"
+                                android:textAppearance="?android:attr/textAppearanceMedium"/>
+                        </RelativeLayout>
+
+
+                            <!--death number-->
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp">
+                            <TextView
+                                android:id="@+id/death_lbl"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Death"
+                                android:gravity="center_horizontal"
+                                android:layout_marginRight="10dp"
+                                android:layout_alignParentLeft="true"
+                                android:layout_margin="15dp"
+                                android:textAppearance="?android:attr/textAppearanceMedium"/>
+
+
+
+                                <EditText
+                                    android:id="@+id/hwc_endowment_fund_death_no"
+                                    android:layout_width="70dp"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center_horizontal"
+                                    android:hint="no."
+                                    android:inputType="number"
+                                    android:layout_alignParentRight="true"
+                                    android:layout_marginRight="10dp"
+                                    android:textAppearance="?android:attr/textAppearanceMedium"/>
+
+                        </RelativeLayout>
+
+                        <!--injured number-->
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp">
+                            <TextView
+                                android:id="@+id/injured_lbl"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Injured"
+                                android:gravity="center_horizontal"
+                                android:layout_alignParentLeft="true"
+                                android:layout_margin="15dp"
+                                android:textAppearance="?android:attr/textAppearanceMedium"/>
+
+
+
+                            <EditText
+                                android:id="@+id/hwc_endowment_fund_injured_no"
+                                android:layout_width="70dp"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_horizontal"
+                                android:hint="no."
+                                android:inputType="number"
+                                android:layout_alignParentRight="true"
+                                android:textAppearance="?android:attr/textAppearanceMedium"/>
+
+                        </RelativeLayout>
+
+                        <!--others number-->
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp">
+
+                            <RelativeLayout
+                                android:layout_width="120dp"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentLeft="true">
+                                <android.support.design.widget.TextInputLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content">
+
+                                    <AutoCompleteTextView
+                                        android:id="@+id/hwc_endowment_fund_others_name"
+                                        android:layout_width="fill_parent"
+                                        android:layout_height="wrap_content"
+                                        android:hint="Others (specify reason)"
+                                        android:inputType="text"
+                                        android:layout_marginTop="45dp"
+                                        />
+                                </android.support.design.widget.TextInputLayout>
+                            </RelativeLayout>
+
+                            <!--<EditText-->
+                                <!--android:id="@+id/hwc_endowment_fund_others_name"-->
+                                <!--android:layout_width="wrap_content"-->
+                                <!--android:layout_height="wrap_content"-->
+                                <!--android:gravity="center_horizontal"-->
+                                <!--android:hint="Others specify"-->
+                                <!--android:inputType="textPersonName"-->
+                                <!--android:layout_alignParentLeft="true"-->
+                                <!--android:layout_marginRight="10dp"-->
+                                <!--android:textAppearance="?android:attr/textAppearanceMedium"/>-->
+
+
+
+                            <EditText
+                                android:id="@+id/hwc_endowment_fund_others_no"
+                                android:layout_width="70dp"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_horizontal"
+                                android:hint="no."
+                                android:inputType="number"
+                                android:layout_alignParentRight="true"
+                                android:layout_marginTop="15dp"
+                                android:textAppearance="?android:attr/textAppearanceMedium"/>
+
+                        </RelativeLayout>
+
+
+                    </LinearLayout>
+
+
+                    <!--Total Fund-->
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/layout_margin">
+                        <android.support.design.widget.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <AutoCompleteTextView
+                                android:id="@+id/hwc_endowment_fund_post_total_fund"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="Total Fund"
+                                android:inputType="number"
+                                android:layout_marginTop="45dp"
+                                />
+                        </android.support.design.widget.TextInputLayout>
+                    </RelativeLayout>
+
+                    <!--Other fund specify-->
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/layout_margin">
+                        <android.support.design.widget.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <AutoCompleteTextView
+                                android:id="@+id/hwc_endowment_fund_FundOthers"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="Other"
+                                android:inputType="number"
+                                android:layout_marginTop="45dp"
+                                />
+                        </android.support.design.widget.TextInputLayout>
+                    </RelativeLayout>
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+
+            <!--Total fund in cumulative-->
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                card_view:cardBackgroundColor="@color/transparent"
+                card_view:cardElevation="1dp"
+                android:layout_margin="10dp">
+                    <!--Total Fund-->
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/layout_margin">
+                        <android.support.design.widget.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <AutoCompleteTextView
+                                android:id="@+id/hwc_endowment_fund_total_fund_in_cumulative"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="Total Fund in Cumulative"
+                                android:inputType="textPersonName"
+                                android:layout_marginTop="45dp"
+                                />
+                        </android.support.design.widget.TextInputLayout>
+                    </RelativeLayout>
+            </android.support.v7.widget.CardView>
+
+            <!--Remark /  Note  -->
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                card_view:cardBackgroundColor="@color/transparent"
+                card_view:cardElevation="1dp"
+                android:layout_margin="10dp">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/layout_margin">
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/hwc_endowment_fund_remarks"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Notes / Remarks"
+                            android:inputType="text"
+                            android:layout_marginTop="45dp"
+                            />
+                    </android.support.design.widget.TextInputLayout>
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
+            <!--save / send-->
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                card_view:cardBackgroundColor="@color/transparent"
+                card_view:cardElevation="1dp"
+                android:layout_margin="10dp">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/layout_margin"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:padding="5dp">
+
+                    <Button
+                        android:id="@+id/hwc_endowment_fund_save"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Save"
+                        android:background="@drawable/button_pressed_hwc_light"
+                        android:textColor="#ffffff"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentEnd="true" />
+
+                    <Button
+                        android:id="@+id/hwc_endowment_fund_send"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/button_pressed_hwc_light"
+                        android:textColor="#ffffff"
+                        android:text="Send" />
+
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

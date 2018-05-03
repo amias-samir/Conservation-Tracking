@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:paddingTop="20dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:textColor="#000000"
+        android:text="Are you sure want to update??"
+        android:id="@+id/textViewWarning"
+        android:gravity="center"
+        android:layout_gravity="center_horizontal" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_margin="@dimen/activity_horizontal_margin"
+        android:padding="@dimen/activity_horizontal_margin"
+        >
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Yes"
+            android:id="@+id/alertButtonYes"
+            android:textColor="#ffffff"
+            android:background="@color/nliveo_blue_colorPrimary"
+            android:layout_weight="1"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+         />
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="No"
+            android:textColor="#ffffff"
+            android:id="@+id/alertButtonNo"
+            android:background="@color/nliveo_blue_colorPrimary"
+            android:layout_weight="1"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"/>
+
+    </LinearLayout>
+
+</LinearLayout>
