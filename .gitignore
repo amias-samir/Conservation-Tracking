@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+# Add any directories, files, or patterns you don't want to be tracked by version control
+>>>>>>> 707526898168a44bc140017b763282d839a1908b
 # Built application files
 *.apk
 *.ap_
