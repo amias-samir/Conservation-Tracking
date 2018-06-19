@@ -34,6 +34,7 @@ import com.google.android.gms.location.LocationSettingsRequest;
 import com.google.android.gms.location.LocationSettingsResult;
 import com.google.android.gms.location.LocationSettingsStatusCodes;
 
+import Utls.SharedPreferenceUtils;
 import br.liveo.Model.HelpLiveo;
 import br.liveo.Model.Navigation;
 import br.liveo.interfaces.OnItemClickListener;
@@ -42,6 +43,7 @@ import br.liveo.navigationliveo.NavigationLiveo;
 
 import com.naxa.conservationtracking.activities.General_Form;
 import com.naxa.conservationtracking.activities.SavedFormsActivity;
+import com.naxa.conservationtracking.defaulthome.DefaultHomeActivity;
 import com.naxa.conservationtracking.fragment_main.Fragment_ClimateChange;
 import com.naxa.conservationtracking.fragment_main.Fragment_CommunitySupport;
 import com.naxa.conservationtracking.fragment_main.Fragment_Conservation_Education;
@@ -276,6 +278,12 @@ public class MainActivity extends NavigationLiveo implements OnItemClickListener
 
 //            updateApp();
             showAlertDialogBeforeUpdate();
+            return true;
+        }
+        if (id == R.id.user_logout) {
+            SharedPreferenceUtils sharedPreferenceUtils = new SharedPreferenceUtils(this);
+            sharedPreferenceUtils.clear();
+            startActivity(new Intent(MainActivity.this, DefaultHomeActivity.class));
             return true;
         }
 
