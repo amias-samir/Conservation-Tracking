@@ -21,6 +21,7 @@ import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.util.Base64;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -76,24 +77,25 @@ import java.util.List;
 
 import javax.net.ssl.HttpsURLConnection;
 
+import Utls.SharedPreferenceUtils;
 import cn.refactor.lib.colordialog.PromptDialog;
 
 /**
  * Created by ramaan on 1/18/2016.
  */
-public class BiogasDetail extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
+public class BiogasDetail extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     Toolbar toolbar;
     int CAMERA_PIC_REQUEST = 2;
     Spinner spinnerLandscape, spinnerWellBeing, spinnerCapacityBiogas, spinnerToiletAttached;
     ArrayAdapter landscapeAdpt, WellBeingAdapter, CapacityBiogasAdapter, ToiletAttachedAdapter;
-    Button send , save , startGps , previewMap ;
+    Button send, save, startGps, previewMap;
     ProgressDialog mProgressDlg;
     GPS_TRACKER_FOR_POINT gps;
-    String jsonToSend , photoTosend;
-    String imagePath , encodedImage = null ,imageName="no_photo";
-    ImageButton photo ;
-    ImageView previewImageSite ;
-    boolean isGpsTaken = false ;
+    String jsonToSend, photoTosend;
+    String imagePath, encodedImage = null, imageName = "no_photo";
+    ImageButton photo;
+    ImageView previewImageSite;
+    boolean isGpsTaken = false;
 
     boolean isGpsTracking = false;
     static double gpsLat;
@@ -106,20 +108,20 @@ public class BiogasDetail extends AppCompatActivity implements AdapterView.OnIte
 
 
     ArrayList<LatLng> listCf = new ArrayList<LatLng>();
-    List<Location> gpslocation = new ArrayList<>() ;
+    List<Location> gpslocation = new ArrayList<>();
     StringBuilder stringBuilder = new StringBuilder();
-    String latLangArray = "", jsonLatLangArray ;
+    String latLangArray = "", jsonLatLangArray;
     String landscape;
     String other_landscape;
     String funding_source;
-    String projectCode, agreement_no , grantee_name , fiscal_year ,  district , vdc , date , beneficiaries_name,  well_being_ranking, areaha, area_gps ,
-            biogas_capacity,toilet_attached, tal, community_contribution, fund_others, fuelwood_consumption_before, fuelwood_consumption_after, others;
+    String projectCode, agreement_no, grantee_name, fiscal_year, district, vdc, date, beneficiaries_name, well_being_ranking, areaha, area_gps,
+            biogas_capacity, toilet_attached, tal, community_contribution, fund_others, fuelwood_consumption_before, fuelwood_consumption_after, others;
 
-    JSONArray jsonArrayGPS  = new JSONArray();
-    String userNameToSend , passwordToSend ;
+    JSONArray jsonArrayGPS = new JSONArray();
+    String userNameToSend, passwordToSend;
 
-    AutoCompleteTextView tvOtherLandscape, tvFundingSource, tvProjectCode, tvAgreement_no ,  tvGrantew_name ,tvFiscal_year , tvDistrictname , tvNameOfVdc , tvDate ,  tvAreaHa,
-            tvBeneficiariesName, tvTal, tvCommunityContribution, tvFundOthers, tvFuelwoodBefore, tvFuelwoodAfter, tvOthers ;
+    AutoCompleteTextView tvOtherLandscape, tvFundingSource, tvProjectCode, tvAgreement_no, tvGrantew_name, tvFiscal_year, tvDistrictname, tvNameOfVdc, tvDate, tvAreaHa,
+            tvBeneficiariesName, tvTal, tvCommunityContribution, tvFundOthers, tvFuelwoodBefore, tvFuelwoodAfter, tvOthers;
 
     private int year;
     private int month;
@@ -207,69 +209,76 @@ public class BiogasDetail extends AppCompatActivity implements AdapterView.OnIte
                     Toast.makeText(getApplicationContext(), "Please end GPS Tracking.", Toast.LENGTH_SHORT).show();
                 } else {
 
-                    if(isGpsTaken) {
+                    if (isGpsTaken) {
 
-                        DisplayMetrics metrics = context.getResources().getDisplayMetrics();
-                        int width = metrics.widthPixels;
-                        int height = metrics.heightPixels;
+//                        DisplayMetrics metrics = context.getResources().getDisplayMetrics();
+//                        int width = metrics.widthPixels;
+//                        int height = metrics.heightPixels;
+//
+//                        final Dialog showDialog = new Dialog(context);
+//
+//                        showDialog.setContentView(R.layout.login_layout);
+//                        final EditText userName = (EditText) showDialog.findViewById(R.id.input_userName);
+//                        final EditText password = (EditText) showDialog.findViewById(R.id.input_password);
+//
+//                        AppCompatButton logIn = (AppCompatButton) showDialog.findViewById(R.id.login_button);
+//                        showDialog.setTitle("Authentication");
+//                        showDialog.setCancelable(true);
+//                        showDialog.show();
+//                        showDialog.getWindow().setLayout((6 * width) / 7, LinearLayout.LayoutParams.WRAP_CONTENT);
+//
+//                        logIn.setOnClickListener(new View.OnClickListener() {
+//
+//                            @Override
+//                            public void onClick(View v) {
+                        // TODO Auto-generated method stub
+//                        String userN = userName.getText().toString();
+//                                String passW = password.getText().toString();
+                        SharedPreferenceUtils sharedPreferenceUtils = new SharedPreferenceUtils(BiogasDetail.this);
 
-                        final Dialog showDialog = new Dialog(context);
+                        String userN = (TextUtils.isEmpty(sharedPreferenceUtils.getStringValue(SharedPreferenceUtils.KEY_USER_NAME, null)) ?
+                                SharedPreferenceUtils.KEY_DEFAULT_USER_NAME : sharedPreferenceUtils.getStringValue(SharedPreferenceUtils.KEY_USER_NAME, null));
+                        String passW = (TextUtils.isEmpty(sharedPreferenceUtils.getStringValue(SharedPreferenceUtils.KEY_USER_PASSWORD, null)) ?
+                                SharedPreferenceUtils.KEY_DEFAULT_USER_PASS : sharedPreferenceUtils.getStringValue(SharedPreferenceUtils.KEY_USER_PASSWORD, null));
+//
+                        if (userN == null || userN.equals("") || passW == null || passW.equals("")) {
+                            Toast.makeText(context, "Either your user name or password is empty.Please fill the required field. ", Toast.LENGTH_SHORT).show();
+                        } else {
+//                                    showDialog.dismiss();
+                            projectCode = tvProjectCode.getText().toString();
 
-                        showDialog.setContentView(R.layout.login_layout);
-                        final EditText userName = (EditText) showDialog.findViewById(R.id.input_userName);
-                        final EditText password = (EditText) showDialog.findViewById(R.id.input_password);
+                            agreement_no = tvAgreement_no.getText().toString();
+                            other_landscape = tvOtherLandscape.getText().toString();
+                            funding_source = tvFundingSource.getText().toString();
+                            grantee_name = tvGrantew_name.getText().toString();
+                            fiscal_year = tvFiscal_year.getText().toString();
+                            district = tvDistrictname.getText().toString();
+                            vdc = tvNameOfVdc.getText().toString();
+                            date = tvDate.getText().toString();
+                            beneficiaries_name = tvBeneficiariesName.getText().toString();
+                            tal = tvTal.getText().toString();
+                            community_contribution = tvCommunityContribution.getText().toString();
+                            fund_others = tvFundOthers.getText().toString();
+                            fuelwood_consumption_before = tvFuelwoodBefore.getText().toString();
+                            fuelwood_consumption_after = tvFuelwoodAfter.getText().toString();
+                            others = tvOthers.getText().toString();
 
-                        AppCompatButton logIn = (AppCompatButton) showDialog.findViewById(R.id.login_button);
-                        showDialog.setTitle("Authentication");
-                        showDialog.setCancelable(true);
-                        showDialog.show();
-                        showDialog.getWindow().setLayout((6 * width) / 7, LinearLayout.LayoutParams.WRAP_CONTENT);
-
-                        logIn.setOnClickListener(new View.OnClickListener() {
-
-                            @Override
-                            public void onClick(View v) {
-                                // TODO Auto-generated method stub
-                                String userN = userName.getText().toString();
-                                String passW = password.getText().toString();
-                                if (userN == null || userN.equals("") || passW == null || passW.equals("")) {
-                                    Toast.makeText(context, "Either your user name or password is empty.Please fill the required field. ", Toast.LENGTH_SHORT).show();
-                                } else {
-                                    showDialog.dismiss();
-                                    projectCode = tvProjectCode.getText().toString();
-
-                                    agreement_no = tvAgreement_no.getText().toString();
-                                    other_landscape = tvOtherLandscape.getText().toString();
-                                    funding_source = tvFundingSource.getText().toString();
-                                    grantee_name = tvGrantew_name.getText().toString();
-                                    fiscal_year = tvFiscal_year.getText().toString();
-                                    district = tvDistrictname.getText().toString();
-                                    vdc = tvNameOfVdc.getText().toString();
-                                    date = tvDate.getText().toString();
-                                    beneficiaries_name = tvBeneficiariesName.getText().toString();
-                                    tal = tvTal.getText().toString();
-                                    community_contribution = tvCommunityContribution.getText().toString();
-                                    fund_others = tvFundOthers.getText().toString();
-                                    fuelwood_consumption_before = tvFuelwoodBefore.getText().toString();
-                                    fuelwood_consumption_after = tvFuelwoodAfter.getText().toString();
-                                    others = tvOthers.getText().toString();
-
-                                    userNameToSend = userN;
-                                    passwordToSend = passW;
+                            userNameToSend = userN;
+                            passwordToSend = passW;
 
 
-                                    Log.e("SEND", "Clicked");
-                                    mProgressDlg = new ProgressDialog(context);
-                                    mProgressDlg.setMessage("Please wait...");
-                                    mProgressDlg.setIndeterminate(false);
-                                    mProgressDlg.setCancelable(false);
-                                    mProgressDlg.show();
-                                    convertDataToJson();
-                                    sendDatToserver();
-                                }
-                            }
-                        });
-                    }else{
+                            Log.e("SEND", "Clicked");
+                            mProgressDlg = new ProgressDialog(context);
+                            mProgressDlg.setMessage("Please wait...");
+                            mProgressDlg.setIndeterminate(false);
+                            mProgressDlg.setCancelable(false);
+                            mProgressDlg.show();
+                            convertDataToJson();
+                            sendDatToserver();
+                        }
+//                            }
+//                        });
+                    } else {
                         Toast.makeText(getApplicationContext(), "You need to take at least one gps cooordinate", Toast.LENGTH_SHORT).show();
                     }
 
@@ -284,7 +293,7 @@ public class BiogasDetail extends AppCompatActivity implements AdapterView.OnIte
                     Toast.makeText(getApplicationContext(), "Please end GPS Tracking.", Toast.LENGTH_SHORT).show();
                 } else {
 
-                    if(isGpsTaken) {
+                    if (isGpsTaken) {
 
                         projectCode = tvProjectCode.getText().toString();
                         other_landscape = tvOtherLandscape.getText().toString();
@@ -362,7 +371,7 @@ public class BiogasDetail extends AppCompatActivity implements AdapterView.OnIte
                                 }
                             }
                         });
-                    }else{
+                    } else {
                         Toast.makeText(getApplicationContext(), "You need to take at least one gps cooordinate", Toast.LENGTH_SHORT).show();
 
                     }
@@ -383,7 +392,6 @@ public class BiogasDetail extends AppCompatActivity implements AdapterView.OnIte
         });
 
 
-
         startGps.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -394,16 +402,14 @@ public class BiogasDetail extends AppCompatActivity implements AdapterView.OnIte
         });
 
 
-
-
         previewMap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                if(CheckValues.isFromSavedFrom){
+                if (CheckValues.isFromSavedFrom) {
                     StaticListOfCoordinates.setList(listCf);
                     startActivity(new Intent(BiogasDetail.this, MapPointActivity.class));
-                }else {
+                } else {
 
                     if (GPS_TRACKER_FOR_POINT.GPS_POINT_INITILIZED) {
                         StaticListOfCoordinates.setList(listCf);
@@ -465,12 +471,9 @@ public class BiogasDetail extends AppCompatActivity implements AdapterView.OnIte
                     break;
 
             }
-            if(spinnerLandscape.getItemAtPosition(position).toString().equals("Others"))
-            {
+            if (spinnerLandscape.getItemAtPosition(position).toString().equals("Others")) {
                 tvOtherLandscape.setVisibility(View.VISIBLE);
-            }
-            else
-            {
+            } else {
                 tvOtherLandscape.setVisibility(View.GONE);
             }
         }
@@ -525,6 +528,7 @@ public class BiogasDetail extends AppCompatActivity implements AdapterView.OnIte
     public void onNothingSelected(AdapterView<?> parent) {
 
     }
+
     @Override
     public void onBackPressed() {
         DisplayMetrics metrics = context.getResources().getDisplayMetrics();
@@ -567,10 +571,10 @@ public class BiogasDetail extends AppCompatActivity implements AdapterView.OnIte
                 Uri selectedImage = data.getData();
 
                 String filePath = getPath(selectedImage);
-                String file_extn = filePath.substring(filePath.lastIndexOf(".")+1);
+                String file_extn = filePath.substring(filePath.lastIndexOf(".") + 1);
 
 //                image_name_tv.setText(filePath);
-                imagePath = filePath ;
+                imagePath = filePath;
                 addImage();
 //                Toast.makeText(getApplicationContext(),""+encodedImage,Toast.LENGTH_SHORT).show();
 //                if (file_extn.equals("img") || file_extn.equals("jpg") || file_extn.equals("jpeg") || file_extn.equals("gif") || file_extn.equals("png")) {
@@ -581,7 +585,7 @@ public class BiogasDetail extends AppCompatActivity implements AdapterView.OnIte
 //                    //NOT IN REQUIRED FORMAT
 //                }
             }
-        if( requestCode == CAMERA_PIC_REQUEST) {
+        if (requestCode == CAMERA_PIC_REQUEST) {
             if (resultCode == Activity.RESULT_OK) {
                 Bitmap thumbnail = (Bitmap) data.getExtras().get("data");
                 //  ImageView image =(ImageView) findViewById(R.id.Photo);
@@ -645,21 +649,21 @@ public class BiogasDetail extends AppCompatActivity implements AdapterView.OnIte
         Calendar calendar = Calendar.getInstance();
         long timeInMillis = calendar.getTimeInMillis();
 
-        imageName ="Biogas_Detail"+timeInMillis;
+        imageName = "Biogas_Detail" + timeInMillis;
 
         File file1 = new File(Environment.getExternalStoragePublicDirectory(
-                Environment.DIRECTORY_PICTURES), imageName );
+                Environment.DIRECTORY_PICTURES), imageName);
 //        if (!file1.mkdirs()) {
 //            Toast.makeText(getApplicationContext(), "Not Created", Toast.LENGTH_SHORT).show();
 //        }
 
-        if (file1.exists ()) file1.delete ();
+        if (file1.exists()) file1.delete();
         try {
             FileOutputStream out = new FileOutputStream(file1);
             thumbnail.compress(Bitmap.CompressFormat.JPEG, 90, out);
             out.flush();
             out.close();
-            Toast.makeText(getApplicationContext(), "Saved "+imageName, Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Saved " + imageName, Toast.LENGTH_SHORT).show();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -667,13 +671,13 @@ public class BiogasDetail extends AppCompatActivity implements AdapterView.OnIte
 
     public String getPath(Uri uri) {
         // just some safety built in
-        if( uri == null ) {
+        if (uri == null) {
             // TODO perform some logging or show user feedback
             return null;
         }
-        String[] projection = { MediaStore.Images.Media.DATA };
+        String[] projection = {MediaStore.Images.Media.DATA};
         Cursor cursor = managedQuery(uri, projection, null, null, null);
-        if( cursor != null ){
+        if (cursor != null) {
             int column_index = cursor
                     .getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
             cursor.moveToFirst();
@@ -682,21 +686,22 @@ public class BiogasDetail extends AppCompatActivity implements AdapterView.OnIte
         // this is our fallback here
         return uri.getPath();
     }
-    public void addImage(){
+
+    public void addImage() {
         File file1 = new File(Environment.getExternalStoragePublicDirectory(
-                Environment.DIRECTORY_PICTURES),imageName);
-        String path=file1.toString();
+                Environment.DIRECTORY_PICTURES), imageName);
+        String path = file1.toString();
 
         BitmapFactory.Options options = new BitmapFactory.Options();
 
         options.inSampleSize = 1;
         options.inPurgeable = true;
-        Bitmap bm = BitmapFactory.decodeFile( path ,options);
+        Bitmap bm = BitmapFactory.decodeFile(path, options);
 //        Bitmap bm = BitmapFactory.decodeFile( imagePath ,options);
 
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
 
-        bm.compress(Bitmap.CompressFormat.JPEG, 100 ,baos);
+        bm.compress(Bitmap.CompressFormat.JPEG, 100, baos);
 
 
         // bitmap object
@@ -705,15 +710,16 @@ public class BiogasDetail extends AppCompatActivity implements AdapterView.OnIte
 
         //generate base64 string of image
         encodedImage = Base64.encodeToString(byteImage_photo, Base64.DEFAULT);
-        Log.e("IMAGE STRING" ,"-"+encodedImage);
+        Log.e("IMAGE STRING", "-" + encodedImage);
 
     }
+
     public void initilizeUI() {
         Intent intent = getIntent();
         if (intent.hasExtra("JSON1")) {
-            CheckValues.isFromSavedFrom = true ;
+            CheckValues.isFromSavedFrom = true;
             startGps.setEnabled(false);
-            isGpsTaken=true;
+            isGpsTaken = true;
             previewMap.setEnabled(true);
             Bundle bundle = intent.getExtras();
             String jsonToParse = (String) bundle.get("JSON1");
@@ -722,15 +728,15 @@ public class BiogasDetail extends AppCompatActivity implements AdapterView.OnIte
             startGps.setText("Location Recorded");
 
             String status = (String) bundle.get("status");
-            if(status.equals("Sent")){
+            if (status.equals("Sent")) {
                 save.setEnabled(false);
                 send.setEnabled(false);
             }
 
-            Log.e("BIOGASDETAIL" , "i-"+imageName);
+            Log.e("BIOGASDETAIL", "i-" + imageName);
 
-            if( imageName.equals("no_photo")) {
-            }else{
+            if (imageName.equals("no_photo")) {
+            } else {
                 File file1 = new File(Environment.getExternalStoragePublicDirectory(
                         Environment.DIRECTORY_PICTURES), imageName);
                 String path = file1.toString();
@@ -742,7 +748,7 @@ public class BiogasDetail extends AppCompatActivity implements AdapterView.OnIte
             }
             try {
                 //new adjustment
-                Log.e("biogas_detail",""+jsonToParse);
+                Log.e("biogas_detail", "" + jsonToParse);
                 parseArrayGPS(gpsLocationtoParse);
                 parseJson(jsonToParse);
             } catch (JSONException e) {
@@ -757,7 +763,7 @@ public class BiogasDetail extends AppCompatActivity implements AdapterView.OnIte
 
 
     //new adjustment
-    public void parseArrayGPS (String arrayToParse){
+    public void parseArrayGPS(String arrayToParse) {
         try {
             JSONArray array = new JSONArray(arrayToParse);
             for (int i = 0; i < array.length(); ++i) {
@@ -776,16 +782,13 @@ public class BiogasDetail extends AppCompatActivity implements AdapterView.OnIte
         }
     }
 
-    private void loadImageFromStorage(String path)
-    {
+    private void loadImageFromStorage(String path) {
         try {
             previewImageSite.setVisibility(View.VISIBLE);
-            File f=new File(path);
+            File f = new File(path);
             Bitmap b = BitmapFactory.decodeStream(new FileInputStream(f));
             previewImageSite.setImageBitmap(b);
-        }
-        catch (FileNotFoundException e)
-        {
+        } catch (FileNotFoundException e) {
             Toast.makeText(getApplicationContext(), "invalid path", Toast.LENGTH_SHORT).show();
             e.printStackTrace();
         }
@@ -800,14 +803,14 @@ public class BiogasDetail extends AppCompatActivity implements AdapterView.OnIte
             post_dict.put("tablename", "tbl_biogas_construction_details");
 
             JSONObject header = new JSONObject();
-            header.put("project_code" , projectCode);
-            header.put("landscape" , landscape + ":  " + other_landscape);
-            header.put("funding_source" , funding_source);
+            header.put("project_code", projectCode);
+            header.put("landscape", landscape + ":  " + other_landscape);
+            header.put("funding_source", funding_source);
             header.put("agreement_no", agreement_no);
             header.put("grantee_name", grantee_name);
             header.put("fiscal_year", fiscal_year);
             header.put("district", district);
-            header.put("vdc",vdc);
+            header.put("vdc", vdc);
             header.put("date", date);
             header.put("beneficiaries_name", beneficiaries_name);
             header.put("well_being_ranking", well_being_ranking);
@@ -818,20 +821,20 @@ public class BiogasDetail extends AppCompatActivity implements AdapterView.OnIte
             header.put("fund_others", fund_others);
             header.put("fuelwood_consumption_before", fuelwood_consumption_before);
             header.put("fuelwood_consumption_after", fuelwood_consumption_after);
-            header.put("longitude",finalLong);
+            header.put("longitude", finalLong);
             header.put("latitude", finalLat);
             header.put("others", others);
             post_dict.put("formdata", header);
 
             jsonToSend = post_dict.toString();
 
-            photo_dict.put("photo", encodedImage );
+            photo_dict.put("photo", encodedImage);
             photoTosend = photo_dict.toString();
 
             SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
             SharedPreferences.Editor editor = preferences.edit();
             editor.putString("LATTI", "" + finalLat);
-            editor.putString("LONGI", ""+ finalLong);
+            editor.putString("LONGI", "" + finalLong);
             editor.apply();
 
         } catch (JSONException e) {
@@ -904,7 +907,7 @@ public class BiogasDetail extends AppCompatActivity implements AdapterView.OnIte
             spinnerLandscape.setSelection(setlandscape);
             tvOtherLandscape.setVisibility(View.GONE);
 
-        }else {
+        } else {
 
             int setlandscape = landscapeAdpt.getPosition(actions[0]);
             spinnerLandscape.setSelection(setlandscape);

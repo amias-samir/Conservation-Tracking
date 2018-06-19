@@ -1,4 +1,4 @@
-package com.naxa.conservationtracking.fragment_main;
+package com.naxa.conservationtracking.defaulthome;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,26 +12,32 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.naxa.conservationtracking.activities.General_Form;
-import com.naxa.conservationtracking.MainActivity;
 import com.naxa.conservationtracking.R;
+import com.naxa.conservationtracking.activities.General_Form;
 import com.naxa.conservationtracking.activities.SavedFormsActivity;
-
 import com.naxa.conservationtracking.adapter.GridSpacingItemDecorator;
 import com.naxa.conservationtracking.adapter.Grid_Adapter;
+import com.naxa.conservationtracking.fragment_main.Fragment_ClimateChange;
+import com.naxa.conservationtracking.fragment_main.Fragment_CommunitySupport;
+import com.naxa.conservationtracking.fragment_main.Fragment_Conservation_Education;
+import com.naxa.conservationtracking.fragment_main.Fragment_Forest;
+import com.naxa.conservationtracking.fragment_main.Fragment_Human_Wildlife_Conflict_Management;
+import com.naxa.conservationtracking.fragment_main.Fragment_WMM;
+import com.naxa.conservationtracking.fragment_main.Fragment_WildlifeMonitoringTechniques;
+import com.naxa.conservationtracking.fragment_main.Fragment_Wildlife_Trade_Control;
 
-import Utls.SharedPreferenceUtils;
 
 /**
- * Created by user1 on 11/30/2015.
+ * Created by samir on 6/19/2018.
  */
-public class Fragment_Grid_Home extends Fragment {
+
+public class Fragment_Grid_Home_Default extends Fragment {
     RecyclerView mRecyclerView;
     RecyclerView.LayoutManager mLayoutManager;
     RecyclerView.Adapter mAdapter;
 //    ConnectonDetector connectonDetector;
 
-    public Fragment_Grid_Home() {
+    public Fragment_Grid_Home_Default() {
 
     }
 
@@ -171,15 +177,15 @@ public class Fragment_Grid_Home extends Fragment {
         if (mFragment != null) {
             mFragmentManager.beginTransaction().addToBackStack(null).replace(R.id.container, mFragment).commit();
         }
-        ((MainActivity) getActivity()).getSupportActionBar().setTitle(title);
-        ((MainActivity) getActivity()).getToolbar().setBackgroundResource(color);
+        ((DefaultHomeActivity) getActivity()).getSupportActionBar().setTitle(title);
+        ((DefaultHomeActivity) getActivity()).getToolbar().setBackgroundResource(color);
 
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        ((MainActivity) getActivity()).getSupportActionBar().setTitle(R.string.home);
-        ((MainActivity) getActivity()).getToolbar().setBackgroundResource(R.color.teal);
+        ((DefaultHomeActivity) getActivity()).getSupportActionBar().setTitle(R.string.home);
+        ((DefaultHomeActivity) getActivity()).getToolbar().setBackgroundResource(R.color.teal);
     }
 }

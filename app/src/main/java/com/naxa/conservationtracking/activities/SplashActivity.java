@@ -20,6 +20,9 @@ import com.naxa.conservationtracking.MainActivity;
 import com.naxa.conservationtracking.R;
 import com.naxa.conservationtracking.application.ApplicationClass;
 import com.naxa.conservationtracking.application.BaseActivity;
+import com.naxa.conservationtracking.defaulthome.DefaultHomeActivity;
+
+import Utls.SharedPreferenceUtils;
 
 public class SplashActivity extends BaseActivity {
     private static String TAG = "SplashActivity";
@@ -74,6 +77,7 @@ public class SplashActivity extends BaseActivity {
 
         gps = new GpsTracker(SplashActivity.this);
 
+        final SharedPreferenceUtils sharedPreferenceUtils = new SharedPreferenceUtils(this);
         Thread pause = new Thread() {
             public void run() {
                 try {
@@ -97,8 +101,14 @@ public class SplashActivity extends BaseActivity {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 } finally {
-                    Intent stuff = new Intent(SplashActivity.this,MainActivity.class);
-                    startActivity(stuff);
+                    if(sharedPreferenceUtils.getBoolanValue(SharedPreferenceUtils.KEY_IS_USER_LOGGED_IN, false)) {
+                        Intent stuff = new Intent(SplashActivity.this, MainActivity.class);
+                        startActivity(stuff);
+                    }else {
+                        Intent stuff = new Intent(SplashActivity.this, DefaultHomeActivity.class);
+                        startActivity(stuff);
+                    }
+
                 }
                 finish();
             }

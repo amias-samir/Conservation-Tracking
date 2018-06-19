@@ -5,4 +5,6 @@ package com.naxa.conservationtracking.model;
  */
 public class CheckValues {
     public static boolean isFromSavedFrom ;
+
+    public static boolean isFromDefaultHome ;
 }

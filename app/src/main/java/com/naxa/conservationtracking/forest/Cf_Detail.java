@@ -16,6 +16,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Menu;
@@ -62,6 +63,7 @@ import java.util.concurrent.TimeUnit;
 
 import javax.net.ssl.HttpsURLConnection;
 
+import com.naxa.conservationtracking.climate_change.BiogasDetail;
 import com.naxa.conservationtracking.database.DataBaseConserVationTracking;
 import com.naxa.conservationtracking.dialog.Default_DIalog;
 import com.naxa.conservationtracking.model.CheckValues;
@@ -69,6 +71,7 @@ import com.naxa.conservationtracking.model.Constants;
 import com.naxa.conservationtracking.model.StaticListOfCoordinates;
 import com.naxa.conservationtracking.wildlife_monitoring_techniques.HumanDisturbance;
 
+import Utls.SharedPreferenceUtils;
 import cn.refactor.lib.colordialog.PromptDialog;
 
 /**
@@ -321,33 +324,40 @@ public class Cf_Detail extends AppCompatActivity implements AdapterView.OnItemSe
                 } else {
 
                     if (isGpsTaken) {
-                        DisplayMetrics metrics = context.getResources().getDisplayMetrics();
-                        int width = metrics.widthPixels;
-                        int height = metrics.heightPixels;
+//                        DisplayMetrics metrics = context.getResources().getDisplayMetrics();
+//                        int width = metrics.widthPixels;
+//                        int height = metrics.heightPixels;
+//
+//                        final Dialog showDialog = new Dialog(context);
+//
+//                        showDialog.setContentView(R.layout.login_layout);
+//                        final EditText userName = (EditText) showDialog.findViewById(R.id.input_userName);
+//                        final EditText password = (EditText) showDialog.findViewById(R.id.input_password);
+//
+//                        AppCompatButton logIn = (AppCompatButton) showDialog.findViewById(R.id.login_button);
+//                        showDialog.setTitle("Authentication");
+//                        showDialog.setCancelable(true);
+//                        showDialog.show();
+//                        showDialog.getWindow().setLayout((6 * width) / 7, LinearLayout.LayoutParams.WRAP_CONTENT);
+//
+//                        logIn.setOnClickListener(new View.OnClickListener() {
+//
+//                            @Override
+//                            public void onClick(View v) {
+//                                // TODO Auto-generated method stub
+//                                String userN = userName.getText().toString();
+//                                String passW = password.getText().toString();
 
-                        final Dialog showDialog = new Dialog(context);
+                        SharedPreferenceUtils sharedPreferenceUtils = new SharedPreferenceUtils(Cf_Detail.this);
 
-                        showDialog.setContentView(R.layout.login_layout);
-                        final EditText userName = (EditText) showDialog.findViewById(R.id.input_userName);
-                        final EditText password = (EditText) showDialog.findViewById(R.id.input_password);
-
-                        AppCompatButton logIn = (AppCompatButton) showDialog.findViewById(R.id.login_button);
-                        showDialog.setTitle("Authentication");
-                        showDialog.setCancelable(true);
-                        showDialog.show();
-                        showDialog.getWindow().setLayout((6 * width) / 7, LinearLayout.LayoutParams.WRAP_CONTENT);
-
-                        logIn.setOnClickListener(new View.OnClickListener() {
-
-                            @Override
-                            public void onClick(View v) {
-                                // TODO Auto-generated method stub
-                                String userN = userName.getText().toString();
-                                String passW = password.getText().toString();
+                        String userN = (TextUtils.isEmpty(sharedPreferenceUtils.getStringValue(SharedPreferenceUtils.KEY_USER_NAME, null)) ?
+                                SharedPreferenceUtils.KEY_DEFAULT_USER_NAME : sharedPreferenceUtils.getStringValue(SharedPreferenceUtils.KEY_USER_NAME, null));
+                        String passW = (TextUtils.isEmpty(sharedPreferenceUtils.getStringValue(SharedPreferenceUtils.KEY_USER_PASSWORD, null)) ?
+                                SharedPreferenceUtils.KEY_DEFAULT_USER_PASS : sharedPreferenceUtils.getStringValue(SharedPreferenceUtils.KEY_USER_PASSWORD, null));
                                 if (userN == null || userN.equals("") || passW == null || passW.equals("")) {
                                     Toast.makeText(context, "Either your user name or password is empty. \nPlease fill the required field. ", Toast.LENGTH_SHORT).show();
                                 } else {
-                                    showDialog.dismiss();
+//                                    showDialog.dismiss();
                                     projectCode = tvProjectCode.getText().toString();
                                     other_landscape = tvOtherLandscape.getText().toString();
                                     funding_source = tvFundingSource.getText().toString();
@@ -380,8 +390,8 @@ public class Cf_Detail extends AppCompatActivity implements AdapterView.OnItemSe
                                     convertDataToJson();
                                     sendDatToserver();
                                 }
-                            }
-                        });
+//                            }
+//                        });
                     } else {
                         Toast.makeText(getApplicationContext(), "Take at least one gps coordinate", Toast.LENGTH_SHORT).show();
 

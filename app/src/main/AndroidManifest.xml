@@ -522,8 +522,8 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
-
-        <activity android:name=".human_wildlife_conflict_management.EWSEquipmentStatusRecordingActivity"
+        <activity
+            android:name=".human_wildlife_conflict_management.EWSEquipmentStatusRecordingActivity"
             android:label="EWS Equipment Status Recording"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden">
@@ -531,11 +531,18 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
-
-        <activity android:name=".human_wildlife_conflict_management.ElephantActivityRecordingCSUActivity"
+        <activity
+            android:name=".human_wildlife_conflict_management.ElephantActivityRecordingCSUActivity"
             android:label="Elephant Activity Recording CSU"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
+        <activity android:name=".defaulthome.DefaultHomeActivity" />
+        <activity android:name=".defaulthome.UserLoginActivity"
+            android:exported="true">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
