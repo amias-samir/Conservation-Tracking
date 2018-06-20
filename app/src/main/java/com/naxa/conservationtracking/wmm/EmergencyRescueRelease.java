@@ -84,6 +84,7 @@ import com.naxa.conservationtracking.model.Constants;
 import com.naxa.conservationtracking.model.StaticListOfCoordinates;
 import com.naxa.conservationtracking.wildlife_monitoring_techniques.HumanDisturbance;
 
+import Utls.UserNameAndPasswordUtils;
 import cn.refactor.lib.colordialog.PromptDialog;
 
 /**
@@ -155,10 +156,10 @@ public class EmergencyRescueRelease extends AppCompatActivity implements Adapter
     JSONArray jsonArrayGPS = new JSONArray();
     TextView tvBoundryUsingGps, tvReasonsOfrescue;
 
-    CheckBox cbConflictAnimal,cbInjuriedAnimal,cbOtherReasonRescue;
+    CheckBox cbConflictAnimal, cbInjuriedAnimal, cbOtherReasonRescue;
 
     AutoCompleteTextView tvOtherReasons, tvOthersActionTaken, tvOtherLandscape, tvFundingSource, tvProjectCode, tvAgreement_no, tvGrantew_name, tvFiscal_year, tvNameOfz,
-            tvDistrictname, tvNameOfVdc, tvLocation,tvFundTal, tvFundCommunity, tvFundOthers,
+            tvDistrictname, tvNameOfVdc, tvLocation, tvFundTal, tvFundCommunity, tvFundOthers,
             tvDate, tvTime, tvNumber, tvRescuedWildlifeSpp, tvSupportProvided, tvOthers, tvAreaHa;
 
     private int year;
@@ -294,68 +295,68 @@ public class EmergencyRescueRelease extends AppCompatActivity implements Adapter
 
                     if (isGpsTaken) {
 
-                        DisplayMetrics metrics = context.getResources().getDisplayMetrics();
-                        int width = metrics.widthPixels;
-                        int height = metrics.heightPixels;
+//                        DisplayMetrics metrics = context.getResources().getDisplayMetrics();
+//                        int width = metrics.widthPixels;
+//                        int height = metrics.heightPixels;
+//
+//                        final Dialog showDialog = new Dialog(context);
+//
+//                        showDialog.setContentView(R.layout.login_layout);
+//                        final EditText userName = (EditText) showDialog.findViewById(R.id.input_userName);
+//                        final EditText password = (EditText) showDialog.findViewById(R.id.input_password);
+//
+//                        AppCompatButton logIn = (AppCompatButton) showDialog.findViewById(R.id.login_button);
+//                        showDialog.setTitle("Authentication");
+//                        showDialog.setCancelable(true);
+//                        showDialog.show();
+//                        showDialog.getWindow().setLayout((6 * width) / 7, LinearLayout.LayoutParams.WRAP_CONTENT);
+//
+//                        logIn.setOnClickListener(new View.OnClickListener() {
+//
+//                            @Override
+//                            public void onClick(View v) {
+//                                // TODO Auto-generated method stub
+                        String userN = UserNameAndPasswordUtils.getUserNameAndPassword(context).get(0);
+                        String passW = UserNameAndPasswordUtils.getUserNameAndPassword(context).get(1);
+                        if (userN == null || userN.equals("") || passW == null || passW.equals("")) {
+                            Toast.makeText(context, "Either your user name or password is empty.Please fill the required field. ", Toast.LENGTH_SHORT).show();
+                        } else {
+//                                    showDialog.dismiss();
 
-                        final Dialog showDialog = new Dialog(context);
+                            projectCode = tvProjectCode.getText().toString();
+                            other_landscape = tvOtherLandscape.getText().toString();
+                            funding_source = tvFundingSource.getText().toString();
+                            agreement_no = tvAgreement_no.getText().toString();
+                            grantee_name = tvGrantew_name.getText().toString();
+                            fiscal_year = tvFiscal_year.getText().toString();
+                            district = tvDistrictname.getText().toString();
+                            vdc = tvNameOfVdc.getText().toString();
+                            date = tvDate.getText().toString();
+                            time = tvTime.getText().toString();
+                            location = tvLocation.getText().toString();
+                            rescued_wildlife_spp = tvRescuedWildlifeSpp.getText().toString();
+                            number = tvNumber.getText().toString();
+                            others_actions = tvOthersActionTaken.getText().toString();
+                            support_provided = tvSupportProvided.getText().toString();
+                            others = tvOthers.getText().toString();
+                            fund_tal = tvFundTal.getText().toString();
+                            fund_community = tvFundCommunity.getText().toString();
+                            fund_others = tvFundOthers.getText().toString();
 
-                        showDialog.setContentView(R.layout.login_layout);
-                        final EditText userName = (EditText) showDialog.findViewById(R.id.input_userName);
-                        final EditText password = (EditText) showDialog.findViewById(R.id.input_password);
+                            userNameToSend = userN;
+                            passwordToSend = passW;
 
-                        AppCompatButton logIn = (AppCompatButton) showDialog.findViewById(R.id.login_button);
-                        showDialog.setTitle("Authentication");
-                        showDialog.setCancelable(true);
-                        showDialog.show();
-                        showDialog.getWindow().setLayout((6 * width) / 7, LinearLayout.LayoutParams.WRAP_CONTENT);
-
-                        logIn.setOnClickListener(new View.OnClickListener() {
-
-                            @Override
-                            public void onClick(View v) {
-                                // TODO Auto-generated method stub
-                                String userN = userName.getText().toString();
-                                String passW = password.getText().toString();
-                                if (userN == null || userN.equals("") || passW == null || passW.equals("")) {
-                                    Toast.makeText(context, "Either your user name or password is empty.Please fill the required field. ", Toast.LENGTH_SHORT).show();
-                                } else {
-                                    showDialog.dismiss();
-
-                                    projectCode = tvProjectCode.getText().toString();
-                                    other_landscape = tvOtherLandscape.getText().toString();
-                                    funding_source = tvFundingSource.getText().toString();
-                                    agreement_no = tvAgreement_no.getText().toString();
-                                    grantee_name = tvGrantew_name.getText().toString();
-                                    fiscal_year = tvFiscal_year.getText().toString();
-                                    district = tvDistrictname.getText().toString();
-                                    vdc = tvNameOfVdc.getText().toString();
-                                    date = tvDate.getText().toString();
-                                    time = tvTime.getText().toString();
-                                    location = tvLocation.getText().toString();
-                                    rescued_wildlife_spp = tvRescuedWildlifeSpp.getText().toString();
-                                    number = tvNumber.getText().toString();
-                                    others_actions = tvOthersActionTaken.getText().toString();
-                                    support_provided = tvSupportProvided.getText().toString();
-                                    others = tvOthers.getText().toString();
-                                    fund_tal = tvFundTal.getText().toString();
-                                    fund_community = tvFundCommunity.getText().toString();
-                                    fund_others = tvFundOthers.getText().toString();
-
-                                    userNameToSend = userN;
-                                    passwordToSend = passW;
-
-                                    Log.e("SEND", "Clicked");
-                                    mProgressDlg = new ProgressDialog(context);
-                                    mProgressDlg.setMessage("Please wait...");
-                                    mProgressDlg.setIndeterminate(false);
-                                    mProgressDlg.setCancelable(false);
-                                    mProgressDlg.show();
-                                    convertDataToJson();
-                                    sendDatToserver();
-                                }
-                            }
-                        });
+                            Log.e("SEND", "Clicked");
+                            mProgressDlg = new ProgressDialog(context);
+                            mProgressDlg.setMessage("Please wait...");
+                            mProgressDlg.setIndeterminate(false);
+                            mProgressDlg.setCancelable(false);
+                            mProgressDlg.show();
+                            convertDataToJson();
+                            sendDatToserver();
+                        }
+//                            }
+//                        });
                     } else {
                         Toast.makeText(getApplicationContext(), "You need to take at least one gps cooordinate", Toast.LENGTH_SHORT).show();
 
@@ -921,7 +922,7 @@ public class EmergencyRescueRelease extends AppCompatActivity implements Adapter
             CheckValues.isFromSavedFrom = true;
             startGps.setEnabled(false);
             startGps1.setEnabled(false);
-            isGpsTaken=true;
+            isGpsTaken = true;
             previewMap.setEnabled(true);
             previewMap1.setEnabled(true);
             Bundle bundle = intent.getExtras();
@@ -930,7 +931,7 @@ public class EmergencyRescueRelease extends AppCompatActivity implements Adapter
             String gpsLocationtoParse = (String) bundle.get("gps");
 
             String status = (String) bundle.get("status");
-            if(status.equals("Sent")){
+            if (status.equals("Sent")) {
                 save.setEnabled(false);
                 send.setEnabled(false);
             }

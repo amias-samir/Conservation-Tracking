@@ -55,6 +55,7 @@ import java.util.Calendar;
 
 import javax.net.ssl.HttpsURLConnection;
 
+import Utls.UserNameAndPasswordUtils;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -169,7 +170,7 @@ public class EWSEquipmentStatusRecordingActivity extends AppCompatActivity {
 
     }
 
-    @OnClick({R.id.ews_equipment_status_recording_GpsStart, R.id.ews_equipment_status_recording_preview_map ,R.id.ews_equipment_status_recording_save, R.id.ews_equipment_status_recording_send})
+    @OnClick({R.id.ews_equipment_status_recording_GpsStart, R.id.ews_equipment_status_recording_preview_map, R.id.ews_equipment_status_recording_save, R.id.ews_equipment_status_recording_send})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.ews_equipment_status_recording_GpsStart:
@@ -353,7 +354,7 @@ public class EWSEquipmentStatusRecordingActivity extends AppCompatActivity {
                             locationData.put(KEY_FINAL_LONG, finalLong);
 
                             jsonArrayGPS.put(locationData);
-                            Log.e(TAG, "onActivityResult: "+jsonArrayGPS );
+                            Log.e(TAG, "onActivityResult: " + jsonArrayGPS);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -391,63 +392,63 @@ public class EWSEquipmentStatusRecordingActivity extends AppCompatActivity {
             if (isGpsTaken) {
                 jsonLatLangArray = jsonArrayGPS.toString();
 
-        convertDataToJson();
+                convertDataToJson();
 
-        DisplayMetrics metrics = context.getResources().getDisplayMetrics();
-        int width = metrics.widthPixels;
-        int height = metrics.heightPixels;
+                DisplayMetrics metrics = context.getResources().getDisplayMetrics();
+                int width = metrics.widthPixels;
+                int height = metrics.heightPixels;
 
-        final Dialog showDialog = new Dialog(context);
-        showDialog.setContentView(R.layout.date_input_layout);
-        final EditText FormNameToInput = (EditText) showDialog.findViewById(R.id.input_tableName);
-        final EditText dateToInput = (EditText) showDialog.findViewById(R.id.input_date);
-        FormNameToInput.setText("EWS Equipment Status Recording");
+                final Dialog showDialog = new Dialog(context);
+                showDialog.setContentView(R.layout.date_input_layout);
+                final EditText FormNameToInput = (EditText) showDialog.findViewById(R.id.input_tableName);
+                final EditText dateToInput = (EditText) showDialog.findViewById(R.id.input_date);
+                FormNameToInput.setText("EWS Equipment Status Recording");
 
-        long date = System.currentTimeMillis();
+                long date = System.currentTimeMillis();
 
-        SimpleDateFormat sdf = new SimpleDateFormat("MMM dd, yyyy h:mm a");
-        String dateString = sdf.format(date);
-        dateToInput.setText(dateString);
+                SimpleDateFormat sdf = new SimpleDateFormat("MMM dd, yyyy h:mm a");
+                String dateString = sdf.format(date);
+                dateToInput.setText(dateString);
 
-        AppCompatButton logIn = (AppCompatButton) showDialog.findViewById(R.id.login_button);
-        showDialog.setTitle("Save Data");
-        showDialog.setCancelable(true);
-        showDialog.show();
-        showDialog.getWindow().setLayout((6 * width) / 7, LinearLayout.LayoutParams.WRAP_CONTENT);
+                AppCompatButton logIn = (AppCompatButton) showDialog.findViewById(R.id.login_button);
+                showDialog.setTitle("Save Data");
+                showDialog.setCancelable(true);
+                showDialog.show();
+                showDialog.getWindow().setLayout((6 * width) / 7, LinearLayout.LayoutParams.WRAP_CONTENT);
 
-        logIn.setOnClickListener(new View.OnClickListener() {
+                logIn.setOnClickListener(new View.OnClickListener() {
 
-            @Override
-            public void onClick(View v) {
-                // TODO Auto-generated method stub
-                String dateDataCollected = dateToInput.getText().toString();
-                String formName = FormNameToInput.getText().toString();
-                if (dateDataCollected == null || dateDataCollected.equals("") || formName == null || formName.equals("")) {
-                    Toast.makeText(context, "Please fill the required field. ", Toast.LENGTH_SHORT).show();
-                } else {
-                    String[] data = new String[]{"90", formName, dateDataCollected, jsonToSend, jsonLatLangArray,
-                            "", "Not Sent", "0"};
+                    @Override
+                    public void onClick(View v) {
+                        // TODO Auto-generated method stub
+                        String dateDataCollected = dateToInput.getText().toString();
+                        String formName = FormNameToInput.getText().toString();
+                        if (dateDataCollected == null || dateDataCollected.equals("") || formName == null || formName.equals("")) {
+                            Toast.makeText(context, "Please fill the required field. ", Toast.LENGTH_SHORT).show();
+                        } else {
+                            String[] data = new String[]{"90", formName, dateDataCollected, jsonToSend, jsonLatLangArray,
+                                    "", "Not Sent", "0"};
 
-                    DataBaseConserVationTracking dataBaseConserVationTracking = new DataBaseConserVationTracking(context);
-                    dataBaseConserVationTracking.open();
-                    long id = dataBaseConserVationTracking.insertIntoTable_Main(data);
+                            DataBaseConserVationTracking dataBaseConserVationTracking = new DataBaseConserVationTracking(context);
+                            dataBaseConserVationTracking.open();
+                            long id = dataBaseConserVationTracking.insertIntoTable_Main(data);
 
-                    new PromptDialog(EWSEquipmentStatusRecordingActivity.this)
-                            .setDialogType(PromptDialog.DIALOG_TYPE_SUCCESS)
-                            .setAnimationEnable(true)
-                            .setTitleText(getString(R.string.dialog_success))
-                            .setContentText(getString(R.string.dialog_saved))
-                            .setPositiveListener("okay", new PromptDialog.OnPositiveListener() {
-                                @Override
-                                public void onClick(PromptDialog dialog) {
-                                    dialog.dismiss();
-                                }
-                            }).show();
-                    dataBaseConserVationTracking.close();
-                    showDialog.dismiss();
-                }
-            }
-        });
+                            new PromptDialog(EWSEquipmentStatusRecordingActivity.this)
+                                    .setDialogType(PromptDialog.DIALOG_TYPE_SUCCESS)
+                                    .setAnimationEnable(true)
+                                    .setTitleText(getString(R.string.dialog_success))
+                                    .setContentText(getString(R.string.dialog_saved))
+                                    .setPositiveListener("okay", new PromptDialog.OnPositiveListener() {
+                                        @Override
+                                        public void onClick(PromptDialog dialog) {
+                                            dialog.dismiss();
+                                        }
+                                    }).show();
+                            dataBaseConserVationTracking.close();
+                            showDialog.dismiss();
+                        }
+                    }
+                });
 
             } else {
                 Toast.makeText(getApplicationContext(), "You need to take at least one gps cooordinate", Toast.LENGTH_SHORT).show();
@@ -463,48 +464,48 @@ public class EWSEquipmentStatusRecordingActivity extends AppCompatActivity {
 
             if (isGpsTaken) {
 
-        DisplayMetrics metrics = context.getResources().getDisplayMetrics();
-        int width = metrics.widthPixels;
-        int height = metrics.heightPixels;
+//                DisplayMetrics metrics = context.getResources().getDisplayMetrics();
+//                int width = metrics.widthPixels;
+//                int height = metrics.heightPixels;
+//
+//                final Dialog showDialog = new Dialog(context);
+//
+//                showDialog.setContentView(R.layout.login_layout);
+//                final EditText userName = (EditText) showDialog.findViewById(R.id.input_userName);
+//                final EditText password = (EditText) showDialog.findViewById(R.id.input_password);
+//
+//                AppCompatButton logIn = (AppCompatButton) showDialog.findViewById(R.id.login_button);
+//                showDialog.setTitle("Authentication");
+//                showDialog.setCancelable(true);
+//                showDialog.show();
+//                showDialog.getWindow().setLayout((6 * width) / 7, LinearLayout.LayoutParams.WRAP_CONTENT);
+//
+//                logIn.setOnClickListener(new View.OnClickListener() {
+//
+//                    @Override
+//                    public void onClick(View v) {
+//                        // TODO Auto-generated method stub
+                String userN = UserNameAndPasswordUtils.getUserNameAndPassword(context).get(0);
+                String passW = UserNameAndPasswordUtils.getUserNameAndPassword(context).get(1);
+                        if (userN == null || userN.equals("") || passW == null || passW.equals("")) {
+                            Toast.makeText(context, "Either your user name or password is empty.Please fill the required field. ", Toast.LENGTH_SHORT).show();
+                        } else {
+//                            showDialog.dismiss();
 
-        final Dialog showDialog = new Dialog(context);
+                            userNameToSend = userN;
+                            passwordToSend = passW;
 
-        showDialog.setContentView(R.layout.login_layout);
-        final EditText userName = (EditText) showDialog.findViewById(R.id.input_userName);
-        final EditText password = (EditText) showDialog.findViewById(R.id.input_password);
-
-        AppCompatButton logIn = (AppCompatButton) showDialog.findViewById(R.id.login_button);
-        showDialog.setTitle("Authentication");
-        showDialog.setCancelable(true);
-        showDialog.show();
-        showDialog.getWindow().setLayout((6 * width) / 7, LinearLayout.LayoutParams.WRAP_CONTENT);
-
-        logIn.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                // TODO Auto-generated method stub
-                String userN = userName.getText().toString();
-                String passW = password.getText().toString();
-                if (userN == null || userN.equals("") || passW == null || passW.equals("")) {
-                    Toast.makeText(context, "Either your user name or password is empty.Please fill the required field. ", Toast.LENGTH_SHORT).show();
-                } else {
-                    showDialog.dismiss();
-
-                    userNameToSend = userN;
-                    passwordToSend = passW;
-
-                    Log.e("SEND", "Clicked");
-                    mProgressDlg = new ProgressDialog(context);
-                    mProgressDlg.setMessage("Please Wait...");
-                    mProgressDlg.setIndeterminate(false);
-                    mProgressDlg.setCancelable(false);
-                    mProgressDlg.show();
-                    convertDataToJson();
-                    sendDatToserver();
-                }
-            }
-        });
+                            Log.e("SEND", "Clicked");
+                            mProgressDlg = new ProgressDialog(context);
+                            mProgressDlg.setMessage("Please Wait...");
+                            mProgressDlg.setIndeterminate(false);
+                            mProgressDlg.setCancelable(false);
+                            mProgressDlg.show();
+                            convertDataToJson();
+                            sendDatToserver();
+                        }
+//                    }
+//                });
             } else {
                 Toast.makeText(getApplicationContext(), "You need to take at least one gps cooordinate", Toast.LENGTH_SHORT).show();
 
@@ -722,7 +723,7 @@ public class EWSEquipmentStatusRecordingActivity extends AppCompatActivity {
 
     //new adjustment
     public void parseArrayGPS(String arrayToParse) {
-        Log.e(TAG, "parseArrayGPS: "+ arrayToParse );
+        Log.e(TAG, "parseArrayGPS: " + arrayToParse);
         try {
             JSONArray array = new JSONArray(arrayToParse);
             for (int i = 0; i < array.length(); ++i) {
@@ -737,7 +738,6 @@ public class EWSEquipmentStatusRecordingActivity extends AppCompatActivity {
             e.printStackTrace();
         }
     }
-
 
 
 }
