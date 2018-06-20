@@ -72,6 +72,7 @@ import com.naxa.conservationtracking.model.StaticListOfCoordinates;
 import com.naxa.conservationtracking.wildlife_monitoring_techniques.HumanDisturbance;
 
 import Utls.SharedPreferenceUtils;
+import Utls.UserNameAndPasswordUtils;
 import cn.refactor.lib.colordialog.PromptDialog;
 
 /**
@@ -347,12 +348,8 @@ public class Cf_Detail extends AppCompatActivity implements AdapterView.OnItemSe
 //                                // TODO Auto-generated method stub
 //                                String userN = userName.getText().toString();
 //                                String passW = password.getText().toString();
-
-                        SharedPreferenceUtils sharedPreferenceUtils = new SharedPreferenceUtils(Cf_Detail.this);
-                        String userN = (TextUtils.isEmpty(sharedPreferenceUtils.getStringValue(SharedPreferenceUtils.KEY_USER_NAME, null)) ?
-                                SharedPreferenceUtils.KEY_DEFAULT_USER_NAME : sharedPreferenceUtils.getStringValue(SharedPreferenceUtils.KEY_USER_NAME, null));
-                        String passW = (TextUtils.isEmpty(sharedPreferenceUtils.getStringValue(SharedPreferenceUtils.KEY_USER_PASSWORD, null)) ?
-                                SharedPreferenceUtils.KEY_DEFAULT_USER_PASS : sharedPreferenceUtils.getStringValue(SharedPreferenceUtils.KEY_USER_PASSWORD, null));
+                        String userN = UserNameAndPasswordUtils.getUserNameAndPassword(context).get(0);
+                        String passW = UserNameAndPasswordUtils.getUserNameAndPassword(context).get(1);
 
                                 if (userN == null || userN.equals("") || passW == null || passW.equals("")) {
                                     Toast.makeText(context, "Either your user name or password is empty. \nPlease fill the required field. ", Toast.LENGTH_SHORT).show();
