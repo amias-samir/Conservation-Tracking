@@ -82,6 +82,7 @@ import com.naxa.conservationtracking.model.Constants;
 import com.naxa.conservationtracking.model.StaticListOfCoordinates;
 import com.naxa.conservationtracking.wildlife_monitoring_techniques.HumanDisturbance;
 
+import Utls.UserNameAndPasswordUtils;
 import cn.refactor.lib.colordialog.PromptDialog;
 
 /**
@@ -233,72 +234,75 @@ public class CapacityBuilding extends AppCompatActivity implements AdapterView.O
                 } else {
 
                     if (isGpsTaken) {
-                        DisplayMetrics metrics = context.getResources().getDisplayMetrics();
-                        int width = metrics.widthPixels;
-                        int height = metrics.heightPixels;
+//                        DisplayMetrics metrics = context.getResources().getDisplayMetrics();
+//                        int width = metrics.widthPixels;
+//                        int height = metrics.heightPixels;
+//
+//                        final Dialog showDialog = new Dialog(context);
+//
+//                        showDialog.setContentView(R.layout.login_layout);
+//                        final EditText userName = (EditText) showDialog.findViewById(R.id.input_userName);
+//                        final EditText password = (EditText) showDialog.findViewById(R.id.input_password);
+//
+//                        AppCompatButton logIn = (AppCompatButton) showDialog.findViewById(R.id.login_button);
+//                        showDialog.setTitle("Authentication");
+//                        showDialog.setCancelable(true);
+//                        showDialog.show();
+//                        showDialog.getWindow().setLayout((6 * width) / 7, LinearLayout.LayoutParams.WRAP_CONTENT);
+//
+//                        logIn.setOnClickListener(new View.OnClickListener() {
+//
+//                            @Override
+//                            public void onClick(View v) {
+//                                // TODO Auto-generated method stub
+//                                String userN = userName.getText().toString();
+//                                String passW = password.getText().toString();
+                        String userN = UserNameAndPasswordUtils.getUserNameAndPassword(context).get(0);
+                        String passW = UserNameAndPasswordUtils.getUserNameAndPassword(context).get(1);
 
-                        final Dialog showDialog = new Dialog(context);
+                        if (userN == null || userN.equals("") || passW == null || passW.equals("")) {
+                            Toast.makeText(context, "Either your user name or password is empty.Please fill the required field. ", Toast.LENGTH_SHORT).show();
+                        } else {
+//                                    showDialog.dismiss();
 
-                        showDialog.setContentView(R.layout.login_layout);
-                        final EditText userName = (EditText) showDialog.findViewById(R.id.input_userName);
-                        final EditText password = (EditText) showDialog.findViewById(R.id.input_password);
+                            projectCode = tvProjectCode.getText().toString();
+                            other_landscape = tvOtherLandscape.getText().toString();
+                            funding_source = tvFundingSource.getText().toString();
+                            agreement_no = tvAgreement_no.getText().toString();
+                            grantee_name = tvGrantew_name.getText().toString();
+                            fiscal_year = tvFiscal_year.getText().toString();
+                            district = tvDistrictname.getText().toString();
+                            vdc = tvNameOfVdc.getText().toString();
+                            other_activity = tvOtherActivity.getText().toString();
+                            location = tvLocation.getText().toString();
+                            date_start = tvDateStart.getText().toString();
+                            date_end = tvDateEnd.getText().toString();
+                            participant_male = tvParticipantMale.getText().toString();
+                            participant_female = tvParticipantFemale.getText().toString();
+                            participant_total = tvParticipantTotal.getText().toString();
+                            affiliation_government = tvAffiliationGovernment.getText().toString();
+                            affiliation_civil_society = tvAffiliationCivilSociety.getText().toString();
+                            affiliation_others = tvAffiliationOthers.getText().toString();
+                            funding_tal = tvFundingTal.getText().toString();
+                            funding_community = tvFundingCommunity.getText().toString();
+                            fund_others = tvFundOthers.getText().toString();
+                            others = tvOthers.getText().toString();
 
-                        AppCompatButton logIn = (AppCompatButton) showDialog.findViewById(R.id.login_button);
-                        showDialog.setTitle("Authentication");
-                        showDialog.setCancelable(true);
-                        showDialog.show();
-                        showDialog.getWindow().setLayout((6 * width) / 7, LinearLayout.LayoutParams.WRAP_CONTENT);
-
-                        logIn.setOnClickListener(new View.OnClickListener() {
-
-                            @Override
-                            public void onClick(View v) {
-                                // TODO Auto-generated method stub
-                                String userN = userName.getText().toString();
-                                String passW = password.getText().toString();
-                                if (userN == null || userN.equals("") || passW == null || passW.equals("")) {
-                                    Toast.makeText(context, "Either your user name or password is empty.Please fill the required field. ", Toast.LENGTH_SHORT).show();
-                                } else {
-                                    showDialog.dismiss();
-
-                                    projectCode = tvProjectCode.getText().toString();
-                                    other_landscape = tvOtherLandscape.getText().toString();
-                                    funding_source = tvFundingSource.getText().toString();
-                                    agreement_no = tvAgreement_no.getText().toString();
-                                    grantee_name = tvGrantew_name.getText().toString();
-                                    fiscal_year = tvFiscal_year.getText().toString();
-                                    district = tvDistrictname.getText().toString();
-                                    vdc = tvNameOfVdc.getText().toString();
-                                    other_activity = tvOtherActivity.getText().toString();
-                                    location = tvLocation.getText().toString();
-                                    date_start = tvDateStart.getText().toString();
-                                    date_end = tvDateEnd.getText().toString();
-                                    participant_male = tvParticipantMale.getText().toString();
-                                    participant_female = tvParticipantFemale.getText().toString();
-                                    participant_total = tvParticipantTotal.getText().toString();
-                                    affiliation_government = tvAffiliationGovernment.getText().toString();
-                                    affiliation_civil_society = tvAffiliationCivilSociety.getText().toString();
-                                    affiliation_others = tvAffiliationOthers.getText().toString();
-                                    funding_tal = tvFundingTal.getText().toString();
-                                    funding_community = tvFundingCommunity.getText().toString();
-                                    fund_others = tvFundOthers.getText().toString();
-                                    others = tvOthers.getText().toString();
-
-                                    userNameToSend = userN;
-                                    passwordToSend = passW;
+                            userNameToSend = userN;
+                            passwordToSend = passW;
 
 
-                                    Log.e("SEND", "Clicked");
-                                    mProgressDlg = new ProgressDialog(context);
-                                    mProgressDlg.setMessage("Please wait...");
-                                    mProgressDlg.setIndeterminate(false);
-                                    mProgressDlg.setCancelable(false);
-                                    mProgressDlg.show();
-                                    convertDataToJson();
-                                    sendDatToserver();
-                                }
-                            }
-                        });
+                            Log.e("SEND", "Clicked");
+                            mProgressDlg = new ProgressDialog(context);
+                            mProgressDlg.setMessage("Please wait...");
+                            mProgressDlg.setIndeterminate(false);
+                            mProgressDlg.setCancelable(false);
+                            mProgressDlg.show();
+                            convertDataToJson();
+                            sendDatToserver();
+                        }
+//                            }
+//                        });
                     } else {
                         Toast.makeText(getApplicationContext(), "You need to take at least one gps cooordinate", Toast.LENGTH_SHORT).show();
 
@@ -724,7 +728,7 @@ public class CapacityBuilding extends AppCompatActivity implements AdapterView.O
         if (intent.hasExtra("JSON1")) {
             CheckValues.isFromSavedFrom = true;
             startGps.setEnabled(false);
-            isGpsTaken=true;
+            isGpsTaken = true;
             previewMap.setEnabled(true);
             Bundle bundle = intent.getExtras();
             String jsonToParse = (String) bundle.get("JSON1");
@@ -732,7 +736,7 @@ public class CapacityBuilding extends AppCompatActivity implements AdapterView.O
             String gpsLocationtoParse = (String) bundle.get("gps");
 
             String status = (String) bundle.get("status");
-            if(status.equals("Sent")){
+            if (status.equals("Sent")) {
                 save.setEnabled(false);
                 send.setEnabled(false);
             }
@@ -886,6 +890,7 @@ public class CapacityBuilding extends AppCompatActivity implements AdapterView.O
             post_dict.put("formdata", header);
 
             jsonToSend = post_dict.toString();
+            Log.d("CapacityBuilding", "convertDataToJson: " + jsonToSend);
 
             photo_dict.put("photo", encodedImage);
             photoTosend = photo_dict.toString();
