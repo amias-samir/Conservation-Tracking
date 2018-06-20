@@ -82,6 +82,7 @@ import com.naxa.conservationtracking.model.Constants;
 import com.naxa.conservationtracking.model.StaticListOfCoordinates;
 import com.naxa.conservationtracking.wildlife_monitoring_techniques.HumanDisturbance;
 
+import Utls.UserNameAndPasswordUtils;
 import cn.refactor.lib.colordialog.PromptDialog;
 
 /**
@@ -143,7 +144,7 @@ public class AlternativeCropSupport extends AppCompatActivity implements Adapter
     String other_ethnicity_no;
     String remarks;
 
-    String farmer_group_name, production_liters ;
+    String farmer_group_name, production_liters;
 
     String plantationPolygonArea;
     JSONArray jsonArrayGPS = new JSONArray();
@@ -235,73 +236,73 @@ public class AlternativeCropSupport extends AppCompatActivity implements Adapter
                 } else {
 
                     if (isGpsTaken) {
-                        DisplayMetrics metrics = context.getResources().getDisplayMetrics();
-                        int width = metrics.widthPixels;
-                        int height = metrics.heightPixels;
+//                        DisplayMetrics metrics = context.getResources().getDisplayMetrics();
+//                        int width = metrics.widthPixels;
+//                        int height = metrics.heightPixels;
+//
+//                        final Dialog showDialog = new Dialog(context);
+//
+//                        showDialog.setContentView(R.layout.login_layout);
+//                        final EditText userName = (EditText) showDialog.findViewById(R.id.input_userName);
+//                        final EditText password = (EditText) showDialog.findViewById(R.id.input_password);
+//
+//                        AppCompatButton logIn = (AppCompatButton) showDialog.findViewById(R.id.login_button);
+//                        showDialog.setTitle("Authentication");
+//                        showDialog.setCancelable(true);
+//                        showDialog.show();
+//                        showDialog.getWindow().setLayout((6 * width) / 7, LinearLayout.LayoutParams.WRAP_CONTENT);
+//
+//                        logIn.setOnClickListener(new View.OnClickListener() {
+//
+//                            @Override
+//                            public void onClick(View v) {
+//                                // TODO Auto-generated method stub
+                        String userN = UserNameAndPasswordUtils.getUserNameAndPassword(context).get(0);
+                        String passW = UserNameAndPasswordUtils.getUserNameAndPassword(context).get(1);
+                        if (userN == null || userN.equals("") || passW == null || passW.equals("")) {
+                            Toast.makeText(context, "Either your user name or password is empty.Please fill the required field. ", Toast.LENGTH_SHORT).show();
+                        } else {
+//                                    showDialog.dismiss();
 
-                        final Dialog showDialog = new Dialog(context);
+                            projectCode = tvProjectCode.getText().toString();
+                            other_landscape = tvOtherLandscape.getText().toString();
+                            funding_source = tvFundingSource.getText().toString();
+                            agreement_no = tvAgreement_no.getText().toString();
+                            grantee_name = tvGrantew_name.getText().toString();
+                            fiscal_year = tvFiscal_year.getText().toString();
+                            crop_name = tvCrop_name.getText().toString();
+                            district_name = tvDistrictname.getText().toString();
+                            vdc_name = tvNameOfVdc.getText().toString();
+                            benificiary_no = tvBenificiary_no.getText().toString();
+                            production_kg = tvProduction_kg.getText().toString();
+                            production_amount = tvProduction_amount.getText().toString();
+                            tal = tvTal.getText().toString();
+                            community_contribution = tvCommunity_contribution.getText().toString();
+                            other_fund_support = tvOtherFundSupport.getText().toString();
 
-                        showDialog.setContentView(R.layout.login_layout);
-                        final EditText userName = (EditText) showDialog.findViewById(R.id.input_userName);
-                        final EditText password = (EditText) showDialog.findViewById(R.id.input_password);
+                            dalit_no = tvDalitNo.getText().toString();
+                            janajati_no = tvJanajatiNo.getText().toString();
+                            other_ethnicity_no = tvOtherEthnicityNo.getText().toString();
 
-                        AppCompatButton logIn = (AppCompatButton) showDialog.findViewById(R.id.login_button);
-                        showDialog.setTitle("Authentication");
-                        showDialog.setCancelable(true);
-                        showDialog.show();
-                        showDialog.getWindow().setLayout((6 * width) / 7, LinearLayout.LayoutParams.WRAP_CONTENT);
+                            remarks = tvNotes.getText().toString();
 
-                        logIn.setOnClickListener(new View.OnClickListener() {
+                            farmer_group_name = tvFarmerName.getText().toString();
+                            production_liters = tvProductionLiters.getText().toString();
 
-                            @Override
-                            public void onClick(View v) {
-                                // TODO Auto-generated method stub
-                                String userN = userName.getText().toString();
-                                String passW = password.getText().toString();
-                                if (userN == null || userN.equals("") || passW == null || passW.equals("")) {
-                                    Toast.makeText(context, "Either your user name or password is empty.Please fill the required field. ", Toast.LENGTH_SHORT).show();
-                                } else {
-                                    showDialog.dismiss();
+                            userNameToSend = userN;
+                            passwordToSend = passW;
 
-                                    projectCode = tvProjectCode.getText().toString();
-                                    other_landscape = tvOtherLandscape.getText().toString();
-                                    funding_source = tvFundingSource.getText().toString();
-                                    agreement_no = tvAgreement_no.getText().toString();
-                                    grantee_name = tvGrantew_name.getText().toString();
-                                    fiscal_year = tvFiscal_year.getText().toString();
-                                    crop_name = tvCrop_name.getText().toString();
-                                    district_name = tvDistrictname.getText().toString();
-                                    vdc_name = tvNameOfVdc.getText().toString();
-                                    benificiary_no = tvBenificiary_no.getText().toString();
-                                    production_kg = tvProduction_kg.getText().toString();
-                                    production_amount = tvProduction_amount.getText().toString();
-                                    tal = tvTal.getText().toString();
-                                    community_contribution = tvCommunity_contribution.getText().toString();
-                                    other_fund_support = tvOtherFundSupport.getText().toString();
-
-                                    dalit_no = tvDalitNo.getText().toString();
-                                    janajati_no = tvJanajatiNo.getText().toString();
-                                    other_ethnicity_no = tvOtherEthnicityNo.getText().toString();
-
-                                    remarks = tvNotes.getText().toString();
-
-                                    farmer_group_name = tvFarmerName.getText().toString();
-                                    production_liters = tvProductionLiters.getText().toString();
-
-                                    userNameToSend = userN;
-                                    passwordToSend = passW;
-
-                                    Log.e("SEND", "Clicked");
-                                    mProgressDlg = new ProgressDialog(context);
-                                    mProgressDlg.setMessage("Please Wait...");
-                                    mProgressDlg.setIndeterminate(false);
-                                    mProgressDlg.setCancelable(false);
-                                    mProgressDlg.show();
-                                    convertDataToJson();
-                                    sendDatToserver();
-                                }
-                            }
-                        });
+                            Log.e("SEND", "Clicked");
+                            mProgressDlg = new ProgressDialog(context);
+                            mProgressDlg.setMessage("Please Wait...");
+                            mProgressDlg.setIndeterminate(false);
+                            mProgressDlg.setCancelable(false);
+                            mProgressDlg.show();
+                            convertDataToJson();
+                            sendDatToserver();
+                        }
+//                            }
+//                        });
                     } else {
                         Toast.makeText(getApplicationContext(), "Take at least one gps coordinate", Toast.LENGTH_SHORT).show();
 
@@ -395,7 +396,8 @@ public class AlternativeCropSupport extends AppCompatActivity implements Adapter
                                                 public void onClick(PromptDialog dialog) {
                                                     dialog.dismiss();
                                                 }
-                                            }).show();                                    dataBaseConserVationTracking.close();
+                                            }).show();
+                                    dataBaseConserVationTracking.close();
                                     showDialog.dismiss();
                                 }
                             }
@@ -472,7 +474,7 @@ public class AlternativeCropSupport extends AppCompatActivity implements Adapter
                             initLat, initLong,
                             finalLat, finalLong, results);
                     distance = 0.001 * results[0];//Distance in Kilometers
-                    Default_DIalog.showDefaultDialog(context, R.string.gps_Info, "Distance measured (Kilometers) : " + ( String.format( "Value of a: %.8f", distance ) )  + "\nArea Calculated (Hectares): " + area_using_Gps);
+                    Default_DIalog.showDefaultDialog(context, R.string.gps_Info, "Distance measured (Kilometers) : " + (String.format("Value of a: %.8f", distance)) + "\nArea Calculated (Hectares): " + area_using_Gps);
 
                 } else {
                     Default_DIalog.showDefaultDialog(context, R.string.gps_Info, "GPS is not initialized properly");
@@ -791,7 +793,7 @@ public class AlternativeCropSupport extends AppCompatActivity implements Adapter
             String gpsLocationtoParse = (String) bundle.get("gps");
 
             String status = (String) bundle.get("status");
-            if(status.equals("Sent")){
+            if (status.equals("Sent")) {
                 save.setEnabled(false);
                 send.setEnabled(false);
             }

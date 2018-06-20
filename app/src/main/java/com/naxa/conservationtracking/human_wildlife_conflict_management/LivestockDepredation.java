@@ -84,6 +84,7 @@ import com.naxa.conservationtracking.model.Constants;
 import com.naxa.conservationtracking.model.StaticListOfCoordinates;
 import com.naxa.conservationtracking.wildlife_monitoring_techniques.HumanDisturbance;
 
+import Utls.UserNameAndPasswordUtils;
 import cn.refactor.lib.colordialog.PromptDialog;
 
 /**
@@ -138,7 +139,7 @@ public class LivestockDepredation extends AppCompatActivity implements AdapterVi
     AutoCompleteTextView tvOtherLandscape, tvFundingSource, tvProjectCode, tvAgreement_no, tvGrantew_name, tvFiscal_year, tvDate, tvTime, tvCfLocationName,
             tvWildlife_spp, tvLivestockDepredated, tvLivestock_number, tvLivestockHolding, tvfarmer_name,
             tvDistrictname, tvNameOfVdc, tvCompensated_amount, tvHwc_endowment_fund, tvCf_fund, tvValue_livestock_loss,
-            tvOthers_fund, tvOthers,   tvDalitNumber, tvJanajatiNumber, tvOthersNumber;
+            tvOthers_fund, tvOthers, tvDalitNumber, tvJanajatiNumber, tvOthersNumber;
 
     private int year;
     private int month;
@@ -241,75 +242,75 @@ public class LivestockDepredation extends AppCompatActivity implements AdapterVi
                 } else {
 
                     if (isGpsTaken) {
-                        DisplayMetrics metrics = context.getResources().getDisplayMetrics();
-                        int width = metrics.widthPixels;
-                        int height = metrics.heightPixels;
+//                        DisplayMetrics metrics = context.getResources().getDisplayMetrics();
+//                        int width = metrics.widthPixels;
+//                        int height = metrics.heightPixels;
+//
+//                        final Dialog showDialog = new Dialog(context);
+//
+//                        showDialog.setContentView(R.layout.login_layout);
+//                        final EditText userName = (EditText) showDialog.findViewById(R.id.input_userName);
+//                        final EditText password = (EditText) showDialog.findViewById(R.id.input_password);
+//
+//                        AppCompatButton logIn = (AppCompatButton) showDialog.findViewById(R.id.login_button);
+//                        showDialog.setTitle("Authentication");
+//                        showDialog.setCancelable(true);
+//                        showDialog.show();
+//                        showDialog.getWindow().setLayout((6 * width) / 7, LinearLayout.LayoutParams.WRAP_CONTENT);
+//
+//                        logIn.setOnClickListener(new View.OnClickListener() {
+//
+//                            @Override
+//                            public void onClick(View v) {
+//                                // TODO Auto-generated method stub
+                        String userN = UserNameAndPasswordUtils.getUserNameAndPassword(context).get(0);
+                        String passW = UserNameAndPasswordUtils.getUserNameAndPassword(context).get(1);
+                        if (userN == null || userN.equals("") || passW == null || passW.equals("")) {
+                            Toast.makeText(context, "Either your user name or password is empty.Please fill the required field. ", Toast.LENGTH_SHORT).show();
+                        } else {
+//                                    showDialog.dismiss();
 
-                        final Dialog showDialog = new Dialog(context);
+                            projectCode = tvProjectCode.getText().toString();
+                            other_landscape = tvOtherLandscape.getText().toString();
+                            funding_source = tvFundingSource.getText().toString();
+                            agreement_no = tvAgreement_no.getText().toString();
+                            grantee_name = tvGrantew_name.getText().toString();
+                            fiscal_year = tvFiscal_year.getText().toString();
+                            district_name = tvDistrictname.getText().toString();
+                            vdc_name = tvNameOfVdc.getText().toString();
+                            date = tvDate.getText().toString();
+                            time = tvTime.getText().toString();
+                            cf_location_name = tvCfLocationName.getText().toString();
+                            wildlife_spp = tvWildlife_spp.getText().toString();
+                            livestock_number = tvLivestock_number.getText().toString();
+                            livestock_depredated = tvLivestockDepredated.getText().toString();
+                            livestock_holding = tvLivestockHolding.getText().toString();
+                            farmer_name = tvfarmer_name.getText().toString();
+                            cf_fund = tvCf_fund.getText().toString();
+                            value_livestock_loss = tvValue_livestock_loss.getText().toString();
+                            compensated_amount = tvCompensated_amount.getText().toString();
+                            hwc_endowment_fund = tvHwc_endowment_fund.getText().toString();
+                            others_fund = tvOthers_fund.getText().toString();
+                            others = tvOthers.getText().toString();
 
-                        showDialog.setContentView(R.layout.login_layout);
-                        final EditText userName = (EditText) showDialog.findViewById(R.id.input_userName);
-                        final EditText password = (EditText) showDialog.findViewById(R.id.input_password);
+                            janajati_number = tvJanajatiNumber.getText().toString();
+                            dalit_number = tvDalitNumber.getText().toString();
+                            others_number = tvOthersNumber.getText().toString();
 
-                        AppCompatButton logIn = (AppCompatButton) showDialog.findViewById(R.id.login_button);
-                        showDialog.setTitle("Authentication");
-                        showDialog.setCancelable(true);
-                        showDialog.show();
-                        showDialog.getWindow().setLayout((6 * width) / 7, LinearLayout.LayoutParams.WRAP_CONTENT);
+                            userNameToSend = userN;
+                            passwordToSend = passW;
 
-                        logIn.setOnClickListener(new View.OnClickListener() {
-
-                            @Override
-                            public void onClick(View v) {
-                                // TODO Auto-generated method stub
-                                String userN = userName.getText().toString();
-                                String passW = password.getText().toString();
-                                if (userN == null || userN.equals("") || passW == null || passW.equals("")) {
-                                    Toast.makeText(context, "Either your user name or password is empty.Please fill the required field. ", Toast.LENGTH_SHORT).show();
-                                } else {
-                                    showDialog.dismiss();
-
-                                    projectCode = tvProjectCode.getText().toString();
-                                    other_landscape = tvOtherLandscape.getText().toString();
-                                    funding_source = tvFundingSource.getText().toString();
-                                    agreement_no = tvAgreement_no.getText().toString();
-                                    grantee_name = tvGrantew_name.getText().toString();
-                                    fiscal_year = tvFiscal_year.getText().toString();
-                                    district_name = tvDistrictname.getText().toString();
-                                    vdc_name = tvNameOfVdc.getText().toString();
-                                    date = tvDate.getText().toString();
-                                    time = tvTime.getText().toString();
-                                    cf_location_name = tvCfLocationName.getText().toString();
-                                    wildlife_spp = tvWildlife_spp.getText().toString();
-                                    livestock_number = tvLivestock_number.getText().toString();
-                                    livestock_depredated = tvLivestockDepredated.getText().toString();
-                                    livestock_holding = tvLivestockHolding.getText().toString();
-                                    farmer_name = tvfarmer_name.getText().toString();
-                                    cf_fund = tvCf_fund.getText().toString();
-                                    value_livestock_loss = tvValue_livestock_loss.getText().toString();
-                                    compensated_amount = tvCompensated_amount.getText().toString();
-                                    hwc_endowment_fund = tvHwc_endowment_fund.getText().toString();
-                                    others_fund = tvOthers_fund.getText().toString();
-                                    others = tvOthers.getText().toString();
-
-                                    janajati_number = tvJanajatiNumber.getText().toString();
-                                    dalit_number = tvDalitNumber.getText().toString();
-                                    others_number = tvOthersNumber.getText().toString();
-
-                                    userNameToSend = userN;
-                                    passwordToSend = passW;
-
-                                    Log.e("SEND", "Clicked");
-                                    mProgressDlg = new ProgressDialog(context);
-                                    mProgressDlg.setMessage("Please Wait...");
-                                    mProgressDlg.setIndeterminate(false);
-                                    mProgressDlg.setCancelable(false);
-                                    mProgressDlg.show();
-                                    convertDataToJson();
-                                    sendDatToserver();
-                                }
-                            }
-                        });
+                            Log.e("SEND", "Clicked");
+                            mProgressDlg = new ProgressDialog(context);
+                            mProgressDlg.setMessage("Please Wait...");
+                            mProgressDlg.setIndeterminate(false);
+                            mProgressDlg.setCancelable(false);
+                            mProgressDlg.show();
+                            convertDataToJson();
+                            sendDatToserver();
+                        }
+//                            }
+//                        });
                     } else {
                         Toast.makeText(getApplicationContext(), "You need to take at least one gps cooordinate", Toast.LENGTH_SHORT).show();
 
@@ -738,7 +739,7 @@ public class LivestockDepredation extends AppCompatActivity implements AdapterVi
         if (intent.hasExtra("JSON1")) {
             CheckValues.isFromSavedFrom = true;
             startGps.setEnabled(false);
-            isGpsTaken=true;
+            isGpsTaken = true;
             previewMap.setEnabled(true);
             Bundle bundle = intent.getExtras();
             String jsonToParse = (String) bundle.get("JSON1");
@@ -746,7 +747,7 @@ public class LivestockDepredation extends AppCompatActivity implements AdapterVi
             String gpsLocationtoParse = (String) bundle.get("gps");
 
             String status = (String) bundle.get("status");
-            if(status.equals("Sent")){
+            if (status.equals("Sent")) {
                 save.setEnabled(false);
                 send.setEnabled(false);
             }
@@ -904,8 +905,8 @@ public class LivestockDepredation extends AppCompatActivity implements AdapterVi
             photo_dict.put("photo", encodedImage);
             photoTosend = photo_dict.toString();
 
-            Log.e(TAG, "convertDataToJson: "+jsonToSend );
-            Log.e(TAG, "convertDataToJson: photoJSON "+photoTosend );
+            Log.e(TAG, "convertDataToJson: " + jsonToSend);
+            Log.e(TAG, "convertDataToJson: photoJSON " + photoTosend);
 
             SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
             SharedPreferences.Editor editor = preferences.edit();
