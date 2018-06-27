@@ -72,7 +72,7 @@ public class Fragment_Grid_Home_Default extends Fragment {
         boolean includeEdge = true;
         mRecyclerView.addItemDecoration(new GridSpacingItemDecorator(spanCount, spacing, includeEdge));
 
-        mAdapter = new Grid_Adapter();
+        mAdapter = new Grid_Adapter(getActivity());
         mRecyclerView.setAdapter(mAdapter);
 
         final GestureDetector mGestureDetector = new GestureDetector(getActivity(), new GestureDetector.SimpleOnGestureListener() {
@@ -142,33 +142,33 @@ public class Fragment_Grid_Home_Default extends Fragment {
                 title = "Human Wildlife Conflict Management";
                 color = R.color.human_wildLife_conflict;
                 break;
+//            case 4:
+//                mFragment = new Fragment_ClimateChange();
+//                title = "Climate Change";
+//                color = R.color.climate_change;
+//                break;
+//            case 5:
+//                mFragment = new Fragment_CommunitySupport();
+//                title = "Community Support";
+//                color = R.color.community_support;
+//                break;
+//            case 6:
+//                mFragment = new Fragment_Conservation_Education();
+//                title = "Conservation Education";
+//                color = R.color.conservation_education;
+//                break;
+//            case 7:
+//                mFragment = new Fragment_WildlifeMonitoringTechniques();
+//                title = "WildLife Monitoring Techniques";
+//                color = R.color.wildlife_monitoring_technique;
+//                break;
             case 4:
-                mFragment = new Fragment_ClimateChange();
-                title = "Climate Change";
-                color = R.color.climate_change;
-                break;
-            case 5:
-                mFragment = new Fragment_CommunitySupport();
-                title = "Community Support";
-                color = R.color.community_support;
-                break;
-            case 6:
-                mFragment = new Fragment_Conservation_Education();
-                title = "Conservation Education";
-                color = R.color.conservation_education;
-                break;
-            case 7:
-                mFragment = new Fragment_WildlifeMonitoringTechniques();
-                title = "WildLife Monitoring Techniques";
-                color = R.color.wildlife_monitoring_technique;
-                break;
-            case 8:
                 startActivity(new Intent(getActivity(), SavedFormsActivity.class));
 //                mFragment = new Fragment_SavedForms();
 //                title = "Saved Forms";
 //                color = R.color.saved_form;
                 break;
-            case 9:
+            case 5:
                 startActivity(new Intent(getActivity(), General_Form.class));
                 break;
 

@@ -33,6 +33,8 @@ import com.naxa.conservationtracking.adapter.GridSpacingItemDecorator;
 import com.naxa.conservationtracking.adapter.RecyclerListAdapter;
 import com.naxa.conservationtracking.model.Single_String_Title;
 
+import Utls.SharedPreferenceUtils;
+
 /**
  * Created by ramaan on 1/5/2016.
  */
@@ -44,6 +46,8 @@ public class Fragment_Forest extends Fragment {
     ProgressDialog mProgressDlg;
     String catId, link , name;
     RecyclerListAdapter ca;
+
+    SharedPreferenceUtils sharedPreferenceUtils ;
 
     public Fragment_Forest() {
 
@@ -60,6 +64,7 @@ public class Fragment_Forest extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_recycler_list, container, false);
         // Inflate the layout for this fragment
+        sharedPreferenceUtils = new SharedPreferenceUtils(getActivity());
         return rootView;
     }
 
@@ -167,36 +172,40 @@ public class Fragment_Forest extends Fragment {
     }
 
     private void createList() {
-        resultCur.clear();
-        Single_String_Title newData1 = new Single_String_Title();
-        newData1.title = "CF Details";
-        resultCur.add(newData1);
-        Single_String_Title newData2 = new Single_String_Title();
-        newData2.title = "Nursery Details";
-        resultCur.add(newData2);
-        Single_String_Title newData3 = new Single_String_Title();
-        newData3.title = "Plantation Details";
-        resultCur.add(newData3);
-        Single_String_Title newData4 = new Single_String_Title();
-        newData4.title = "Forest Protection";
-        resultCur.add(newData4);
-        Single_String_Title newData5 = new Single_String_Title();
-        newData5.title = "Integrated Livestock Management";
-        resultCur.add(newData5);
-        Single_String_Title newData6 = new Single_String_Title();
-        newData6.title = "Encroachment Status";
-        resultCur.add(newData6);
-        Single_String_Title newData7 = new Single_String_Title();
-        newData7.title = "Encroachment Eviction Status";
-        resultCur.add(newData7);
-        Single_String_Title newData8 = new Single_String_Title();
-        newData8.title = "Forest Fire";
-        resultCur.add(newData8);
-        Single_String_Title newData9 = new Single_String_Title();
-        newData9.title = "Illegal Logging";
-        resultCur.add(newData9);
+        if(sharedPreferenceUtils.getBoolanValue(SharedPreferenceUtils.KEY_IS_USER_LOGGED_IN, false)) {
+            resultCur.clear();
+            Single_String_Title newData1 = new Single_String_Title();
+            newData1.title = "CF Details";
+            resultCur.add(newData1);
+            Single_String_Title newData2 = new Single_String_Title();
+            newData2.title = "Nursery Details";
+            resultCur.add(newData2);
+            Single_String_Title newData3 = new Single_String_Title();
+            newData3.title = "Plantation Details";
+            resultCur.add(newData3);
+            Single_String_Title newData4 = new Single_String_Title();
+            newData4.title = "Forest Protection";
+            resultCur.add(newData4);
+            Single_String_Title newData5 = new Single_String_Title();
+            newData5.title = "Integrated Livestock Management";
+            resultCur.add(newData5);
+            Single_String_Title newData6 = new Single_String_Title();
+            newData6.title = "Encroachment Status";
+            resultCur.add(newData6);
+            Single_String_Title newData7 = new Single_String_Title();
+            newData7.title = "Encroachment Eviction Status";
+            resultCur.add(newData7);
+            Single_String_Title newData8 = new Single_String_Title();
+            newData8.title = "Forest Fire";
+            resultCur.add(newData8);
+            Single_String_Title newData9 = new Single_String_Title();
+            newData9.title = "Illegal Logging";
+            resultCur.add(newData9);
+            fillTable();
+        }else {
 
-        fillTable();
+        }
+
     }
 
     public void fillTable() {

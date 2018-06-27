@@ -66,7 +66,7 @@ public class Fragment_Grid_Home extends Fragment {
         boolean includeEdge = true;
         mRecyclerView.addItemDecoration(new GridSpacingItemDecorator(spanCount, spacing, includeEdge));
 
-        mAdapter = new Grid_Adapter();
+        mAdapter = new Grid_Adapter(getActivity());
         mRecyclerView.setAdapter(mAdapter);
 
         final GestureDetector mGestureDetector = new GestureDetector(getActivity(), new GestureDetector.SimpleOnGestureListener() {

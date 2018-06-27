@@ -173,6 +173,7 @@ public class UserLoginActivity extends AppCompatActivity {
                                 public void onClick(PromptDialog dialog) {
                                     dialog.dismiss();
                                     startActivity(new Intent(UserLoginActivity.this, MainActivity.class));
+                                    finish();
                                 }
                             }).show();
 

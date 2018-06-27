@@ -118,13 +118,13 @@ public class DefaultHomeActivity extends NavigationLiveo implements OnItemClickL
 //            mHelpLiveo.addSeparator(); // Item separator
         mHelpLiveo.add(getString(R.string.human_wildlife_conflict_mgmt), R.mipmap.conflict);
 //            mHelpLiveo.addSeparator();
-        mHelpLiveo.add(getString(R.string.climate_change), R.mipmap.climate);
-//            mHelpLiveo.addSeparator();
-        mHelpLiveo.add(getString(R.string.community_support), R.mipmap.community_support);
-//            mHelpLiveo.addSeparator();
-        mHelpLiveo.add(getString(R.string.conservation_education), R.mipmap.conservation_education);
-//            mHelpLiveo.addSeparator();
-        mHelpLiveo.add(getString(R.string.wildlife_monitoring_techniques), R.mipmap.monitoring_techniquies);
+//        mHelpLiveo.add(getString(R.string.climate_change), R.mipmap.climate);
+////            mHelpLiveo.addSeparator();
+//        mHelpLiveo.add(getString(R.string.community_support), R.mipmap.community_support);
+////            mHelpLiveo.addSeparator();
+//        mHelpLiveo.add(getString(R.string.conservation_education), R.mipmap.conservation_education);
+////            mHelpLiveo.addSeparator();
+//        mHelpLiveo.add(getString(R.string.wildlife_monitoring_techniques), R.mipmap.monitoring_techniquies);
 
         mHelpLiveo.add(getString(R.string.general_form), R.mipmap.general_form);
 
@@ -203,32 +203,32 @@ public class DefaultHomeActivity extends NavigationLiveo implements OnItemClickL
                 title = getString(R.string.human_wildlife_conflict_mgmt);
                 color = R.color.human_wildLife_conflict;
                 break;
+//            case 8:
+//                mFragment = new Fragment_ClimateChange();
+//                title = getString(R.string.climate_change);
+//                color = R.color.climate_change;
+//                break;
+//            case 9:
+//                mFragment = new Fragment_CommunitySupport();
+//                title = getString(R.string.community_support);
+//                color = R.color.community_support;
+//                break;
+//            case 10:
+//                mFragment = new Fragment_Conservation_Education();
+//                title = getString(R.string.conservation_education);
+//                color = R.color.conservation_education;
+//                break;
+//            case 11:
+//                mFragment = new Fragment_WildlifeMonitoringTechniques();
+//                title = getString(R.string.wildlife_monitoring_techniques);
+//                color = R.color.wildlife_monitoring_technique;
+//                break;
             case 8:
-                mFragment = new Fragment_ClimateChange();
-                title = getString(R.string.climate_change);
-                color = R.color.climate_change;
-                break;
-            case 9:
-                mFragment = new Fragment_CommunitySupport();
-                title = getString(R.string.community_support);
-                color = R.color.community_support;
-                break;
-            case 10:
-                mFragment = new Fragment_Conservation_Education();
-                title = getString(R.string.conservation_education);
-                color = R.color.conservation_education;
-                break;
-            case 11:
-                mFragment = new Fragment_WildlifeMonitoringTechniques();
-                title = getString(R.string.wildlife_monitoring_techniques);
-                color = R.color.wildlife_monitoring_technique;
-                break;
-            case 12:
                 startActivity(new Intent(DefaultHomeActivity.this, General_Form.class));
                 title = getString(R.string.general_form);
                 color = R.color.general_frorm;
                 break;
-            case 13:
+            case 9:
                 startActivity(new Intent(DefaultHomeActivity.this, SavedFormsActivity.class));
 //                mFragment = new Fragment_SavedForms();
 //                title = getString(R.string.save_form);
@@ -415,7 +415,7 @@ public class DefaultHomeActivity extends NavigationLiveo implements OnItemClickL
 //                Toast.makeText(this, "Permission granted now you can read the storage", Toast.LENGTH_LONG).show();
             } else {
                 //Displaying another toast if permission is not granted
-                Toast.makeText(this, "Oops you just denied the permission", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(this, "Oops you just denied the permission", Toast.LENGTH_SHORT).show();
             }
         }
     }

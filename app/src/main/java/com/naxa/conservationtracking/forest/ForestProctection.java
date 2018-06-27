@@ -129,7 +129,9 @@ public class ForestProctection extends AppCompatActivity implements AdapterView.
     AlarmManager alarmManager;
 
     public static final int GEOPOINT_RESULT_CODE = 1994;
+    public static final int GEOPOINT_SINGLE_POINT_RESULT_CODE = 2994;
     public static final String LOCATION_RESULT = "LOCATION_RESULT";
+    public static final String KEY_FINAL_LAT = "latitude", KEY_FINAL_LONG = "longitude";
 
     ArrayList<LatLng> listCf = new ArrayList<LatLng>();
     List<Location> gpslocation = new ArrayList<>();
@@ -543,53 +545,56 @@ public class ForestProctection extends AppCompatActivity implements AdapterView.
         GpsPoint.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(GPS_TRACKER_FOR_POINT.GPS_POINT_INITILIZED) {
-                    SharedPreferences wmbPreference = PreferenceManager
-                            .getDefaultSharedPreferences(context);
+//                if(GPS_TRACKER_FOR_POINT.GPS_POINT_INITILIZED) {
+//                    SharedPreferences wmbPreference = PreferenceManager
+//                            .getDefaultSharedPreferences(context);
+//
+//                    String latitu = wmbPreference.getString("LAT", "");
+//                    String longtitu = wmbPreference.getString("LONG", "");
+//
+//                    try {
+//                        if (gpsPoint.canGetLocation()) {
+//                            gpslocationPoint.add(gpsPoint.getLocation());
+//                            finalLat = gpsPoint.getLatitude();
+//                            finalLong = gpsPoint.getLongitude();
+//                            if (finalLat != 0) {
+//                                previewMapPoint.setEnabled(true);
+//                                try {
+//                                    JSONObject data = new JSONObject();
+//                                    data.put("latitude", finalLat);
+//                                    data.put("longitude", finalLong);
+//
+//                                    jsonArrayGPS.put(data);
+//                                } catch (JSONException e) {
+//                                    e.printStackTrace();
+//                                }
+//
+//                                LatLng d = new LatLng(finalLat, finalLong);
+//
+//                                listCfPoint.add(d);
+//                                isGpsTaken = true;
+//                                Toast.makeText(
+//                                        getApplicationContext(),
+//                                        "Your Location is - \nLat: " + finalLat
+//                                                + "\nLong: " + finalLong, Toast.LENGTH_SHORT)
+//                                        .show();
+//                                stringBuilder.append("[" + finalLat + "," + finalLong + "]" + ",");
+//                            }
+//
+//                        } else {
+//                            gpsPoint.showSettingsAlert();
+//                        }
+//                    }catch (NullPointerException e){
+//                        e.fillInStackTrace();
+//                    }
+//
+//                }else{
+//                    gpsPoint = new GPS_TRACKER_FOR_POINT(ForestProctection.this);
+//                    Default_DIalog.showDefaultDialog(context, R.string.app_name, "Please Wait until Gps is Initilized");
+//                }
 
-                    String latitu = wmbPreference.getString("LAT", "");
-                    String longtitu = wmbPreference.getString("LONG", "");
-
-                    try {
-                        if (gpsPoint.canGetLocation()) {
-                            gpslocationPoint.add(gpsPoint.getLocation());
-                            finalLat = gpsPoint.getLatitude();
-                            finalLong = gpsPoint.getLongitude();
-                            if (finalLat != 0) {
-                                previewMapPoint.setEnabled(true);
-                                try {
-                                    JSONObject data = new JSONObject();
-                                    data.put("latitude", finalLat);
-                                    data.put("longitude", finalLong);
-
-                                    jsonArrayGPS.put(data);
-                                } catch (JSONException e) {
-                                    e.printStackTrace();
-                                }
-
-                                LatLng d = new LatLng(finalLat, finalLong);
-
-                                listCfPoint.add(d);
-                                isGpsTaken = true;
-                                Toast.makeText(
-                                        getApplicationContext(),
-                                        "Your Location is - \nLat: " + finalLat
-                                                + "\nLong: " + finalLong, Toast.LENGTH_SHORT)
-                                        .show();
-                                stringBuilder.append("[" + finalLat + "," + finalLong + "]" + ",");
-                            }
-
-                        } else {
-                            gpsPoint.showSettingsAlert();
-                        }
-                    }catch (NullPointerException e){
-                        e.fillInStackTrace();
-                    }
-
-                }else{
-                    gpsPoint = new GPS_TRACKER_FOR_POINT(ForestProctection.this);
-                    Default_DIalog.showDefaultDialog(context, R.string.app_name, "Please Wait until Gps is Initilized");
-                }
+                Intent toGeoPointActivity = new Intent(context, GeoPointActivity.class);
+                startActivityForResult(toGeoPointActivity, GEOPOINT_SINGLE_POINT_RESULT_CODE);
             }
 
         });
@@ -843,6 +848,46 @@ public class ForestProctection extends AppCompatActivity implements AdapterView.
 
                     endGps.setEnabled(true);
                     startGps.setEnabled(false);
+                    //                    Toast.makeText(this.context, location, Toast.LENGTH_SHORT).show();
+                    break;
+            }
+        }
+
+        if (requestCode == GEOPOINT_SINGLE_POINT_RESULT_CODE) {
+
+            switch (resultCode) {
+                case RESULT_OK:
+                    String location = data.getStringExtra(LOCATION_RESULT);
+
+                    String string = location;
+                    String[] parts = string.split(" ");
+                    String split_lat = parts[0]; // 004
+                    String split_lon = parts[1]; // 034556
+                    String split_altitude = parts[2]; // altitude
+
+                    finalLat = Double.parseDouble(split_lat);
+                    finalLong = Double.parseDouble(split_lon);
+
+                    LatLng d = new LatLng(finalLat, finalLong);
+                    //
+                    listCf.add(d);
+                    if (!split_lat.equals("") && !split_lon.equals("")) {
+
+                        isGpsTaken = true;
+
+                        GPS_TRACKER_FOR_POINT.GPS_POINT_INITILIZED = true;
+                        try {
+                            JSONObject locationData = new JSONObject();
+                            locationData.put(KEY_FINAL_LAT, finalLat);
+                            locationData.put(KEY_FINAL_LONG, finalLong);
+
+                            jsonArrayGPS.put(locationData);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        previewMapPoint.setEnabled(true);
+                        GpsPoint.setText("Location Recorded");
+                    }
                     //                    Toast.makeText(this.context, location, Toast.LENGTH_SHORT).show();
                     break;
             }
