@@ -32,6 +32,8 @@ import com.naxa.conservationtracking.human_wildlife_conflict_management.Infrastr
 import com.naxa.conservationtracking.human_wildlife_conflict_management.LivestockDepredation;
 import com.naxa.conservationtracking.model.Single_String_Title;
 
+import Utls.SharedPreferenceUtils;
+
 /**
  * Created by ramaan on 1/5/2016.
  */
@@ -43,6 +45,8 @@ public class Fragment_Human_Wildlife_Conflict_Management extends Fragment {
     ProgressDialog mProgressDlg;
     String catId, link , name;
     RecyclerListAdapter3 ca;
+
+    SharedPreferenceUtils sharedPreferenceUtils;
 
     public Fragment_Human_Wildlife_Conflict_Management() {
 
@@ -59,6 +63,7 @@ public class Fragment_Human_Wildlife_Conflict_Management extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_recycler_list, container, false);
         // Inflate the layout for this fragment
+        sharedPreferenceUtils = new SharedPreferenceUtils(getActivity());
         return rootView;
     }
 
@@ -124,38 +129,55 @@ public class Fragment_Human_Wildlife_Conflict_Management extends Fragment {
     }
 
     public void loadForm(int position){
-        switch (position){
-            case 0 :
-                startActivity(new Intent(getActivity() , HumanCasualty.class));
-                break;
-            case 1 :
-                startActivity(new Intent(getActivity() , CropDepredation.class));
-                break;
-            case 2 :
-                startActivity(new Intent(getActivity() , LivestockDepredation.class));
-                break;
-            case 3 :
-                startActivity(new Intent(getActivity() , InfrastructureDamage.class));
-                break;
+        if(sharedPreferenceUtils.getBoolanValue(SharedPreferenceUtils.KEY_IS_USER_LOGGED_IN, false)) {
+            switch (position) {
+                case 0:
+                    startActivity(new Intent(getActivity(), HumanCasualty.class));
+                    break;
+                case 1:
+                    startActivity(new Intent(getActivity(), CropDepredation.class));
+                    break;
+                case 2:
+                    startActivity(new Intent(getActivity(), LivestockDepredation.class));
+                    break;
+                case 3:
+                    startActivity(new Intent(getActivity(), InfrastructureDamage.class));
+                    break;
 
-            case 4 :
-               startActivity(new Intent(getActivity() , AlternativeCropSupport.class));
-               break;
+                case 4:
+                    startActivity(new Intent(getActivity(), AlternativeCropSupport.class));
+                    break;
 
-            case 5 :
-                startActivity(new Intent(getActivity() , HWCEndowmentFund.class));
-                break;
+                case 5:
+                    startActivity(new Intent(getActivity(), HWCEndowmentFund.class));
+                    break;
 
-            case 6 :
-                startActivity(new Intent(getActivity() , HWCMitigationSupport.class));
-                break;
+                case 6:
+                    startActivity(new Intent(getActivity(), HWCMitigationSupport.class));
+                    break;
 
-            case 7 :
-                startActivity(new Intent(getActivity() , EWSEquipmentStatusRecordingActivity.class));
-                break;
-            case 8 :
-                startActivity(new Intent(getActivity() , ElephantActivityRecordingCSUActivity.class));
-                break;
+                case 7:
+                    startActivity(new Intent(getActivity(), EWSEquipmentStatusRecordingActivity.class));
+                    break;
+                case 8:
+                    startActivity(new Intent(getActivity(), ElephantActivityRecordingCSUActivity.class));
+                    break;
+            }
+        }else {
+            switch (position) {
+                case 0:
+                    startActivity(new Intent(getActivity(), HumanCasualty.class));
+                    break;
+                case 1:
+                    startActivity(new Intent(getActivity(), CropDepredation.class));
+                    break;
+                case 2:
+                    startActivity(new Intent(getActivity(), LivestockDepredation.class));
+                    break;
+                case 3:
+                    startActivity(new Intent(getActivity(), InfrastructureDamage.class));
+                    break;
+            }
         }
     }
 
@@ -170,38 +192,56 @@ public class Fragment_Human_Wildlife_Conflict_Management extends Fragment {
     }
 
     private void createList() {
-        resultCur.clear();
-        Single_String_Title newData1 = new Single_String_Title();
-        newData1.title = "Human Casualty";
-        resultCur.add(newData1);
-        Single_String_Title newData2 = new Single_String_Title();
-        newData2.title = "Crop Depredation";
-        resultCur.add(newData2);
-        Single_String_Title newData3 = new Single_String_Title();
-        newData3.title = "Livestock Depredation";
-        resultCur.add(newData3);
-        Single_String_Title newData4 = new Single_String_Title();
-        newData4.title = "Infrastructure Damage";
-        resultCur.add(newData4);
-        Single_String_Title newData5 = new Single_String_Title();
-        newData5.title = "Alternative Crop Support";
-        resultCur.add(newData5);
-        Single_String_Title newData6 = new Single_String_Title();
-        newData6.title = "HWC Endowment Fund";
-        resultCur.add(newData6);
-        Single_String_Title newData7 = new Single_String_Title();
-        newData7.title = "HWC Mitigation Support";
-        resultCur.add(newData7);
+        if(sharedPreferenceUtils.getBoolanValue(SharedPreferenceUtils.KEY_IS_USER_LOGGED_IN, false)) {
+            resultCur.clear();
+            Single_String_Title newData1 = new Single_String_Title();
+            newData1.title = "Human Casualty";
+            resultCur.add(newData1);
+            Single_String_Title newData2 = new Single_String_Title();
+            newData2.title = "Crop Depredation";
+            resultCur.add(newData2);
+            Single_String_Title newData3 = new Single_String_Title();
+            newData3.title = "Livestock Depredation";
+            resultCur.add(newData3);
+            Single_String_Title newData4 = new Single_String_Title();
+            newData4.title = "Infrastructure Damage";
+            resultCur.add(newData4);
+            Single_String_Title newData5 = new Single_String_Title();
+            newData5.title = "Alternative Crop Support";
+            resultCur.add(newData5);
+            Single_String_Title newData6 = new Single_String_Title();
+            newData6.title = "HWC Endowment Fund";
+            resultCur.add(newData6);
+            Single_String_Title newData7 = new Single_String_Title();
+            newData7.title = "HWC Mitigation Support";
+            resultCur.add(newData7);
 
-        Single_String_Title newData8 = new Single_String_Title();
-        newData8.title = "EWS Equipment Status Recording";
-        resultCur.add(newData8);
+            Single_String_Title newData8 = new Single_String_Title();
+            newData8.title = "EWS Equipment Status Recording";
+            resultCur.add(newData8);
 
-        Single_String_Title newData9 = new Single_String_Title();
-        newData9.title = "Elephant Activity Recording";
-        resultCur.add(newData9);
+            Single_String_Title newData9 = new Single_String_Title();
+            newData9.title = "Elephant Activity Recording";
+            resultCur.add(newData9);
 
-        fillTable();
+            fillTable();
+        }else {
+            resultCur.clear();
+            Single_String_Title newData1 = new Single_String_Title();
+            newData1.title = "Human Casualty";
+            resultCur.add(newData1);
+            Single_String_Title newData2 = new Single_String_Title();
+            newData2.title = "Crop Depredation";
+            resultCur.add(newData2);
+            Single_String_Title newData3 = new Single_String_Title();
+            newData3.title = "Livestock Depredation";
+            resultCur.add(newData3);
+            Single_String_Title newData4 = new Single_String_Title();
+            newData4.title = "Infrastructure Damage";
+            resultCur.add(newData4);
+
+            fillTable();
+        }
     }
 
     public void fillTable() {

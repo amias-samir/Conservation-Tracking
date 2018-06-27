@@ -130,34 +130,51 @@ public class Fragment_Forest extends Fragment {
     }
 
     public void loadForm(int position){
-        switch (position){
-            case 0 :
-                startActivity(new Intent(getActivity() , Cf_Detail.class));
-                break;
-            case 1 :
-                startActivity(new Intent(getActivity() , NurseryDetails.class));
-                break;
-            case 2 :
-                startActivity(new Intent(getActivity() , PlantationDetail.class));
-                break;
-            case 3 :
-                startActivity(new Intent(getActivity() , ForestProctection.class));
-                break;
-            case 4 :
-                startActivity(new Intent(getActivity() , ForestIntegLivestocManagement.class));
-                break;
-            case 5 :
-                startActivity(new Intent(getActivity() , ForestEncroachmentStatus.class));
-                break;
-            case 6 :
-                startActivity(new Intent(getActivity() , Forest_E_EvictionStatus.class));
-                break;
-            case 7 :
-                startActivity(new Intent(getActivity() , ForestFire.class));
-                break;
-            case 8 :
-                startActivity(new Intent(getActivity() , IllegalLogging.class));
-                break;
+        if(sharedPreferenceUtils.getBoolanValue(SharedPreferenceUtils.KEY_IS_USER_LOGGED_IN, false)) {
+            switch (position) {
+                case 0:
+                    startActivity(new Intent(getActivity(), Cf_Detail.class));
+                    break;
+                case 1:
+                    startActivity(new Intent(getActivity(), NurseryDetails.class));
+                    break;
+                case 2:
+                    startActivity(new Intent(getActivity(), PlantationDetail.class));
+                    break;
+                case 3:
+                    startActivity(new Intent(getActivity(), ForestProctection.class));
+                    break;
+                case 4:
+                    startActivity(new Intent(getActivity(), ForestIntegLivestocManagement.class));
+                    break;
+                case 5:
+                    startActivity(new Intent(getActivity(), ForestEncroachmentStatus.class));
+                    break;
+                case 6:
+                    startActivity(new Intent(getActivity(), Forest_E_EvictionStatus.class));
+                    break;
+                case 7:
+                    startActivity(new Intent(getActivity(), ForestFire.class));
+                    break;
+                case 8:
+                    startActivity(new Intent(getActivity(), IllegalLogging.class));
+                    break;
+            }
+        }else {
+            switch (position) {
+                case 0:
+                    startActivity(new Intent(getActivity(), ForestEncroachmentStatus.class));
+                    break;
+                case 1:
+                    startActivity(new Intent(getActivity(), Forest_E_EvictionStatus.class));
+                    break;
+                case 2:
+                    startActivity(new Intent(getActivity(), ForestFire.class));
+                    break;
+                case 3:
+                    startActivity(new Intent(getActivity(), IllegalLogging.class));
+                    break;
+            }
         }
     }
 
@@ -203,7 +220,20 @@ public class Fragment_Forest extends Fragment {
             resultCur.add(newData9);
             fillTable();
         }else {
-
+            resultCur.clear();
+            Single_String_Title newData6 = new Single_String_Title();
+            newData6.title = "Encroachment Status";
+            resultCur.add(newData6);
+            Single_String_Title newData7 = new Single_String_Title();
+            newData7.title = "Encroachment Eviction Status";
+            resultCur.add(newData7);
+            Single_String_Title newData8 = new Single_String_Title();
+            newData8.title = "Forest Fire";
+            resultCur.add(newData8);
+            Single_String_Title newData9 = new Single_String_Title();
+            newData9.title = "Illegal Logging";
+            resultCur.add(newData9);
+            fillTable();
         }
 
     }

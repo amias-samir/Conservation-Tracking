@@ -30,6 +30,8 @@ import com.naxa.conservationtracking.wmm.WetlandManagement;
 import com.naxa.conservationtracking.wmm.WildlifeMortalityDetails;
 import com.naxa.conservationtracking.wmm.WildlifeSightingDetails;
 
+import Utls.SharedPreferenceUtils;
+
 
 /**
  * Created by ramaan on 1/5/2016.
@@ -42,6 +44,7 @@ public class Fragment_WMM extends Fragment {
     ProgressDialog mProgressDlg;
     String catId, link , name;
     RecyclerListAdapter1 ca;
+    SharedPreferenceUtils sharedPreferenceUtils ;
 
     public Fragment_WMM() {
 
@@ -58,6 +61,7 @@ public class Fragment_WMM extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_recycler_list, container, false);
         // Inflate the layout for this fragment
+        sharedPreferenceUtils = new SharedPreferenceUtils(getActivity());
         return rootView;
     }
 
@@ -113,25 +117,40 @@ public class Fragment_WMM extends Fragment {
     }
 
     public void loadForm(int position){
-        switch (position){
-            case 0 :
-                startActivity(new Intent(getActivity() , WetlandManagement.class));
-                break;
-            case 1 :
-                startActivity(new Intent(getActivity() , GrasslandManagement.class));
-                break;
-            case 2 :
-                startActivity(new Intent(getActivity() , InvasiveSpeciesManagement.class));
-                break;
-            case 3 :
-                startActivity(new Intent(getActivity() , WildlifeSightingDetails.class));
-                break;
-            case 4 :
-                startActivity(new Intent(getActivity() , WildlifeMortalityDetails.class));
-                break;
-            case 5 :
-                startActivity(new Intent(getActivity() , EmergencyRescueRelease.class));
-                break;
+
+        if(sharedPreferenceUtils.getBoolanValue(SharedPreferenceUtils.KEY_IS_USER_LOGGED_IN, false)) {
+            switch (position) {
+                case 0:
+                    startActivity(new Intent(getActivity(), WetlandManagement.class));
+                    break;
+                case 1:
+                    startActivity(new Intent(getActivity(), GrasslandManagement.class));
+                    break;
+                case 2:
+                    startActivity(new Intent(getActivity(), InvasiveSpeciesManagement.class));
+                    break;
+                case 3:
+                    startActivity(new Intent(getActivity(), WildlifeSightingDetails.class));
+                    break;
+                case 4:
+                    startActivity(new Intent(getActivity(), WildlifeMortalityDetails.class));
+                    break;
+                case 5:
+                    startActivity(new Intent(getActivity(), EmergencyRescueRelease.class));
+                    break;
+            }
+        }else {
+            switch (position) {
+                case 0:
+                    startActivity(new Intent(getActivity(), WildlifeSightingDetails.class));
+                    break;
+                case 1:
+                    startActivity(new Intent(getActivity(), WildlifeMortalityDetails.class));
+                    break;
+                case 2:
+                    startActivity(new Intent(getActivity(), EmergencyRescueRelease.class));
+                    break;
+            }
         }
     }
 
@@ -146,27 +165,42 @@ public class Fragment_WMM extends Fragment {
     }
 
     private void createList() {
-        resultCur.clear();
-        Single_String_Title newData1 = new Single_String_Title();
-        newData1.title = "Wetland Management";
-        resultCur.add(newData1);
-        Single_String_Title newData2 = new Single_String_Title();
-        newData2.title = "Grassland Management";
-        resultCur.add(newData2);
-        Single_String_Title newData3 = new Single_String_Title();
-        newData3.title = "Invasive Species Management";
-        resultCur.add(newData3);
-        Single_String_Title newData4 = new Single_String_Title();
-        newData4.title = "Wildlife Sighting Details";
-        resultCur.add(newData4);
-        Single_String_Title newData5 = new Single_String_Title();
-        newData5.title = "Wildlife Mortality Details";
-        resultCur.add(newData5);
-        Single_String_Title newData6 = new Single_String_Title();
-        newData6.title = "Emergency Rescue and Release";
-        resultCur.add(newData6);
+        if(sharedPreferenceUtils.getBoolanValue(SharedPreferenceUtils.KEY_IS_USER_LOGGED_IN, false)) {
+            resultCur.clear();
+            Single_String_Title newData1 = new Single_String_Title();
+            newData1.title = "Wetland Management";
+            resultCur.add(newData1);
+            Single_String_Title newData2 = new Single_String_Title();
+            newData2.title = "Grassland Management";
+            resultCur.add(newData2);
+            Single_String_Title newData3 = new Single_String_Title();
+            newData3.title = "Invasive Species Management";
+            resultCur.add(newData3);
+            Single_String_Title newData4 = new Single_String_Title();
+            newData4.title = "Wildlife Sighting Details";
+            resultCur.add(newData4);
+            Single_String_Title newData5 = new Single_String_Title();
+            newData5.title = "Wildlife Mortality Details";
+            resultCur.add(newData5);
+            Single_String_Title newData6 = new Single_String_Title();
+            newData6.title = "Emergency Rescue and Release";
+            resultCur.add(newData6);
 
-        fillTable();
+            fillTable();
+        }else {
+            resultCur.clear();
+            Single_String_Title newData4 = new Single_String_Title();
+            newData4.title = "Wildlife Sighting Details";
+            resultCur.add(newData4);
+            Single_String_Title newData5 = new Single_String_Title();
+            newData5.title = "Wildlife Mortality Details";
+            resultCur.add(newData5);
+            Single_String_Title newData6 = new Single_String_Title();
+            newData6.title = "Emergency Rescue and Release";
+            resultCur.add(newData6);
+
+            fillTable();
+        }
     }
 
     public void fillTable() {

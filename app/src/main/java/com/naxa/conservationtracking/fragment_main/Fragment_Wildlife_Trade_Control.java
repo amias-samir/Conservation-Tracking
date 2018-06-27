@@ -27,6 +27,8 @@ import com.naxa.conservationtracking.wildlife_trade_control.AntipoachingSupport;
 import com.naxa.conservationtracking.wildlife_trade_control.CBAPOStatus;
 import com.naxa.conservationtracking.wildlife_trade_control.Poaching;
 
+import Utls.SharedPreferenceUtils;
+
 /**
  * Created by ramaan on 1/5/2016.
  */
@@ -38,6 +40,7 @@ public class Fragment_Wildlife_Trade_Control extends Fragment {
     ProgressDialog mProgressDlg;
     String catId, link , name;
     RecyclerListAdapter2 ca;
+    SharedPreferenceUtils sharedPreferenceUtils;
 
     public Fragment_Wildlife_Trade_Control() {
 
@@ -54,6 +57,7 @@ public class Fragment_Wildlife_Trade_Control extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_recycler_list, container, false);
         // Inflate the layout for this fragment
+        sharedPreferenceUtils = new SharedPreferenceUtils(getActivity());
         return rootView;
     }
 
@@ -119,20 +123,29 @@ public class Fragment_Wildlife_Trade_Control extends Fragment {
     }
 
     public void loadForm(int position){
-        switch (position){
-            case 0 :
-                startActivity(new Intent(getActivity() , Poaching.class));
-                break;
-            case 1 :
-                startActivity(new Intent(getActivity() , CBAPOStatus.class));
-                break;
-            case 2 :
-                startActivity(new Intent(getActivity() , AntiPoachingInfrastructure.class));
-                break;
-            case 3 :
-                startActivity(new Intent(getActivity() , AntipoachingSupport.class));
-                break;
+        if (sharedPreferenceUtils.getBoolanValue(SharedPreferenceUtils.KEY_IS_USER_LOGGED_IN, false)) {
+            switch (position) {
+                case 0:
+                    startActivity(new Intent(getActivity(), Poaching.class));
+                    break;
+                case 1:
+                    startActivity(new Intent(getActivity(), CBAPOStatus.class));
+                    break;
+                case 2:
+                    startActivity(new Intent(getActivity(), AntiPoachingInfrastructure.class));
+                    break;
+                case 3:
+                    startActivity(new Intent(getActivity(), AntipoachingSupport.class));
+                    break;
 
+            }
+        }
+        else {
+            switch (position) {
+                case 0:
+                    startActivity(new Intent(getActivity(), Poaching.class));
+                    break;
+            }
         }
     }
 
@@ -147,21 +160,30 @@ public class Fragment_Wildlife_Trade_Control extends Fragment {
     }
 
     private void createList() {
-        resultCur.clear();
-        Single_String_Title newData1 = new Single_String_Title();
-        newData1.title = "Poaching Details";
-        resultCur.add(newData1);
-        Single_String_Title newData2 = new Single_String_Title();
-        newData2.title = "CBAPO Database";
-        resultCur.add(newData2);
-        Single_String_Title newData3 = new Single_String_Title();
-        newData3.title = "Anti Poaching Infrastructure";
-        resultCur.add(newData3);
-        Single_String_Title newData4 = new Single_String_Title();
-        newData4.title = "Anti Poaching Support";
-        resultCur.add(newData4);
+        if(sharedPreferenceUtils.getBoolanValue(SharedPreferenceUtils.KEY_IS_USER_LOGGED_IN, false)) {
+            resultCur.clear();
+            Single_String_Title newData1 = new Single_String_Title();
+            newData1.title = "Poaching Details";
+            resultCur.add(newData1);
+            Single_String_Title newData2 = new Single_String_Title();
+            newData2.title = "CBAPO Database";
+            resultCur.add(newData2);
+            Single_String_Title newData3 = new Single_String_Title();
+            newData3.title = "Anti Poaching Infrastructure";
+            resultCur.add(newData3);
+            Single_String_Title newData4 = new Single_String_Title();
+            newData4.title = "Anti Poaching Support";
+            resultCur.add(newData4);
 
-        fillTable();
+            fillTable();
+        }else {
+            resultCur.clear();
+            Single_String_Title newData1 = new Single_String_Title();
+            newData1.title = "Poaching Details";
+            resultCur.add(newData1);
+
+            fillTable();
+        }
     }
 
     public void fillTable() {
