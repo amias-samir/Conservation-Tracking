@@ -1,6 +1,7 @@
 package com.naxa.conservationtracking.application;
 
 import android.app.Application;
+import android.content.Context;
 import android.os.Environment;
 import android.util.Log;
 
@@ -19,10 +20,16 @@ public class ApplicationClass extends Application {
     public static String extSdcard = Environment.getExternalStorageDirectory().toString();
 
     public static String PHOTO_PATH = extSdcard + mainFolder + photoFolder;
+    private static Context app;
+
+    public static Context getApp() {
+        return app;
+    }
 
     @Override
     public void onCreate() {
         super.onCreate();
+        app = getApplicationContext();
 
     }
 
@@ -42,8 +49,8 @@ public class ApplicationClass extends Application {
 //        }
 
 
-        if(!dirData.exists()){
-            if (!dirData.mkdirs()){
+        if (!dirData.exists()) {
+            if (!dirData.mkdirs()) {
                 throw new Exception("Failed to create database folder");
             }
         }

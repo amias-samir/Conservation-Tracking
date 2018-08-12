@@ -25,6 +25,7 @@ public class DataBaseConserVationTracking extends ODKSQLiteOpenHelper {
         public final static String TABLE_GPS = "_table_Gps";
         public final static String TABLE_PHOTO = "_table_photo";
         public final static String DELETE_FLAG = "_delete_flag";
+        public final static String IMEI = "imei";
         public final static String TABLE_MAIN = "_table_main";
 
         public final static String[] COLS_TABLE_MAIN = new String[]{ID_TABLE , TABLE_ID ,TABLE_NAME ,TABLE_DATE ,TABLE_JSON , TABLE_GPS , TABLE_PHOTO , TABLE_STATUS  , DELETE_FLAG };
@@ -79,6 +80,7 @@ public class DataBaseConserVationTracking extends ODKSQLiteOpenHelper {
             contentValues.put(TABLE_PHOTO, list[5]);
             contentValues.put(TABLE_STATUS , list[6]);
             contentValues.put(DELETE_FLAG, list[7]);
+
             long id = db.insert(TABLE_MAIN, null, contentValues);
             return id;
         }

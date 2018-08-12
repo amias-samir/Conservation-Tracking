@@ -1,6 +1,7 @@
 package com.naxa.conservationtracking.defaulthome;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
@@ -13,6 +14,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
+import android.telephony.PhoneNumberUtils;
 import android.util.DisplayMetrics;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -32,6 +34,7 @@ import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.location.LocationSettingsRequest;
 import com.google.android.gms.location.LocationSettingsResult;
 import com.google.android.gms.location.LocationSettingsStatusCodes;
+import com.naxa.conservationtracking.PhoneUtils;
 import com.naxa.conservationtracking.R;
 import com.naxa.conservationtracking.activities.General_Form;
 import com.naxa.conservationtracking.activities.SavedFormsActivity;
@@ -44,18 +47,22 @@ import com.naxa.conservationtracking.fragment_main.Fragment_WMM;
 import com.naxa.conservationtracking.fragment_main.Fragment_WildlifeMonitoringTechniques;
 import com.naxa.conservationtracking.fragment_main.Fragment_Wildlife_Trade_Control;
 
+import Utls.SharedPreferenceUtils;
 import br.liveo.Model.HelpLiveo;
 import br.liveo.Model.Navigation;
 import br.liveo.interfaces.OnItemClickListener;
 import br.liveo.interfaces.OnPrepareOptionsMenuLiveo;
 import br.liveo.navigationliveo.NavigationLiveo;
 
+import static android.content.pm.PackageManager.PERMISSION_GRANTED;
+import static com.naxa.conservationtracking.database.DataBaseConserVationTracking.IMEI;
+
 public class DefaultHomeActivity extends NavigationLiveo implements OnItemClickListener {
 
-    Context context = this ;
+    Context context = this;
 
     //Susan
-    private int MULTIPLE_PERMISSION_CODE = 22;
+    private final int MULTIPLE_PERMISSION_CODE = 22;
     static final Integer LOCATION = 0x1;
     static final Integer GPS_SETTINGS = 0x7;
     static final String TAG = "MainActivity";
@@ -282,7 +289,7 @@ public class DefaultHomeActivity extends NavigationLiveo implements OnItemClickL
         return super.onOptionsItemSelected(item);
     }
 
-    public void updateApp (){
+    public void updateApp() {
         String url = "http://naxa.com.np/apps/cta.apk";
 
         Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
@@ -290,21 +297,20 @@ public class DefaultHomeActivity extends NavigationLiveo implements OnItemClickL
 
     }
 
-    public void showAlertDialogBeforeUpdate (){
+    public void showAlertDialogBeforeUpdate() {
         DisplayMetrics metrics = context.getResources().getDisplayMetrics();
         int width = metrics.widthPixels;
         int height = metrics.heightPixels;
 
         final Dialog showDialog = new Dialog(context);
         showDialog.setContentView(R.layout.alert_dialog_before_action_layout);
-        final TextView tvWarningDetails = (TextView)showDialog .findViewById(R.id.textViewWarning);
+        final TextView tvWarningDetails = (TextView) showDialog.findViewById(R.id.textViewWarning);
         final Button btnYes = (Button) showDialog.findViewById(R.id.alertButtonYes);
         final Button btnNo = (Button) showDialog.findViewById(R.id.alertButtonNo);
 
         tvWarningDetails.setText("Please send your data first before App update");
         btnYes.setText("Update Anyway");
         btnNo.setText("Send Data");
-
 
 
         showDialog.setTitle("WARNING !!!");
@@ -380,7 +386,7 @@ public class DefaultHomeActivity extends NavigationLiveo implements OnItemClickL
         int result = ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA);
 
         //If permission is granted returning true
-        if (result == PackageManager.PERMISSION_GRANTED)
+        if (result == PERMISSION_GRANTED)
             return true;
 
         //If permission is not granted returning false
@@ -397,26 +403,46 @@ public class DefaultHomeActivity extends NavigationLiveo implements OnItemClickL
             //Explain here why you need this permission
         }
         ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.ACCESS_FINE_LOCATION}, MULTIPLE_PERMISSION_CODE);
+                Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.READ_PHONE_STATE}, MULTIPLE_PERMISSION_CODE);
 
     }
 
     //This method will be called when the user will tap on allow or deny
+    @SuppressLint("MissingPermission")
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        askForGPS();
-        //Checking the request code of our request
-        if (requestCode == MULTIPLE_PERMISSION_CODE) {
 
-            //If permission is granted
-            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+        switch (requestCode) {
+            case MULTIPLE_PERMISSION_CODE:
+                if (grantResults.length == 0) {
+                    Toast.makeText(context, " Required permission were not given\napp may function improperly", Toast.LENGTH_LONG).show();
 
-                //Displaying a toast
-//                Toast.makeText(this, "Permission granted now you can read the storage", Toast.LENGTH_LONG).show();
-            } else {
-                //Displaying another toast if permission is not granted
-//                Toast.makeText(this, "Oops you just denied the permission", Toast.LENGTH_SHORT).show();
-            }
+                    return;
+                }
+
+                boolean hasCameraPermission = grantResults[0] == PERMISSION_GRANTED;
+                boolean hasStoragePermission = grantResults[1] == PERMISSION_GRANTED;
+                boolean hasLocationPermission = grantResults[2] == PERMISSION_GRANTED;
+                boolean hasPhonePermission = grantResults[3] == PERMISSION_GRANTED;
+
+                if (hasPhonePermission) {
+                    SharedPreferenceUtils.getInstance(context).setValue(IMEI, PhoneUtils.getDeviceId());
+                }
+
+
+                if (hasLocationPermission) {
+                    askForGPS();
+                }
+
+                if (hasCameraPermission && hasStoragePermission && hasLocationPermission & hasPhonePermission) {
+                    //unhandled
+                } else {
+                    Toast.makeText(context, "All required permission were not given\napp may function improperly", Toast.LENGTH_LONG).show();
+                }
+                break;
+            default:
+                //unhandled
         }
+
     }
 }
