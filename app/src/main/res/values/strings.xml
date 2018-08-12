@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Conservation Tracking</string>
-    <string name="api_host_url">"http://cta.wwfnepal.org.np/cta/api/enter_record"</string>
-    <string name="api_login_url">"http://cta.wwfnepal.org.np/cta/LoginApi/check_user"</string>
+    <string name="api_host_url">"https://cta.wwfnepal.org.np/api/index.php/enter_record"</string>
+    <string name="api_login_url">"https://cta.wwfnepal.org.np/LoginApi/check_user"</string>
     <!--<string name="api_host_url">"http://naxa.com.np/cta/api/enter_record"</string>-->
     <string name="select_option">Select option</string>
 
