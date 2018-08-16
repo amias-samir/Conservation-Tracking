@@ -82,6 +82,7 @@ import java.util.concurrent.TimeUnit;
 
 import javax.net.ssl.HttpsURLConnection;
 
+import com.naxa.conservationtracking.application.ApplicationClass;
 import com.naxa.conservationtracking.database.DataBaseConserVationTracking;
 import com.naxa.conservationtracking.dialog.Default_DIalog;
 import com.naxa.conservationtracking.model.CheckValues;
@@ -913,8 +914,7 @@ public class ForestProctection extends AppCompatActivity implements AdapterView.
             iName = imageNameMonitoring;
         }
 
-        File file1 = new File(Environment.getExternalStoragePublicDirectory(
-                Environment.DIRECTORY_PICTURES), iName);
+        File file1 = new File(ApplicationClass.PHOTO_PATH, iName);
 
         if (file1.exists()) file1.delete();
         try {
@@ -930,8 +930,7 @@ public class ForestProctection extends AppCompatActivity implements AdapterView.
 
     public void addImage(int photoIdNo) {
         if (photoIdNo == CAMERA_PIC_REQUEST) {
-            File file1 = new File(Environment.getExternalStoragePublicDirectory(
-                    Environment.DIRECTORY_PICTURES), imageName);
+            File file1 = new File(ApplicationClass.PHOTO_PATH, imageName);
             String path = file1.toString();
 
             BitmapFactory.Options options = new BitmapFactory.Options();
@@ -955,8 +954,7 @@ public class ForestProctection extends AppCompatActivity implements AdapterView.
             Log.e("IMAGE STRING", "-" + encodedImage);
 
         } else if (photoIdNo == CAMERA_PIC_REQUEST_B) {
-            File file1 = new File(Environment.getExternalStoragePublicDirectory(
-                    Environment.DIRECTORY_PICTURES), imageNameCompleted);
+            File file1 = new File(ApplicationClass.PHOTO_PATH, imageNameCompleted);
             String path = file1.toString();
 
             BitmapFactory.Options options = new BitmapFactory.Options();
@@ -979,8 +977,7 @@ public class ForestProctection extends AppCompatActivity implements AdapterView.
             Log.e("IMAGE STRING", "-" + encodedImageCompleted);
 
         } else if (photoIdNo == CAMERA_PIC_REQUEST_C) {
-            File file1 = new File(Environment.getExternalStoragePublicDirectory(
-                    Environment.DIRECTORY_PICTURES), imageNameMonitoring);
+            File file1 = new File(ApplicationClass.PHOTO_PATH, imageNameMonitoring);
             String path = file1.toString();
 
             BitmapFactory.Options options = new BitmapFactory.Options();
@@ -1075,8 +1072,7 @@ public class ForestProctection extends AppCompatActivity implements AdapterView.
 
             if (imageName.equals("no_photo")) {
             } else {
-                File file1 = new File(Environment.getExternalStoragePublicDirectory(
-                        Environment.DIRECTORY_PICTURES), imageName);
+                File file1 = new File(ApplicationClass.PHOTO_PATH, imageName);
                 String path = file1.toString();
                 Toast.makeText(getApplicationContext(), path, Toast.LENGTH_SHORT).show();
 
@@ -1087,8 +1083,7 @@ public class ForestProctection extends AppCompatActivity implements AdapterView.
             Log.e("protection_detail_", "i-" + imageNameCompleted);
             if (imageNameCompleted.equals("no_photo")) {
             } else {
-                File file1 = new File(Environment.getExternalStoragePublicDirectory(
-                        Environment.DIRECTORY_PICTURES), imageNameCompleted);
+                File file1 = new File(ApplicationClass.PHOTO_PATH, imageNameCompleted);
                 String path = file1.toString();
                 Toast.makeText(getApplicationContext(), path, Toast.LENGTH_SHORT).show();
 
@@ -1100,8 +1095,7 @@ public class ForestProctection extends AppCompatActivity implements AdapterView.
 
             if (imageNameMonitoring.equals("no_photo")) {
             } else {
-                File file1 = new File(Environment.getExternalStoragePublicDirectory(
-                        Environment.DIRECTORY_PICTURES), imageNameMonitoring);
+                File file1 = new File(ApplicationClass.PHOTO_PATH, imageNameMonitoring);
                 String path = file1.toString();
                 Toast.makeText(getApplicationContext(), path, Toast.LENGTH_SHORT).show();
 

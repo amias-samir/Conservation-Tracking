@@ -75,26 +75,18 @@ public class DefaultHomeActivity extends NavigationLiveo implements OnItemClickL
     //        ConnectonDetector connectonDetector;
     FragmentManager mFragmentManager = getSupportFragmentManager();
 
+    @SuppressLint("MissingPermission")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        try {
-            //First checking if the app is already having the permission
-            if (isPermissionAllowed()) {
-                //If permission is already having then showing the toast
-//                Toast.makeText(AddYourBusinessActivity.this, "You already have the permission", Toast.LENGTH_LONG).show();
-                //Existing the method with return
-                return;
-            } else {
-                //If the app has not the permission then asking for the permission
-                requestMultiplePermission();
-            }
 
-        } catch (ArrayIndexOutOfBoundsException e) {
-            e.getMessage();
+        if (isPermissionAllowed()) {
+            String imei = PhoneUtils.getDeviceId();
+            SharedPreferenceUtils.getInstance(context).setValue(IMEI,imei);
+        } else {
+            requestMultiplePermission();
         }
-
-    }
+}
 
     @Override
     public void onInt(Bundle savedInstanceState) {
@@ -377,31 +369,22 @@ public class DefaultHomeActivity extends NavigationLiveo implements OnItemClickL
         });
     }
 
-    /**
-     * @return Susan Permissions: Camera, Storage, Location, Internet, etc.
-     */
-    //We are calling this method to check the permission status
+
     private boolean isPermissionAllowed() {
-        //Getting the permission status
-        int result = ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA);
 
-        //If permission is granted returning true
-        if (result == PERMISSION_GRANTED)
-            return true;
+        boolean hasCameraPermission = ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA) == PERMISSION_GRANTED;
+        boolean hasStoragePermission = ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PERMISSION_GRANTED;
+        boolean hasLocationPermission = ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PERMISSION_GRANTED;
+        boolean hasPhonePermission = ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED;
 
-        //If permission is not granted returning false
-        return false;
+        return hasCameraPermission && hasStoragePermission && hasLocationPermission && hasPhonePermission;
     }
 
 
     //Requesting permission
     private void requestMultiplePermission() {
 
-        if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.CAMERA)) {
-            //If the user has denied the permission previously your code will come to this block
-            //Here you can explain why you need this permission
-            //Explain here why you need this permission
-        }
+
         ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE,
                 Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.READ_PHONE_STATE}, MULTIPLE_PERMISSION_CODE);
 

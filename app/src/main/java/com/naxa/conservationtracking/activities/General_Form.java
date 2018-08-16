@@ -67,6 +67,7 @@ import javax.net.ssl.HttpsURLConnection;
 
 import com.naxa.conservationtracking.GeoPointActivity;
 import com.naxa.conservationtracking.R;
+import com.naxa.conservationtracking.application.ApplicationClass;
 import com.naxa.conservationtracking.database.DataBaseConserVationTracking;
 import com.naxa.conservationtracking.dialog.Default_DIalog;
 import com.naxa.conservationtracking.model.CheckValues;
@@ -194,34 +195,34 @@ public class General_Form extends AppCompatActivity {
 //                            @Override
 //                            public void onClick(View v) {
 //                                // TODO Auto-generated method stub
-                                String userN = UserNameAndPasswordUtils.getUserNameAndPassword(context).get(0);
-                                String passW = UserNameAndPasswordUtils.getUserNameAndPassword(context).get(1);
-                                if (userN == null || userN.equals("") || passW == null || passW.equals("")) {
-                                    Toast.makeText(context, "Either your user name or password is empty.Please fill the required field. ", Toast.LENGTH_SHORT).show();
-                                } else {
+                        String userN = UserNameAndPasswordUtils.getUserNameAndPassword(context).get(0);
+                        String passW = UserNameAndPasswordUtils.getUserNameAndPassword(context).get(1);
+                        if (userN == null || userN.equals("") || passW == null || passW.equals("")) {
+                            Toast.makeText(context, "Either your user name or password is empty.Please fill the required field. ", Toast.LENGTH_SHORT).show();
+                        } else {
 //                                    showDialog.dismiss();
-                                    project_name = tvProject_name.getText().toString();
-                                    fiscal_year = tvFiscal_year.getText().toString();
-                                    district_name = tvDistrictname.getText().toString();
-                                    vdc_name = tvNameOfVdc.getText().toString();
-                                    test_field_1 = tvField1.getText().toString();
-                                    test_field_2 = tvField2.getText().toString();
-                                    test_field_3 = tvField3.getText().toString();
-                                    test_field_4 = tvField4.getText().toString();
-                                    others = tvNotes.getText().toString();
+                            project_name = tvProject_name.getText().toString();
+                            fiscal_year = tvFiscal_year.getText().toString();
+                            district_name = tvDistrictname.getText().toString();
+                            vdc_name = tvNameOfVdc.getText().toString();
+                            test_field_1 = tvField1.getText().toString();
+                            test_field_2 = tvField2.getText().toString();
+                            test_field_3 = tvField3.getText().toString();
+                            test_field_4 = tvField4.getText().toString();
+                            others = tvNotes.getText().toString();
 
-                                    userNameToSend = userN;
-                                    passwordToSend = passW;
+                            userNameToSend = userN;
+                            passwordToSend = passW;
 
-                                    Log.e("SEND", "Clicked");
-                                    mProgressDlg = new ProgressDialog(context);
-                                    mProgressDlg.setMessage("Please wait...");
-                                    mProgressDlg.setIndeterminate(false);
-                                    mProgressDlg.setCancelable(false);
-                                    mProgressDlg.show();
-                                    convertDataToJson();
-                                    sendDatToserver();
-                                }
+                            Log.e("SEND", "Clicked");
+                            mProgressDlg = new ProgressDialog(context);
+                            mProgressDlg.setMessage("Please wait...");
+                            mProgressDlg.setIndeterminate(false);
+                            mProgressDlg.setCancelable(false);
+                            mProgressDlg.show();
+                            convertDataToJson();
+                            sendDatToserver();
+                        }
 //                            }
 //                        });
                     } else {
@@ -492,8 +493,7 @@ public class General_Form extends AppCompatActivity {
 
         imageName = "General_form" + timeInMillis;
 
-        File file1 = new File(Environment.getExternalStoragePublicDirectory(
-                Environment.DIRECTORY_PICTURES), imageName);
+        File file1 = new File(ApplicationClass.PHOTO_PATH, imageName);
 //        if (!file1.mkdirs()) {
 //            Toast.makeText(getApplicationContext(), "Not Created", Toast.LENGTH_SHORT).show();
 //        }
@@ -529,8 +529,7 @@ public class General_Form extends AppCompatActivity {
     }
 
     public void addImage() {
-        File file1 = new File(Environment.getExternalStoragePublicDirectory(
-                Environment.DIRECTORY_PICTURES), imageName);
+        File file1 = new File(ApplicationClass.PHOTO_PATH, imageName);
         String path = file1.toString();
 
         BitmapFactory.Options options = new BitmapFactory.Options();
@@ -560,7 +559,7 @@ public class General_Form extends AppCompatActivity {
         if (intent.hasExtra("JSON1")) {
             CheckValues.isFromSavedFrom = true;
             startGps.setEnabled(false);
-            isGpsTaken=true;
+            isGpsTaken = true;
             previewMap.setEnabled(true);
 //            endGps.setEnabled(false);
             Bundle bundle = intent.getExtras();
@@ -569,7 +568,7 @@ public class General_Form extends AppCompatActivity {
             String gpsLocationtoParse = (String) bundle.get("gps");
 
             String status = (String) bundle.get("status");
-            if(status.equals("Sent")){
+            if (status.equals("Sent")) {
                 save.setEnabled(false);
                 send.setEnabled(false);
             }
@@ -578,8 +577,7 @@ public class General_Form extends AppCompatActivity {
 
             if (imageName.equals("no_photo")) {
             } else {
-                File file1 = new File(Environment.getExternalStoragePublicDirectory(
-                        Environment.DIRECTORY_PICTURES), imageName);
+                File file1 = new File(ApplicationClass.PHOTO_PATH, imageName);
                 String path = file1.toString();
                 Toast.makeText(getApplicationContext(), path, Toast.LENGTH_SHORT).show();
 

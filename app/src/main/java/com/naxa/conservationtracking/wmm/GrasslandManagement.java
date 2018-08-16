@@ -50,6 +50,7 @@ import com.naxa.conservationtracking.R;
 import com.naxa.conservationtracking.activities.CalculateAreaUsinGPS;
 import com.naxa.conservationtracking.activities.GpsTracker;
 import com.naxa.conservationtracking.activities.MapPolyLineActivity;
+import com.naxa.conservationtracking.application.ApplicationClass;
 import com.naxa.conservationtracking.database.DataBaseConserVationTracking;
 import com.naxa.conservationtracking.dialog.Default_DIalog;
 import com.naxa.conservationtracking.forest.ForestProctection;
@@ -758,8 +759,7 @@ public class GrasslandManagement extends AppCompatActivity implements AdapterVie
             iName = imageNameMonitoring;
         }
 
-        File file1 = new File(Environment.getExternalStoragePublicDirectory(
-                Environment.DIRECTORY_PICTURES), iName);
+        File file1 = new File(ApplicationClass.PHOTO_PATH, iName);
 
         if (file1.exists()) file1.delete();
         try {
@@ -775,8 +775,7 @@ public class GrasslandManagement extends AppCompatActivity implements AdapterVie
 
     public void addImage(int photoIdNo) {
         if (photoIdNo == CAMERA_PIC_REQUEST) {
-            File file1 = new File(Environment.getExternalStoragePublicDirectory(
-                    Environment.DIRECTORY_PICTURES), imageName);
+            File file1 = new File(ApplicationClass.PHOTO_PATH, imageName);
             String path = file1.toString();
 
             BitmapFactory.Options options = new BitmapFactory.Options();
@@ -800,8 +799,7 @@ public class GrasslandManagement extends AppCompatActivity implements AdapterVie
             Log.e("IMAGE STRING", "-" + encodedImage);
 
         } else if (photoIdNo == CAMERA_PIC_REQUEST_B) {
-            File file1 = new File(Environment.getExternalStoragePublicDirectory(
-                    Environment.DIRECTORY_PICTURES), imageNameCompleted);
+            File file1 = new File(ApplicationClass.PHOTO_PATH, imageNameCompleted);
             String path = file1.toString();
 
             BitmapFactory.Options options = new BitmapFactory.Options();
@@ -824,8 +822,7 @@ public class GrasslandManagement extends AppCompatActivity implements AdapterVie
             Log.e("IMAGE STRING", "-" + encodedImageCompleted);
 
         } else if (photoIdNo == CAMERA_PIC_REQUEST_C) {
-            File file1 = new File(Environment.getExternalStoragePublicDirectory(
-                    Environment.DIRECTORY_PICTURES), imageNameMonitoring);
+            File file1 = new File(ApplicationClass.PHOTO_PATH, imageNameMonitoring);
             String path = file1.toString();
 
             BitmapFactory.Options options = new BitmapFactory.Options();
@@ -917,8 +914,7 @@ public class GrasslandManagement extends AppCompatActivity implements AdapterVie
 
             if (imageName.equals("no_photo")) {
             } else {
-                File file1 = new File(Environment.getExternalStoragePublicDirectory(
-                        Environment.DIRECTORY_PICTURES), imageName);
+                File file1 = new File(ApplicationClass.PHOTO_PATH, imageName);
                 String path = file1.toString();
                 Toast.makeText(getApplicationContext(), path, Toast.LENGTH_SHORT).show();
 
@@ -929,8 +925,7 @@ public class GrasslandManagement extends AppCompatActivity implements AdapterVie
             Log.e("grassland_", "i-" + imageNameCompleted);
             if (imageNameCompleted.equals("no_photo")) {
             } else {
-                File file1 = new File(Environment.getExternalStoragePublicDirectory(
-                        Environment.DIRECTORY_PICTURES), imageNameCompleted);
+                File file1 = new File(ApplicationClass.PHOTO_PATH, imageNameCompleted);
                 String path = file1.toString();
                 Toast.makeText(getApplicationContext(), path, Toast.LENGTH_SHORT).show();
 
@@ -942,8 +937,7 @@ public class GrasslandManagement extends AppCompatActivity implements AdapterVie
 
             if (imageNameMonitoring.equals("no_photo")) {
             } else {
-                File file1 = new File(Environment.getExternalStoragePublicDirectory(
-                        Environment.DIRECTORY_PICTURES), imageNameMonitoring);
+                File file1 = new File(ApplicationClass.PHOTO_PATH, imageNameMonitoring);
                 String path = file1.toString();
                 Toast.makeText(getApplicationContext(), path, Toast.LENGTH_SHORT).show();
 

@@ -73,6 +73,7 @@ import java.util.List;
 
 import javax.net.ssl.HttpsURLConnection;
 
+import com.naxa.conservationtracking.application.ApplicationClass;
 import com.naxa.conservationtracking.database.DataBaseConserVationTracking;
 import com.naxa.conservationtracking.dialog.Default_DIalog;
 import com.naxa.conservationtracking.model.CheckValues;
@@ -635,8 +636,7 @@ public class InstitutionalSupport extends AppCompatActivity implements AdapterVi
             iName = imageNameMonitoring;
         }
 
-        File file1 = new File(Environment.getExternalStoragePublicDirectory(
-                Environment.DIRECTORY_PICTURES), iName);
+        File file1 = new File(ApplicationClass.PHOTO_PATH, iName);
 //        if (!file1.mkdirs()) {
 //            Toast.makeText(getApplicationContext(), "Not Created", Toast.LENGTH_SHORT).show();
 //        }
@@ -674,8 +674,7 @@ public class InstitutionalSupport extends AppCompatActivity implements AdapterVi
 
     public void addImage(int photoIdNo) {
         if (photoIdNo == CAMERA_PIC_REQUEST) {
-            File file1 = new File(Environment.getExternalStoragePublicDirectory(
-                    Environment.DIRECTORY_PICTURES), imageName);
+            File file1 = new File(ApplicationClass.PHOTO_PATH, imageName);
             String path = file1.toString();
 
             BitmapFactory.Options options = new BitmapFactory.Options();
@@ -698,8 +697,7 @@ public class InstitutionalSupport extends AppCompatActivity implements AdapterVi
             encodedImage = Base64.encodeToString(byteImage_photo, Base64.DEFAULT);
             Log.e("IMAGE STRING", "-" + encodedImage);
         } else if (photoIdNo == CAMERA_PIC_REQUEST_B) {
-            File file1 = new File(Environment.getExternalStoragePublicDirectory(
-                    Environment.DIRECTORY_PICTURES), imageNameMonitoring);
+            File file1 = new File(ApplicationClass.PHOTO_PATH, imageNameMonitoring);
             String path = file1.toString();
 
             BitmapFactory.Options options = new BitmapFactory.Options();
@@ -774,8 +772,7 @@ public class InstitutionalSupport extends AppCompatActivity implements AdapterVi
 
             if (imageName.equals("no_photo")) {
             } else {
-                File file1 = new File(Environment.getExternalStoragePublicDirectory(
-                        Environment.DIRECTORY_PICTURES), imageName);
+                File file1 = new File(ApplicationClass.PHOTO_PATH, imageName);
                 String path = file1.toString();
                 Toast.makeText(getApplicationContext(), path, Toast.LENGTH_SHORT).show();
 
@@ -785,8 +782,7 @@ public class InstitutionalSupport extends AppCompatActivity implements AdapterVi
             }
             if (imageNameMonitoring.equals("no_photo")) {
             } else {
-                File file1 = new File(Environment.getExternalStoragePublicDirectory(
-                        Environment.DIRECTORY_PICTURES), imageNameMonitoring);
+                File file1 = new File(ApplicationClass.PHOTO_PATH, imageNameMonitoring);
                 String path = file1.toString();
                 Toast.makeText(getApplicationContext(), path, Toast.LENGTH_SHORT).show();
 

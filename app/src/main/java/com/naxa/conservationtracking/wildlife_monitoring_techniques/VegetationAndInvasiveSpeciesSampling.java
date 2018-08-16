@@ -78,6 +78,7 @@ import java.util.List;
 import javax.net.ssl.HttpsURLConnection;
 
 import com.naxa.conservationtracking.adapter.RecyclerListAdapterSpeciesNN;
+import com.naxa.conservationtracking.application.ApplicationClass;
 import com.naxa.conservationtracking.database.DataBaseConserVationTracking;
 import com.naxa.conservationtracking.dialog.Default_DIalog;
 import com.naxa.conservationtracking.model.CheckValues;
@@ -940,8 +941,7 @@ public class VegetationAndInvasiveSpeciesSampling extends AppCompatActivity impl
 
         imageName = "vis_1m_plot_" + timeInMillis;
 
-        File file1 = new File(Environment.getExternalStoragePublicDirectory(
-                Environment.DIRECTORY_PICTURES), imageName);
+        File file1 = new File(ApplicationClass.PHOTO_PATH, imageName);
 
         if (file1.exists()) file1.delete();
         try {
@@ -1018,8 +1018,7 @@ public class VegetationAndInvasiveSpeciesSampling extends AppCompatActivity impl
 
             if (imageName.equals("no_photo")) {
             } else {
-                File file1 = new File(Environment.getExternalStoragePublicDirectory(
-                        Environment.DIRECTORY_PICTURES), imageName);
+                File file1 = new File(ApplicationClass.PHOTO_PATH, imageName);
                 String path = file1.toString();
                 Toast.makeText(getApplicationContext(), path, Toast.LENGTH_SHORT).show();
 

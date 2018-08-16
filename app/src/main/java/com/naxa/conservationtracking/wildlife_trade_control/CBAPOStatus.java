@@ -75,6 +75,7 @@ import java.util.List;
 
 import javax.net.ssl.HttpsURLConnection;
 
+import com.naxa.conservationtracking.application.ApplicationClass;
 import com.naxa.conservationtracking.database.DataBaseConserVationTracking;
 import com.naxa.conservationtracking.dialog.Default_DIalog;
 import com.naxa.conservationtracking.model.CheckValues;
@@ -590,8 +591,7 @@ public class CBAPOStatus extends AppCompatActivity implements AdapterView.OnItem
 
         imageName = "CBAPO_status" + timeInMillis;
 
-        File file1 = new File(Environment.getExternalStoragePublicDirectory(
-                Environment.DIRECTORY_PICTURES), imageName);
+        File file1 = new File(ApplicationClass.PHOTO_PATH, imageName);
 //        if (!file1.mkdirs()) {
 //            Toast.makeText(getApplicationContext(), "Not Created", Toast.LENGTH_SHORT).show();
 //        }
@@ -627,8 +627,7 @@ public class CBAPOStatus extends AppCompatActivity implements AdapterView.OnItem
     }
 
     public void addImage() {
-        File file1 = new File(Environment.getExternalStoragePublicDirectory(
-                Environment.DIRECTORY_PICTURES), imageName);
+        File file1 = new File(ApplicationClass.PHOTO_PATH, imageName);
         String path = file1.toString();
 
         BitmapFactory.Options options = new BitmapFactory.Options();
@@ -675,8 +674,7 @@ public class CBAPOStatus extends AppCompatActivity implements AdapterView.OnItem
 
             if (imageName.equals("no_photo")) {
             } else {
-                File file1 = new File(Environment.getExternalStoragePublicDirectory(
-                        Environment.DIRECTORY_PICTURES), imageName);
+                File file1 = new File(ApplicationClass.PHOTO_PATH, imageName);
                 String path = file1.toString();
                 Toast.makeText(getApplicationContext(), path, Toast.LENGTH_SHORT).show();
 

@@ -119,6 +119,7 @@ public class DataBaseConserVationTracking extends ODKSQLiteOpenHelper {
         contentValues.put(TABLE_PHOTO, list[5]);
         contentValues.put(TABLE_STATUS, list[6]);
         contentValues.put(DELETE_FLAG, list[7]);
+        contentValues.put(IMEI, SharedPreferenceUtils.getInstance(con).getStringValue(IMEI, ""));
 
         long id = db.insert(TABLE_MAIN, null, contentValues);
         return id;

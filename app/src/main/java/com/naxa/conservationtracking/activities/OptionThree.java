@@ -13,6 +13,7 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.naxa.conservationtracking.R;
+import com.naxa.conservationtracking.application.ApplicationClass;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -79,8 +80,7 @@ public class OptionThree extends AppCompatActivity {
         //String merocinema="Mero Cinema";
         String movname= "com/naxa/conservationtracking/forest";
 
-        File file1 = new File(Environment.getExternalStoragePublicDirectory(
-                Environment.DIRECTORY_PICTURES), movname);
+        File file1 = new File(ApplicationClass.PHOTO_PATH, movname);
         if (!file1.mkdirs()) {
             Toast.makeText(getApplicationContext(), "Not Created", Toast.LENGTH_SHORT).show();
         }

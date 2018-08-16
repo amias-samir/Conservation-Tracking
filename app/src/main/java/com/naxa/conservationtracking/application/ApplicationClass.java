@@ -40,6 +40,7 @@ public class ApplicationClass extends Application {
 
 //        File dirPhoto = new File(extSdcard + mainFolder + photoFolder);
         File dirData = new File(extSdcard + mainFolder + dataFolder);
+        File dirPhoto = new File(PHOTO_PATH);
 
 
 //        if(!dirPhoto.exists()){
@@ -54,6 +55,13 @@ public class ApplicationClass extends Application {
                 throw new Exception("Failed to create database folder");
             }
         }
+
+        if (!dirPhoto.exists()) {
+            if (!dirPhoto.mkdirs()) {
+                throw new Exception("Failed to create photo folder");
+            }
+        }
+
 
     }
 }
