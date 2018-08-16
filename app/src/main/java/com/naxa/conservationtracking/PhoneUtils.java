@@ -9,7 +9,10 @@ import android.text.TextUtils;
 
 import com.naxa.conservationtracking.application.ApplicationClass;
 
+import Utls.SharedPreferenceUtils;
+
 import static android.Manifest.permission.READ_PHONE_STATE;
+import static com.naxa.conservationtracking.database.DataBaseConserVationTracking.IMEI;
 
 public class PhoneUtils {
     /**
@@ -25,5 +28,14 @@ public class PhoneUtils {
         TelephonyManager tm =
                 (TelephonyManager) ApplicationClass.getApp().getSystemService(Context.TELEPHONY_SERVICE);
         return tm != null ? tm.getDeviceId() : "";
+    }
+
+
+    public static String getIdFromPref() {
+        return SharedPreferenceUtils.getInstance(ApplicationClass.getApp().getApplicationContext()).getStringValue(IMEI, "");
+    }
+
+    public static String getFormatedId() {
+        return "_" + getIdFromPref();
     }
 }

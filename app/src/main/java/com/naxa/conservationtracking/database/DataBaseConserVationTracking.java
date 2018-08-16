@@ -30,8 +30,8 @@ public class DataBaseConserVationTracking extends ODKSQLiteOpenHelper {
     public final static String IMEI = "imei";
     public final static String TABLE_MAIN = "_table_main";
 
-//    public final static String[] COLS_TABLE_MAIN = new String[]{ID_TABLE, TABLE_ID, TABLE_NAME, TABLE_DATE, TABLE_JSON, TABLE_GPS, TABLE_PHOTO, TABLE_STATUS, DELETE_FLAG};
-        public final static String[] COLS_TABLE_MAIN = new String[]{ID_TABLE, TABLE_ID, TABLE_NAME, TABLE_DATE, TABLE_JSON, TABLE_GPS, TABLE_PHOTO, TABLE_STATUS, DELETE_FLAG, IMEI};
+    //    public final static String[] COLS_TABLE_MAIN = new String[]{ID_TABLE, TABLE_ID, TABLE_NAME, TABLE_DATE, TABLE_JSON, TABLE_GPS, TABLE_PHOTO, TABLE_STATUS, DELETE_FLAG};
+    public final static String[] COLS_TABLE_MAIN = new String[]{ID_TABLE, TABLE_ID, TABLE_NAME, TABLE_DATE, TABLE_JSON, TABLE_GPS, TABLE_PHOTO, TABLE_STATUS, DELETE_FLAG, IMEI};
 //    static String CREATE_TABLE_MAIN = "Create table if not exists " + TABLE_MAIN + "("
 //            + ID_TABLE + " INTEGER PRIMARY KEY AUTOINCREMENT " +
 //            "," + TABLE_ID + " Text not null " +
@@ -110,6 +110,7 @@ public class DataBaseConserVationTracking extends ODKSQLiteOpenHelper {
 
     public long insertIntoTable_Main(String[] list) {
 
+
         ContentValues contentValues = new ContentValues();
         contentValues.put(TABLE_ID, list[0]);
         contentValues.put(TABLE_NAME, list[1]);
@@ -123,6 +124,11 @@ public class DataBaseConserVationTracking extends ODKSQLiteOpenHelper {
 
         long id = db.insert(TABLE_MAIN, null, contentValues);
         return id;
+    }
+
+    private String formatImageName(String s) {
+        String imei = SharedPreferenceUtils.getInstance(con).getStringValue(IMEI, "");
+        return s + "_" + imei + ".jpeg";
     }
 
     public boolean is_TABLE_MAIN_Empty() {

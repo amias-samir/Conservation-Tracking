@@ -48,6 +48,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.maps.model.LatLng;
 import com.naxa.conservationtracking.GeoPointActivity;
+import com.naxa.conservationtracking.PhoneUtils;
 import com.naxa.conservationtracking.activities.GPS_TRACKER_FOR_POINT;
 import com.naxa.conservationtracking.activities.MapPointActivity;
 import com.naxa.conservationtracking.R;
@@ -775,10 +776,10 @@ public class EmergencyRescueRelease extends AppCompatActivity implements Adapter
 
         String iName = null;
         if (photoID == CAMERA_PIC_REQUEST) {
-            imageName = "emergency_rescue_" + timeInMillis;
+            imageName = "emergency_rescue_" + timeInMillis + PhoneUtils.getFormatedId();
             iName = imageName;
         } else if (photoID == CAMERA_PIC_REQUEST_B) {
-            imageNameMonitoring = "emergency_release_" + timeInMillis;
+            imageNameMonitoring = "emergency_release_" + timeInMillis + PhoneUtils.getFormatedId();
             iName = imageNameMonitoring;
         }
 

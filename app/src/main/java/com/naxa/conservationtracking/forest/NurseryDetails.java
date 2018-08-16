@@ -42,6 +42,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.maps.model.LatLng;
 import com.naxa.conservationtracking.GeoPointActivity;
+import com.naxa.conservationtracking.PhoneUtils;
 import com.naxa.conservationtracking.activities.CalculateAreaUsinGPS;
 import com.naxa.conservationtracking.activities.GpsTracker;
 import com.naxa.conservationtracking.activities.MapPolyLineActivity;
@@ -795,7 +796,7 @@ public class NurseryDetails extends AppCompatActivity implements AdapterView.OnI
         Calendar calendar = Calendar.getInstance();
         long timeInMillis = calendar.getTimeInMillis();
 
-        imageName = "Plantation_detail_" + timeInMillis;
+        imageName = "Plantation_detail_" + timeInMillis + PhoneUtils.getFormatedId();
 
         File file1 = new File(ApplicationClass.PHOTO_PATH, imageName);
 //        if (!file1.mkdirs()) {

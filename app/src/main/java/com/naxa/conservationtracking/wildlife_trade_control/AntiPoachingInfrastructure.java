@@ -42,6 +42,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.maps.model.LatLng;
 import com.naxa.conservationtracking.GeoPointActivity;
+import com.naxa.conservationtracking.PhoneUtils;
 import com.naxa.conservationtracking.activities.GPS_TRACKER_FOR_POINT;
 import com.naxa.conservationtracking.activities.MapPointActivity;
 import com.naxa.conservationtracking.R;
@@ -631,10 +632,10 @@ public class AntiPoachingInfrastructure extends AppCompatActivity implements Ada
 
         String iName = null;
         if (photoID == CAMERA_PIC_REQUEST) {
-            imageName = "antipoaching_infrastructure_" + timeInMillis;
+            imageName = "antipoaching_infrastructure_" + timeInMillis + PhoneUtils.getFormatedId();
             iName = imageName;
         } else if (photoID == CAMERA_PIC_REQUEST_B) {
-            imageNameMonitoring = "antipoaching_infrastructure_" + timeInMillis;
+            imageNameMonitoring = "antipoaching_infrastructure_" + timeInMillis + PhoneUtils.getFormatedId();
             iName = imageNameMonitoring;
         }
 

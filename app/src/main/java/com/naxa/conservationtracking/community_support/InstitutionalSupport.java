@@ -44,6 +44,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.maps.model.LatLng;
 import com.naxa.conservationtracking.GeoPointActivity;
+import com.naxa.conservationtracking.PhoneUtils;
 import com.naxa.conservationtracking.activities.GPS_TRACKER_FOR_POINT;
 import com.naxa.conservationtracking.activities.MapPointActivity;
 import com.naxa.conservationtracking.R;
@@ -128,7 +129,7 @@ public class InstitutionalSupport extends AppCompatActivity implements AdapterVi
     String plantationPolygonArea;
     JSONArray jsonArrayGPS = new JSONArray();
     TextView tvBoundryUsingGps;
-    AutoCompleteTextView tvOtherEquipment, tvOtherLandscape, tvFundingSource, tvProjectCode,tvSpecifyActivity, tvAgreementNo, tvGranteeName,
+    AutoCompleteTextView tvOtherEquipment, tvOtherLandscape, tvFundingSource, tvProjectCode, tvSpecifyActivity, tvAgreementNo, tvGranteeName,
             tvFiscalYear, tvDistrict, tvVdc, tvName_bz_nf_cf, tvNumber, tvFundingTal, tvFundingCommunity, tvOtherFundSupport, tvOthers;
 
     String userNameToSend, passwordToSend;
@@ -236,40 +237,40 @@ public class InstitutionalSupport extends AppCompatActivity implements AdapterVi
                         String userN = UserNameAndPasswordUtils.getUserNameAndPassword(context).get(0);
                         String passW = UserNameAndPasswordUtils.getUserNameAndPassword(context).get(1);
 
-                                if (userN == null || userN.equals("") || passW == null || passW.equals("")) {
-                                    Toast.makeText(context, "Either your user name or password is empty.Please fill the required field. ", Toast.LENGTH_SHORT).show();
-                                } else {
+                        if (userN == null || userN.equals("") || passW == null || passW.equals("")) {
+                            Toast.makeText(context, "Either your user name or password is empty.Please fill the required field. ", Toast.LENGTH_SHORT).show();
+                        } else {
 //                                    showDialog.dismiss();
 
-                                    projectCode = tvProjectCode.getText().toString();
-                                    other_landscape = tvOtherLandscape.getText().toString();
-                                    funding_source = tvFundingSource.getText().toString();
-                                    specify_activity = tvSpecifyActivity.getText().toString();
-                                    agreement_no = tvAgreementNo.getText().toString();
-                                    grantee_name = tvGranteeName.getText().toString();
-                                    fiscal_year = tvFiscalYear.getText().toString();
-                                    district = tvDistrict.getText().toString();
-                                    vdc = tvVdc.getText().toString();
-                                    name_bz_nf_cf = tvName_bz_nf_cf.getText().toString();
-                                    number = tvNumber.getText().toString();
-                                    funding_tal = tvFundingTal.getText().toString();
-                                    funding_community = tvFundingCommunity.getText().toString();
-                                    other_fund_support = tvOtherFundSupport.getText().toString();
-                                    others = tvOthers.getText().toString();
+                            projectCode = tvProjectCode.getText().toString();
+                            other_landscape = tvOtherLandscape.getText().toString();
+                            funding_source = tvFundingSource.getText().toString();
+                            specify_activity = tvSpecifyActivity.getText().toString();
+                            agreement_no = tvAgreementNo.getText().toString();
+                            grantee_name = tvGranteeName.getText().toString();
+                            fiscal_year = tvFiscalYear.getText().toString();
+                            district = tvDistrict.getText().toString();
+                            vdc = tvVdc.getText().toString();
+                            name_bz_nf_cf = tvName_bz_nf_cf.getText().toString();
+                            number = tvNumber.getText().toString();
+                            funding_tal = tvFundingTal.getText().toString();
+                            funding_community = tvFundingCommunity.getText().toString();
+                            other_fund_support = tvOtherFundSupport.getText().toString();
+                            others = tvOthers.getText().toString();
 
-                                    userNameToSend = userN;
-                                    passwordToSend = passW;
+                            userNameToSend = userN;
+                            passwordToSend = passW;
 
 
-                                    Log.e("SEND", "Clicked");
-                                    mProgressDlg = new ProgressDialog(context);
-                                    mProgressDlg.setMessage("Please wait...");
-                                    mProgressDlg.setIndeterminate(false);
-                                    mProgressDlg.setCancelable(false);
-                                    mProgressDlg.show();
-                                    convertDataToJson();
-                                    sendDatToserver();
-                                }
+                            Log.e("SEND", "Clicked");
+                            mProgressDlg = new ProgressDialog(context);
+                            mProgressDlg.setMessage("Please wait...");
+                            mProgressDlg.setIndeterminate(false);
+                            mProgressDlg.setCancelable(false);
+                            mProgressDlg.show();
+                            convertDataToJson();
+                            sendDatToserver();
+                        }
 //                            }
 //                        });
                     } else {
@@ -629,10 +630,10 @@ public class InstitutionalSupport extends AppCompatActivity implements AdapterVi
 
         String iName = null;
         if (photoID == CAMERA_PIC_REQUEST) {
-            imageName = "institutional_support_" + timeInMillis;
+            imageName = "institutional_support_" + timeInMillis + PhoneUtils.getFormatedId();
             iName = imageName;
         } else if (photoID == CAMERA_PIC_REQUEST_B) {
-            imageNameMonitoring = "institutional_support_" + timeInMillis;
+            imageNameMonitoring = "institutional_support_" + timeInMillis + PhoneUtils.getFormatedId();
             iName = imageNameMonitoring;
         }
 
@@ -752,7 +753,7 @@ public class InstitutionalSupport extends AppCompatActivity implements AdapterVi
         if (intent.hasExtra("JSON1")) {
             CheckValues.isFromSavedFrom = true;
             startGps.setEnabled(false);
-            isGpsTaken=true;
+            isGpsTaken = true;
             previewMap.setEnabled(true);
             Bundle bundle = intent.getExtras();
             String jsonToParse = (String) bundle.get("JSON1");
@@ -760,7 +761,7 @@ public class InstitutionalSupport extends AppCompatActivity implements AdapterVi
             String gpsLocationtoParse = (String) bundle.get("gps");
 
             String status = (String) bundle.get("status");
-            if(status.equals("Sent")){
+            if (status.equals("Sent")) {
                 save.setEnabled(false);
                 send.setEnabled(false);
             }
@@ -949,9 +950,9 @@ public class InstitutionalSupport extends AppCompatActivity implements AdapterVi
         spinnerActivity.setSelection(forConPos);
 
 
-        if(activity.equals("Others")){
+        if (activity.equals("Others")) {
             tvSpecifyActivity.setVisibility(View.VISIBLE);
-        }else {
+        } else {
             tvSpecifyActivity.setVisibility(View.GONE);
         }
 

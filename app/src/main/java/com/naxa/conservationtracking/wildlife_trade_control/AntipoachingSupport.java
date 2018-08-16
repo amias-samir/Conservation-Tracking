@@ -43,6 +43,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.maps.model.LatLng;
 import com.naxa.conservationtracking.GeoPointActivity;
+import com.naxa.conservationtracking.PhoneUtils;
 import com.naxa.conservationtracking.activities.GPS_TRACKER_FOR_POINT;
 import com.naxa.conservationtracking.activities.MapPointActivity;
 import com.naxa.conservationtracking.R;
@@ -633,7 +634,7 @@ public class AntipoachingSupport extends AppCompatActivity implements AdapterVie
         Calendar calendar = Calendar.getInstance();
         long timeInMillis = calendar.getTimeInMillis();
 
-        imageName = "Antipoaching_support" + timeInMillis;
+        imageName = "Antipoaching_support" + timeInMillis + PhoneUtils.getFormatedId();
 
         File file1 = new File(ApplicationClass.PHOTO_PATH, imageName);
 //        if (!file1.mkdirs()) {

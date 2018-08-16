@@ -72,12 +72,13 @@ public class OptionThree extends AppCompatActivity {
         }
         else
         {
-            Toast.makeText(getApplicationContext(), "Picture NOt taken", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Picture Not taken", Toast.LENGTH_LONG).show();
         }
     }
     private void saveToExternalSorage(Bitmap thumbnail) {
         // TODO Auto-generated method stub
         //String merocinema="Mero Cinema";
+        //todo: Nishon
         String movname= "com/naxa/conservationtracking/forest";
 
         File file1 = new File(ApplicationClass.PHOTO_PATH, movname);

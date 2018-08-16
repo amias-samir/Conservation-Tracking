@@ -44,6 +44,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.maps.model.LatLng;
 import com.naxa.conservationtracking.GeoPointActivity;
+import com.naxa.conservationtracking.PhoneUtils;
 import com.naxa.conservationtracking.activities.CalculateAreaUsinGPS;
 import com.naxa.conservationtracking.activities.GpsTracker;
 import com.naxa.conservationtracking.activities.MapPolyLineActivity;
@@ -662,10 +663,10 @@ public class Forest_E_EvictionStatus extends AppCompatActivity implements Adapte
 
         String iName = null;
         if (photoID == CAMERA_PIC_REQUEST) {
-            imageName = "encroachment_eviction_" + timeInMillis;
+            imageName = "encroachment_eviction_" + timeInMillis + PhoneUtils.getFormatedId();
             iName = imageName;
         } else if (photoID == CAMERA_PIC_REQUEST_B) {
-            imageNameMonitoring = "encroachment_eviction_" + timeInMillis;
+            imageNameMonitoring = "encroachment_eviction_" + timeInMillis + PhoneUtils.getFormatedId();
             iName = imageNameMonitoring;
         }
 

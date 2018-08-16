@@ -44,6 +44,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.maps.model.LatLng;
 import com.naxa.conservationtracking.GeoPointActivity;
+import com.naxa.conservationtracking.PhoneUtils;
 import com.naxa.conservationtracking.activities.CalculateAreaUsinGPS;
 import com.naxa.conservationtracking.activities.GpsTracker;
 import com.naxa.conservationtracking.activities.MapPolyLineActivity;
@@ -666,7 +667,7 @@ public class ForestEncroachmentStatus extends AppCompatActivity implements Adapt
         Calendar calendar = Calendar.getInstance();
         long timeInMillis = calendar.getTimeInMillis();
 
-        imageName = "Encroachment_Status_" + timeInMillis;
+        imageName = "Encroachment_Status_" + timeInMillis + PhoneUtils.getFormatedId();
 
         File file1 = new File(ApplicationClass.PHOTO_PATH, imageName);
 //        if (!file1.mkdirs()) {

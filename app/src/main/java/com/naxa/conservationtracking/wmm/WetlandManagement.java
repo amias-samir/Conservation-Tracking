@@ -45,6 +45,7 @@ import android.widget.Toast;
 import com.google.android.gms.maps.model.LatLng;
 import com.naxa.conservationtracking.GeoPointActivity;
 import com.naxa.conservationtracking.GeoPointPolyLineActivity;
+import com.naxa.conservationtracking.PhoneUtils;
 import com.naxa.conservationtracking.activities.CalculateAreaUsinGPS;
 import com.naxa.conservationtracking.activities.GpsTracker;
 import com.naxa.conservationtracking.activities.MapPolyLineActivity;
@@ -789,13 +790,13 @@ public class WetlandManagement extends AppCompatActivity implements AdapterView.
 
         String iName = null;
         if (photoID == CAMERA_PIC_REQUEST) {
-            imageName = "wetland_management_" + timeInMillis;
+            imageName = "wetland_management_" + timeInMillis + PhoneUtils.getFormatedId();
             iName = imageName;
         } else if (photoID == CAMERA_PIC_REQUEST_B) {
-            imageNameCompleted = "wetland_management_" + timeInMillis;
+            imageNameCompleted = "wetland_management_" + timeInMillis + PhoneUtils.getFormatedId();
             iName = imageNameCompleted;
         } else if (photoID == CAMERA_PIC_REQUEST_C) {
-            imageNameMonitoring = "wetland_management_" + timeInMillis;
+            imageNameMonitoring = "wetland_management_" + timeInMillis + PhoneUtils.getFormatedId();
             iName = imageNameMonitoring;
         }
 

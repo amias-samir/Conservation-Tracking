@@ -44,6 +44,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.maps.model.LatLng;
 import com.naxa.conservationtracking.GeoPointActivity;
+import com.naxa.conservationtracking.PhoneUtils;
 import com.naxa.conservationtracking.activities.CalculateAreaUsinGPS;
 import com.naxa.conservationtracking.activities.GpsTracker;
 import com.naxa.conservationtracking.activities.MapPolyLineActivity;
@@ -161,7 +162,7 @@ public class InvasiveSpeciesManagement extends AppCompatActivity implements Adap
     JSONArray jsonArrayGPS = new JSONArray();
     TextView tvDistance, tvBoundryUsingGps, tvDateManagement, tvMonitoringDate;
     AutoCompleteTextView tvOtherPractices, tvOtherLandscape, tvFundingSource, tvProjectCode, tvAgreement_no, tvGrantew_name, tvFiscal_year, tvNameOfz,
-            tvDistrictname, tvNameOfVdc, tvRegrowthIfyes, tvRecommendationDetail,tvFundTal, tvFundCommunity, tvFundOthers,
+            tvDistrictname, tvNameOfVdc, tvRegrowthIfyes, tvRecommendationDetail, tvFundTal, tvFundCommunity, tvFundOthers,
             tvInvasiveSppName, tvOthers;
 
     private int year;
@@ -306,43 +307,43 @@ public class InvasiveSpeciesManagement extends AppCompatActivity implements Adap
 //                                // TODO Auto-generated method stub
                         String userN = UserNameAndPasswordUtils.getUserNameAndPassword(context).get(0);
                         String passW = UserNameAndPasswordUtils.getUserNameAndPassword(context).get(1);
-                                if (userN == null || userN.equals("") || passW == null || passW.equals("")) {
-                                    Toast.makeText(context, "Either your user name or password is empty.Please fill the required field. ", Toast.LENGTH_SHORT).show();
-                                } else {
+                        if (userN == null || userN.equals("") || passW == null || passW.equals("")) {
+                            Toast.makeText(context, "Either your user name or password is empty.Please fill the required field. ", Toast.LENGTH_SHORT).show();
+                        } else {
 //                                    showDialog.dismiss();
 
-                                    projectCode = tvProjectCode.getText().toString();
-                                    other_landscape = tvOtherLandscape.getText().toString();
-                                    funding_source = tvFundingSource.getText().toString();
-                                    agreement_no = tvAgreement_no.getText().toString();
-                                    grantee_name = tvGrantew_name.getText().toString();
-                                    fiscal_year = tvFiscal_year.getText().toString();
-                                    name_park_bz_cf = tvNameOfz.getText().toString();
-                                    district = tvDistrictname.getText().toString();
-                                    vdc = tvNameOfVdc.getText().toString();
-                                    invasive_spp_name = tvInvasiveSppName.getText().toString();
-                                    other_practices = tvOtherPractices.getText().toString();
-                                    date_management = tvDateManagement.getText().toString();
-                                    regrowth_invasive_detail = tvRegrowthIfyes.getText().toString();
-                                    monitoring_date = tvMonitoringDate.getText().toString();
-                                    recommendation_detail = tvRecommendationDetail.getText().toString();
-                                    others = tvOthers.getText().toString();
-                                    fund_tal = tvFundTal.getText().toString();
-                                    fund_community = tvFundCommunity.getText().toString();
-                                    fund_others = tvFundOthers.getText().toString();
+                            projectCode = tvProjectCode.getText().toString();
+                            other_landscape = tvOtherLandscape.getText().toString();
+                            funding_source = tvFundingSource.getText().toString();
+                            agreement_no = tvAgreement_no.getText().toString();
+                            grantee_name = tvGrantew_name.getText().toString();
+                            fiscal_year = tvFiscal_year.getText().toString();
+                            name_park_bz_cf = tvNameOfz.getText().toString();
+                            district = tvDistrictname.getText().toString();
+                            vdc = tvNameOfVdc.getText().toString();
+                            invasive_spp_name = tvInvasiveSppName.getText().toString();
+                            other_practices = tvOtherPractices.getText().toString();
+                            date_management = tvDateManagement.getText().toString();
+                            regrowth_invasive_detail = tvRegrowthIfyes.getText().toString();
+                            monitoring_date = tvMonitoringDate.getText().toString();
+                            recommendation_detail = tvRecommendationDetail.getText().toString();
+                            others = tvOthers.getText().toString();
+                            fund_tal = tvFundTal.getText().toString();
+                            fund_community = tvFundCommunity.getText().toString();
+                            fund_others = tvFundOthers.getText().toString();
 
-                                    userNameToSend = userN;
-                                    passwordToSend = passW;
+                            userNameToSend = userN;
+                            passwordToSend = passW;
 
-                                    Log.e("SEND", "Clicked");
-                                    mProgressDlg = new ProgressDialog(context);
-                                    mProgressDlg.setMessage("Please wait...");
-                                    mProgressDlg.setIndeterminate(false);
-                                    mProgressDlg.setCancelable(false);
-                                    mProgressDlg.show();
-                                    convertDataToJson();
-                                    sendDatToserver();
-                                }
+                            Log.e("SEND", "Clicked");
+                            mProgressDlg = new ProgressDialog(context);
+                            mProgressDlg.setMessage("Please wait...");
+                            mProgressDlg.setIndeterminate(false);
+                            mProgressDlg.setCancelable(false);
+                            mProgressDlg.show();
+                            convertDataToJson();
+                            sendDatToserver();
+                        }
 //                            }
 //                        });
                     } else {
@@ -522,7 +523,7 @@ public class InvasiveSpeciesManagement extends AppCompatActivity implements Adap
                             initLat, initLong,
                             finalLat, finalLong, results);
                     distance = 0.001 * results[0];//Distance in Kilometers
-                    Default_DIalog.showDefaultDialog(context, R.string.gps_Info, "Distance measured (Kilometers) : " + ( String.format( "Value of a: %.8f", distance ) )  + "\nArea Calculated (Hectares): " + area_using_Gps);
+                    Default_DIalog.showDefaultDialog(context, R.string.gps_Info, "Distance measured (Kilometers) : " + (String.format("Value of a: %.8f", distance)) + "\nArea Calculated (Hectares): " + area_using_Gps);
                 } else {
                     Default_DIalog.showDefaultDialog(context, R.string.gps_Info, "GPS is not initialized properly");
 
@@ -782,13 +783,13 @@ public class InvasiveSpeciesManagement extends AppCompatActivity implements Adap
 
         String iName = null;
         if (photoID == CAMERA_PIC_REQUEST) {
-            imageName = "invasive_species_" + timeInMillis;
+            imageName = "invasive_species_" + timeInMillis + PhoneUtils.getFormatedId();
             iName = imageName;
         } else if (photoID == CAMERA_PIC_REQUEST_B) {
-            imageNameCompleted = "invasive_species_" + timeInMillis;
+            imageNameCompleted = "invasive_species_" + timeInMillis + PhoneUtils.getFormatedId();
             iName = imageNameCompleted;
         } else if (photoID == CAMERA_PIC_REQUEST_C) {
-            imageNameMonitoring = "invasive_species_" + timeInMillis;
+            imageNameMonitoring = "invasive_species_" + timeInMillis + PhoneUtils.getFormatedId();
             iName = imageNameMonitoring;
         }
 
@@ -950,7 +951,7 @@ public class InvasiveSpeciesManagement extends AppCompatActivity implements Adap
             String gpsLocationtoParse = (String) bundle.get("gps");
 
             String status = (String) bundle.get("status");
-            if(status.equals("Sent")){
+            if (status.equals("Sent")) {
                 save.setEnabled(false);
                 send.setEnabled(false);
             }
@@ -1106,9 +1107,9 @@ public class InvasiveSpeciesManagement extends AppCompatActivity implements Adap
             }, 0, 5, TimeUnit.SECONDS);
 
         } else {
-            try{
+            try {
                 gps.showSettingsAlert();
-            }catch (NullPointerException e){
+            } catch (NullPointerException e) {
 
             }
 

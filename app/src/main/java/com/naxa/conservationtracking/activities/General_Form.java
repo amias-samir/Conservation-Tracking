@@ -66,6 +66,7 @@ import java.util.List;
 import javax.net.ssl.HttpsURLConnection;
 
 import com.naxa.conservationtracking.GeoPointActivity;
+import com.naxa.conservationtracking.PhoneUtils;
 import com.naxa.conservationtracking.R;
 import com.naxa.conservationtracking.application.ApplicationClass;
 import com.naxa.conservationtracking.database.DataBaseConserVationTracking;
@@ -491,7 +492,7 @@ public class General_Form extends AppCompatActivity {
         Calendar calendar = Calendar.getInstance();
         long timeInMillis = calendar.getTimeInMillis();
 
-        imageName = "General_form" + timeInMillis;
+        imageName = "General_form" + timeInMillis + PhoneUtils.getFormatedId();
 
         File file1 = new File(ApplicationClass.PHOTO_PATH, imageName);
 //        if (!file1.mkdirs()) {

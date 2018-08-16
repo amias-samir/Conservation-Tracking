@@ -44,6 +44,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.maps.model.LatLng;
 import com.naxa.conservationtracking.GeoPointActivity;
+import com.naxa.conservationtracking.PhoneUtils;
 import com.naxa.conservationtracking.activities.CalculateAreaUsinGPS;
 import com.naxa.conservationtracking.activities.GPS_TRACKER_FOR_POINT;
 import com.naxa.conservationtracking.activities.GpsTracker;
@@ -765,13 +766,13 @@ public class PlantationDetail extends AppCompatActivity implements AdapterView.O
 
         String iName = null;
         if (photoID == CAMERA_PIC_REQUEST) {
-            imageName = "plantation_detail_before_" + timeInMillis;
+            imageName = "plantation_detail_before_" + timeInMillis + PhoneUtils.getFormatedId();
             iName = imageName;
         } else if (photoID == CAMERA_PIC_REQUEST_B) {
-            imageNameCompleted = "plantation_detail_After_" + timeInMillis;
+            imageNameCompleted = "plantation_detail_After_" + timeInMillis + PhoneUtils.getFormatedId();
             iName = imageNameCompleted;
         } else if (photoID == CAMERA_PIC_REQUEST_C) {
-            imageNameMonitoring = "plantation_detail_AfInter_" + timeInMillis;
+            imageNameMonitoring = "plantation_detail_AfInter_" + timeInMillis + PhoneUtils.getFormatedId();
             iName = imageNameMonitoring;
         }
 

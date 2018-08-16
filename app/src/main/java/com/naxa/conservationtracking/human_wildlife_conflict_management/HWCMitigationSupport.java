@@ -47,6 +47,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.model.LatLng;
+import com.naxa.conservationtracking.PhoneUtils;
 import com.naxa.conservationtracking.activities.CalculateAreaUsinGPS;
 import com.naxa.conservationtracking.activities.GPS_TRACKER_FOR_POINT;
 import com.naxa.conservationtracking.activities.GpsTracker;
@@ -813,13 +814,13 @@ public class HWCMitigationSupport extends AppCompatActivity implements AdapterVi
 
         String iName = null;
         if (photoID == CAMERA_PIC_REQUEST) {
-            imageName = "hwc_mitigation_support_" + timeInMillis;
+            imageName = "hwc_mitigation_support_" + timeInMillis + PhoneUtils.getFormatedId();
             iName = imageName;
         } else if (photoID == CAMERA_PIC_REQUEST_B) {
-            imageNameCompleted = "hwc_mitigation_complete_" + timeInMillis;
+            imageNameCompleted = "hwc_mitigation_complete_" + timeInMillis + PhoneUtils.getFormatedId();
             iName = imageNameCompleted;
         } else if (photoID == CAMERA_PIC_REQUEST_C) {
-            imageNameMonitoring = "hwc_mitigation_monitoring_" + timeInMillis;
+            imageNameMonitoring = "hwc_mitigation_monitoring_" + timeInMillis + PhoneUtils.getFormatedId();
             iName = imageNameMonitoring;
         }
 

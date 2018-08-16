@@ -46,6 +46,7 @@ import android.widget.Toast;
 import com.google.android.gms.maps.model.LatLng;
 import com.naxa.conservationtracking.GeoPointActivity;
 import com.naxa.conservationtracking.GeoPointPolyLineActivity;
+import com.naxa.conservationtracking.PhoneUtils;
 import com.naxa.conservationtracking.R;
 import com.naxa.conservationtracking.activities.CalculateAreaUsinGPS;
 import com.naxa.conservationtracking.activities.GpsTracker;
@@ -120,8 +121,8 @@ public class GrasslandManagement extends AppCompatActivity implements AdapterVie
     double finalLong;
     public static final int GEOPOINT_RESULT_CODE = 1994;
     public static final String LOCATION_RESULT = "LOCATION_RESULT";
-    Double finalLatFromGeopoint = 0.0 ;
-    Double finalLongFromGeopoint = 0.0 ;
+    Double finalLatFromGeopoint = 0.0;
+    Double finalLongFromGeopoint = 0.0;
 
 
     PendingIntent pendingIntent;
@@ -164,7 +165,7 @@ public class GrasslandManagement extends AppCompatActivity implements AdapterVie
             tvDistrictname, tvNameOfVdc, tvOthers, tvNameofGrassland, tvFundTal, tvFundCommunity, tvFundOthers, tvSpeciesName;
 
     CheckBox cbGrassesCut, cbTreesUprooted, cbOldGrassBurnt, cbNewGrassSeeding, cbOthers,
-    cbSolarcharger, cbWaterSprinkler, cbOther1;
+            cbSolarcharger, cbWaterSprinkler, cbOther1;
     private int year;
     private int month;
     private int day;
@@ -175,7 +176,7 @@ public class GrasslandManagement extends AppCompatActivity implements AdapterVie
     String userNameToSend, passwordToSend;
     String dataSentStatus = "", dateString;
 
-    GeoPointPolyLineActivity geoPointPolyLineActivity ;
+    GeoPointPolyLineActivity geoPointPolyLineActivity;
 
 //    GPS_Point_For_MapPolyline_Interface listner ;
 
@@ -278,7 +279,7 @@ public class GrasslandManagement extends AppCompatActivity implements AdapterVie
         btnAdditionalIntervention.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-              //  showAdditionalDialog();
+                //  showAdditionalDialog();
             }
         });
 
@@ -314,41 +315,41 @@ public class GrasslandManagement extends AppCompatActivity implements AdapterVie
 //                                // TODO Auto-generated method stub
                         String userN = UserNameAndPasswordUtils.getUserNameAndPassword(context).get(0);
                         String passW = UserNameAndPasswordUtils.getUserNameAndPassword(context).get(1);
-                                if (userN == null || userN.equals("") || passW == null || passW.equals("")) {
-                                    Toast.makeText(context, "Either your user name or password is empty.Please fill the required field. ", Toast.LENGTH_SHORT).show();
-                                } else {
+                        if (userN == null || userN.equals("") || passW == null || passW.equals("")) {
+                            Toast.makeText(context, "Either your user name or password is empty.Please fill the required field. ", Toast.LENGTH_SHORT).show();
+                        } else {
 //                                    showDialog.dismiss();
 
-                                    projectCode = tvProjectCode.getText().toString();
-                                    other_landscape = tvOtherLandscape.getText().toString();
-                                    funding_source = tvFundingSource.getText().toString();
-                                    agreement_no = tvAgreement_no.getText().toString();
-                                    grantee_name = tvGrantew_name.getText().toString();
-                                    fiscal_year = tvFiscal_year.getText().toString();
-                                    name_park_bz_cf = tvNameOfz.getText().toString();
-                                    name_of_grassland = tvNameofGrassland.getText().toString();
-                                    district = tvDistrictname.getText().toString();
-                                    vdc = tvNameOfVdc.getText().toString();
-                                    date = tvDate.getText().toString();
-                                    monitoring_date = tvMonitoringDate.getText().toString();
-                                    others = tvOthers.getText().toString();
-                                    fund_tal = tvFundTal.getText().toString();
-                                    fund_community = tvFundCommunity.getText().toString();
-                                    fund_others = tvFundOthers.getText().toString();
-                                    species_name = tvSpeciesName.getText().toString();
+                            projectCode = tvProjectCode.getText().toString();
+                            other_landscape = tvOtherLandscape.getText().toString();
+                            funding_source = tvFundingSource.getText().toString();
+                            agreement_no = tvAgreement_no.getText().toString();
+                            grantee_name = tvGrantew_name.getText().toString();
+                            fiscal_year = tvFiscal_year.getText().toString();
+                            name_park_bz_cf = tvNameOfz.getText().toString();
+                            name_of_grassland = tvNameofGrassland.getText().toString();
+                            district = tvDistrictname.getText().toString();
+                            vdc = tvNameOfVdc.getText().toString();
+                            date = tvDate.getText().toString();
+                            monitoring_date = tvMonitoringDate.getText().toString();
+                            others = tvOthers.getText().toString();
+                            fund_tal = tvFundTal.getText().toString();
+                            fund_community = tvFundCommunity.getText().toString();
+                            fund_others = tvFundOthers.getText().toString();
+                            species_name = tvSpeciesName.getText().toString();
 
-                                    userNameToSend = userN;
-                                    passwordToSend = passW;
+                            userNameToSend = userN;
+                            passwordToSend = passW;
 
-                                    Log.e("SEND", "Clicked");
-                                    mProgressDlg = new ProgressDialog(context);
-                                    mProgressDlg.setMessage("Please wait...");
-                                    mProgressDlg.setIndeterminate(false);
-                                    mProgressDlg.setCancelable(false);
-                                    mProgressDlg.show();
-                                    convertDataToJson();
-                                    sendDatToserver();
-                                }
+                            Log.e("SEND", "Clicked");
+                            mProgressDlg = new ProgressDialog(context);
+                            mProgressDlg.setMessage("Please wait...");
+                            mProgressDlg.setIndeterminate(false);
+                            mProgressDlg.setCancelable(false);
+                            mProgressDlg.show();
+                            convertDataToJson();
+                            sendDatToserver();
+                        }
 //                            }
 //                        });
                     } else {
@@ -531,7 +532,7 @@ public class GrasslandManagement extends AppCompatActivity implements AdapterVie
                             initLat, initLong,
                             finalLat, finalLong, results);
                     distance = 0.001 * results[0];//Distance in Kilometers
-                    Default_DIalog.showDefaultDialog(context, R.string.gps_Info, "Distance measured (Kilometers) : " + ( String.format( "Value of a: %.8f", distance ) )  + "\nArea Calculated (Hectares): " + area_using_Gps);
+                    Default_DIalog.showDefaultDialog(context, R.string.gps_Info, "Distance measured (Kilometers) : " + (String.format("Value of a: %.8f", distance)) + "\nArea Calculated (Hectares): " + area_using_Gps);
 
                     scheduleTaskExecutor.shutdown();
 
@@ -749,13 +750,13 @@ public class GrasslandManagement extends AppCompatActivity implements AdapterVie
 
         String iName = null;
         if (photoID == CAMERA_PIC_REQUEST) {
-            imageName = "grassland_" + timeInMillis;
+            imageName = "grassland_" + timeInMillis + PhoneUtils.getFormatedId();
             iName = imageName;
         } else if (photoID == CAMERA_PIC_REQUEST_B) {
-            imageNameCompleted = "grassland_" + timeInMillis;
+            imageNameCompleted = "grassland_" + timeInMillis + PhoneUtils.getFormatedId();
             iName = imageNameCompleted;
         } else if (photoID == CAMERA_PIC_REQUEST_C) {
-            imageNameMonitoring = "grassland_" + timeInMillis;
+            imageNameMonitoring = "grassland_" + timeInMillis + PhoneUtils.getFormatedId();
             iName = imageNameMonitoring;
         }
 
@@ -899,7 +900,7 @@ public class GrasslandManagement extends AppCompatActivity implements AdapterVie
             String gpsLocationtoParse = (String) bundle.get("gps");
 
             String status = (String) bundle.get("status");
-            if(status.equals("Sent")){
+            if (status.equals("Sent")) {
                 save.setEnabled(false);
                 send.setEnabled(false);
             }
@@ -1072,9 +1073,9 @@ public class GrasslandManagement extends AppCompatActivity implements AdapterVie
             }, 0, 5, TimeUnit.SECONDS);
 
         } else {
-            try{
+            try {
                 gps.showSettingsAlert();
-            }catch (NullPointerException e){
+            } catch (NullPointerException e) {
 
             }
 
@@ -1151,7 +1152,7 @@ public class GrasslandManagement extends AppCompatActivity implements AdapterVie
             public void onClick(View v) {
                 // TODO Auto-generated method stub
                 other_interventions = tvOtherIntervention.getText().toString();
-                 getCheckBoxData1();
+                getCheckBoxData1();
                 tvAdditionalInterventions.setText(additional_interventions);
 
                 showDialog.dismiss();
@@ -1352,12 +1353,11 @@ public class GrasslandManagement extends AppCompatActivity implements AdapterVie
     @Override
     public void gpsTrackerForPolyLine(Double lat, Double longt) {
 
-        finalLatFromGeopoint = lat ;
-        finalLongFromGeopoint = longt ;
+        finalLatFromGeopoint = lat;
+        finalLongFromGeopoint = longt;
 
-        Log.e("GrassLand_SAMIR", "gpsTrackerForPolyLine: "+finalLatFromGeopoint + " , "+ finalLongFromGeopoint );
+        Log.e("GrassLand_SAMIR", "gpsTrackerForPolyLine: " + finalLatFromGeopoint + " , " + finalLongFromGeopoint);
     }
-
 
 
     private class RestApii extends AsyncTask<String, Void, String> {

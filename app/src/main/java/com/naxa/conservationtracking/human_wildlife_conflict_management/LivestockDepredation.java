@@ -48,6 +48,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.maps.model.LatLng;
 import com.naxa.conservationtracking.GeoPointActivity;
+import com.naxa.conservationtracking.PhoneUtils;
 import com.naxa.conservationtracking.activities.GPS_TRACKER_FOR_POINT;
 import com.naxa.conservationtracking.activities.MapPointActivity;
 import com.naxa.conservationtracking.R;
@@ -670,7 +671,7 @@ public class LivestockDepredation extends AppCompatActivity implements AdapterVi
         Calendar calendar = Calendar.getInstance();
         long timeInMillis = calendar.getTimeInMillis();
 
-        imageName = "Plantation_detail_" + timeInMillis;
+        imageName = "Plantation_detail_" + timeInMillis + PhoneUtils.getFormatedId();
 
         File file1 = new File(ApplicationClass.PHOTO_PATH, imageName);
 //        if (!file1.mkdirs()) {

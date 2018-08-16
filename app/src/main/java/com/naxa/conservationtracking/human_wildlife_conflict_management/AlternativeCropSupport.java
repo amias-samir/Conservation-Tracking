@@ -42,6 +42,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.maps.model.LatLng;
 import com.naxa.conservationtracking.GeoPointActivity;
+import com.naxa.conservationtracking.PhoneUtils;
 import com.naxa.conservationtracking.activities.CalculateAreaUsinGPS;
 import com.naxa.conservationtracking.activities.GpsTracker;
 import com.naxa.conservationtracking.activities.MapPolyLineActivity;
@@ -660,10 +661,10 @@ public class AlternativeCropSupport extends AppCompatActivity implements Adapter
 
         String iName = null;
         if (photoID == CAMERA_PIC_REQUEST) {
-            imageName = "alternative_crop_support_" + timeInMillis;
+            imageName = "alternative_crop_support_" + timeInMillis + PhoneUtils.getFormatedId();
             iName = imageName;
         } else if (photoID == CAMERA_PIC_REQUEST_B) {
-            imageNameMonitoring = "alternative_crop_support_" + timeInMillis;
+            imageNameMonitoring = "alternative_crop_support_" + timeInMillis + PhoneUtils.getFormatedId();
             iName = imageNameMonitoring;
         }
 

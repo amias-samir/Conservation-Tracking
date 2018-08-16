@@ -55,6 +55,7 @@
             android:label="@string/app_name"
             android:screenOrientation="portrait" />
         <activity
+            android:exported="true"
             android:name=".MainActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" />

@@ -42,6 +42,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.maps.model.LatLng;
 import com.naxa.conservationtracking.GeoPointActivity;
+import com.naxa.conservationtracking.PhoneUtils;
 import com.naxa.conservationtracking.R;
 import com.naxa.conservationtracking.activities.GPS_Point_Activity;
 import com.naxa.conservationtracking.activities.GPS_TRACKER_FOR_POINT;
@@ -650,7 +651,7 @@ public class BiogasDetail extends AppCompatActivity implements AdapterView.OnIte
         Calendar calendar = Calendar.getInstance();
         long timeInMillis = calendar.getTimeInMillis();
 
-        imageName = "Biogas_Detail" + timeInMillis;
+        imageName = "Biogas_Detail" + timeInMillis + PhoneUtils.getFormatedId();
 
         File file1 = new File(ApplicationClass.PHOTO_PATH, imageName);
 //        if (!file1.mkdirs()) {

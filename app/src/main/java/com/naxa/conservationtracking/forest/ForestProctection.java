@@ -47,6 +47,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.maps.model.LatLng;
 import com.naxa.conservationtracking.GeoPointActivity;
+import com.naxa.conservationtracking.PhoneUtils;
 import com.naxa.conservationtracking.activities.CalculateAreaUsinGPS;
 import com.naxa.conservationtracking.activities.GPS_TRACKER_FOR_POINT;
 import com.naxa.conservationtracking.activities.GpsTracker;
@@ -904,13 +905,13 @@ public class ForestProctection extends AppCompatActivity implements AdapterView.
 
         String iName = null;
         if (photoID == CAMERA_PIC_REQUEST) {
-            imageName = "forest_protection_" + timeInMillis;
+            imageName = "forest_protection_" + timeInMillis + PhoneUtils.getFormatedId();
             iName = imageName;
         } else if (photoID == CAMERA_PIC_REQUEST_B) {
-            imageNameCompleted = "forest_protection_" + timeInMillis;
+            imageNameCompleted = "forest_protection_" + timeInMillis + PhoneUtils.getFormatedId();
             iName = imageNameCompleted;
         } else if (photoID == CAMERA_PIC_REQUEST_C) {
-            imageNameMonitoring = "forest_protection_" + timeInMillis;
+            imageNameMonitoring = "forest_protection_" + timeInMillis + PhoneUtils.getFormatedId();
             iName = imageNameMonitoring;
         }
 
