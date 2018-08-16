@@ -61,7 +61,15 @@ public class ApplicationClass extends Application {
                 throw new Exception("Failed to create photo folder");
             }
         }
+    }
 
+
+    public static boolean hasCTAfolders() {
+        File dirData = new File(extSdcard + mainFolder + dataFolder);
+        File dirPhoto = new File(PHOTO_PATH);
+        return dirData.exists() && dirPhoto.exists();
 
     }
+
+
 }

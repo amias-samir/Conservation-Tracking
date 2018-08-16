@@ -80,12 +80,7 @@ public class DefaultHomeActivity extends NavigationLiveo implements OnItemClickL
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        if (isPermissionAllowed()) {
-            String imei = PhoneUtils.getDeviceId();
-            SharedPreferenceUtils.getInstance(context).setValue(IMEI,imei);
-        } else {
-            requestMultiplePermission();
-        }
+
 }
 
     @Override

@@ -2,12 +2,19 @@ package com.naxa.conservationtracking.activities;
 
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Typeface;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -17,123 +24,155 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.naxa.conservationtracking.MainActivity;
+import com.naxa.conservationtracking.PhoneUtils;
 import com.naxa.conservationtracking.R;
 import com.naxa.conservationtracking.application.ApplicationClass;
 import com.naxa.conservationtracking.application.BaseActivity;
 import com.naxa.conservationtracking.defaulthome.DefaultHomeActivity;
 
+import java.sql.Time;
+import java.util.concurrent.TimeUnit;
+
 import Utls.SharedPreferenceUtils;
 
+import static android.content.pm.PackageManager.PERMISSION_GRANTED;
+import static com.naxa.conservationtracking.database.DataBaseConserVationTracking.IMEI;
+
 public class SplashActivity extends BaseActivity {
+    private static final int MULTIPLE_PERMISSION_CODE = 22;
     private static String TAG = "SplashActivity";
     GpsTracker gps;
     GPS_TRACKER_FOR_POINT gpsTrackerForPoint;
 
-    TextView tv;
-
-    TextView tvWWFNepal;
-    private static final int PERMISSION_WRITE = 5654556;
-
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        switch (requestCode) {
-            case PERMISSION_WRITE:
-                if (grantResults.length > 0
-                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-
-                    try {
-                        ApplicationClass.createFolder();
-                    } catch (Exception e) {
-                        Toast.makeText(this, "Failed to create ConservationTracking Directories, Forms can't be saved ", Toast.LENGTH_SHORT).show();
-//                        Default_DIalog.showDefaultDialog(this, "Unexpected Error Occurred", "Failed to create ConservationTracking Directories, Forms can't be saved ");
-                        Log.e(TAG, e.getMessage());
-                        e.printStackTrace();
-                    }
-
-                    break;
-                }
-        }
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.splash_activity);
-
-        tvWWFNepal = (TextView)findViewById(R.id.textView2);
-        tv         = (TextView)findViewById(R.id.shimmer_tv);
-
-        Typeface face= Typeface.createFromAsset(getAssets(), "font/junegull.ttf");
-        tvWWFNepal.setTypeface(face);
-
-        Typeface face1= Typeface.createFromAsset(getAssets(), "font/abugslife.ttf");
-        tv.setTypeface(face1);
-
         gpsTrackerForPoint = new GPS_TRACKER_FOR_POINT(this);
-
-        GpsTracer gps2 = new GpsTracer(this);
-
         gps = new GpsTracker(SplashActivity.this);
 
-        final SharedPreferenceUtils sharedPreferenceUtils = new SharedPreferenceUtils(this);
-        Thread pause = new Thread() {
-            public void run() {
-                try {
 
-                    RelativeLayout relativeLayout = (RelativeLayout) findViewById(R.id.relativeBackground);
-                    Animation relativeAnim = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fade_in);
-                    relativeLayout.startAnimation(relativeAnim);
-
-                    ImageView image = (ImageView)findViewById(R.id.imageView);
-                    Animation animation1 = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fade_in_slow);
-                    image.startAnimation(animation1);
-
-                    Animation textViewAnimate = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fade_in_slow);
-                    tvWWFNepal.startAnimation(textViewAnimate);
-
-                    Animation textViewAnimate1 = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fade_in_slow);
-                    tv.startAnimation(textViewAnimate1);
-
-                    sleep(3500);
-                    finish();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                } finally {
-                    if(sharedPreferenceUtils.getBoolanValue(SharedPreferenceUtils.KEY_IS_USER_LOGGED_IN, false)) {
-                        Intent stuff = new Intent(SplashActivity.this, MainActivity.class);
-                        startActivity(stuff);
-                    }else {
-                        Intent stuff = new Intent(SplashActivity.this, DefaultHomeActivity.class);
-                        startActivity(stuff);
-                    }
-
-                }
-                finish();
-            }
-        };
-        pause.start();
-
-
-        if (hasPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
-
-            try {
-                ApplicationClass.createFolder();
-            } catch (Exception e) {
-                Toast.makeText(this, "Failed to create ConservationTracking Directories, Forms can't be saved ", Toast.LENGTH_SHORT).show();
-                Log.e(TAG, e.getMessage());
-                e.printStackTrace();
-            }
-
+        if (isPermissionAllowed()) {
+            @SuppressLint("MissingPermission")
+            String imei = PhoneUtils.getDeviceId();
+            SharedPreferenceUtils.getInstance(getApplicationContext()).setValue(IMEI, imei);
         } else {
-
-            requestPermissionsSafely(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE,
-            }, PERMISSION_WRITE);
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    showPermissionRationale();
+                }
+            }, TimeUnit.SECONDS.toMillis(3));
 
         }
+    }
+
+    private boolean isPermissionAllowed() {
+
+        boolean hasCameraPermission = ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA) == PERMISSION_GRANTED;
+        boolean hasStoragePermission = ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PERMISSION_GRANTED;
+        boolean hasLocationPermission = ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PERMISSION_GRANTED;
+        boolean hasPhonePermission = ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE) == PackageManager.PERMISSION_GRANTED;
+
+        return hasCameraPermission && hasStoragePermission && hasLocationPermission && hasPhonePermission;
+    }
+
+    private void requestMultiplePermission() {
 
 
+        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.READ_PHONE_STATE}, MULTIPLE_PERMISSION_CODE);
+
+    }
+
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        switch (requestCode) {
+            case MULTIPLE_PERMISSION_CODE:
+                if (grantResults.length == 0) {
+                    Toast.makeText(getApplicationContext(), " Required permission were not given\napp may function improperly", Toast.LENGTH_LONG).show();
+                    return;
+                }
+
+                boolean hasCameraPermission = grantResults[0] == PERMISSION_GRANTED;
+                boolean hasStoragePermission = grantResults[1] == PERMISSION_GRANTED;
+                boolean hasLocationPermission = grantResults[2] == PERMISSION_GRANTED;
+                boolean hasPhonePermission = grantResults[3] == PERMISSION_GRANTED;
+
+                if (hasPhonePermission) {
+
+                    SharedPreferenceUtils.getInstance(getApplicationContext()).setValue(IMEI, PhoneUtils.getDeviceId());
+                }
+
+                if (hasLocationPermission) {
+
+                }
+
+                if (hasStoragePermission) {
+                    try {
+                        ApplicationClass.createFolder();
+                    } catch (Exception e) {
+                        Toast.makeText(this, "Failed to create folders ", Toast.LENGTH_LONG).show();
+                        e.printStackTrace();
+                    }
+                }
+
+                //perform sanity check
+                boolean hasIMEI = !TextUtils.isEmpty(SharedPreferenceUtils.getInstance(getApplicationContext()).getStringValue(IMEI, ""));
+                boolean hasFolders = ApplicationClass.hasCTAfolders();
+
+                if (!hasIMEI) {
+                    Toast.makeText(this, "Failed to read IMEI", Toast.LENGTH_LONG).show();
+                }
+
+                if (hasCameraPermission && hasStoragePermission && hasLocationPermission && hasIMEI && hasFolders) {
+
+                    boolean isLoggedIn = (new SharedPreferenceUtils(this).getBoolanValue(SharedPreferenceUtils.KEY_IS_USER_LOGGED_IN, false));
+                    Intent intent;
+
+                    if (isLoggedIn) {
+                        intent = new Intent(SplashActivity.this, MainActivity.class);
+                    } else {
+                        intent = new Intent(SplashActivity.this, DefaultHomeActivity.class);
+                    }
+
+
+                    startActivity(intent);
+
+                } else {
+                    showPermissionRationale();
+                }
+                break;
+            default:
+                Toast.makeText(this, "A unhandled error occurred", Toast.LENGTH_SHORT).show();
+                //unhandled
+        }
+
+    }
+
+    private void showPermissionRationale() {
+        new AlertDialog.Builder(this).setMessage(String.format("%s requires consent to access on device gps, storage, camera and imei", getString(R.string.app_name)))
+                .setTitle("Setup")
+                .setPositiveButton("Start setup", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        requestMultiplePermission();
+                    }
+                })
+                .setNegativeButton("Dismiss", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                            finishAffinity();
+                        } else {
+                            finish();
+                        }
+                    }
+                }).show()
+        ;
     }
 
 }
