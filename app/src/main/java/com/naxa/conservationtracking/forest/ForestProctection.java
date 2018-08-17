@@ -426,7 +426,7 @@ public class ForestProctection extends AppCompatActivity implements AdapterView.
                                     Toast.makeText(context, "Please fill the required field. ", Toast.LENGTH_SHORT).show();
                                 } else {
                                     String[] data = new String[]{"4", formName, dateDataCollected, jsonToSend, jsonLatLangArray,
-                                            "" + imageName + "second_image_" + imageNameCompleted + "andthird_image_" + imageNameMonitoring, "Not Sent", "0"};
+                                            "" + imageName + "," + imageNameCompleted + "," + imageNameMonitoring, "Not Sent", "0"};
 
                                     DataBaseConserVationTracking dataBaseConserVationTracking = new DataBaseConserVationTracking(context);
                                     dataBaseConserVationTracking.open();
@@ -1063,12 +1063,10 @@ public class ForestProctection extends AppCompatActivity implements AdapterView.
                 send.setEnabled(false);
             }
 
-            String[] images = imageNameall.split("second_image_");
+            String[] images = imageNameall.split(",");
             imageName = images[0];
             imageNameCompleted = images[1];
-            String[] Second = images[1].split("andthird_image_");
-            imageNameCompleted = Second[0];
-            imageNameMonitoring = Second[1];
+            imageNameMonitoring = images[2];
             Log.e("protection_detail_", "i-" + imageName);
 
             if (imageName.equals("no_photo")) {
@@ -1462,7 +1460,7 @@ public class ForestProctection extends AppCompatActivity implements AdapterView.
                                     dialog.dismiss();
                                 }
                             }).show();
-                    String[] data = new String[]{"4", "Forest Protection", dateString, jsonToSend, jsonLatLangArray, "" + imageName + "second_image_" + imageNameCompleted + "andthird_image_" + imageNameMonitoring, "Sent", "0"};
+                    String[] data = new String[]{"4", "Forest Protection", dateString, jsonToSend, jsonLatLangArray, "" + imageName + "," + imageNameCompleted + "," + imageNameMonitoring, "Sent", "0"};
 
                     DataBaseConserVationTracking dataBaseConserVationTracking = new DataBaseConserVationTracking(context);
                     dataBaseConserVationTracking.open();
