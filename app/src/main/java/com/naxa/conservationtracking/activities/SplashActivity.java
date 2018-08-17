@@ -54,9 +54,8 @@ public class SplashActivity extends BaseActivity {
 
 
         if (isPermissionAllowed()) {
-            @SuppressLint("MissingPermission")
-            String imei = PhoneUtils.getDeviceId();
-            SharedPreferenceUtils.getInstance(getApplicationContext()).setValue(IMEI, imei);
+            toDashBoard();
+
         } else {
             new Handler().postDelayed(new Runnable() {
                 @Override
@@ -73,9 +72,13 @@ public class SplashActivity extends BaseActivity {
         boolean hasCameraPermission = ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA) == PERMISSION_GRANTED;
         boolean hasStoragePermission = ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PERMISSION_GRANTED;
         boolean hasLocationPermission = ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PERMISSION_GRANTED;
-        boolean hasPhonePermission = ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE) == PackageManager.PERMISSION_GRANTED;
 
-        return hasCameraPermission && hasStoragePermission && hasLocationPermission && hasPhonePermission;
+        //perform sanity check
+        boolean hasIMEI = !TextUtils.isEmpty(SharedPreferenceUtils.getInstance(getApplicationContext()).getStringValue(IMEI, ""));
+        boolean hasFolders = ApplicationClass.hasCTAfolders();
+
+
+        return hasCameraPermission && hasLocationPermission && hasIMEI && hasFolders;
     }
 
     private void requestMultiplePermission() {
@@ -129,17 +132,7 @@ public class SplashActivity extends BaseActivity {
 
                 if (hasCameraPermission && hasStoragePermission && hasLocationPermission && hasIMEI && hasFolders) {
 
-                    boolean isLoggedIn = (new SharedPreferenceUtils(this).getBoolanValue(SharedPreferenceUtils.KEY_IS_USER_LOGGED_IN, false));
-                    Intent intent;
-
-                    if (isLoggedIn) {
-                        intent = new Intent(SplashActivity.this, MainActivity.class);
-                    } else {
-                        intent = new Intent(SplashActivity.this, DefaultHomeActivity.class);
-                    }
-
-
-                    startActivity(intent);
+                    toDashBoard();
 
                 } else {
                     showPermissionRationale();
@@ -147,9 +140,23 @@ public class SplashActivity extends BaseActivity {
                 break;
             default:
                 Toast.makeText(this, "A unhandled error occurred", Toast.LENGTH_SHORT).show();
-                //unhandled
+
         }
 
+    }
+
+    private void toDashBoard() {
+        boolean isLoggedIn = (new SharedPreferenceUtils(this).getBoolanValue(SharedPreferenceUtils.KEY_IS_USER_LOGGED_IN, false));
+        Intent intent;
+
+        if (isLoggedIn) {
+            intent = new Intent(SplashActivity.this, MainActivity.class);
+        } else {
+            intent = new Intent(SplashActivity.this, DefaultHomeActivity.class);
+        }
+
+
+        startActivity(intent);
     }
 
     private void showPermissionRationale() {
