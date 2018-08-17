@@ -53,9 +53,8 @@ public class SplashActivity extends BaseActivity {
         gps = new GpsTracker(SplashActivity.this);
 
 
-        if (isPermissionAllowed()) {
+        if (isPermissionAllowed() && Build.VERSION.SDK_INT <= Build.VERSION_CODES.LOLLIPOP_MR1) {
             toDashBoard();
-
         } else {
             new Handler().postDelayed(new Runnable() {
                 @Override
