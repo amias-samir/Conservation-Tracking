@@ -156,7 +156,7 @@ public class Constants {
     public static String[] HUMAN_PRESENCE = {"Yes", "No"};
 
     public static String[] LIVESTOCK_TRAIL = {"Yes", "No"};
-    public static String[] TYPES_OF_POACHING = {"Gun Shot", "Poacher's Camp", "Snares", "Poacher's Activities", "Others"};
+    public static String[] TYPES_OF_POACHING = {"Gun Shot", "Poacher(s) Camp", "Snares", "Poacher(s) Activities", "Others"};
 
     public static String[] HABITAT_TYPE = {"SF-Sal Forest",  "MF-Mixed Forest", "RF-Riverine Forest", "TG-Tall Grassland", "SG–Short Grassland", "W-Wetland", "S-Streambed"};
 
