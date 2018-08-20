@@ -284,6 +284,7 @@ public class MainActivity extends NavigationLiveo implements OnItemClickListener
             SharedPreferenceUtils sharedPreferenceUtils = new SharedPreferenceUtils(this);
             sharedPreferenceUtils.clear();
             startActivity(new Intent(MainActivity.this, DefaultHomeActivity.class));
+            finish();
             return true;
         }
 

@@ -156,6 +156,8 @@ public class SplashActivity extends BaseActivity {
 
 
         startActivity(intent);
+        finish();
+
     }
 
     private void showPermissionRationale() {
