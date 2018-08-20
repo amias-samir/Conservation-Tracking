@@ -1,4 +1,4 @@
-package com.naxa.conservationtracking.SweetAlert;
+package com.naxa.conservationtrackingapp.SweetAlert;
 
 import android.annotation.TargetApi;
 import android.content.Context;
@@ -17,7 +17,7 @@ import android.util.DisplayMetrics;
 import android.util.TypedValue;
 import android.view.View;
 
-import com.naxa.conservationtracking.R;
+import com.naxa.conservationtrackingapp.R;
 
 /**
  * A Material style progress wheel, compatible up to 2.2.

@@ -1,4 +1,4 @@
-package com.naxa.conservationtracking.SweetAlert;
+package com.naxa.conservationtrackingapp.SweetAlert;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -9,7 +9,7 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.Transformation;
 
-import com.naxa.conservationtracking.R;
+import com.naxa.conservationtrackingapp.R;
 
 public class SuccessTickView extends View {
     private float mDensity = -1;

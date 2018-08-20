@@ -1,4 +1,4 @@
-package com.naxa.conservationtracking.SweetAlert;
+package com.naxa.conservationtrackingapp.SweetAlert;
 
 
 import android.app.Dialog;
@@ -17,7 +17,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.naxa.conservationtracking.R;
+import com.naxa.conservationtrackingapp.R;
 
 import java.util.List;
 

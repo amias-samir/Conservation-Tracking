@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.naxa.conservationtracking">
+    package="com.naxa.conservationtrackingapp">
 
     <uses-permission android:name="com.naxa.conservationtrackingpermission.MAPS_RECEIVE" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />

@@ -1,4 +1,4 @@
-package com.naxa.conservationtracking.SweetAlert;
+package com.naxa.conservationtrackingapp.SweetAlert;
 
 import android.content.Context;
 import android.content.res.Resources;

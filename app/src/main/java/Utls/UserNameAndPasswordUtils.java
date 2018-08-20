@@ -3,7 +3,7 @@ package Utls;
 import android.content.Context;
 import android.text.TextUtils;
 
-import com.naxa.conservationtracking.climate_change.BiogasDetail;
+import com.naxa.conservationtrackingapp.climate_change.BiogasDetail;
 
 import java.util.ArrayList;
 import java.util.List;
