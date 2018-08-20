@@ -9,6 +9,10 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import com.naxa.conservationtracking.application.ApplicationClass;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
 import Utls.SharedPreferenceUtils;
 
 /**
@@ -111,10 +115,14 @@ public class DataBaseConserVationTracking extends ODKSQLiteOpenHelper {
     public long insertIntoTable_Main(String[] list) {
 
 
+        Date date = new Date(System.currentTimeMillis());
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-mm-dd HH:MM:SS", Locale.US);
+        String formatedDate = format.format(date);
+
         ContentValues contentValues = new ContentValues();
         contentValues.put(TABLE_ID, list[0]);
         contentValues.put(TABLE_NAME, list[1]);
-        contentValues.put(TABLE_DATE, list[2]);
+        contentValues.put(TABLE_DATE, formatedDate);
         contentValues.put(TABLE_JSON, list[3]);
         contentValues.put(TABLE_GPS, list[4]);
         contentValues.put(TABLE_PHOTO, list[5]);

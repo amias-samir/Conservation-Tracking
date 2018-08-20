@@ -423,7 +423,7 @@ public class GrasslandManagement extends AppCompatActivity implements AdapterVie
                                     Toast.makeText(context, "Please fill the required field. ", Toast.LENGTH_SHORT).show();
                                 } else {
                                     String[] data = new String[]{"22", formName, dateDataCollected, jsonToSend, jsonLatLangArray,
-                                            "" + imageName + "second_image_" + imageNameCompleted + "andthird_image_" + imageNameMonitoring, "Not Sent", "0"};
+                                            "" + imageName + "," + imageNameCompleted + "," + imageNameMonitoring, "Not Sent", "0"};
 
                                     DataBaseConserVationTracking dataBaseConserVationTracking = new DataBaseConserVationTracking(context);
                                     dataBaseConserVationTracking.open();
@@ -905,10 +905,10 @@ public class GrasslandManagement extends AppCompatActivity implements AdapterVie
                 send.setEnabled(false);
             }
 
-            String[] images = imageNameall.split("second_image_");
+            String[] images = imageNameall.split(",");
             imageName = images[0];
             imageNameCompleted = images[1];
-            String[] Second = images[1].split("andthird_image_");
+            String[] Second = images[1].split(",");
             imageNameCompleted = Second[0];
             imageNameMonitoring = Second[1];
             Log.e("wetland_", "i-" + imageName);
@@ -1421,7 +1421,7 @@ public class GrasslandManagement extends AppCompatActivity implements AdapterVie
                                     dialog.dismiss();
                                 }
                             }).show();
-                    String[] data = new String[]{"22", "Grassland Management", dateString, jsonToSend, jsonLatLangArray, "" + imageName + "second_image_" + imageNameCompleted + "andthird_image_" + imageNameMonitoring, "Sent", "0"};
+                    String[] data = new String[]{"22", "Grassland Management", dateString, jsonToSend, jsonLatLangArray, "" + imageName + "," + imageNameCompleted + "," + imageNameMonitoring, "Sent", "0"};
 
                     DataBaseConserVationTracking dataBaseConserVationTracking = new DataBaseConserVationTracking(context);
                     dataBaseConserVationTracking.open();

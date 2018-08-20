@@ -609,13 +609,13 @@ public class HumanDisturbance extends AppCompatActivity implements AdapterView.O
                     types_of_poaching = "Gun Shot";
                     break;
                 case 1:
-                    types_of_poaching = "Poacher's Camp";
+                    types_of_poaching = "Poacher(s) Camp";
                     break;
                 case 2:
                     types_of_poaching = "Snares";
                     break;
                 case 3:
-                    types_of_poaching = "Poacher's Activities";
+                    types_of_poaching = "Poacher(s) Activities";
                     break;
                 case 4:
                     types_of_poaching = "Others";

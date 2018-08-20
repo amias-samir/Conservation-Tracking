@@ -418,7 +418,7 @@ public class InvasiveSpeciesManagement extends AppCompatActivity implements Adap
                                     Toast.makeText(context, "Please fill the required field. ", Toast.LENGTH_SHORT).show();
                                 } else {
                                     String[] data = new String[]{"23", formName, dateDataCollected, jsonToSend, jsonLatLangArray,
-                                            "" + imageName + "second_image_" + imageNameCompleted + "andthird_image_" + imageNameMonitoring, "Not Sent", "0"};
+                                            "" + imageName + "," + imageNameCompleted + "," + imageNameMonitoring, "Not Sent", "0"};
 
                                     DataBaseConserVationTracking dataBaseConserVationTracking = new DataBaseConserVationTracking(context);
                                     dataBaseConserVationTracking.open();
@@ -956,12 +956,10 @@ public class InvasiveSpeciesManagement extends AppCompatActivity implements Adap
                 send.setEnabled(false);
             }
 
-            String[] images = imageNameall.split("second_image_");
+            String[] images = imageNameall.split(",");
             imageName = images[0];
             imageNameCompleted = images[1];
-            String[] Second = images[1].split("andthird_image_");
-            imageNameCompleted = Second[0];
-            imageNameMonitoring = Second[1];
+            imageNameMonitoring = images[2];
             Log.e("invasive_species_", "i-" + imageName);
 
             if (imageName.equals("no_photo")) {
@@ -1339,7 +1337,7 @@ public class InvasiveSpeciesManagement extends AppCompatActivity implements Adap
                                 }
                             }).show();
                     String[] data = new String[]{"23", "Invasive Species Management", dateString, jsonToSend, jsonLatLangArray,
-                            "" + imageName + "second_image_" + imageNameCompleted + "andthird_image_" + imageNameMonitoring, "Sent", "0"};
+                            "" + imageName + "," + imageNameCompleted + "," + imageNameMonitoring, "Sent", "0"};
 
                     DataBaseConserVationTracking dataBaseConserVationTracking = new DataBaseConserVationTracking(context);
                     dataBaseConserVationTracking.open();
