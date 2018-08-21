@@ -10,10 +10,7 @@ android {
         targetSdkVersion 27
         versionCode 18
         versionName "1.2.5"
-
         multiDexEnabled true
-
-
     }
 
     buildTypes {

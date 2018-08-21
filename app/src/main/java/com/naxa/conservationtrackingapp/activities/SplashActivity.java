@@ -145,6 +145,7 @@ public class SplashActivity extends BaseActivity {
     }
 
     private void toDashBoard() {
+
         boolean isLoggedIn = (new SharedPreferenceUtils(this).getBoolanValue(SharedPreferenceUtils.KEY_IS_USER_LOGGED_IN, false));
         Intent intent;
 

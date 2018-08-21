@@ -433,7 +433,7 @@ public class EmergencyRescueRelease extends AppCompatActivity implements Adapter
                                     Toast.makeText(context, "Please fill the required field. ", Toast.LENGTH_SHORT).show();
                                 } else {
                                     String[] data = new String[]{"21", formName, dateDataCollected, jsonToSend, jsonLatLangArray,
-                                            "" + imageName + "andSecondImage=" + imageNameMonitoring, "Not Sent", "0"};
+                                            "" + imageName + "," + imageNameMonitoring, "Not Sent", "0"};
                                     DataBaseConserVationTracking dataBaseConserVationTracking = new DataBaseConserVationTracking(context);
                                     dataBaseConserVationTracking.open();
                                     long id = dataBaseConserVationTracking.insertIntoTable_Main(data);
@@ -935,7 +935,7 @@ public class EmergencyRescueRelease extends AppCompatActivity implements Adapter
                 send.setEnabled(false);
             }
 
-            String[] images = imageNameall.split("andSecondImage=");
+            String[] images = imageNameall.split(",");
             imageName = images[0];
             imageNameMonitoring = images[1];
 
@@ -1261,7 +1261,7 @@ public class EmergencyRescueRelease extends AppCompatActivity implements Adapter
                                 }
                             }).show();
 
-                    String[] data = new String[]{"21", "Emergency Rescue & Release Management", dateString, jsonToSend, jsonLatLangArray, "" + imageName + "andSecondImage=" + imageNameMonitoring, "Sent", "0"};
+                    String[] data = new String[]{"21", "Emergency Rescue & Release Management", dateString, jsonToSend, jsonLatLangArray, "" + imageName + "," + imageNameMonitoring, "Sent", "0"};
 
                     DataBaseConserVationTracking dataBaseConserVationTracking = new DataBaseConserVationTracking(context);
                     dataBaseConserVationTracking.open();

@@ -107,6 +107,7 @@
                 android:value=".MainActivity" />
         </activity>
         <activity
+            android:exported="true"
             android:name=".forest.Forest_E_EvictionStatus"
             android:label="Encroachment Eviction"
             android:screenOrientation="portrait"

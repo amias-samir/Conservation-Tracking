@@ -347,7 +347,7 @@ public class AntiPoachingInfrastructure extends AppCompatActivity implements Ada
                                 } else {
 
                                     String[] data = new String[]{"33", formName, dateDataCollected, jsonToSend, jsonLatLangArray,
-                                            "" + imageName + "andSecondImage=" + imageNameMonitoring, "Not Sent", "0"};
+                                            "" + imageName + "," + imageNameMonitoring, "Not Sent", "0"};
                                     DataBaseConserVationTracking dataBaseConserVationTracking = new DataBaseConserVationTracking(context);
                                     dataBaseConserVationTracking.open();
                                     long id = dataBaseConserVationTracking.insertIntoTable_Main(data);
@@ -767,7 +767,7 @@ public class AntiPoachingInfrastructure extends AppCompatActivity implements Ada
                 send.setEnabled(false);
             }
 
-            String[] images = imageNameall.split("andSecondImage=");
+            String[] images = imageNameall.split(",");
             imageName = images[0];
             imageNameMonitoring = images[1];
             Log.e("ANTIPOACHING", "i-" + imageName);
@@ -1033,7 +1033,7 @@ public class AntiPoachingInfrastructure extends AppCompatActivity implements Ada
                                 }
                             }).show();
                     String[] data = new String[]{"33", "Anti Poaching Infrastructure", dateString, jsonToSend, jsonLatLangArray,
-                            "" + imageName + "andSecondImage=" + imageNameMonitoring, "Sent", "0"};
+                            "" + imageName + "," + imageNameMonitoring, "Sent", "0"};
 
                     DataBaseConserVationTracking dataBaseConserVationTracking = new DataBaseConserVationTracking(context);
                     dataBaseConserVationTracking.open();

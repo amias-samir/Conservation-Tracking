@@ -383,7 +383,7 @@ public class Forest_E_EvictionStatus extends AppCompatActivity implements Adapte
                                     Toast.makeText(context, "Please fill the required field. ", Toast.LENGTH_SHORT).show();
                                 } else {
                                     String[] data = new String[]{"7", formName, dateDataCollected, jsonToSend, jsonLatLangArray,
-                                            "" + imageName + "andSecondImage=" + imageNameMonitoring, "Not Sent", "0"};
+                                            "" + imageName + "," + imageNameMonitoring, "Not Sent", "0"};
                                     DataBaseConserVationTracking dataBaseConserVationTracking = new DataBaseConserVationTracking(context);
                                     dataBaseConserVationTracking.open();
                                     long id = dataBaseConserVationTracking.insertIntoTable_Main(data);
@@ -802,7 +802,7 @@ public class Forest_E_EvictionStatus extends AppCompatActivity implements Adapte
                 send.setEnabled(false);
             }
 
-            String[] images = imageNameall.split("andSecondImage=");
+            String[] images = imageNameall.split(",");
             imageName = images[0];
             imageNameMonitoring = images[1];
             Log.e("encroachment_eviction_", "i-" + imageName);
@@ -1141,7 +1141,7 @@ public class Forest_E_EvictionStatus extends AppCompatActivity implements Adapte
                                     dialog.dismiss();
                                 }
                             }).show();
-                    String[] data = new String[]{"7", "Encroachment Eviction Status", dateString, jsonToSend, jsonLatLangArray, "" + imageName + "andSecondImage=" + imageNameMonitoring, "Sent", "0"};
+                    String[] data = new String[]{"7", "Encroachment Eviction Status", dateString, jsonToSend, jsonLatLangArray, "" + imageName + "," + imageNameMonitoring, "Sent", "0"};
 
                     DataBaseConserVationTracking dataBaseConserVationTracking = new DataBaseConserVationTracking(context);
                     dataBaseConserVationTracking.open();
