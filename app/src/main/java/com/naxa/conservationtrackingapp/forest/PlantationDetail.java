@@ -47,6 +47,7 @@ import com.naxa.conservationtrackingapp.GeoPointActivity;
 import com.naxa.conservationtrackingapp.PhoneUtils;
 import com.naxa.conservationtrackingapp.activities.CalculateAreaUsinGPS;
 import com.naxa.conservationtrackingapp.activities.GPS_TRACKER_FOR_POINT;
+import com.naxa.conservationtrackingapp.activities.General_Form;
 import com.naxa.conservationtrackingapp.activities.GpsTracker;
 import com.naxa.conservationtrackingapp.activities.MapPolyLineActivity;
 import com.naxa.conservationtrackingapp.R;
@@ -79,6 +80,7 @@ import java.util.concurrent.TimeUnit;
 
 import javax.net.ssl.HttpsURLConnection;
 
+import com.naxa.conservationtrackingapp.activities.SavedFormsActivity;
 import com.naxa.conservationtrackingapp.application.ApplicationClass;
 import com.naxa.conservationtrackingapp.database.DataBaseConserVationTracking;
 import com.naxa.conservationtrackingapp.dialog.Default_DIalog;
@@ -131,6 +133,8 @@ public class PlantationDetail extends AppCompatActivity implements AdapterView.O
     List<Location> gpslocation = new ArrayList<>();
     StringBuilder stringBuilder = new StringBuilder();
     String latLangArray = "", jsonLatLangArray = "";
+
+    String formNameSavedForm, formid;
 
     String projectCode;
     String landscape;
@@ -384,6 +388,10 @@ public class PlantationDetail extends AppCompatActivity implements AdapterView.O
                         fund_community = tvFundCommunity.getText().toString();
                         fund_others = tvFundOthers.getText().toString();
 
+                        if(!CheckValues.isFromSavedFrom) {
+                            jsonLatLangArray = jsonArrayGPS.toString();
+                        }
+
                         convertDataToJson();
 
                         DisplayMetrics metrics = context.getResources().getDisplayMetrics();
@@ -395,6 +403,14 @@ public class PlantationDetail extends AppCompatActivity implements AdapterView.O
                         final EditText FormNameToInput = (EditText) showDialog.findViewById(R.id.input_tableName);
                         final EditText dateToInput = (EditText) showDialog.findViewById(R.id.input_date);
                         FormNameToInput.setText("Plantation Details");
+
+                        if (CheckValues.isFromSavedFrom) {
+                            if (formNameSavedForm == null | formNameSavedForm.equals("")) {
+                                FormNameToInput.setText("Plantation Details");
+                            } else {
+                                FormNameToInput.setText(formNameSavedForm);
+                            }
+                        }
 
                         long date = System.currentTimeMillis();
 
@@ -424,6 +440,16 @@ public class PlantationDetail extends AppCompatActivity implements AdapterView.O
                                     DataBaseConserVationTracking dataBaseConserVationTracking = new DataBaseConserVationTracking(context);
                                     dataBaseConserVationTracking.open();
                                     long id = dataBaseConserVationTracking.insertIntoTable_Main(data);
+                                    dataBaseConserVationTracking.close();
+
+
+                                    if (CheckValues.isFromSavedFrom) {
+
+                                        DataBaseConserVationTracking dataBaseConserVationTracking1 = new DataBaseConserVationTracking(context);
+                                        dataBaseConserVationTracking1.open();
+                                        int updated_id = (int) dataBaseConserVationTracking1.updateTable_DeleteFlag(formid);
+                                        dataBaseConserVationTracking.close();
+                                    }
 
                                     new PromptDialog(PlantationDetail.this)
                                             .setDialogType(PromptDialog.DIALOG_TYPE_SUCCESS)
@@ -433,8 +459,13 @@ public class PlantationDetail extends AppCompatActivity implements AdapterView.O
                                             .setPositiveListener("okay", new PromptDialog.OnPositiveListener() {
                                                 @Override
                                                 public void onClick(PromptDialog dialog) {
-                                                    dialog.dismiss();
-                                                }
+                                                    if (CheckValues.isFromSavedFrom) {
+                                                        showDialog.dismiss();
+                                                        startActivity(new Intent(PlantationDetail.this, SavedFormsActivity.class));
+                                                        finish();
+                                                    } else {
+                                                        dialog.dismiss();
+                                                    }                                                }
                                             }).show();
                                     dataBaseConserVationTracking.close();
                                     showDialog.dismiss();
@@ -915,6 +946,9 @@ public class PlantationDetail extends AppCompatActivity implements AdapterView.O
             String imageNameall = (String) bundle.get("photo");
             String gpsLocationtoParse = (String) bundle.get("gps");
 
+            formid = (String) bundle.get("dbID");
+            formNameSavedForm = (String) bundle.get("formName");
+
             String status = (String) bundle.get("status");
             if(status.equals("Sent")){
                 save.setEnabled(false);
@@ -999,6 +1033,8 @@ public class PlantationDetail extends AppCompatActivity implements AdapterView.O
     //new adjustment
     public void parseArrayGPS(String arrayToParse) {
         try {
+            jsonLatLangArray = arrayToParse;
+
             JSONArray array = new JSONArray(arrayToParse);
             for (int i = 0; i < array.length(); ++i) {
                 JSONObject item1 = null;

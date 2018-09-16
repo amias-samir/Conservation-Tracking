@@ -251,6 +251,7 @@ public class General_Form extends AppCompatActivity {
                         fiscal_year = tvFiscal_year.getText().toString();
                         district_name = tvDistrictname.getText().toString();
                         vdc_name = tvNameOfVdc.getText().toString();
+
                         if(!CheckValues.isFromSavedFrom) {
                             jsonLatLangArray = jsonArrayGPS.toString();
                         }

@@ -43,6 +43,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.naxa.conservationtrackingapp.GeoPointActivity;
 import com.naxa.conservationtrackingapp.PhoneUtils;
 import com.naxa.conservationtrackingapp.activities.GPS_TRACKER_FOR_POINT;
+import com.naxa.conservationtrackingapp.activities.General_Form;
 import com.naxa.conservationtrackingapp.activities.MapPointActivity;
 import com.naxa.conservationtrackingapp.R;
 
@@ -71,6 +72,7 @@ import java.util.List;
 
 import javax.net.ssl.HttpsURLConnection;
 
+import com.naxa.conservationtrackingapp.activities.SavedFormsActivity;
 import com.naxa.conservationtrackingapp.application.ApplicationClass;
 import com.naxa.conservationtrackingapp.database.DataBaseConserVationTracking;
 import com.naxa.conservationtrackingapp.dialog.Default_DIalog;
@@ -117,6 +119,8 @@ public class ForestIntegLivestocManagement extends AppCompatActivity implements 
     String latLangArray = "", jsonLatLangArray;
     double area_using_Gps;
     String area_Ha_manual_entered;
+
+    String formNameSavedForm, formid;
 
 
     String projectCode;
@@ -332,7 +336,10 @@ public class ForestIntegLivestocManagement extends AppCompatActivity implements 
                         fund_community = tvFundCommunity.getText().toString();
                         fund_others = tvFundOthers.getText().toString();
                         others = tvOthers.getText().toString();
-                        jsonLatLangArray = jsonArrayGPS.toString();
+
+                        if(!CheckValues.isFromSavedFrom) {
+                            jsonLatLangArray = jsonArrayGPS.toString();
+                        }
 
                         dalits = tvDalits.getText().toString();
                         janajatis = tvJanajatis.getText().toString();
@@ -357,6 +364,14 @@ public class ForestIntegLivestocManagement extends AppCompatActivity implements 
                         final EditText FormNameToInput = (EditText) showDialog.findViewById(R.id.input_tableName);
                         final EditText dateToInput = (EditText) showDialog.findViewById(R.id.input_date);
                         FormNameToInput.setText("Integration Livestock Management");
+
+                        if (CheckValues.isFromSavedFrom) {
+                            if (formNameSavedForm == null | formNameSavedForm.equals("")) {
+                                FormNameToInput.setText("Integration Livestock Management");
+                            } else {
+                                FormNameToInput.setText(formNameSavedForm);
+                            }
+                        }
 
                         long date = System.currentTimeMillis();
 
@@ -385,6 +400,16 @@ public class ForestIntegLivestocManagement extends AppCompatActivity implements 
                                     DataBaseConserVationTracking dataBaseConserVationTracking = new DataBaseConserVationTracking(context);
                                     dataBaseConserVationTracking.open();
                                     long id = dataBaseConserVationTracking.insertIntoTable_Main(data);
+                                    dataBaseConserVationTracking.close();
+
+
+                                    if (CheckValues.isFromSavedFrom) {
+
+                                        DataBaseConserVationTracking dataBaseConserVationTracking1 = new DataBaseConserVationTracking(context);
+                                        dataBaseConserVationTracking1.open();
+                                        int updated_id = (int) dataBaseConserVationTracking1.updateTable_DeleteFlag(formid);
+                                        dataBaseConserVationTracking.close();
+                                    }
 
                                     new PromptDialog(ForestIntegLivestocManagement.this)
                                             .setDialogType(PromptDialog.DIALOG_TYPE_SUCCESS)
@@ -394,8 +419,13 @@ public class ForestIntegLivestocManagement extends AppCompatActivity implements 
                                             .setPositiveListener("okay", new PromptDialog.OnPositiveListener() {
                                                 @Override
                                                 public void onClick(PromptDialog dialog) {
-                                                    dialog.dismiss();
-                                                }
+                                                    if (CheckValues.isFromSavedFrom) {
+                                                        showDialog.dismiss();
+                                                        startActivity(new Intent(ForestIntegLivestocManagement.this, SavedFormsActivity.class));
+                                                        finish();
+                                                    } else {
+                                                        dialog.dismiss();
+                                                    }                                                }
                                             }).show();
                                     dataBaseConserVationTracking.close();
                                     showDialog.dismiss();
@@ -705,6 +735,9 @@ public class ForestIntegLivestocManagement extends AppCompatActivity implements 
             imageName = (String) bundle.get("photo");
             String gpsLocationtoParse = (String) bundle.get("gps");
 
+            formid = (String) bundle.get("dbID");
+            formNameSavedForm = (String) bundle.get("formName");
+
             String status = (String) bundle.get("status");
             if(status.equals("Sent")){
                 save.setEnabled(false);
@@ -742,6 +775,8 @@ public class ForestIntegLivestocManagement extends AppCompatActivity implements 
     //new adjustment
     public void parseArrayGPS(String arrayToParse) {
         try {
+            jsonLatLangArray = arrayToParse;
+
             JSONArray array = new JSONArray(arrayToParse);
             for (int i = 0; i < array.length(); ++i) {
                 JSONObject item1 = null;

@@ -37,6 +37,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.naxa.conservationtrackingapp.GeoPointActivity;
 import com.naxa.conservationtrackingapp.activities.CalculateAreaUsinGPS;
 import com.naxa.conservationtrackingapp.activities.GPS_TRACKER_FOR_POINT;
+import com.naxa.conservationtrackingapp.activities.General_Form;
 import com.naxa.conservationtrackingapp.activities.GpsTracker;
 import com.naxa.conservationtrackingapp.activities.MapPolyLineActivity;
 import com.naxa.conservationtrackingapp.R;
@@ -63,6 +64,7 @@ import java.util.concurrent.TimeUnit;
 
 import javax.net.ssl.HttpsURLConnection;
 
+import com.naxa.conservationtrackingapp.activities.SavedFormsActivity;
 import com.naxa.conservationtrackingapp.climate_change.BiogasDetail;
 import com.naxa.conservationtrackingapp.database.DataBaseConserVationTracking;
 import com.naxa.conservationtrackingapp.dialog.Default_DIalog;
@@ -105,6 +107,7 @@ public class Cf_Detail extends AppCompatActivity implements AdapterView.OnItemSe
     List<Location> gpslocation = new ArrayList<>();
     Location initial;
     String latLangArray = "", jsonLatLangArray = "";
+    String formNameSavedForm, formid;
 
     public static final int GEOPOINT_RESULT_CODE = 1994;
     public static final String LOCATION_RESULT = "LOCATION_RESULT";
@@ -249,8 +252,9 @@ public class Cf_Detail extends AppCompatActivity implements AdapterView.OnItemSe
                         fund_community = tvFundCommunity.getText().toString();
                         fund_others = tvFundOthers.getText().toString();
 
-                        jsonLatLangArray = jsonArrayGPS.toString();
-
+                        if (!CheckValues.isFromSavedFrom) {
+                            jsonLatLangArray = jsonArrayGPS.toString();
+                        }
                         convertDataToJson();
 
                         DisplayMetrics metrics = context.getResources().getDisplayMetrics();
@@ -262,6 +266,14 @@ public class Cf_Detail extends AppCompatActivity implements AdapterView.OnItemSe
                         final EditText FormNameToInput = (EditText) showDialog.findViewById(R.id.input_tableName);
                         final EditText dateToInput = (EditText) showDialog.findViewById(R.id.input_date);
                         FormNameToInput.setText("Cf Details");
+
+                        if (CheckValues.isFromSavedFrom) {
+                            if (formNameSavedForm == null | formNameSavedForm.equals("")) {
+                                FormNameToInput.setText("Cf Details");
+                            } else {
+                                FormNameToInput.setText(formNameSavedForm);
+                            }
+                        }
 
                         long date = System.currentTimeMillis();
 
@@ -290,6 +302,16 @@ public class Cf_Detail extends AppCompatActivity implements AdapterView.OnItemSe
                                     DataBaseConserVationTracking dataBaseConserVationTracking = new DataBaseConserVationTracking(context);
                                     dataBaseConserVationTracking.open();
                                     long id = dataBaseConserVationTracking.insertIntoTable_Main(data);
+                                    dataBaseConserVationTracking.close();
+
+
+                                    if (CheckValues.isFromSavedFrom) {
+
+                                        DataBaseConserVationTracking dataBaseConserVationTracking1 = new DataBaseConserVationTracking(context);
+                                        dataBaseConserVationTracking1.open();
+                                        int updated_id = (int) dataBaseConserVationTracking1.updateTable_DeleteFlag(formid);
+                                        dataBaseConserVationTracking.close();
+                                    }
 
                                     new PromptDialog(Cf_Detail.this)
                                             .setDialogType(PromptDialog.DIALOG_TYPE_SUCCESS)
@@ -299,7 +321,13 @@ public class Cf_Detail extends AppCompatActivity implements AdapterView.OnItemSe
                                             .setPositiveListener("okay", new PromptDialog.OnPositiveListener() {
                                                 @Override
                                                 public void onClick(PromptDialog dialog) {
-                                                    dialog.dismiss();
+                                                    if (CheckValues.isFromSavedFrom) {
+                                                        showDialog.dismiss();
+                                                        startActivity(new Intent(Cf_Detail.this, SavedFormsActivity.class));
+                                                        finish();
+                                                    } else {
+                                                        dialog.dismiss();
+                                                    }
                                                 }
                                             }).show();
                                     dataBaseConserVationTracking.close();
@@ -351,42 +379,42 @@ public class Cf_Detail extends AppCompatActivity implements AdapterView.OnItemSe
                         String userN = UserNameAndPasswordUtils.getUserNameAndPassword(context).get(0);
                         String passW = UserNameAndPasswordUtils.getUserNameAndPassword(context).get(1);
 
-                                if (userN == null || userN.equals("") || passW == null || passW.equals("")) {
-                                    Toast.makeText(context, "Either your user name or password is empty. \nPlease fill the required field. ", Toast.LENGTH_SHORT).show();
-                                } else {
+                        if (userN == null || userN.equals("") || passW == null || passW.equals("")) {
+                            Toast.makeText(context, "Either your user name or password is empty. \nPlease fill the required field. ", Toast.LENGTH_SHORT).show();
+                        } else {
 //                                    showDialog.dismiss();
-                                    projectCode = tvProjectCode.getText().toString();
-                                    other_landscape = tvOtherLandscape.getText().toString();
-                                    funding_source = tvFundingSource.getText().toString();
-                                    no_of_beneficiaries = tvNoOfBeneficiaries.getText().toString();
-                                    dalits = tvDalits.getText().toString();
-                                    janajatis = tvJanajatis.getText().toString();
-                                    other_social_group = tvOtherSocialGroup.getText().toString();
-                                    hwc_affected = tvHWC_Affected.getText().toString();
-                                    nrm_dependant = tvNRM_Dependant.getText().toString();
-                                    other_target_groups = tvOtherTargetGroup.getText().toString();
-                                    location_name = tvLocationName.getText().toString();
-                                    name_of_cf = nameOfCf.getText().toString();
-                                    list_OfWildLife = listOfSpecies.getText().toString();
-                                    remarks = remarks_Others.getText().toString();
-                                    district = tvDistrict.getText().toString();
-                                    vdc = tvVdc.getText().toString();
-                                    fund_tal = tvFundTal.getText().toString();
-                                    fund_community = tvFundCommunity.getText().toString();
-                                    fund_others = tvFundOthers.getText().toString();
+                            projectCode = tvProjectCode.getText().toString();
+                            other_landscape = tvOtherLandscape.getText().toString();
+                            funding_source = tvFundingSource.getText().toString();
+                            no_of_beneficiaries = tvNoOfBeneficiaries.getText().toString();
+                            dalits = tvDalits.getText().toString();
+                            janajatis = tvJanajatis.getText().toString();
+                            other_social_group = tvOtherSocialGroup.getText().toString();
+                            hwc_affected = tvHWC_Affected.getText().toString();
+                            nrm_dependant = tvNRM_Dependant.getText().toString();
+                            other_target_groups = tvOtherTargetGroup.getText().toString();
+                            location_name = tvLocationName.getText().toString();
+                            name_of_cf = nameOfCf.getText().toString();
+                            list_OfWildLife = listOfSpecies.getText().toString();
+                            remarks = remarks_Others.getText().toString();
+                            district = tvDistrict.getText().toString();
+                            vdc = tvVdc.getText().toString();
+                            fund_tal = tvFundTal.getText().toString();
+                            fund_community = tvFundCommunity.getText().toString();
+                            fund_others = tvFundOthers.getText().toString();
 
-                                    userNameToSend = userN;
-                                    passwordToSend = passW;
+                            userNameToSend = userN;
+                            passwordToSend = passW;
 
-                                    mProgressDlg = new ProgressDialog(context);
-                                    mProgressDlg.setMessage("Please wait...");
-                                    mProgressDlg.setIndeterminate(false);
-                                    mProgressDlg.setCancelable(false);
-                                    mProgressDlg.show();
+                            mProgressDlg = new ProgressDialog(context);
+                            mProgressDlg.setMessage("Please wait...");
+                            mProgressDlg.setIndeterminate(false);
+                            mProgressDlg.setCancelable(false);
+                            mProgressDlg.show();
 
-                                    convertDataToJson();
-                                    sendDatToserver();
-                                }
+                            convertDataToJson();
+                            sendDatToserver();
+                        }
 //                            }
 //                        });
                     } else {
@@ -445,7 +473,7 @@ public class Cf_Detail extends AppCompatActivity implements AdapterView.OnItemSe
                             finalLat, finalLong, results);
                     distance = 0.001 * results[0];//Distance in Kilometers
 
-                    Default_DIalog.showDefaultDialog(context, R.string.gps_Info, "Distance measured (Kilometers) : " + ( String.format( "Value of a: %.8f", distance ) )  + "\nArea Calculated (Hectares): " + area_using_Gps);
+                    Default_DIalog.showDefaultDialog(context, R.string.gps_Info, "Distance measured (Kilometers) : " + (String.format("Value of a: %.8f", distance)) + "\nArea Calculated (Hectares): " + area_using_Gps);
 
                 } else {
                     Default_DIalog.showDefaultDialog(context, R.string.gps_Info, "GPS is not initialized properly");
@@ -676,8 +704,11 @@ public class Cf_Detail extends AppCompatActivity implements AdapterView.OnItemSe
             String jsonToParse = (String) bundle.get("JSON1");
             String gpsLocationtoParse = (String) bundle.get("gps");
 
+            formid = (String) bundle.get("dbID");
+            formNameSavedForm = (String) bundle.get("formName");
+
             String status = (String) bundle.get("status");
-            if(status.equals("Sent")){
+            if (status.equals("Sent")) {
                 save.setEnabled(false);
                 send.setEnabled(false);
             }
@@ -844,6 +875,9 @@ public class Cf_Detail extends AppCompatActivity implements AdapterView.OnItemSe
 
     public void parseArrayGPS(String arrayToParse) {
         try {
+
+            jsonLatLangArray = arrayToParse;
+
             JSONArray array = new JSONArray(arrayToParse);
             for (int i = 0; i < array.length(); ++i) {
                 JSONObject item1 = null;

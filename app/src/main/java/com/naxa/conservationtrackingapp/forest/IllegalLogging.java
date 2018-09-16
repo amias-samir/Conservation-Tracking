@@ -45,6 +45,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.naxa.conservationtrackingapp.GeoPointActivity;
 import com.naxa.conservationtrackingapp.PhoneUtils;
 import com.naxa.conservationtrackingapp.activities.GPS_TRACKER_FOR_POINT;
+import com.naxa.conservationtrackingapp.activities.General_Form;
 import com.naxa.conservationtrackingapp.activities.MapPointActivity;
 import com.naxa.conservationtrackingapp.R;
 
@@ -73,6 +74,7 @@ import java.util.List;
 
 import javax.net.ssl.HttpsURLConnection;
 
+import com.naxa.conservationtrackingapp.activities.SavedFormsActivity;
 import com.naxa.conservationtrackingapp.application.ApplicationClass;
 import com.naxa.conservationtrackingapp.database.DataBaseConserVationTracking;
 import com.naxa.conservationtrackingapp.dialog.Default_DIalog;
@@ -93,7 +95,7 @@ public class IllegalLogging extends AppCompatActivity implements AdapterView.OnI
     int CAMERA_PIC_REQUEST = 2;
     Spinner spinnerLandscape;
     ArrayAdapter landscapeAdpt;
-    Button send, save, startGps, endGps, previewMap,  dateBtn;
+    Button send, save, startGps, endGps, previewMap, dateBtn;
     ProgressDialog mProgressDlg;
     Context context = this;
     GPS_TRACKER_FOR_POINT gps;
@@ -116,6 +118,8 @@ public class IllegalLogging extends AppCompatActivity implements AdapterView.OnI
     List<Location> gpslocation = new ArrayList<>();
     StringBuilder stringBuilder = new StringBuilder();
     String latLangArray = "", jsonLatLangArray;
+
+    String formNameSavedForm, formid;
 
     String projectCode;
     String landscape;
@@ -253,43 +257,43 @@ public class IllegalLogging extends AppCompatActivity implements AdapterView.OnI
 //                                String passW = password.getText().toString();
                         String userN = UserNameAndPasswordUtils.getUserNameAndPassword(context).get(0);
                         String passW = UserNameAndPasswordUtils.getUserNameAndPassword(context).get(1);
-                                if (userN == null || userN.equals("") || passW == null || passW.equals("")) {
-                                    Toast.makeText(context, "Either your user name or password is empty.Please fill the required field. ", Toast.LENGTH_SHORT).show();
-                                } else {
+                        if (userN == null || userN.equals("") || passW == null || passW.equals("")) {
+                            Toast.makeText(context, "Either your user name or password is empty.Please fill the required field. ", Toast.LENGTH_SHORT).show();
+                        } else {
 //                                    showDialog.dismiss();
 
-                                    //edit here
-                                    projectCode = tvProjectCode.getText().toString();
-                                    other_landscape = tvOtherLandscape.getText().toString();
-                                    funding_source = tvFundingSource.getText().toString();
-                                    agreement_no = tvAgreement_no.getText().toString();
-                                    grantee_name = tvGrantew_name.getText().toString();
-                                    fiscal_year = tvFiscal_year.getText().toString();
-                                    date = tvDate.getText().toString();
-                                    location = tvLocation.getText().toString();
-                                    bz_corridor_Location = tvNameOfz.getText().toString();
-                                    confiscated_items = tvNameAndNumber.getText().toString();
-                                    district_name = tvDistrictname.getText().toString();
-                                    vdc_name = tvNameOfVdc.getText().toString();
-                                    other_tools_quantity = tvOtherQuantity.getText().toString();
-                                    no_of_people_involved = tvNo_people_illegal_action.getText().toString();
-                                    remarks = tvNotes.getText().toString();
-                                    fund_tal = tvFundTal.getText().toString();
-                                    fund_community = tvFundCommunity.getText().toString();
-                                    fund_others = tvFundOthers.getText().toString();
+                            //edit here
+                            projectCode = tvProjectCode.getText().toString();
+                            other_landscape = tvOtherLandscape.getText().toString();
+                            funding_source = tvFundingSource.getText().toString();
+                            agreement_no = tvAgreement_no.getText().toString();
+                            grantee_name = tvGrantew_name.getText().toString();
+                            fiscal_year = tvFiscal_year.getText().toString();
+                            date = tvDate.getText().toString();
+                            location = tvLocation.getText().toString();
+                            bz_corridor_Location = tvNameOfz.getText().toString();
+                            confiscated_items = tvNameAndNumber.getText().toString();
+                            district_name = tvDistrictname.getText().toString();
+                            vdc_name = tvNameOfVdc.getText().toString();
+                            other_tools_quantity = tvOtherQuantity.getText().toString();
+                            no_of_people_involved = tvNo_people_illegal_action.getText().toString();
+                            remarks = tvNotes.getText().toString();
+                            fund_tal = tvFundTal.getText().toString();
+                            fund_community = tvFundCommunity.getText().toString();
+                            fund_others = tvFundOthers.getText().toString();
 
-                                    userNameToSend = userN;
-                                    passwordToSend = passW;
+                            userNameToSend = userN;
+                            passwordToSend = passW;
 
-                                    Log.e("SEND", "Clicked");
-                                    mProgressDlg = new ProgressDialog(context);
-                                    mProgressDlg.setMessage("Please wait...");
-                                    mProgressDlg.setIndeterminate(false);
-                                    mProgressDlg.setCancelable(false);
-                                    mProgressDlg.show();
-                                    convertDataToJson();
-                                    sendDatToserver();
-                                }
+                            Log.e("SEND", "Clicked");
+                            mProgressDlg = new ProgressDialog(context);
+                            mProgressDlg.setMessage("Please wait...");
+                            mProgressDlg.setIndeterminate(false);
+                            mProgressDlg.setCancelable(false);
+                            mProgressDlg.show();
+                            convertDataToJson();
+                            sendDatToserver();
+                        }
 //                            }
 //                        });
                     } else {
@@ -328,7 +332,9 @@ public class IllegalLogging extends AppCompatActivity implements AdapterView.OnI
                         fund_community = tvFundCommunity.getText().toString();
                         fund_others = tvFundOthers.getText().toString();
 
-                        jsonLatLangArray = jsonArrayGPS.toString();
+                        if (!CheckValues.isFromSavedFrom) {
+                            jsonLatLangArray = jsonArrayGPS.toString();
+                        }
 
                         convertDataToJson();
 
@@ -341,6 +347,14 @@ public class IllegalLogging extends AppCompatActivity implements AdapterView.OnI
                         final EditText FormNameToInput = (EditText) showDialog.findViewById(R.id.input_tableName);
                         final EditText dateToInput = (EditText) showDialog.findViewById(R.id.input_date);
                         FormNameToInput.setText("Illegal Logging");
+
+                        if (CheckValues.isFromSavedFrom) {
+                            if (formNameSavedForm == null | formNameSavedForm.equals("")) {
+                                FormNameToInput.setText("Illegal Logging");
+                            } else {
+                                FormNameToInput.setText(formNameSavedForm);
+                            }
+                        }
 
                         long date = System.currentTimeMillis();
 
@@ -371,6 +385,16 @@ public class IllegalLogging extends AppCompatActivity implements AdapterView.OnI
                                     DataBaseConserVationTracking dataBaseConserVationTracking = new DataBaseConserVationTracking(context);
                                     dataBaseConserVationTracking.open();
                                     long id = dataBaseConserVationTracking.insertIntoTable_Main(data);
+                                    dataBaseConserVationTracking.close();
+
+
+                                    if (CheckValues.isFromSavedFrom) {
+
+                                        DataBaseConserVationTracking dataBaseConserVationTracking1 = new DataBaseConserVationTracking(context);
+                                        dataBaseConserVationTracking1.open();
+                                        int updated_id = (int) dataBaseConserVationTracking1.updateTable_DeleteFlag(formid);
+                                        dataBaseConserVationTracking.close();
+                                    }
 
                                     new PromptDialog(IllegalLogging.this)
                                             .setDialogType(PromptDialog.DIALOG_TYPE_SUCCESS)
@@ -380,7 +404,13 @@ public class IllegalLogging extends AppCompatActivity implements AdapterView.OnI
                                             .setPositiveListener("okay", new PromptDialog.OnPositiveListener() {
                                                 @Override
                                                 public void onClick(PromptDialog dialog) {
-                                                    dialog.dismiss();
+                                                    if (CheckValues.isFromSavedFrom) {
+                                                        showDialog.dismiss();
+                                                        startActivity(new Intent(IllegalLogging.this, SavedFormsActivity.class));
+                                                        finish();
+                                                    } else {
+                                                        dialog.dismiss();
+                                                    }
                                                 }
                                             }).show();
                                     dataBaseConserVationTracking.close();
@@ -681,15 +711,18 @@ public class IllegalLogging extends AppCompatActivity implements AdapterView.OnI
         if (intent.hasExtra("JSON1")) {
             CheckValues.isFromSavedFrom = true;
             startGps.setEnabled(false);
-            isGpsTaken=true;
+            isGpsTaken = true;
             previewMap.setEnabled(true);
             Bundle bundle = intent.getExtras();
             String jsonToParse = (String) bundle.get("JSON1");
             imageName = (String) bundle.get("photo");
             String gpsLocationtoParse = (String) bundle.get("gps");
 
+            formid = (String) bundle.get("dbID");
+            formNameSavedForm = (String) bundle.get("formName");
+
             String status = (String) bundle.get("status");
-            if(status.equals("Sent")){
+            if (status.equals("Sent")) {
                 save.setEnabled(false);
                 send.setEnabled(false);
             }
@@ -726,6 +759,8 @@ public class IllegalLogging extends AppCompatActivity implements AdapterView.OnI
     //new adjustment
     public void parseArrayGPS(String arrayToParse) {
         try {
+            jsonLatLangArray = arrayToParse;
+
             JSONArray array = new JSONArray(arrayToParse);
             for (int i = 0; i < array.length(); ++i) {
                 JSONObject item1 = null;

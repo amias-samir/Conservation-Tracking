@@ -48,6 +48,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.naxa.conservationtrackingapp.GeoPointActivity;
 import com.naxa.conservationtrackingapp.PhoneUtils;
 import com.naxa.conservationtrackingapp.activities.GPS_TRACKER_FOR_POINT;
+import com.naxa.conservationtrackingapp.activities.General_Form;
 import com.naxa.conservationtrackingapp.activities.MapPointActivity;
 import com.naxa.conservationtrackingapp.R;
 
@@ -78,6 +79,7 @@ import java.util.concurrent.ScheduledExecutorService;
 
 import javax.net.ssl.HttpsURLConnection;
 
+import com.naxa.conservationtrackingapp.activities.SavedFormsActivity;
 import com.naxa.conservationtrackingapp.application.ApplicationClass;
 import com.naxa.conservationtrackingapp.database.DataBaseConserVationTracking;
 import com.naxa.conservationtrackingapp.dialog.Default_DIalog;
@@ -121,6 +123,9 @@ public class ForestFire extends AppCompatActivity implements AdapterView.OnItemS
     List<Location> gpslocation = new ArrayList<>();
     StringBuilder stringBuilder = new StringBuilder();
     String latLangArray = "", jsonLatLangArray = "";
+
+    String formNameSavedForm, formid;
+
     String landscape, other_landscape, funding_source, projectCode, agreement_no, grantee_name, fiscal_year, pa_bz_fc, district_name, vdc_name,
             forest_fire_date, location, causes_of_forest_fire, other_causes_of_forest_fire, remarks, fire_fighting_team, duration_of_fire,
     no_of_team_mobilized, fund_tal, fund_community, fund_others;
@@ -324,6 +329,10 @@ public class ForestFire extends AppCompatActivity implements AdapterView.OnItemS
                         fund_community = tvFundCommunity.getText().toString();
                         fund_others = tvFundOthers.getText().toString();
 
+                        if(!CheckValues.isFromSavedFrom) {
+                            jsonLatLangArray = jsonArrayGPS.toString();
+                        }
+
                         convertDataToJson();
 
                         DisplayMetrics metrics = context.getResources().getDisplayMetrics();
@@ -335,6 +344,14 @@ public class ForestFire extends AppCompatActivity implements AdapterView.OnItemS
                         final EditText FormNameToInput = (EditText) showDialog.findViewById(R.id.input_tableName);
                         final EditText dateToInput = (EditText) showDialog.findViewById(R.id.input_date);
                         FormNameToInput.setText("Forest Fire");
+
+                        if (CheckValues.isFromSavedFrom) {
+                            if (formNameSavedForm == null | formNameSavedForm.equals("")) {
+                                FormNameToInput.setText("Forest Fire");
+                            } else {
+                                FormNameToInput.setText(formNameSavedForm);
+                            }
+                        }
 
                         long date = System.currentTimeMillis();
 
@@ -363,6 +380,16 @@ public class ForestFire extends AppCompatActivity implements AdapterView.OnItemS
                                     DataBaseConserVationTracking dataBaseConserVationTracking = new DataBaseConserVationTracking(context);
                                     dataBaseConserVationTracking.open();
                                     long id = dataBaseConserVationTracking.insertIntoTable_Main(data);
+                                    dataBaseConserVationTracking.close();
+
+
+                                    if (CheckValues.isFromSavedFrom) {
+
+                                        DataBaseConserVationTracking dataBaseConserVationTracking1 = new DataBaseConserVationTracking(context);
+                                        dataBaseConserVationTracking1.open();
+                                        int updated_id = (int) dataBaseConserVationTracking1.updateTable_DeleteFlag(formid);
+                                        dataBaseConserVationTracking.close();
+                                    }
 
                                     new PromptDialog(ForestFire.this)
                                             .setDialogType(PromptDialog.DIALOG_TYPE_SUCCESS)
@@ -372,8 +399,13 @@ public class ForestFire extends AppCompatActivity implements AdapterView.OnItemS
                                             .setPositiveListener("okay", new PromptDialog.OnPositiveListener() {
                                                 @Override
                                                 public void onClick(PromptDialog dialog) {
-                                                    dialog.dismiss();
-                                                }
+                                                    if (CheckValues.isFromSavedFrom) {
+                                                        showDialog.dismiss();
+                                                        startActivity(new Intent(ForestFire.this, SavedFormsActivity.class));
+                                                        finish();
+                                                    } else {
+                                                        dialog.dismiss();
+                                                    }                                                }
                                             }).show();
                                     dataBaseConserVationTracking.close();
                                     showDialog.dismiss();
@@ -722,6 +754,9 @@ public class ForestFire extends AppCompatActivity implements AdapterView.OnItemS
             imageName = (String) bundle.get("photo");
             String gpsLocationtoParse = (String) bundle.get("gps");
 
+            formid = (String) bundle.get("dbID");
+            formNameSavedForm = (String) bundle.get("formName");
+
             String status = (String) bundle.get("status");
             if(status.equals("Sent")){
                 save.setEnabled(false);
@@ -759,6 +794,9 @@ public class ForestFire extends AppCompatActivity implements AdapterView.OnItemS
     //new adjustment
     public void parseArrayGPS(String arrayToParse) {
         try {
+
+            jsonLatLangArray = arrayToParse;
+
             JSONArray array = new JSONArray(arrayToParse);
             for (int i = 0; i < array.length(); ++i) {
                 JSONObject item1 = null;
