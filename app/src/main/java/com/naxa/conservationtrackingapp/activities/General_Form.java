@@ -72,6 +72,7 @@ import com.naxa.conservationtrackingapp.application.ApplicationClass;
 import com.naxa.conservationtrackingapp.database.DataBaseConserVationTracking;
 import com.naxa.conservationtrackingapp.dialog.Default_DIalog;
 import com.naxa.conservationtrackingapp.model.CheckValues;
+import com.naxa.conservationtrackingapp.model.Constants;
 import com.naxa.conservationtrackingapp.model.StaticListOfCoordinates;
 import com.naxa.conservationtrackingapp.wildlife_monitoring_techniques.HumanDisturbance;
 
@@ -82,6 +83,7 @@ import cn.refactor.lib.colordialog.PromptDialog;
  * Created by ramaan on 3/5/2016.
  */
 public class General_Form extends AppCompatActivity {
+    private static final String TAG = "General_Form";
     Toolbar toolbar;
     int CAMERA_PIC_REQUEST = 2;
     ArrayAdapter spinAdpt;
@@ -92,6 +94,9 @@ public class General_Form extends AppCompatActivity {
     String jsonToSend, photoTosend;
     String imagePath, encodedImage = null, imageName = "no_photo";
     ImageButton photo;
+
+    String formNameSavedForm, formid;
+
 
     public static final int GEOPOINT_RESULT_CODE = 1994;
     public static final String LOCATION_RESULT = "LOCATION_RESULT";
@@ -246,7 +251,9 @@ public class General_Form extends AppCompatActivity {
                         fiscal_year = tvFiscal_year.getText().toString();
                         district_name = tvDistrictname.getText().toString();
                         vdc_name = tvNameOfVdc.getText().toString();
-                        jsonLatLangArray = jsonArrayGPS.toString();
+                        if(!CheckValues.isFromSavedFrom) {
+                            jsonLatLangArray = jsonArrayGPS.toString();
+                        }
                         test_field_1 = tvField1.getText().toString();
                         test_field_2 = tvField2.getText().toString();
                         test_field_3 = tvField3.getText().toString();
@@ -264,6 +271,16 @@ public class General_Form extends AppCompatActivity {
                         final EditText FormNameToInput = (EditText) showDialog.findViewById(R.id.input_tableName);
                         final EditText dateToInput = (EditText) showDialog.findViewById(R.id.input_date);
                         FormNameToInput.setText("General Form");
+
+
+                        if (CheckValues.isFromSavedFrom) {
+                            if (formNameSavedForm == null | formNameSavedForm.equals("")) {
+                                FormNameToInput.setText("General Form");
+                            } else {
+                                FormNameToInput.setText(formNameSavedForm);
+                            }
+                        }
+
 
                         long date = System.currentTimeMillis();
 
@@ -284,6 +301,8 @@ public class General_Form extends AppCompatActivity {
                                 // TODO Auto-generated method stub
                                 String dateDataCollected = dateToInput.getText().toString();
                                 String formName = FormNameToInput.getText().toString();
+
+
                                 if (dateDataCollected == null || dateDataCollected.equals("") || formName == null || formName.equals("")) {
                                     Toast.makeText(context, "Please fill the required field. ", Toast.LENGTH_SHORT).show();
                                 } else {
@@ -293,6 +312,18 @@ public class General_Form extends AppCompatActivity {
                                     DataBaseConserVationTracking dataBaseConserVationTracking = new DataBaseConserVationTracking(context);
                                     dataBaseConserVationTracking.open();
                                     long id = dataBaseConserVationTracking.insertIntoTable_Main(data);
+                                    dataBaseConserVationTracking.close();
+
+
+                                    if (CheckValues.isFromSavedFrom) {
+
+                                        DataBaseConserVationTracking dataBaseConserVationTracking1 = new DataBaseConserVationTracking(context);
+                                        dataBaseConserVationTracking1.open();
+                                        int updated_id = (int) dataBaseConserVationTracking1.updateTable_DeleteFlag(formid);
+                                        dataBaseConserVationTracking.close();
+                                    }
+                                    dataBaseConserVationTracking.close();
+
 
                                     new PromptDialog(General_Form.this)
                                             .setDialogType(PromptDialog.DIALOG_TYPE_SUCCESS)
@@ -302,7 +333,14 @@ public class General_Form extends AppCompatActivity {
                                             .setPositiveListener("okay", new PromptDialog.OnPositiveListener() {
                                                 @Override
                                                 public void onClick(PromptDialog dialog) {
-                                                    dialog.dismiss();
+
+                                                    if (CheckValues.isFromSavedFrom) {
+                                                        showDialog.dismiss();
+                                                        startActivity(new Intent(General_Form.this, SavedFormsActivity.class));
+                                                        finish();
+                                                    } else {
+                                                        dialog.dismiss();
+                                                    }
                                                 }
                                             }).show();
 
@@ -397,8 +435,14 @@ public class General_Form extends AppCompatActivity {
         yes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showDialog.dismiss();
-                finish();
+                if (CheckValues.isFromSavedFrom) {
+                    showDialog.dismiss();
+                    startActivity(new Intent(General_Form.this, SavedFormsActivity.class));
+                    finish();
+                } else {
+                    showDialog.dismiss();
+                    finish();
+                }
             }
         });
 
@@ -408,6 +452,8 @@ public class General_Form extends AppCompatActivity {
                 showDialog.dismiss();
             }
         });
+
+
     }
 
     @Override
@@ -568,6 +614,9 @@ public class General_Form extends AppCompatActivity {
             imageName = (String) bundle.get("photo");
             String gpsLocationtoParse = (String) bundle.get("gps");
 
+            formid = (String) bundle.get("dbID");
+            formNameSavedForm = (String) bundle.get("formName");
+
             String status = (String) bundle.get("status");
             if (status.equals("Sent")) {
                 save.setEnabled(false);
@@ -588,7 +637,7 @@ public class General_Form extends AppCompatActivity {
             }
             try {
                 //new adjustment
-                Log.e("general_form_", "" + jsonToParse);
+                Log.d(TAG, "general_form_" + jsonToParse);
                 parseArrayGPS(gpsLocationtoParse);
                 parseJson(jsonToParse);
             } catch (JSONException e) {
@@ -605,6 +654,10 @@ public class General_Form extends AppCompatActivity {
     //new adjustment
     public void parseArrayGPS(String arrayToParse) {
         try {
+            Log.d(TAG, "parseArrayGPS: " + arrayToParse);
+
+            jsonLatLangArray = arrayToParse;
+
             JSONArray array = new JSONArray(arrayToParse);
             for (int i = 0; i < array.length(); ++i) {
                 JSONObject item1 = null;
@@ -612,7 +665,6 @@ public class General_Form extends AppCompatActivity {
 
                 item1 = array.getJSONObject(i);
                 LatLng location = new LatLng(item1.getDouble("latitude"), item1.getDouble("longitude"));
-
                 listCf.add(location);
 
 //            mMap.addMarker(new MarkerOptions().position(location).title("Start"));
@@ -659,6 +711,8 @@ public class General_Form extends AppCompatActivity {
 
             jsonToSend = post_dict.toString();
 
+            Log.d(TAG, "convertDataToJson: " + jsonToSend);
+
             photo_dict.put("photo", encodedImage);
             photoTosend = photo_dict.toString();
 
@@ -677,6 +731,7 @@ public class General_Form extends AppCompatActivity {
     }
 
     public void parseJson(String jsonToParse) throws JSONException {
+
         JSONObject jsonOb = new JSONObject(jsonToParse);
         Log.e("PlantationDETAIL", "json : " + jsonOb.toString());
         String data = jsonOb.getString("formdata");

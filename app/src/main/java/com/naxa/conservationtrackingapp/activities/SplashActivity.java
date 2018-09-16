@@ -54,7 +54,16 @@ public class SplashActivity extends BaseActivity {
 
 
         if (isPermissionAllowed() || Build.VERSION.SDK_INT <= Build.VERSION_CODES.LOLLIPOP_MR1) {
+
+            try {
+                ApplicationClass.createFolder();
+            } catch (Exception e) {
+                Toast.makeText(this, "Failed to create folders ", Toast.LENGTH_LONG).show();
+                e.printStackTrace();
+            }
+
             toDashBoard();
+
         } else {
             new Handler().postDelayed(new Runnable() {
                 @Override

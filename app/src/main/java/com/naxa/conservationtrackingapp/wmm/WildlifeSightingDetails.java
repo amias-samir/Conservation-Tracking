@@ -144,12 +144,12 @@ public class WildlifeSightingDetails extends AppCompatActivity implements Adapte
     String rhino_activity;
     String specified_rhino_activity;
     String others;
-    String male_number;
-    String female_number;
-    String unknown_number;
-    String adult_number;
-    String sub_adult_number;
-    String calf_cub_number;
+    String male_number = "0";
+    String female_number = "0";
+    String unknown_number = "0";
+    String adult_number = "0";
+    String sub_adult_number = "0";
+    String calf_cub_number = "0";
     String fund_tal, fund_community, fund_others;
 
     String plantationPolygonArea;

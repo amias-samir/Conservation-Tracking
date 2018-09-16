@@ -778,7 +778,7 @@ public class IllegalLogging extends AppCompatActivity implements AdapterView.OnI
             header.put("vdc", vdc_name);
             header.put("latitude", finalLat);
             header.put("longitude", finalLong);
-            header.put("confiscated_items", confiscated_items + "   " + other_tools_quantity);
+            header.put("confiscated_items", confiscated_items + " : " + other_tools_quantity);
 //            header.put("other_tools_quantity" ,other_tools_quantity);
             header.put("no_of_people_involved", no_of_people_involved);
             header.put("fund_tal", fund_tal);

@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import com.naxa.conservationtrackingapp.application.ApplicationClass;
 
@@ -95,6 +96,7 @@ public class DataBaseConserVationTracking extends ODKSQLiteOpenHelper {
 
 
                 break;
+
             default:
                 db.execSQL(DROP_TABLE_MAIN);
                 onCreate(db);
@@ -133,6 +135,8 @@ public class DataBaseConserVationTracking extends ODKSQLiteOpenHelper {
         long id = db.insert(TABLE_MAIN, null, contentValues);
         return id;
     }
+
+
 
     private String formatImageName(String s) {
         String imei = SharedPreferenceUtils.getInstance(con).getStringValue(IMEI, "");
@@ -214,6 +218,8 @@ public class DataBaseConserVationTracking extends ODKSQLiteOpenHelper {
         int rowsUpdated = db.update(TABLE_MAIN, values, ID_TABLE + "='" + id + " ' ", null);
         return rowsUpdated;
     }
+
+
 
 //        public void alterTableMAIN() {
 //            db.execSQL(DROP_TABLE_MAIN);

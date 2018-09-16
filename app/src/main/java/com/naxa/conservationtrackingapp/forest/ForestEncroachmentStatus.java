@@ -93,6 +93,7 @@ import cn.refactor.lib.colordialog.PromptDialog;
  * Created by ramaan on 1/18/2016.
  */
 public class ForestEncroachmentStatus extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+    private static final String TAG = "ForestEncroachmentStatus" ;
     Toolbar toolbar;
     int CAMERA_PIC_REQUEST = 2;
     Spinner spinnerLandscape, spinnerforestActionTakenEviction;
@@ -341,7 +342,9 @@ public class ForestEncroachmentStatus extends AppCompatActivity implements Adapt
                         fund_community = tvFundCommunity.getText().toString();
                         fund_others = tvFundOthers.getText().toString();
 
-                        jsonLatLangArray = jsonArrayGPS.toString();
+                        if(!CheckValues.isFromSavedFrom) {
+                            jsonLatLangArray = jsonArrayGPS.toString();
+                        }
 
                         convertDataToJson();
 
@@ -382,6 +385,7 @@ public class ForestEncroachmentStatus extends AppCompatActivity implements Adapt
                                     DataBaseConserVationTracking dataBaseConserVationTracking = new DataBaseConserVationTracking(context);
                                     dataBaseConserVationTracking.open();
                                     long id = dataBaseConserVationTracking.insertIntoTable_Main(data);
+
 
                                     new PromptDialog(ForestEncroachmentStatus.this)
                                             .setDialogType(PromptDialog.DIALOG_TYPE_SUCCESS)
@@ -782,6 +786,8 @@ public class ForestEncroachmentStatus extends AppCompatActivity implements Adapt
     //new adjustment
     public void parseArrayGPS(String arrayToParse) {
         try {
+            jsonLatLangArray = arrayToParse;
+            Log.d(TAG, "parseArrayGPS: "+arrayToParse);
             JSONArray array = new JSONArray(arrayToParse);
             for (int i = 0; i < array.length(); ++i) {
                 JSONObject item1 = null;
