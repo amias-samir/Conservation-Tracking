@@ -130,7 +130,7 @@ public class Poaching extends AppCompatActivity implements AdapterView.OnItemSel
     String other_methods;
     String projectCode, agreement_no, grantee_name, fiscal_year, time, date, district_name, vdc_name, location_name,
             species_poached_attempted, no, poacher_offender_name, remarks, methods_used, item_confiscated,
-            poached_species_name, poached_species_number, fund_tal, fund_community, fund_others;
+            poached_species_name, poached_species_number = "0", fund_tal, fund_community, fund_others;
     String plantationPolygonArea;
     JSONArray jsonArrayGPS = new JSONArray();
     TextView tvBoundryUsingGps, tvMethodNameAndNumber;

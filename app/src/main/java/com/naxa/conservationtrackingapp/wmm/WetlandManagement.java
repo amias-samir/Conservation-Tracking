@@ -173,6 +173,7 @@ public class WetlandManagement extends AppCompatActivity implements AdapterView.
 
     String userNameToSend, passwordToSend;
     String dataSentStatus = "", dateString;
+    private String TAG = "WetlandManagement";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -374,7 +375,12 @@ public class WetlandManagement extends AppCompatActivity implements AdapterView.
                         monitoring_date = tvMonitoringDate.getText().toString();
                         other_restoration = tvOtherRestoration.getText().toString();
                         others = tvOthers.getText().toString();
+
                         jsonLatLangArray = jsonArrayGPS.toString();
+
+                        Log.d(TAG, "onClick: "+jsonLatLangArray);
+                        Log.d(TAG, "onClick: "+jsonArrayGPS.toString());
+
                         fund_tal = tvFundTal.getText().toString();
                         fund_community = tvFundCommunity.getText().toString();
                         fund_others = tvFundOthers.getText().toString();

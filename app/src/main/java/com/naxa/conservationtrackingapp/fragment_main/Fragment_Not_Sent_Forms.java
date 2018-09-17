@@ -155,7 +155,9 @@ public class Fragment_Not_Sent_Forms extends Fragment {
                     String photo = resultCur.get(position).photo;
                     String gps = resultCur.get(position).gps;
                     String status = resultCur.get(position).status;
-                    loadForm(id, jSon, photo, gps, status);
+                    String dbID = resultCur.get(position).dbId;
+                    String formName = resultCur.get(position).formName;
+                    loadForm(id, jSon, photo, gps, status, dbID, formName);
 
                 } else if (items[item] == "Delete") {
                     DisplayMetrics metrics = getActivity().getResources().getDisplayMetrics();
@@ -248,7 +250,7 @@ public class Fragment_Not_Sent_Forms extends Fragment {
 
     }
 
-    public void loadForm(String formId,String jsonData ,String photo ,  String gps, String status){
+    public void loadForm(String formId,String jsonData ,String photo ,  String gps, String status, String dbID, String formName){
         switch (formId){
             case "1" :
                 Intent intent1 = new Intent(getActivity(), Cf_Detail.class);
@@ -256,6 +258,8 @@ public class Fragment_Not_Sent_Forms extends Fragment {
                 intent1.putExtra("photo" , photo);
                 intent1.putExtra("gps" , gps) ;
                 intent1.putExtra("status" , status) ;
+                intent1.putExtra("dbID" , dbID) ;
+                intent1.putExtra("formName" , formName) ;
                 startActivity(intent1);
                 break;
             case "2" :
@@ -264,6 +268,8 @@ public class Fragment_Not_Sent_Forms extends Fragment {
                 intent2.putExtra("photo" , photo);
                 intent2.putExtra("gps" , gps) ;
                 intent2.putExtra("status" , status) ;
+                intent2.putExtra("dbID" , dbID) ;
+                intent2.putExtra("formName" , formName) ;
                 startActivity(intent2);
                 break;
             case "3" :
@@ -272,6 +278,8 @@ public class Fragment_Not_Sent_Forms extends Fragment {
                 intent3.putExtra("photo" , photo);
                 intent3.putExtra("gps" , gps) ;
                 intent3.putExtra("status" , status) ;
+                intent3.putExtra("dbID" , dbID) ;
+                intent3.putExtra("formName" , formName) ;
                 startActivity(intent3);
                 break;
             case "4" :
@@ -280,6 +288,8 @@ public class Fragment_Not_Sent_Forms extends Fragment {
                 intent4.putExtra("photo" , photo);
                 intent4.putExtra("gps" , gps) ;
                 intent4.putExtra("status" , status) ;
+                intent4.putExtra("dbID" , dbID) ;
+                intent4.putExtra("formName" , formName) ;
                 startActivity(intent4);
                 break;
             case "5" :
@@ -287,6 +297,8 @@ public class Fragment_Not_Sent_Forms extends Fragment {
                 intent5.putExtra("JSON1", jsonData);
                 intent5.putExtra("photo" , photo);
                 intent5.putExtra("status" , status) ;
+                intent5.putExtra("dbID" , dbID) ;
+                intent5.putExtra("formName" , formName) ;
                 startActivity(intent5);
                 break;
             case "6" :
@@ -295,6 +307,8 @@ public class Fragment_Not_Sent_Forms extends Fragment {
                 intent6.putExtra("photo" , photo);
                 intent6.putExtra("gps" , gps) ;
                 intent6.putExtra("status" , status) ;
+                intent6.putExtra("dbID" , dbID) ;
+                intent6.putExtra("formName" , formName) ;
                 startActivity(intent6);
                 break;
             case "7" :
@@ -303,6 +317,8 @@ public class Fragment_Not_Sent_Forms extends Fragment {
                 intent7.putExtra("photo" , photo);
                 intent7.putExtra("gps" , gps) ;
                 intent7.putExtra("status" , status) ;
+                intent7.putExtra("dbID" , dbID) ;
+                intent7.putExtra("formName" , formName) ;
                 startActivity(intent7);
                 break;
             case "8" :
@@ -311,6 +327,8 @@ public class Fragment_Not_Sent_Forms extends Fragment {
                 intent8.putExtra("photo" , photo);
                 intent8.putExtra("gps" , gps) ;
                 intent8.putExtra("status" , status) ;
+                intent8.putExtra("dbID" , dbID) ;
+                intent8.putExtra("formName" , formName) ;
                 startActivity(intent8);
                 break;
             case "9" :
@@ -318,7 +336,9 @@ public class Fragment_Not_Sent_Forms extends Fragment {
                 intent9.putExtra("JSON1", jsonData);
                 intent9.putExtra("photo" , photo);
                 intent9.putExtra("gps" , gps) ;
-                intent9.putExtra("status" , status) ;;
+                intent9.putExtra("status" , status) ;
+                intent9.putExtra("dbID" , dbID) ;
+                intent9.putExtra("formName" , formName) ;
                 startActivity(intent9);
                 break;
             case "21" :
@@ -327,6 +347,8 @@ public class Fragment_Not_Sent_Forms extends Fragment {
                 intentto.putExtra("photo", photo);
                 intentto.putExtra("gps" , gps) ;
                 intentto.putExtra("status" , status) ;
+                intentto.putExtra("dbID" , dbID) ;
+                intentto.putExtra("formName" , formName) ;
                 startActivity(intentto);
                 break;
             case "22" :
@@ -335,6 +357,8 @@ public class Fragment_Not_Sent_Forms extends Fragment {
                 intentt.putExtra("photo", photo);
                 intentt.putExtra("gps" , gps) ;
                 intentt.putExtra("status" , status) ;
+                intentt.putExtra("dbID" , dbID) ;
+                intentt.putExtra("formName" , formName) ;
                 startActivity(intentt);
                 break;
             case "23" :
@@ -343,13 +367,18 @@ public class Fragment_Not_Sent_Forms extends Fragment {
                 intentth.putExtra("photo", photo);
                 intentth.putExtra("gps" , gps) ;
                 intentth.putExtra("status" , status) ;
+                intentth.putExtra("dbID" , dbID) ;
+                intentth.putExtra("formName" , formName) ;
                 startActivity(intentth);
                 break;
             case "24" :
                 Intent intentf = new Intent(getActivity(), WetlandManagement.class);
                 intentf.putExtra("JSON1", jsonData);
                 intentf.putExtra("photo", photo);
+                intentf.putExtra("gps" , gps) ;
                 intentf.putExtra("status" , status) ;
+                intentf.putExtra("dbID" , dbID) ;
+                intentf.putExtra("formName" , formName) ;
                 startActivity(intentf);
                 break;
             case "25" :
@@ -358,6 +387,8 @@ public class Fragment_Not_Sent_Forms extends Fragment {
                 intentfi.putExtra("photo", photo);
                 intentfi.putExtra("gps" , gps) ;
                 intentfi.putExtra("status" , status) ;
+                intentfi.putExtra("dbID" , dbID) ;
+                intentfi.putExtra("formName" , formName) ;
                 startActivity(intentfi);
                 break;
             case "26" :
@@ -366,6 +397,8 @@ public class Fragment_Not_Sent_Forms extends Fragment {
                 intente.putExtra("photo", photo);
                 intente.putExtra("gps" , gps) ;
                 intente.putExtra("status" , status) ;
+                intente.putExtra("dbID" , dbID) ;
+                intente.putExtra("formName" , formName) ;
                 startActivity(intente);
                 break;
 
@@ -375,6 +408,8 @@ public class Fragment_Not_Sent_Forms extends Fragment {
                 intent16.putExtra("photo", photo);
                 intent16.putExtra("gps" , gps) ;
                 intent16.putExtra("status" , status) ;
+                intent16.putExtra("dbID" , dbID) ;
+                intent16.putExtra("formName" , formName) ;
                 startActivity(intent16);
                 break;
 
@@ -384,6 +419,8 @@ public class Fragment_Not_Sent_Forms extends Fragment {
                 intent17.putExtra("photo" , photo);
                 intent17.putExtra("gps" , gps) ;
                 intent17.putExtra("status" , status) ;
+                intent17.putExtra("dbID" , dbID) ;
+                intent17.putExtra("formName" , formName) ;
                 startActivity(intent17);
                 break;
 
@@ -393,6 +430,8 @@ public class Fragment_Not_Sent_Forms extends Fragment {
                 intent18.putExtra("photo" , photo);
                 intent18.putExtra("gps" , gps) ;
                 intent18.putExtra("status" , status) ;
+                intent18.putExtra("dbID" , dbID) ;
+                intent18.putExtra("formName" , formName) ;
                 startActivity(intent18);
                 break;
             case "34" :
@@ -401,6 +440,8 @@ public class Fragment_Not_Sent_Forms extends Fragment {
                 intent19.putExtra("photo", photo);
                 intent19.putExtra("gps" , gps) ;
                 intent19.putExtra("status" , status) ;
+                intent19.putExtra("dbID" , dbID) ;
+                intent19.putExtra("formName" , formName) ;
                 startActivity(intent19);
                 break;
 
@@ -410,6 +451,8 @@ public class Fragment_Not_Sent_Forms extends Fragment {
                 intent20.putExtra("photo", photo);
                 intent20.putExtra("gps" , gps) ;
                 intent20.putExtra("status" , status) ;
+                intent20.putExtra("dbID" , dbID) ;
+                intent20.putExtra("formName" , formName) ;
                 startActivity(intent20);
                 break;
 
@@ -419,6 +462,8 @@ public class Fragment_Not_Sent_Forms extends Fragment {
                 intent21.putExtra("photo", photo);
                 intent21.putExtra("gps" , gps) ;
                 intent21.putExtra("status" , status) ;
+                intent21.putExtra("dbID" , dbID) ;
+                intent21.putExtra("formName" , formName) ;
                 startActivity(intent21);
                 break;
 
@@ -428,6 +473,8 @@ public class Fragment_Not_Sent_Forms extends Fragment {
                 intent22.putExtra("photo", photo);
                 intent22.putExtra("gps" , gps) ;
                 intent22.putExtra("status" , status) ;
+                intent22.putExtra("dbID" , dbID) ;
+                intent22.putExtra("formName" , formName) ;
                 startActivity(intent22);
                 break;
 
@@ -437,6 +484,8 @@ public class Fragment_Not_Sent_Forms extends Fragment {
                 intent23.putExtra("photo", photo);
                 intent23.putExtra("gps" , gps) ;
                 intent23.putExtra("status" , status) ;
+                intent23.putExtra("dbID" , dbID) ;
+                intent23.putExtra("formName" , formName) ;
                 startActivity(intent23);
                 break;
 
@@ -446,6 +495,8 @@ public class Fragment_Not_Sent_Forms extends Fragment {
                 intent24.putExtra("photo", photo);
                 intent24.putExtra("gps" , gps) ;
                 intent24.putExtra("status" , status) ;
+                intent24.putExtra("dbID" , dbID) ;
+                intent24.putExtra("formName" , formName) ;
                 startActivity(intent24);
                 break;
 
@@ -455,6 +506,8 @@ public class Fragment_Not_Sent_Forms extends Fragment {
                 intent25.putExtra("photo", photo);
                 intent25.putExtra("gps" , gps) ;
                 intent25.putExtra("status" , status) ;
+                intent25.putExtra("dbID" , dbID) ;
+                intent25.putExtra("formName" , formName) ;
                 startActivity(intent25);
                 break;
 
@@ -464,6 +517,8 @@ public class Fragment_Not_Sent_Forms extends Fragment {
                 intent26.putExtra("photo", photo);
                 intent26.putExtra("gps" , gps) ;
                 intent26.putExtra("status" , status) ;
+                intent26.putExtra("dbID" , dbID) ;
+                intent26.putExtra("formName" , formName) ;
                 startActivity(intent26);
                 break;
             case "51" :
@@ -472,6 +527,8 @@ public class Fragment_Not_Sent_Forms extends Fragment {
                 intent51.putExtra("photo", photo);
                 intent51.putExtra("gps" , gps) ;
                 intent51.putExtra("status" , status) ;
+                intent51.putExtra("dbID" , dbID) ;
+                intent51.putExtra("formName" , formName) ;
                 startActivity(intent51);
                 break;
             case "52" :
@@ -480,6 +537,8 @@ public class Fragment_Not_Sent_Forms extends Fragment {
                 intent52.putExtra("photo", photo);
                 intent52.putExtra("gps", gps) ;
                 intent52.putExtra("status" , status) ;
+                intent52.putExtra("dbID" , dbID) ;
+                intent52.putExtra("formName" , formName) ;
                 startActivity(intent52);
                 break;
             case "61" :
@@ -488,6 +547,8 @@ public class Fragment_Not_Sent_Forms extends Fragment {
                 intent61.putExtra("photo", photo);
                 intent61.putExtra("gps", gps) ;
                 intent61.putExtra("status" , status) ;
+                intent61.putExtra("dbID" , dbID) ;
+                intent61.putExtra("formName" , formName) ;
                 startActivity(intent61);
                 break;
             case "62" :
@@ -496,6 +557,8 @@ public class Fragment_Not_Sent_Forms extends Fragment {
                 intent62.putExtra("photo", photo);
                 intent62.putExtra("gps", gps) ;
                 intent62.putExtra("status" , status) ;
+                intent62.putExtra("dbID" , dbID) ;
+                intent62.putExtra("formName" , formName) ;
                 startActivity(intent62);
                 break;
             case "63" :
@@ -504,6 +567,8 @@ public class Fragment_Not_Sent_Forms extends Fragment {
                 intent63.putExtra("photo", photo);
                 intent63.putExtra("gps", gps) ;
                 intent63.putExtra("status" , status) ;
+                intent63.putExtra("dbID" , dbID) ;
+                intent63.putExtra("formName" , formName) ;
                 startActivity(intent63);
                 break;
             case "64" :
@@ -512,6 +577,8 @@ public class Fragment_Not_Sent_Forms extends Fragment {
                 intent64.putExtra("photo", photo);
                 intent64.putExtra("gps", gps) ;
                 intent64.putExtra("status" , status) ;
+                intent64.putExtra("dbID" , dbID) ;
+                intent64.putExtra("formName" , formName) ;
                 startActivity(intent64);
                 break;
             case "65" :
@@ -520,6 +587,8 @@ public class Fragment_Not_Sent_Forms extends Fragment {
                 intent65.putExtra("photo", photo);
                 intent65.putExtra("gps", gps) ;
                 intent65.putExtra("status" , status) ;
+                intent65.putExtra("dbID" , dbID) ;
+                intent65.putExtra("formName" , formName) ;
                 startActivity(intent65);
                 break;
             case "66" :
@@ -528,6 +597,8 @@ public class Fragment_Not_Sent_Forms extends Fragment {
                 intent66.putExtra("photo", photo);
                 intent66.putExtra("gps", gps) ;
                 intent66.putExtra("status" , status) ;
+                intent66.putExtra("dbID" , dbID) ;
+                intent66.putExtra("formName" , formName) ;
                 startActivity(intent66);
                 break;
             case "71" :
@@ -536,6 +607,8 @@ public class Fragment_Not_Sent_Forms extends Fragment {
                 intent71.putExtra("photo", photo);
                 intent71.putExtra("gps", gps) ;
                 intent71.putExtra("status" , status) ;
+                intent71.putExtra("dbID" , dbID) ;
+                intent71.putExtra("formName" , formName) ;
                 startActivity(intent71);
                 break;
             case "72" :
@@ -544,6 +617,8 @@ public class Fragment_Not_Sent_Forms extends Fragment {
                 intent72.putExtra("photo", photo);
                 intent72.putExtra("gps", gps) ;
                 intent72.putExtra("status" , status) ;
+                intent72.putExtra("dbID" , dbID) ;
+                intent72.putExtra("formName" , formName) ;
                 startActivity(intent72);
                 break;
             case "73" :
@@ -552,6 +627,8 @@ public class Fragment_Not_Sent_Forms extends Fragment {
                 intent73.putExtra("photo", photo);
                 intent73.putExtra("gps", gps) ;
                 intent73.putExtra("status" , status) ;
+                intent73.putExtra("dbID" , dbID) ;
+                intent73.putExtra("formName" , formName) ;
                 startActivity(intent73);
                 break;
 
@@ -560,6 +637,8 @@ public class Fragment_Not_Sent_Forms extends Fragment {
                 intent81.putExtra("JSON1", jsonData);
                 intent81.putExtra("gps", gps) ;
                 intent81.putExtra("status" , status) ;
+                intent81.putExtra("dbID" , dbID) ;
+                intent81.putExtra("formName" , formName) ;
                 startActivity(intent81);
                 break;
 
@@ -567,7 +646,9 @@ public class Fragment_Not_Sent_Forms extends Fragment {
                 Intent intent82 = new Intent(getActivity(), GharialAndMuggerMonitoringAnthropogenicParameters.class);
                 intent82.putExtra("JSON1", jsonData);
                 intent82.putExtra("gps", gps) ;
-                intent82.putExtra("status" , status) ;;
+                intent82.putExtra("status" , status) ;
+                intent82.putExtra("dbID" , dbID) ;
+                intent82.putExtra("formName" , formName) ;
                 startActivity(intent82);
                 break;
 
@@ -576,6 +657,8 @@ public class Fragment_Not_Sent_Forms extends Fragment {
                 intent83.putExtra("JSON1", jsonData);
                 intent83.putExtra("gps", gps) ;
                 intent83.putExtra("status" , status) ;
+                intent83.putExtra("dbID" , dbID) ;
+                intent83.putExtra("formName" , formName) ;
                 startActivity(intent83);
                 break;
             case "84" :
@@ -584,6 +667,8 @@ public class Fragment_Not_Sent_Forms extends Fragment {
                 intent84.putExtra("photo", photo);
                 intent84.putExtra("gps", gps) ;
                 intent84.putExtra("status" , status) ;
+                intent84.putExtra("dbID" , dbID) ;
+                intent84.putExtra("formName" , formName) ;
                 startActivity(intent84);
                 break;
             case "85" :
@@ -592,6 +677,8 @@ public class Fragment_Not_Sent_Forms extends Fragment {
                 intent85.putExtra("photo", photo);
                 intent85.putExtra("gps", gps) ;
                 intent85.putExtra("status" , status) ;
+                intent85.putExtra("dbID" , dbID) ;
+                intent85.putExtra("formName" , formName) ;
                 startActivity(intent85);
                 break;
             case "86" :
@@ -600,6 +687,8 @@ public class Fragment_Not_Sent_Forms extends Fragment {
                 intent86.putExtra("photo", photo);
                 intent86.putExtra("gps", gps) ;
                 intent86.putExtra("status" , status) ;
+                intent86.putExtra("dbID" , dbID) ;
+                intent86.putExtra("formName" , formName) ;
                 startActivity(intent86);
                 break;
             case "87" :
@@ -608,6 +697,8 @@ public class Fragment_Not_Sent_Forms extends Fragment {
                 intent87.putExtra("photo", photo);
                 intent87.putExtra("gps", gps) ;
                 intent87.putExtra("status" , status) ;
+                intent87.putExtra("dbID" , dbID) ;
+                intent87.putExtra("formName" , formName) ;
                 startActivity(intent87);
                 break;
 
@@ -617,8 +708,11 @@ public class Fragment_Not_Sent_Forms extends Fragment {
                 intent100.putExtra("photo", photo);
                 intent100.putExtra("gps", gps) ;
                 intent100.putExtra("status" , status) ;
+                intent100.putExtra("dbID" , dbID) ;
+                intent100.putExtra("formName" , formName) ;
                 startActivity(intent100);
                 break;
+
         }
     }
 
@@ -660,11 +754,18 @@ public class Fragment_Not_Sent_Forms extends Fragment {
                 savedData.deletedStatus = data[7];
                 savedData.dbId = data[8];
 
-                if(data[7].equals("0")) {
-                    if(data[6].equals("Not Sent")) {
-                        resultCur.add(savedData);
+                try {
+
+                    if(data[7].equals("0")) {
+                        if(data[6].equals("Not Sent")) {
+                            resultCur.add(savedData);
+                        }
                     }
+                }catch (NullPointerException e){
+                    e.printStackTrace();
                 }
+
+
 
             }
         }

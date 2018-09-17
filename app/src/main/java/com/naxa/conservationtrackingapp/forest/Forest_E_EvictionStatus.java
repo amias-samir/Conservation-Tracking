@@ -46,6 +46,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.naxa.conservationtrackingapp.GeoPointActivity;
 import com.naxa.conservationtrackingapp.PhoneUtils;
 import com.naxa.conservationtrackingapp.activities.CalculateAreaUsinGPS;
+import com.naxa.conservationtrackingapp.activities.General_Form;
 import com.naxa.conservationtrackingapp.activities.GpsTracker;
 import com.naxa.conservationtrackingapp.activities.MapPolyLineActivity;
 import com.naxa.conservationtrackingapp.R;
@@ -78,6 +79,7 @@ import java.util.concurrent.TimeUnit;
 
 import javax.net.ssl.HttpsURLConnection;
 
+import com.naxa.conservationtrackingapp.activities.SavedFormsActivity;
 import com.naxa.conservationtrackingapp.application.ApplicationClass;
 import com.naxa.conservationtrackingapp.database.DataBaseConserVationTracking;
 import com.naxa.conservationtrackingapp.dialog.Default_DIalog;
@@ -126,6 +128,8 @@ public class Forest_E_EvictionStatus extends AppCompatActivity implements Adapte
     String latLangArray = "", jsonLatLangArray = "";
     double area_using_Gps;
     double distance;
+
+    String formNameSavedForm, formid;
 
     String projectCode;
     String landscape;
@@ -345,7 +349,9 @@ public class Forest_E_EvictionStatus extends AppCompatActivity implements Adapte
                         regeneration_status = tvRegenerationStatus.getText().toString();
                         others = tvOthers.getText().toString();
 
-                        jsonLatLangArray = jsonArrayGPS.toString();
+                        if(!CheckValues.isFromSavedFrom) {
+                            jsonLatLangArray = jsonArrayGPS.toString();
+                        }
                         //plantation monitoring area
 
                         convertDataToJson();
@@ -359,6 +365,14 @@ public class Forest_E_EvictionStatus extends AppCompatActivity implements Adapte
                         final EditText FormNameToInput = (EditText) showDialog.findViewById(R.id.input_tableName);
                         final EditText dateToInput = (EditText) showDialog.findViewById(R.id.input_date);
                         FormNameToInput.setText("Encroachment Eviction Status");
+
+                        if (CheckValues.isFromSavedFrom) {
+                            if (formNameSavedForm == null | formNameSavedForm.equals("")) {
+                                FormNameToInput.setText("Encroachment Eviction Status");
+                            } else {
+                                FormNameToInput.setText(formNameSavedForm);
+                            }
+                        }
 
                         long date = System.currentTimeMillis();
 
@@ -387,6 +401,16 @@ public class Forest_E_EvictionStatus extends AppCompatActivity implements Adapte
                                     DataBaseConserVationTracking dataBaseConserVationTracking = new DataBaseConserVationTracking(context);
                                     dataBaseConserVationTracking.open();
                                     long id = dataBaseConserVationTracking.insertIntoTable_Main(data);
+                                    dataBaseConserVationTracking.close();
+
+
+                                    if (CheckValues.isFromSavedFrom) {
+
+                                        DataBaseConserVationTracking dataBaseConserVationTracking1 = new DataBaseConserVationTracking(context);
+                                        dataBaseConserVationTracking1.open();
+                                        int updated_id = (int) dataBaseConserVationTracking1.updateTable_DeleteFlag(formid);
+                                        dataBaseConserVationTracking.close();
+                                    }
 
                                     new PromptDialog(Forest_E_EvictionStatus.this)
                                             .setDialogType(PromptDialog.DIALOG_TYPE_SUCCESS)
@@ -396,8 +420,13 @@ public class Forest_E_EvictionStatus extends AppCompatActivity implements Adapte
                                             .setPositiveListener("okay", new PromptDialog.OnPositiveListener() {
                                                 @Override
                                                 public void onClick(PromptDialog dialog) {
-                                                    dialog.dismiss();
-                                                }
+                                                    if (CheckValues.isFromSavedFrom) {
+                                                        showDialog.dismiss();
+                                                        startActivity(new Intent(Forest_E_EvictionStatus.this, SavedFormsActivity.class));
+                                                        finish();
+                                                    } else {
+                                                        dialog.dismiss();
+                                                    }                                                }
                                             }).show();
                                     dataBaseConserVationTracking.close();
                                     showDialog.dismiss();
@@ -796,6 +825,8 @@ public class Forest_E_EvictionStatus extends AppCompatActivity implements Adapte
             String imageNameall = (String) bundle.get("photo");
             String gpsLocationtoParse = (String) bundle.get("gps");
 
+            formid = (String) bundle.get("dbID");
+            formNameSavedForm = (String) bundle.get("formName");
             String status = (String) bundle.get("status");
             if(status.equals("Sent")){
                 save.setEnabled(false);
@@ -848,6 +879,8 @@ public class Forest_E_EvictionStatus extends AppCompatActivity implements Adapte
     //new adjustment
     public void parseArrayGPS(String arrayToParse) {
         try {
+            jsonLatLangArray = arrayToParse;
+
             JSONArray array = new JSONArray(arrayToParse);
             for (int i = 0; i < array.length(); ++i) {
                 JSONObject item1 = null;

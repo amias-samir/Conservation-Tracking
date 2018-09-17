@@ -46,6 +46,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.naxa.conservationtrackingapp.GeoPointActivity;
 import com.naxa.conservationtrackingapp.PhoneUtils;
 import com.naxa.conservationtrackingapp.activities.CalculateAreaUsinGPS;
+import com.naxa.conservationtrackingapp.activities.General_Form;
 import com.naxa.conservationtrackingapp.activities.GpsTracker;
 import com.naxa.conservationtrackingapp.activities.MapPolyLineActivity;
 import com.naxa.conservationtrackingapp.R;
@@ -78,6 +79,7 @@ import java.util.concurrent.TimeUnit;
 
 import javax.net.ssl.HttpsURLConnection;
 
+import com.naxa.conservationtrackingapp.activities.SavedFormsActivity;
 import com.naxa.conservationtrackingapp.application.ApplicationClass;
 import com.naxa.conservationtrackingapp.database.DataBaseConserVationTracking;
 import com.naxa.conservationtrackingapp.dialog.Default_DIalog;
@@ -93,6 +95,7 @@ import cn.refactor.lib.colordialog.PromptDialog;
  * Created by ramaan on 1/18/2016.
  */
 public class ForestEncroachmentStatus extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+    private static final String TAG = "ForestEncroa" ;
     Toolbar toolbar;
     int CAMERA_PIC_REQUEST = 2;
     Spinner spinnerLandscape, spinnerforestActionTakenEviction;
@@ -125,6 +128,8 @@ public class ForestEncroachmentStatus extends AppCompatActivity implements Adapt
     String latLangArray = "", jsonLatLangArray = "";
     double distance;
     double area_using_Gps;
+
+    String formNameSavedForm, formid;
 
     String projectCode;
     String landscape;
@@ -341,7 +346,9 @@ public class ForestEncroachmentStatus extends AppCompatActivity implements Adapt
                         fund_community = tvFundCommunity.getText().toString();
                         fund_others = tvFundOthers.getText().toString();
 
-                        jsonLatLangArray = jsonArrayGPS.toString();
+                        if(!CheckValues.isFromSavedFrom) {
+                            jsonLatLangArray = jsonArrayGPS.toString();
+                        }
 
                         convertDataToJson();
 
@@ -354,6 +361,14 @@ public class ForestEncroachmentStatus extends AppCompatActivity implements Adapt
                         final EditText FormNameToInput = (EditText) showDialog.findViewById(R.id.input_tableName);
                         final EditText dateToInput = (EditText) showDialog.findViewById(R.id.input_date);
                         FormNameToInput.setText("Encroachment Status");
+
+                        if (CheckValues.isFromSavedFrom) {
+                            if (formNameSavedForm == null | formNameSavedForm.equals("")) {
+                                FormNameToInput.setText("Encroachment Status");
+                            } else {
+                                FormNameToInput.setText(formNameSavedForm);
+                            }
+                        }
 
                         long date = System.currentTimeMillis();
 
@@ -382,6 +397,17 @@ public class ForestEncroachmentStatus extends AppCompatActivity implements Adapt
                                     DataBaseConserVationTracking dataBaseConserVationTracking = new DataBaseConserVationTracking(context);
                                     dataBaseConserVationTracking.open();
                                     long id = dataBaseConserVationTracking.insertIntoTable_Main(data);
+                                    dataBaseConserVationTracking.close();
+
+
+                                    if (CheckValues.isFromSavedFrom) {
+
+                                        DataBaseConserVationTracking dataBaseConserVationTracking1 = new DataBaseConserVationTracking(context);
+                                        dataBaseConserVationTracking1.open();
+                                        int updated_id = (int) dataBaseConserVationTracking1.updateTable_DeleteFlag(formid);
+                                        dataBaseConserVationTracking.close();
+                                    }
+
 
                                     new PromptDialog(ForestEncroachmentStatus.this)
                                             .setDialogType(PromptDialog.DIALOG_TYPE_SUCCESS)
@@ -391,8 +417,13 @@ public class ForestEncroachmentStatus extends AppCompatActivity implements Adapt
                                             .setPositiveListener("okay", new PromptDialog.OnPositiveListener() {
                                                 @Override
                                                 public void onClick(PromptDialog dialog) {
-                                                    dialog.dismiss();
-                                                }
+                                                    if (CheckValues.isFromSavedFrom) {
+                                                        showDialog.dismiss();
+                                                        startActivity(new Intent(ForestEncroachmentStatus.this, SavedFormsActivity.class));
+                                                        finish();
+                                                    } else {
+                                                        dialog.dismiss();
+                                                    }                                                }
                                             }).show();
                                     dataBaseConserVationTracking.close();
                                     showDialog.dismiss();
@@ -744,6 +775,9 @@ public class ForestEncroachmentStatus extends AppCompatActivity implements Adapt
             imageName = (String) bundle.get("photo");
             String gpsLocationtoParse = (String) bundle.get("gps");
 
+            formid = (String) bundle.get("dbID");
+            formNameSavedForm = (String) bundle.get("formName");
+
             String status = (String) bundle.get("status");
             if(status.equals("Sent")){
                 save.setEnabled(false);
@@ -782,6 +816,8 @@ public class ForestEncroachmentStatus extends AppCompatActivity implements Adapt
     //new adjustment
     public void parseArrayGPS(String arrayToParse) {
         try {
+            jsonLatLangArray = arrayToParse;
+            Log.d(TAG, "parseArrayGPS: "+arrayToParse);
             JSONArray array = new JSONArray(arrayToParse);
             for (int i = 0; i < array.length(); ++i) {
                 JSONObject item1 = null;

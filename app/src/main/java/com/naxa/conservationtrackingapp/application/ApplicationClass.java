@@ -36,7 +36,7 @@ public class ApplicationClass extends Application {
 
     public static void createFolder() throws Exception {
 
-        Log.i("MapboxApplication", "Trying to create required folders");
+        Log.i("ConservationTracking", "Trying to create required folders");
 
 //        File dirPhoto = new File(extSdcard + mainFolder + photoFolder);
         File dirData = new File(extSdcard + mainFolder + dataFolder);

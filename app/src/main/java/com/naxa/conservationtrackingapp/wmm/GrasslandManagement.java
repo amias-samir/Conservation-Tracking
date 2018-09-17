@@ -905,12 +905,12 @@ public class GrasslandManagement extends AppCompatActivity implements AdapterVie
                 send.setEnabled(false);
             }
 
+
             String[] images = imageNameall.split(",");
             imageName = images[0];
             imageNameCompleted = images[1];
-            String[] Second = images[1].split(",");
-            imageNameCompleted = Second[0];
-            imageNameMonitoring = Second[1];
+            imageNameMonitoring = images[2];
+
             Log.e("wetland_", "i-" + imageName);
 
             if (imageName.equals("no_photo")) {
