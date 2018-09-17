@@ -1,0 +1,678 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar6" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                card_view:cardBackgroundColor="@color/transparent"
+                android:layout_margin="10dp"
+                card_view:cardElevation="1dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="5dp"
+                    android:layout_margin="20dp">
+
+                    <!--project code-->
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/ProjectCode"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Project Code"
+                            android:inputType="text"
+                            android:layout_marginTop="45dp"/>
+                    </android.support.design.widget.TextInputLayout>
+
+                    <!--Landscape-->
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp">
+
+                        <TextView
+                            android:id="@+id/landScape"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignBottom="@+id/wmm_wildlife_rescue_release_detail_landscape"
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentStart="true"
+                            android:layout_alignParentTop="true"
+                            android:gravity="center_vertical"
+                            android:paddingLeft="5dp"
+                            android:text="Landscape"
+                            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                        <Spinner
+                            android:id="@+id/ce_ecs_detail_landscape"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentTop="true"
+                            android:layout_alignParentRight="true"
+                            android:layout_toRightOf="@+id/landScape"
+                            android:layout_toEndOf="@+id/landScape" />
+
+                    </RelativeLayout>
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="20dp"
+                        >
+
+                        <AutoCompleteTextView
+                            android:visibility="invisible"
+                            android:id="@+id/OtherlandscapeName"
+                            android:layout_width="200dp"
+                            android:layout_height="wrap_content"
+                            android:hint="Landscape Name"
+                            android:inputType="textMultiLine"
+
+                            />
+                    </android.support.design.widget.TextInputLayout>
+
+                    <!--Agreement No-->
+                        <android.support.design.widget.TextInputLayout
+                            android:id="@+id/to_text_input_layout"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <AutoCompleteTextView
+                                android:id="@+id/ce_ecs_Agreement_No"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="Agreement Number"
+                                android:inputType="number"
+                                android:layout_marginTop="15dp"
+                                />
+                        </android.support.design.widget.TextInputLayout>
+
+                    <!--Guarentee Name-->
+                        <android.support.design.widget.TextInputLayout
+                            android:id="@+id/garenteeName"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <AutoCompleteTextView
+                                android:id="@+id/ce_ecs_Grantee_Name"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="Grantee Name"
+                                android:inputType="textPersonName"
+                                android:layout_marginTop="10dp"
+                                />
+                        </android.support.design.widget.TextInputLayout>
+
+                    <!--Funding Source-->
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/ce_ecs_detail_fundingSource"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Funding Source"
+                            android:inputType="text"
+                            android:layout_marginTop="45dp"/>
+                    </android.support.design.widget.TextInputLayout>
+
+                    <!--fiscal year-->
+                        <android.support.design.widget.TextInputLayout
+                            android:id="@+id/fiscal_year_text_input_layout"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <AutoCompleteTextView
+                                android:id="@+id/ce_ecs_fiscal_Year"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="Fiscal Year"
+                                android:inputType="date"
+                                android:layout_marginTop="10dp"
+                                />
+                        </android.support.design.widget.TextInputLayout>
+
+                    <!--Date-->
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="DOUBLE TAP EDITTEXT TO SELECT DATE"
+                        android:gravity="center"
+                        android:textColor="#ffffff"
+                        android:padding="5dp"
+                        android:background="@color/conservation_education_light"
+                        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+                        <android.support.design.widget.TextInputLayout
+                            android:id="@+id/date_text_input_layout"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <AutoCompleteTextView
+                                android:id="@+id/ce_ecs_date"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="Date"
+                                android:inputType="date"
+                                android:layout_marginTop="10dp"
+                                />
+                        </android.support.design.widget.TextInputLayout>
+
+
+
+                    <!--Name of Eco-club-->
+                        <android.support.design.widget.TextInputLayout
+                            android:id="@+id/EchoClubName"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <AutoCompleteTextView
+                                android:id="@+id/ce_ecs_detail_EchoClubName"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="Name of Eco-Club"
+                                android:inputType="textPersonName"
+                                android:layout_marginTop="10dp"
+                                />
+                        </android.support.design.widget.TextInputLayout>
+
+                    <!--BZ/Corridor/ NF/CF area-->
+                        <android.support.design.widget.TextInputLayout
+                            android:id="@+id/BZName"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <AutoCompleteTextView
+                                android:id="@+id/ce_ecs_detail_Areabz"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="BZ/Corridor/ NF/CF area"
+                                android:inputType="numberDecimal"
+                                android:layout_marginTop="10dp"
+                                />
+                        </android.support.design.widget.TextInputLayout>
+
+                    <!--District Name-->
+                        <android.support.design.widget.TextInputLayout
+                            android:id="@+id/DistrictName"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <AutoCompleteTextView
+                                android:id="@+id/ce_ecs_detail_DistrictName"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="District Name"
+                                android:inputType="textPersonName"
+                                android:layout_marginTop="10dp"
+                                />
+                        </android.support.design.widget.TextInputLayout>
+
+                    <!--VDC /Municipality Name-->
+                        <android.support.design.widget.TextInputLayout
+                            android:id="@+id/Vdc_nagarpalika"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <AutoCompleteTextView
+                                android:id="@+id/ce_ecs_detail_Vdc_Municipality_Name"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="VDC / Municipality"
+                                android:inputType="textPersonName"
+                                android:layout_marginTop="10dp"
+                                />
+                        </android.support.design.widget.TextInputLayout>
+
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <!--School Type Government/Private/Public-->
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                card_view:cardBackgroundColor="@color/transparent"
+                android:layout_margin="10dp"
+                card_view:cardElevation="1dp"
+                android:layout_weight="0.12">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_margin="@dimen/layout_margin"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:padding="5dp">
+
+                    <TextView
+                        android:id="@+id/ce_ecs_typeStatusLable"
+                        android:layout_width="200dp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:gravity="center_vertical"
+                        android:paddingLeft="5dp"
+                        android:text="School Type"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:layout_alignParentTop="true" />
+
+                    <Spinner
+                        android:id="@+id/ce_ecs_spinner_detail_typeStatus"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_toEndOf="@+id/ce_ecs_typeStatusLable"
+                        android:layout_toRightOf="@+id/ce_ecs_typeStatusLable"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentBottom="true" />
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
+
+            <!--Support Category Institutional support/ capacity building/awarenes-->
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                card_view:cardBackgroundColor="@color/transparent"
+                android:layout_margin="10dp"
+                card_view:cardElevation="1dp"
+                android:layout_weight="0.12">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_margin="@dimen/layout_margin"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:padding="5dp">
+
+                    <TextView
+                        android:id="@+id/ce_ecs_supportStatusLable"
+                        android:layout_width="200dp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:gravity="center_vertical"
+                        android:paddingLeft="5dp"
+                        android:text="Support Category"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:layout_alignParentTop="true" />
+
+                    <Spinner
+                        android:id="@+id/ce_ecs_spinner_detail_supportStatus"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_toEndOf="@+id/ce_ecs_supportStatusLable"
+                        android:layout_toRightOf="@+id/ce_ecs_supportStatusLable"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentBottom="true" />
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
+
+            <!--Sub-category: Institutional- Building support, Library, Furniture, Books/Stationary etc;
+             Capacity building: various competition, exposure visits, study  tour-->
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                card_view:cardBackgroundColor="@color/transparent"
+                android:layout_margin="10dp"
+                card_view:cardElevation="1dp"
+                android:layout_weight="0.12">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_margin="@dimen/layout_margin"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:padding="5dp">
+
+                    <TextView
+                        android:id="@+id/ce_ecs_subCStatusLable"
+                        android:layout_width="200dp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:gravity="center_vertical"
+                        android:paddingLeft="5dp"
+                        android:text="Sub-Category"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:layout_alignParentTop="true" />
+
+                    <Spinner
+                        android:id="@+id/ce_ecs_spinner_detail_subCStatus"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_toEndOf="@+id/ce_ecs_subCStatusLable"
+                        android:layout_toRightOf="@+id/ce_ecs_subCStatusLable"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentBottom="true" />
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
+
+            <!--get Gps Location-->
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                card_view:cardBackgroundColor="@color/transparent"
+                card_view:cardElevation="1dp"
+                android:layout_margin="20dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_margin="10dp"
+                    android:padding="5dp">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_centerVertical="true"
+                        android:layout_margin="@dimen/layout_margin"
+                        android:padding="5dp">
+
+                        <Button
+                            android:id="@+id/ce_ecs_GpsStart"
+                            android:layout_width="212dp"
+                            android:layout_height="wrap_content"
+                            android:layout_centerHorizontal="true"
+                            android:gravity="center"
+                            android:background="@drawable/button_pressed_ce_light"
+                            android:textColor="#ffffff"
+                            android:text="Get gps location" />
+
+                    </RelativeLayout>
+
+                    <Button
+                        android:layout_width="212dp"
+                        android:layout_height="wrap_content"
+                        android:text="Preview Map"
+                        android:background="@drawable/button_pressed_ce_light"
+                        android:textColor="#ffffff"
+                        android:layout_gravity="center"
+                        android:id="@+id/ce_ecs_preview_map" />
+
+
+
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <!--Total Participants-->
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                card_view:cardBackgroundColor="@color/transparent"
+                card_view:cardElevation="1dp"
+                android:layout_margin="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:layout_margin="20dp"
+                    android:padding="5dp">
+                    <TextView
+                        android:id="@+id/ce_ecs_detail_totalparticipant"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="Total Participants"
+                        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                    <!-- Girls-->
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/layout_margin"
+                        android:padding="5dp">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/ce_ecs_girls"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Girls"
+                            android:inputType="numberDecimal" />
+                    </android.support.design.widget.TextInputLayout>
+
+                    <!--Boys-->
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/layout_margin"
+                        android:padding="5dp">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/ce_ecs_boys"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Boys"
+                            android:inputType="numberDecimal" />
+                    </android.support.design.widget.TextInputLayout>
+
+                    <!--Total-->
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/layout_margin"
+                        android:padding="5dp">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/ce_ecs_totalparticipant"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Total"
+                            android:inputType="numberDecimal" />
+                    </android.support.design.widget.TextInputLayout>
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <!-- Photograph of the support-->
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                card_view:cardBackgroundColor="@color/transparent"
+                android:layout_margin="10dp"
+                card_view:cardElevation="1dp">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/layout_margin"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:padding="5dp">
+
+                    <TextView
+                        android:id="@+id/ce_ecs_PhotographLable"
+                        android:layout_width="200dp"
+                        android:layout_height="50dp"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:gravity="center_vertical"
+                        android:paddingLeft="5dp"
+                        android:text="Photograph"
+                        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                    <ImageButton
+                        android:id="@+id/ce_ecs_detail_photo"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:src="@drawable/button_pressed_transparent"
+                        android:background="@drawable/cam7"
+                        android:layout_alignBottom="@+id/ce_ecs_PhotographLable"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentEnd="true" />
+
+                    <ImageView
+                        android:layout_width="200dp"
+                        android:layout_height="200dp"
+                        android:id="@+id/ce_ecs_detail_PhotographSiteimageViewPreview"
+                        android:layout_below="@+id/ce_ecs_PhotographLable"
+                        android:layout_centerHorizontal="true" />
+
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
+
+            <!--Funding Source-->
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                card_view:cardBackgroundColor="@color/transparent"
+                card_view:cardElevation="1dp"
+                android:layout_margin="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_margin="10dp"
+                    android:padding="5dp">
+
+                    <TextView
+                        android:id="@+id/ce_ecslabel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:paddingLeft="5dp"
+                        android:text="FUNDING SOURCE (Nrs)"
+                        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/ce_ecs_Tal"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="TAL"
+                            android:inputType="numberDecimal" />
+                    </android.support.design.widget.TextInputLayout>
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/ce_ecs_CommunityContribution"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Community Contribution"
+                            android:inputType="numberDecimal" />
+                    </android.support.design.widget.TextInputLayout>
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/ce_ecs_FundOthers"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Others"
+                            android:inputType="text" />
+                    </android.support.design.widget.TextInputLayout>
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+            
+            <!--others-->
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                card_view:cardBackgroundColor="@color/transparent"
+                card_view:cardElevation="1dp"
+                android:layout_margin="10dp">
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/layout_margin"
+                    android:padding="5dp">
+
+                    <AutoCompleteTextView
+                        android:id="@+id/ce_ecs_detail_notes"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:hint="Notes / Remarks"
+                        android:inputType="text" />
+                </android.support.design.widget.TextInputLayout>
+            </android.support.v7.widget.CardView>
+
+            <!--save / send-->
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                card_view:cardBackgroundColor="@color/transparent"
+                card_view:cardElevation="1dp"
+                android:layout_margin="10dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:layout_margin="@dimen/layout_margin"
+                    android:padding="5dp">
+
+                    <Button
+                        android:id="@+id/ce_ecs_detail_save"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentTop="true"
+                        android:background="@drawable/button_pressed_ce_light"
+                        android:textColor="#ffffff"
+                        android:text="Save" />
+
+                    <Button
+                        android:id="@+id/ce_ecs_detail_send"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/button_pressed_ce_light"
+                        android:textColor="#ffffff"
+                        android:text="Send" />
+
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

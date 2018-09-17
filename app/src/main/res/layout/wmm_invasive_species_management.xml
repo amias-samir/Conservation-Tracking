@@ -1,0 +1,948 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar1" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                card_view:cardBackgroundColor="@color/transparent"
+                android:layout_margin="10dp"
+                card_view:cardElevation="1dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="5dp"
+                    android:layout_margin="20dp">
+
+                    <!--project code-->
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/ProjectCode"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Project Code"
+                            android:inputType="text"
+                            android:layout_marginTop="45dp"/>
+                    </android.support.design.widget.TextInputLayout>
+
+                    <!--Landscape-->
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp">
+
+                        <TextView
+                            android:id="@+id/landScape"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignBottom="@+id/wmm_invasive_species_management_detail_landscape"
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentStart="true"
+                            android:layout_alignParentTop="true"
+                            android:gravity="center_vertical"
+                            android:paddingLeft="5dp"
+                            android:text="Landscape"
+                            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                        <Spinner
+                            android:id="@+id/wmm_invasive_species_management_detail_landscape"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentTop="true"
+                            android:layout_alignParentRight="true"
+                            android:layout_toRightOf="@+id/landScape"
+                            android:layout_toEndOf="@+id/landScape" />
+
+                    </RelativeLayout>
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="20dp"
+                        >
+
+                        <AutoCompleteTextView
+                            android:visibility="invisible"
+                            android:id="@+id/OtherlandscapeName"
+                            android:layout_width="200dp"
+                            android:layout_height="wrap_content"
+                            android:hint="Landscape Name"
+                            android:inputType="textMultiLine"
+
+                            />
+                    </android.support.design.widget.TextInputLayout>
+
+                    <!--Agreement No-->
+                        <android.support.design.widget.TextInputLayout
+                            android:id="@+id/to_text_input_layout"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <AutoCompleteTextView
+                                android:id="@+id/wmm_invasive_species_management_detail_Agreement_No"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="Agreement Number"
+                                android:inputType="number"
+                                android:layout_marginTop="15dp"
+                                />
+                        </android.support.design.widget.TextInputLayout>
+
+                    <!--Guarentee Name-->
+                        <android.support.design.widget.TextInputLayout
+                            android:id="@+id/garenteeName"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <AutoCompleteTextView
+                                android:id="@+id/wmm_invasive_species_management_detail_Grantee_Name"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="Grantee Name"
+                                android:inputType="textPersonName"
+                                android:layout_marginTop="10dp"
+                                />
+                        </android.support.design.widget.TextInputLayout>
+
+                    <!--Funding Source-->
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/wmm_invasive_species_management_detail_fundingSource"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Funding Source"
+                            android:inputType="text"
+                            android:layout_marginTop="45dp"/>
+                    </android.support.design.widget.TextInputLayout>
+
+                    <!--fiscal year-->
+                        <android.support.design.widget.TextInputLayout
+                            android:id="@+id/fiscal_year_text_input_layout"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <AutoCompleteTextView
+                                android:id="@+id/wmm_invasive_species_management_Detail_fiscal_Year"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="Fiscal Year"
+                                android:inputType="date"
+                                android:layout_marginTop="10dp"
+                                />
+                        </android.support.design.widget.TextInputLayout>
+
+                    <!--Name of BZ Park/Corriodr/CF-->
+                        <android.support.design.widget.TextInputLayout
+                            android:id="@+id/NameOfBZ_text_input_layout"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <AutoCompleteTextView
+                                android:id="@+id/wmm_invasive_species_management_detail_nameof_bzForestCorridor"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="Location Name"
+                                android:inputType="text"
+                                android:layout_marginTop="10dp"
+                                />
+                        </android.support.design.widget.TextInputLayout>
+
+                    <!--District Name-->
+                        <android.support.design.widget.TextInputLayout
+                            android:id="@+id/DistrictName"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <AutoCompleteTextView
+                                android:id="@+id/wmm_invasive_species_management_detail_DistrictName"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="District Name"
+                                android:inputType="textPersonName"
+                                android:layout_marginTop="10dp"
+                                />
+                        </android.support.design.widget.TextInputLayout>
+
+                    <!--VDC /Municipality Name-->
+                        <android.support.design.widget.TextInputLayout
+                            android:id="@+id/Vdc_nagarpalika"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <AutoCompleteTextView
+                                android:id="@+id/wmm_invasive_species_management_detail_Vdc_Municipality_Name"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="VDC / Municipality"
+                                android:inputType="textPersonName"
+                                android:layout_marginTop="10dp"
+                                />
+                        </android.support.design.widget.TextInputLayout>
+
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <!--Photograph Of the Site-->
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                card_view:cardBackgroundColor="@color/transparent"
+                android:layout_margin="10dp"
+                card_view:cardElevation="1dp">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/layout_margin"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:padding="5dp">
+
+                    <TextView
+                        android:id="@+id/wmm_invasive_species_management_PhotographSiteLable"
+                        android:layout_width="200dp"
+                        android:layout_height="50dp"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:gravity="center_vertical"
+                        android:paddingLeft="5dp"
+                        android:text="Photograph of site"
+                        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                    <ImageButton
+                        android:id="@+id/wmm_invasive_species_management_detail_before_photo_site"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:src="@drawable/button_pressed_transparent"
+                        android:background="@drawable/cam2"
+                        android:layout_alignBottom="@+id/wmm_invasive_species_management_PhotographSiteLable"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentEnd="true" />
+
+                    <ImageView
+                        android:layout_width="200dp"
+                        android:layout_height="200dp"
+                        android:id="@+id/wmm_invasive_species_management_detail_PhotographSiteimageViewPreview"
+                        android:layout_below="@+id/wmm_invasive_species_management_PhotographSiteLable"
+                        android:layout_centerHorizontal="true" />
+
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
+
+
+            <!--Invasive spp Name-->
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                card_view:cardBackgroundColor="@color/transparent"
+                card_view:cardElevation="1dp"
+                android:layout_margin="10dp">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/layout_margin"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:padding="5dp">
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/NameOfInvasive_spp_text_input_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/wmm_invasive_species_management_detail_invasive_spp_name"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Add Species Name"
+                            android:inputType="text"
+                            android:layout_marginTop="10dp"
+                            />
+                    </android.support.design.widget.TextInputLayout>
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
+
+            <!-- Management practices (Uprooted/burnt) -->
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                card_view:cardBackgroundColor="@color/transparent"
+                android:layout_margin="10dp"
+                card_view:cardElevation="1dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="54dp"
+                    android:layout_margin="@dimen/layout_margin"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:padding="5dp">
+
+                    <TextView
+                        android:id="@+id/wmm_invasive_species_management_wildlifeLable"
+                        android:layout_width="200dp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:gravity="center_vertical"
+                        android:paddingLeft="5dp"
+                        android:text="Management practices"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:layout_alignParentTop="true" />
+
+                    <Spinner
+                        android:id="@+id/wmm_invasive_species_management_detail_managementPract"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_toEndOf="@+id/wmm_invasive_species_management_wildlifeLable"
+                        android:layout_toRightOf="@+id/wmm_invasive_species_management_wildlifeLable"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentBottom="true" />
+
+                </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/layout_margin"
+                        android:layout_centerHorizontal="true"
+                        android:layout_centerVertical="true"
+                        android:padding="5dp">
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <AutoCompleteTextView
+                            android:visibility="gone"
+                            android:id="@+id/wmm_invasive_species_management_Detail_OtherPractices"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Practices Names"
+                            android:inputType="textMultiLine"
+                            android:layout_marginTop="10dp"
+                            />
+                    </android.support.design.widget.TextInputLayout>
+                </RelativeLayout>
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <!--Date of management-->
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                card_view:cardBackgroundColor="@color/transparent"
+                card_view:cardElevation="1dp"
+                android:layout_margin="10dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp">
+
+                    <!--date-->
+                    <TextView
+                        android:id="@+id/wmm_invasive_species_management_Detail_dateOfmanagement"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_below="@+id/datelabel"
+                        android:hint="_ _ _ _ _ _ _ _ _"
+                        android:inputType="date" />
+
+                    <Button
+                        android:id="@+id/date_btn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:background="@drawable/button_pressed_wmm_light"
+                        android:text="Choose Date"
+                        android:textColor="#ffffff" />
+
+                    <TextView
+                        android:id="@+id/datelabel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:text="Date of Management" />
+
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
+
+            <!--get Gps Location-->
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                card_view:cardBackgroundColor="@color/transparent"
+                card_view:cardElevation="1dp"
+                android:layout_margin="20dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_margin="20dp"
+                    android:padding="5dp">
+
+                    <TextView
+                        android:id="@+id/wmm_invasive_species_management_detail_GetGpsCoordinate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="@string/gps_tracking"
+                        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_centerVertical="true"
+                        android:layout_margin="@dimen/layout_margin"
+                        android:padding="5dp">
+
+                        <Button
+                            android:id="@+id/wmm_invasive_species_management_detail_GpsEnd"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="End"
+                            android:textColor="#ffffff"
+                            android:background="@drawable/button_pressed_wmm_light"
+                            android:layout_alignTop="@+id/wmm_invasive_species_management_detail_GpsStart"
+                            android:layout_alignParentRight="true"
+                            android:layout_alignParentEnd="true" />
+
+                        <Button
+                            android:id="@+id/wmm_invasive_species_management_detail_GpsStart"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Start"
+                            android:textColor="#ffffff"
+                            android:background="@drawable/button_pressed_wmm_light"
+                            />
+
+                        <ProgressBar
+                            style="?android:attr/progressBarStyleSmall"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/progressBar"
+                            android:layout_centerVertical="true"
+                            android:layout_centerHorizontal="true" />
+
+                    </RelativeLayout>
+
+                    <Button
+                        android:layout_width="212dp"
+                        android:layout_height="wrap_content"
+                        android:text="Preview Map"
+                        android:textColor="#ffffff"
+                        android:background="@drawable/button_pressed_wmm_light"
+                        android:layout_gravity="center"
+                        android:id="@+id/wmm_invasive_species_management_detail_preview_map" />
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="20dp">
+                        <TextView
+                            android:id="@+id/wmm_invasive_species_management_detail_boundry_using_gps"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Area using GPS : " />
+                    </android.support.design.widget.TextInputLayout>
+
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+            <!-- Follow up Photographs (After intervention)-->
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                card_view:cardBackgroundColor="@color/transparent"
+                android:layout_margin="10dp"
+                card_view:cardElevation="1dp">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/layout_margin"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:padding="5dp">
+
+                    <TextView
+                        android:id="@+id/invasive_AfterIntervention"
+                        android:layout_width="200dp"
+                        android:layout_height="50dp"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:gravity="center_vertical"
+                        android:paddingLeft="5dp"
+                        android:text="Photograph (After intervention)"
+                        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                    <ImageButton
+                        android:id="@+id/wmm_invasive_species_management_detail_AfterInterventionBtn"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:src="@drawable/button_pressed_transparent"
+                        android:background="@drawable/cam2"
+                        android:layout_alignBottom="@+id/invasive_AfterIntervention"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentEnd="true"/>
+
+                    <ImageView
+                        android:layout_width="200dp"
+                        android:layout_height="200dp"
+                        android:id="@+id/wmm_invasive_species_management_detail_AfterInterventionimageViewPreview"
+                        android:layout_below="@+id/invasive_AfterIntervention"
+                        android:layout_centerHorizontal="true" />
+
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
+
+            <!--Monitoring Date-->
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                card_view:cardBackgroundColor="@color/transparent"
+                card_view:cardElevation="1dp"
+                android:layout_margin="10dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp">
+
+                    <!--date-->
+                    <TextView
+                        android:id="@+id/wmm_invasive_species_management_Detail_monitoring_date"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_below="@+id/datelabel1"
+                        android:hint="_ _ _ _ _ _ _ _ _"
+                        android:inputType="date" />
+
+                    <Button
+                        android:id="@+id/monitoring_date_btn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:background="@drawable/button_pressed_wmm_light"
+                        android:text="Choose Date"
+                        android:textColor="#ffffff" />
+
+                    <TextView
+                        android:id="@+id/datelabel1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:text="Monitoring Date" />
+
+                </RelativeLayout>
+
+            </android.support.v7.widget.CardView>
+
+            <!--Status of the site  -->
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                card_view:cardBackgroundColor="@color/transparent"
+                android:layout_margin="10dp"
+                card_view:cardElevation="1dp"
+                android:layout_weight="0.12">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/wmm_invasive_species_management_StatusLable"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:paddingLeft="5dp"
+                        android:text="STATUS OF THE SITE"
+                        android:layout_marginTop="10dp"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:layout_alignParentTop="true" />
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:layout_margin="@dimen/layout_margin"
+                        android:layout_centerHorizontal="true"
+                        android:layout_centerVertical="true"
+                        android:padding="5dp">
+
+                        <!--Re-growth of invasives (Y/N)-->
+                        <TextView
+                            android:id="@+id/wmm_invasive_species_management_re_growthStatusLable"
+                            android:layout_width="240dp"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentBottom="true"
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentStart="true"
+                            android:gravity="center_vertical"
+                            android:paddingLeft="5dp"
+                            android:text="Re-growth of invasives"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:layout_alignParentTop="true" />
+
+
+                        <Spinner
+                            android:id="@+id/wmm_invasive_species_management_detail_re_growthStatus"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_alignParentRight="true"
+                            android:layout_toEndOf="@+id/wmm_invasive_species_management_re_growthStatusLable"
+                            android:layout_toRightOf="@+id/wmm_invasive_species_management_re_growthStatusLable"
+                            android:layout_alignParentTop="true"
+                            android:layout_alignParentBottom="true" />
+
+                    </RelativeLayout>
+
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/layout_margin">
+
+                        <android.support.design.widget.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <AutoCompleteTextView
+                                android:id="@+id/wmm_invasive_species_management_detail_re_growthStatus_yes"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="45dp"
+                                android:hint="If yes, provide details?"
+                                android:inputType="text"
+                                android:visibility="gone" />
+                        </android.support.design.widget.TextInputLayout>
+                    </RelativeLayout>
+
+                    <!--Wildlife use (Frequent, Rare, Not in use)-->
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="55dp"
+                        android:layout_margin="@dimen/layout_margin"
+                        android:layout_centerHorizontal="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginTop="20dp"
+                        android:padding="5dp">
+                        <TextView
+                            android:id="@+id/wmm_invasive_species_management_wildlife_useLable"
+                            android:layout_width="200dp"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentBottom="true"
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentStart="true"
+                            android:gravity="center_vertical"
+                            android:paddingLeft="5dp"
+                            android:text="Wildlife use"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:layout_alignParentTop="true" />
+
+
+                        <Spinner
+                            android:id="@+id/wmm_invasive_species_management_detail_wildlife_use"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_alignParentRight="true"
+                            android:layout_toEndOf="@+id/wmm_invasive_species_management_wildlife_useLable"
+                            android:layout_toRightOf="@+id/wmm_invasive_species_management_wildlife_useLable"
+                            android:layout_alignParentTop="true"
+                            android:layout_alignParentBottom="true" />
+                    </RelativeLayout>
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <!--Recommendation-->
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                card_view:cardBackgroundColor="@color/transparent"
+                card_view:cardElevation="1dp"
+                android:layout_margin="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:layout_margin="@dimen/layout_margin"
+                        android:layout_centerHorizontal="true"
+                        android:layout_centerVertical="true"
+                        android:padding="5dp">
+
+                        <TextView
+                            android:id="@+id/recommendation"
+                            android:layout_width="240dp"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentBottom="true"
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentStart="true"
+                            android:gravity="center_vertical"
+                            android:paddingLeft="5dp"
+                            android:text="Recommendation"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:layout_alignParentTop="true" />
+
+
+                        <Spinner
+                            android:id="@+id/wmm_invasive_species_management_detail_recommendation"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_alignParentRight="true"
+                            android:layout_toEndOf="@+id/recommendation"
+                            android:layout_toRightOf="@+id/recommendation"
+                            android:layout_alignParentTop="true"
+                            android:layout_alignParentBottom="true" />
+
+                    </RelativeLayout>
+
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/layout_margin">
+
+                        <android.support.design.widget.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <AutoCompleteTextView
+                                android:id="@+id/wmm_invasive_species_management_detail_recommendation_yes"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="45dp"
+                                android:hint="If yes, provide details?"
+                                android:inputType="text"
+                                android:visibility="gone" />
+                        </android.support.design.widget.TextInputLayout>
+                    </RelativeLayout>
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <!--Photograph (Monitoring)-->
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                card_view:cardBackgroundColor="@color/transparent"
+                android:layout_margin="10dp"
+                card_view:cardElevation="1dp">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/layout_margin"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:padding="5dp">
+
+                    <TextView
+                        android:id="@+id/MonitoringPhoto"
+                        android:layout_width="200dp"
+                        android:layout_height="50dp"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:gravity="center_vertical"
+                        android:paddingLeft="5dp"
+                        android:text="Photograph (Monitoring)"
+                        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                    <ImageButton
+                        android:id="@+id/wmm_invasive_species_management_MonitoringPhotoBtn"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:src="@drawable/button_pressed_transparent"
+                        android:background="@drawable/cam2"
+                        android:layout_alignBottom="@+id/MonitoringPhoto"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentEnd="true"/>
+
+                    <ImageView
+                        android:layout_width="200dp"
+                        android:layout_height="200dp"
+                        android:id="@+id/wmm_invasive_species_management_MonitoringimageViewPreview"
+                        android:layout_below="@+id/MonitoringPhoto"
+                        android:layout_centerHorizontal="true" />
+
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
+
+            <!--Funding Source-->
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                card_view:cardBackgroundColor="@color/transparent"
+                card_view:cardElevation="1dp"
+                android:layout_margin="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_margin="10dp"
+                    android:padding="5dp">
+
+                    <TextView
+                        android:id="@+id/wmm_invasive_species_management_detaillabel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:paddingLeft="5dp"
+                        android:text="FUNDING SOURCE (Nrs)"
+                        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/wmm_invasive_species_management_detail_Tal"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="TAL"
+                            android:inputType="numberDecimal" />
+                    </android.support.design.widget.TextInputLayout>
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/wmm_invasive_species_management_detail_CommunityContribution"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Community Contribution"
+                            android:inputType="numberDecimal" />
+                    </android.support.design.widget.TextInputLayout>
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/wmm_invasive_species_management_detail_FundOthers"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Others"
+                            android:inputType="text" />
+                    </android.support.design.widget.TextInputLayout>
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+            
+            <!--others-->
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                card_view:cardBackgroundColor="@color/transparent"
+                card_view:cardElevation="1dp"
+                android:layout_margin="10dp">
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/layout_margin"
+                    android:padding="5dp">
+
+                    <AutoCompleteTextView
+                        android:id="@+id/wmm_invasive_species_management_detail_notes"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:hint="Notes / Remarks"
+                        android:inputType="text" />
+                </android.support.design.widget.TextInputLayout>
+            </android.support.v7.widget.CardView>
+
+            <!--save / send-->
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                card_view:cardBackgroundColor="@color/transparent"
+                card_view:cardElevation="1dp"
+                android:layout_margin="10dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:layout_margin="@dimen/layout_margin"
+                    android:padding="5dp">
+
+                    <Button
+                        android:id="@+id/wmm_invasive_species_management_detail_save"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentTop="true"
+                        android:textColor="#ffffff"
+                        android:background="@drawable/button_pressed_wmm_light"
+                        android:text="Save" />
+
+                    <Button
+                        android:id="@+id/wmm_invasive_species_management_detail_send"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="#ffffff"
+                        android:background="@drawable/button_pressed_wmm_light"
+                        android:text="Send" />
+
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

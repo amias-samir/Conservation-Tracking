@@ -1,0 +1,571 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar5" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                card_view:cardBackgroundColor="@color/transparent"
+                card_view:cardElevation="1dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="5dp"
+                    android:layout_margin="20dp">
+
+                    <!--project code-->
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/ProjectCode"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Project Code"
+                            android:inputType="text"
+                            android:layout_marginTop="45dp"/>
+                    </android.support.design.widget.TextInputLayout>
+
+                    <!--Landscape-->
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp">
+
+                        <TextView
+                            android:id="@+id/landScape"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignBottom="@+id/wmm_wildlife_rescue_release_detail_landscape"
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentStart="true"
+                            android:layout_alignParentTop="true"
+                            android:gravity="center_vertical"
+                            android:paddingLeft="5dp"
+                            android:text="Landscape"
+                            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                        <Spinner
+                            android:id="@+id/cs_is_detail_landscape"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentTop="true"
+                            android:layout_alignParentRight="true"
+                            android:layout_toRightOf="@+id/landScape"
+                            android:layout_toEndOf="@+id/landScape" />
+
+                    </RelativeLayout>
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="20dp"
+                        >
+
+                        <AutoCompleteTextView
+                            android:visibility="invisible"
+                            android:id="@+id/OtherlandscapeName"
+                            android:layout_width="200dp"
+                            android:layout_height="wrap_content"
+                            android:hint="Landscape Name"
+                            android:inputType="textMultiLine"
+
+                            />
+                    </android.support.design.widget.TextInputLayout>
+
+                    <!--Agreement No-->
+                        <android.support.design.widget.TextInputLayout
+                            android:id="@+id/to_text_input_layout"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <AutoCompleteTextView
+                                android:id="@+id/cs_is_Agreement_No"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="Agreement Number"
+                                android:inputType="number"
+                                android:layout_marginTop="15dp"
+                                />
+                        </android.support.design.widget.TextInputLayout>
+
+                    <!--Guarentee Name-->
+                        <android.support.design.widget.TextInputLayout
+                            android:id="@+id/garenteeName"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <AutoCompleteTextView
+                                android:id="@+id/cs_is_Grantee_Name"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="Grantee Name"
+                                android:inputType="textPersonName"
+                                android:layout_marginTop="10dp"
+                                />
+                        </android.support.design.widget.TextInputLayout>
+
+                    <!--Funding Source-->
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/cs_is_detail_fundingSource"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Funding Source"
+                            android:inputType="text"
+                            android:layout_marginTop="45dp"/>
+                    </android.support.design.widget.TextInputLayout>
+
+                    <!--fiscal year-->
+                        <android.support.design.widget.TextInputLayout
+                            android:id="@+id/fiscal_year_text_input_layout"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <AutoCompleteTextView
+                                android:id="@+id/cs_is_fiscal_Year"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="Fiscal Year"
+                                android:inputType="date"
+                                android:layout_marginTop="10dp"
+                                />
+                        </android.support.design.widget.TextInputLayout>
+
+
+
+                    <!--Name of BZ Park/BZ/NF/Corriodr/CF-->
+                        <android.support.design.widget.TextInputLayout
+                            android:id="@+id/NameOfBZ_text_input_layout"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <AutoCompleteTextView
+                                android:id="@+id/cs_is_detail_nameof_bzForestCorridor"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="Location Name"
+                                android:inputType="text"
+                                android:layout_marginTop="10dp"
+                                />
+                        </android.support.design.widget.TextInputLayout>
+
+                    <!--No.-->
+                        <android.support.design.widget.TextInputLayout
+                            android:id="@+id/wmm_wildlife_mortality_no"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <AutoCompleteTextView
+                                android:id="@+id/cs_is_detail_no"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="Number"
+                                android:inputType="numberDecimal"
+                                android:layout_marginTop="10dp"
+                                />
+                        </android.support.design.widget.TextInputLayout>
+
+                    <!--District Name-->
+                        <android.support.design.widget.TextInputLayout
+                            android:id="@+id/DistrictName"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <AutoCompleteTextView
+                                android:id="@+id/cs_is_detail_DistrictName"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="District Name"
+                                android:inputType="textPersonName"
+                                android:layout_marginTop="10dp"
+                                />
+                        </android.support.design.widget.TextInputLayout>
+
+                    <!--VDC /Municipality Name-->
+                        <android.support.design.widget.TextInputLayout
+                            android:id="@+id/Vdc_nagarpalika"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <AutoCompleteTextView
+                                android:id="@+id/cs_is_detail_Vdc_Municipality_Name"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="VDC / Municipality"
+                                android:inputType="textPersonName"
+                                android:layout_marginTop="10dp"
+                                />
+                        </android.support.design.widget.TextInputLayout>
+
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <!--Office building/Office equipment (com   puter, stationary, books, furnitures)-->
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                card_view:cardBackgroundColor="@color/transparent"
+                card_view:cardElevation="1dp"
+                android:layout_weight="0.12">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/layout_margin"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:padding="5dp">
+
+                    <TextView
+                        android:id="@+id/cs_is_officeEquipmentStatusLable"
+                        android:layout_width="200dp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:gravity="center_vertical"
+                        android:paddingLeft="5dp"
+                        android:text="Office building/Office equipment (Activity)"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:layout_alignParentTop="true" />
+
+
+                    <Spinner
+                        android:id="@+id/cs_is_spinner_detail_officeEquipmentStatus"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                       android:layout_below="@id/cs_is_officeEquipmentStatusLable"
+                        android:layout_alignParentRight="true"
+                        />
+
+
+                    <!--Specify others activity-->
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/sc_activity_others_text_input_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/cs_is_spinner_detail_officeEquipmentStatus">
+
+                        <AutoCompleteTextView
+                            android:visibility="gone"
+                            android:id="@+id/cs_is_specify_others_activity"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Specify Others"
+                            android:inputType="text"
+                            android:layout_marginTop="15dp"
+                            />
+                    </android.support.design.widget.TextInputLayout>
+                </RelativeLayout>
+
+            </android.support.v7.widget.CardView>
+
+            <!--Photograph of Before-->
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                card_view:cardBackgroundColor="@color/transparent"
+                android:layout_margin="10dp"
+                card_view:cardElevation="1dp">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/layout_margin"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:padding="5dp">
+
+                    <TextView
+                        android:id="@+id/cs_is_PhotographBeforeLable"
+                        android:layout_width="200dp"
+                        android:layout_height="50dp"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:gravity="center_vertical"
+                        android:paddingLeft="5dp"
+                        android:text="Photograph of site"
+                        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                    <ImageButton
+                        android:id="@+id/cs_is_detail_Beforephoto"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:src="@drawable/button_pressed_transparent"
+                        android:background="@drawable/cam6"
+                        android:layout_alignBottom="@+id/cs_is_PhotographBeforeLable"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentEnd="true"  />
+
+                    <ImageView
+                        android:layout_width="200dp"
+                        android:layout_height="200dp"
+                        android:id="@+id/cs_is__detail_PhotographBeforeimageViewPreview"
+                        android:layout_below="@+id/cs_is_PhotographBeforeLable"
+                        android:layout_centerHorizontal="true" />
+
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
+
+            <!--get Gps Location House hold-->
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                card_view:cardBackgroundColor="@color/transparent"
+                card_view:cardElevation="1dp"
+                android:layout_margin="20dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_margin="10dp"
+                    android:padding="5dp">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_centerVertical="true"
+                        android:layout_margin="@dimen/layout_margin"
+                        android:padding="5dp">
+
+                        <Button
+                            android:id="@+id/cs_is_GpsStart"
+                            android:layout_width="212dp"
+                            android:layout_height="wrap_content"
+                            android:layout_centerHorizontal="true"
+                            android:gravity="center"
+                            android:background="@drawable/button_pressed_cs_light"
+                            android:textColor="#ffffff"
+                            android:text="Get gps location" />
+
+                    </RelativeLayout>
+
+                    <Button
+                        android:layout_width="212dp"
+                        android:layout_height="wrap_content"
+                        android:text="Preview Map"
+                        android:background="@drawable/button_pressed_cs_light"
+                        android:textColor="#ffffff"
+                        android:layout_gravity="center"
+                        android:id="@+id/cs_is_preview_map" />
+
+
+
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <!--Funding Source-->
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                card_view:cardBackgroundColor="@color/transparent"
+                card_view:cardElevation="1dp"
+                android:layout_margin="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:layout_margin="20dp"
+                    android:padding="5dp">
+                    <TextView
+                        android:id="@+id/cs_is_detail_funding"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="FUNDING SOURCE"
+                        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                    <!--TAL-->
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/layout_margin">
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+
+                    <AutoCompleteTextView
+                            android:id="@+id/cs_is_tal"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:hint="TAL"
+                            android:inputType="numberDecimal" />
+                    </android.support.design.widget.TextInputLayout>
+                    </RelativeLayout>
+
+                    <!--Community contribution-->
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/layout_margin">
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+
+                    <AutoCompleteTextView
+                            android:id="@+id/cs_is_detail_community_contribution"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:hint="Park/Community contribution"
+                            android:inputType="numberDecimal" />
+                    </android.support.design.widget.TextInputLayout>
+                    </RelativeLayout>
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/cs_is_detail_FundOthers"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Other (Specify)"
+                            android:inputType="textMultiLine" />
+                    </android.support.design.widget.TextInputLayout>
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <!--Photo (After Intervention)-->
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                card_view:cardBackgroundColor="@color/transparent"
+                android:layout_margin="10dp"
+                card_view:cardElevation="1dp">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/layout_margin"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:padding="5dp">
+
+                    <TextView
+                        android:id="@+id/PhotograhIntervention"
+                        android:layout_width="200dp"
+                        android:layout_height="50dp"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:gravity="center_vertical"
+                        android:paddingLeft="5dp"
+                        android:text="Photograph (After Intervention)"
+                        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                    <ImageButton
+                        android:id="@+id/cs_is_detail_PhotographIntervention"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:src="@drawable/button_pressed_transparent"
+                        android:background="@drawable/cam6"
+                        android:layout_alignBottom="@+id/PhotograhIntervention"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentEnd="true"  />
+
+                    <ImageView
+                        android:layout_width="200dp"
+                        android:layout_height="200dp"
+                        android:id="@+id/cs_is__detail_PhotograpInterventionimageViewPreview"
+                        android:layout_below="@+id/PhotograhIntervention"
+                        android:layout_centerHorizontal="true" />
+
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
+
+            <!--others-->
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                card_view:cardBackgroundColor="@color/transparent"
+                card_view:cardElevation="1dp"
+                android:layout_margin="10dp">
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/layout_margin"
+                    android:padding="5dp">
+
+                    <AutoCompleteTextView
+                        android:id="@+id/cs_is_detail_notes"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:hint="Notes / Remarks"
+                        android:inputType="text" />
+                </android.support.design.widget.TextInputLayout>
+            </android.support.v7.widget.CardView>
+
+            <!--save / send-->
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                card_view:cardBackgroundColor="@color/transparent"
+                card_view:cardElevation="1dp"
+                android:layout_margin="10dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:layout_margin="@dimen/layout_margin"
+                    android:padding="5dp">
+
+                    <Button
+                        android:id="@+id/cs_is_detail_save"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentTop="true"
+                        android:background="@drawable/button_pressed_cs_light"
+                        android:textColor="#ffffff"
+                        android:text="Save" />
+
+                    <Button
+                        android:id="@+id/cs_is_detail_send"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Send"
+                        android:background="@drawable/button_pressed_cs_light"
+                        android:textColor="#ffffff"/>
+
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

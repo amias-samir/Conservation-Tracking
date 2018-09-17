@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="teal">#1c75bf</color>
+    <color name="light_teal">#6b008bff</color>
+    <color name="colorAccent">#000000</color>
+
+    <color name="transparent">#FFFFFF</color>
+    <color name="light_grey">#D0D0D0</color>
+    <color name="shadow_light">#C0C0C0</color>
+
+    <color name="sent">#00cf11</color>
+    <color name="not_sent">#ed5047</color>
+
+    <color name="forest">#388e3c</color>
+    <color name="forest_light">#489e4c</color>
+    <color name="conservation_education">#78bf26</color>
+    <color name="conservation_education_light">#8ed73a</color>
+    <color name="wmm">#3f51b5</color>
+    <color name="wmm_light">#4f65df</color>
+    <color name="wild_life_trade_control">#c0392b</color>
+    <color name="wild_life_trade_control_light">#e74b3b</color>
+    <color name="general_frorm">#795548</color>
+    <color name="general_frorm_light">#9e705f</color>
+    <color name="saved_form">#6b6b6b</color>
+    <color name="saved_form_light">#808080</color>
+    <color name="wildlife_monitoring_technique">#00796b</color>
+    <color name="wildlife_monitoring_technique_light">#02a390</color>
+    <color name="community_support">#607d8b</color>
+    <color name="community_support_light">#7091a1</color>
+    <color name="climate_change">#10b5ff</color>
+    <color name="climate_change_light">#35c0ff</color>
+    <color name="human_wildLife_conflict">#ff5722</color>
+    <color name="human_wildLife_conflict_light">#ff6535</color>
+
+
+
+    <color name="float_transparent">#00000000</color>
+    <color name="sweet_dialog_bg_color">#FFFFFF</color>
+    <color name="button_text_color">#FFFFFF</color>
+    <color name="gray_btn_bg_color">#D0D0D0</color>
+    <color name="gray_btn_bg_pressed_color">#B6B6B6</color>
+    <color name="blue_btn_bg_color">#388e3c</color>
+    <color name="blue_btn_bg_pressed_color">#96BFD2</color>
+    <color name="red_btn_bg_color">#b93319</color>
+    <color name="red_btn_bg_pressed_color">#cc3830</color>
+    <color name="error_stroke_color">#b11919</color>
+    <color name="success_stroke_color">#109412</color>
+    <color name="trans_success_stroke_color">#33A5DC86</color>
+    <color name="warning_stroke_color">#F8BB86</color>
+    <color name="text_color">#575757</color>
+    <color name="material_blue_grey_80">#ff37474f</color>
+    <color name="material_blue_grey_90">#ff263238</color>
+    <color name="material_blue_grey_95">#ff21272b</color>
+    <color name="material_deep_teal_20">#ff80cbc4</color>
+    <color name="material_deep_teal_50">#ff009688</color>
+
+</resources>
