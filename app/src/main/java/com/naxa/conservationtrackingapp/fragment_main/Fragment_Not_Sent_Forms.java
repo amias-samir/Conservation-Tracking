@@ -375,6 +375,7 @@ public class Fragment_Not_Sent_Forms extends Fragment {
                 Intent intentf = new Intent(getActivity(), WetlandManagement.class);
                 intentf.putExtra("JSON1", jsonData);
                 intentf.putExtra("photo", photo);
+                intentf.putExtra("gps" , gps) ;
                 intentf.putExtra("status" , status) ;
                 intentf.putExtra("dbID" , dbID) ;
                 intentf.putExtra("formName" , formName) ;
