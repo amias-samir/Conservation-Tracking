@@ -47,6 +47,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.model.LatLng;
+
 import com.naxa.conservationtrackingapp.GeoPointActivity;
 import com.naxa.conservationtrackingapp.PhoneUtils;
 import com.naxa.conservationtrackingapp.activities.CalculateAreaUsinGPS;
@@ -88,7 +89,7 @@ import com.naxa.conservationtrackingapp.application.ApplicationClass;
 import com.naxa.conservationtrackingapp.database.DataBaseConserVationTracking;
 import com.naxa.conservationtrackingapp.dialog.Default_DIalog;
 import com.naxa.conservationtrackingapp.dialog.Multiple_Selection_Dialog_HECMitigationSupport;
-import com.naxa.conservationtrackingapp.forest.Cf_Detail;
+
 import com.naxa.conservationtrackingapp.model.CheckValues;
 import com.naxa.conservationtrackingapp.model.Constants;
 import com.naxa.conservationtrackingapp.model.StaticListOfCoordinates;
@@ -114,6 +115,7 @@ public class HWCMitigationSupport extends AppCompatActivity implements AdapterVi
     Spinner spinnerLandscape, activityName, fenchStatus;
     ArrayAdapter landscapeAdpt, activityNameAdapter, fenchStatusAdapter;
     Button send, save, startGps, endGps , previewMap, startTrackingGps, endTrackingGps, trackingPreviewMap;
+
     ProgressDialog mProgressDlg;
     ProgressBar tracking;
     Context context = this;
@@ -135,6 +137,7 @@ public class HWCMitigationSupport extends AppCompatActivity implements AdapterVi
     boolean isGpsTracking = false;
     boolean isGpsTaken = false;
     boolean isPaused = true;
+
     double initLat;
     double finalLat;
     double initLong;
@@ -157,6 +160,7 @@ public class HWCMitigationSupport extends AppCompatActivity implements AdapterVi
     String name_of_bz;
     String district_name;
     String vdc_name;
+
     String activity_name;
     //    String unit;
     String value;
@@ -262,7 +266,7 @@ public class HWCMitigationSupport extends AppCompatActivity implements AdapterVi
         send = (Button) findViewById(R.id.hwc_mitigation_support_send);
         save = (Button) findViewById(R.id.hwc_mitigation_support_save);
         startGps = (Button) findViewById(R.id.hwc_mitigation_support_GpsPointStart);
-//         endGps = (Button) findViewById(R.id.hwc_mitigation_support_GpsEnd);
+
         previewMap = (Button) findViewById(R.id.hwc_mitigation_support_preview_map);
         previewMap.setEnabled(false);
 
@@ -586,33 +590,6 @@ public class HWCMitigationSupport extends AppCompatActivity implements AdapterVi
 
         //============================================== start tracking code starts here ======================================//
 
-//        startTrackingGps.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                tracking.setVisibility(View.VISIBLE);
-//                isGpsTracking = true;
-//                listCf.clear();
-//                gpslocation.clear();
-//                gpsTracking = new GpsTracker(HWCMitigationSupport.this);
-//                if (gpsTracking.canGetLocation()) {
-//
-////                    Toast.makeText(
-////                            getApplicationContext(),
-////                            "Your Location is - \nLat: " + initLat
-////                                    + "\nLong: " + initLong, Toast.LENGTH_SHORT)
-////                            .show();
-//                } else {
-//                    gpsTracking.showSettingsAlert();
-//                }
-//
-//                UpdateData();//Update GPS coordinate background thread //Method
-//
-//                endTrackingGps.setEnabled(true);
-//                startTrackingGps.setEnabled(false);
-//            }
-//        });
-
-
         startTrackingGps.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) throws NullPointerException {
@@ -622,9 +599,6 @@ public class HWCMitigationSupport extends AppCompatActivity implements AdapterVi
                 startActivityForResult(toGeoPointActivity, GEOPOINT_RESULT_CODE);
             }
         });
-
-
-
 
         endTrackingGps.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -1091,6 +1065,7 @@ public class HWCMitigationSupport extends AppCompatActivity implements AdapterVi
             gpsTracking = new GpsTracker(HWCMitigationSupport.this);
             gpsTracking.canGetLocation();
             startTrackingGps.setEnabled(true);
+
         }
     }
 
