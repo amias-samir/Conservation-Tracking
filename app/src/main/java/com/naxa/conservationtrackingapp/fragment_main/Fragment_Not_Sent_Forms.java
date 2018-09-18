@@ -522,31 +522,6 @@ public class Fragment_Not_Sent_Forms extends Fragment {
                 startActivity(intent26);
                 break;
 
-            case "90" :
-                Intent intent90 = new Intent(getActivity(), EWSEquipmentStatusRecordingActivity.class);
-                intent90.putExtra("JSON1", jsonData);
-                intent90.putExtra("photo", photo);
-                intent90.putExtra("gps" , gps) ;
-                intent90.putExtra("status" , status) ;
-                intent90.putExtra("dbID" , dbID) ;
-                intent90.putExtra("formName" , formName) ;
-                startActivity(intent90);
-                break;
-
-            case "91" :
-                Intent intent91 = new Intent(getActivity(), ElephantActivityRecordingCSUActivity.class);
-                intent91.putExtra("JSON1", jsonData);
-                intent91.putExtra("photo", photo);
-                intent91.putExtra("gps" , gps) ;
-                intent91.putExtra("status" , status) ;
-                intent91.putExtra("dbID" , dbID) ;
-                intent91.putExtra("formName" , formName) ;
-                startActivity(intent91);
-                break;
-
-
-
-
 
             case "51" :
                 Intent intent51 = new Intent(getActivity(), BiogasDetail.class);
@@ -727,6 +702,51 @@ public class Fragment_Not_Sent_Forms extends Fragment {
                 intent87.putExtra("dbID" , dbID) ;
                 intent87.putExtra("formName" , formName) ;
                 startActivity(intent87);
+                break;
+
+
+            case "88" :
+                Intent intent88 = new Intent(getActivity(), ScatCollectionDetailsActivity.class);
+                intent88.putExtra("JSON1", jsonData);
+                intent88.putExtra("photo", photo);
+                intent88.putExtra("gps" , gps) ;
+                intent88.putExtra("status" , status) ;
+                intent88.putExtra("dbID" , dbID) ;
+                intent88.putExtra("formName" , formName) ;
+                startActivity(intent88);
+                break;
+
+            case "89" :
+                Intent intent89 = new Intent(getActivity(), SnowLeopardPreyBaseMonitoringActivity.class);
+                intent89.putExtra("JSON1", jsonData);
+                intent89.putExtra("photo", photo);
+                intent89.putExtra("gps" , gps) ;
+                intent89.putExtra("status" , status) ;
+                intent89.putExtra("dbID" , dbID) ;
+                intent89.putExtra("formName" , formName) ;
+                startActivity(intent89);
+                break;
+
+            case "90" :
+                Intent intent90 = new Intent(getActivity(), EWSEquipmentStatusRecordingActivity.class);
+                intent90.putExtra("JSON1", jsonData);
+                intent90.putExtra("photo", photo);
+                intent90.putExtra("gps" , gps) ;
+                intent90.putExtra("status" , status) ;
+                intent90.putExtra("dbID" , dbID) ;
+                intent90.putExtra("formName" , formName) ;
+                startActivity(intent90);
+                break;
+
+            case "91" :
+                Intent intent91 = new Intent(getActivity(), ElephantActivityRecordingCSUActivity.class);
+                intent91.putExtra("JSON1", jsonData);
+                intent91.putExtra("photo", photo);
+                intent91.putExtra("gps" , gps) ;
+                intent91.putExtra("status" , status) ;
+                intent91.putExtra("dbID" , dbID) ;
+                intent91.putExtra("formName" , formName) ;
+                startActivity(intent91);
                 break;
 
             case "100" :
