@@ -150,6 +150,9 @@ public class Cf_Detail extends AppCompatActivity implements AdapterView.OnItemSe
 //        toolbar.setTitle("Cf Detail");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        CheckValues.isFromSavedFrom = false;
+
+
         tvProjectCode = (AutoCompleteTextView) findViewById(R.id.ProjectCode);
         spinnerLandscape = (Spinner) findViewById(R.id.cf_detail_landscape);
         tvFundingSource = (AutoCompleteTextView) findViewById(R.id.cf_detail_fundingSource);

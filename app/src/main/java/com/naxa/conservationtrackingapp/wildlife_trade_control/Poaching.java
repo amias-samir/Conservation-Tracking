@@ -79,10 +79,12 @@ import java.util.List;
 
 import javax.net.ssl.HttpsURLConnection;
 
+import com.naxa.conservationtrackingapp.activities.SavedFormsActivity;
 import com.naxa.conservationtrackingapp.application.ApplicationClass;
 import com.naxa.conservationtrackingapp.database.DataBaseConserVationTracking;
 import com.naxa.conservationtrackingapp.dialog.Default_DIalog;
 import com.naxa.conservationtrackingapp.dialog.Multiple_Selection_Dialog_PoachingDetails1;
+import com.naxa.conservationtrackingapp.forest.Cf_Detail;
 import com.naxa.conservationtrackingapp.model.CheckValues;
 import com.naxa.conservationtrackingapp.model.Constants;
 import com.naxa.conservationtrackingapp.model.StaticListOfCoordinates;
@@ -156,6 +158,9 @@ public class Poaching extends AppCompatActivity implements AdapterView.OnItemSel
     String userNameToSend, passwordToSend;
     String dataSentStatus = "", dateString;
 
+    String formNameSavedForm, formid;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -164,6 +169,9 @@ public class Poaching extends AppCompatActivity implements AdapterView.OnItemSel
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        CheckValues.isFromSavedFrom = false;
+
 
         tvProjectCode = (AutoCompleteTextView) findViewById(R.id.PoachingProjectCode);
         spinnerLandscape = (Spinner) findViewById(R.id.poaching_details_detail_landscape);
@@ -343,7 +351,11 @@ public class Poaching extends AppCompatActivity implements AdapterView.OnItemSel
                         item_confiscated = tvNameAndNumber.getText().toString();
                         date = tvDate.getText().toString();
                         time = tvTime.getText().toString();
-                        jsonLatLangArray = jsonArrayGPS.toString();
+
+                        if (!CheckValues.isFromSavedFrom) {
+                            jsonLatLangArray = jsonArrayGPS.toString();
+                        }
+
                         poacher_offender_name = tvPoacherOffenderName.getText().toString();
                         remarks = tvNotes.getText().toString();
                         fund_tal = tvFundTal.getText().toString();
@@ -363,6 +375,14 @@ public class Poaching extends AppCompatActivity implements AdapterView.OnItemSel
                         final EditText FormNameToInput = (EditText) showDialog.findViewById(R.id.input_tableName);
                         final EditText dateToInput = (EditText) showDialog.findViewById(R.id.input_date);
                         FormNameToInput.setText("Poaching Details");
+
+                        if (CheckValues.isFromSavedFrom) {
+                            if (formNameSavedForm == null | formNameSavedForm.equals("")) {
+                                FormNameToInput.setText("CBAPO Status");
+                            } else {
+                                FormNameToInput.setText(formNameSavedForm);
+                            }
+                        }
 
                         long date = System.currentTimeMillis();
 
@@ -392,6 +412,17 @@ public class Poaching extends AppCompatActivity implements AdapterView.OnItemSel
                                     DataBaseConserVationTracking dataBaseConserVationTracking = new DataBaseConserVationTracking(context);
                                     dataBaseConserVationTracking.open();
                                     long id = dataBaseConserVationTracking.insertIntoTable_Main(data);
+                                    dataBaseConserVationTracking.close();
+
+
+                                    if (CheckValues.isFromSavedFrom) {
+
+                                        DataBaseConserVationTracking dataBaseConserVationTracking1 = new DataBaseConserVationTracking(context);
+                                        dataBaseConserVationTracking1.open();
+                                        int updated_id = (int) dataBaseConserVationTracking1.updateTable_DeleteFlag(formid);
+                                        dataBaseConserVationTracking.close();
+                                    }
+
 
                                     new PromptDialog(Poaching.this)
                                             .setDialogType(PromptDialog.DIALOG_TYPE_SUCCESS)
@@ -401,7 +432,13 @@ public class Poaching extends AppCompatActivity implements AdapterView.OnItemSel
                                             .setPositiveListener("okay", new PromptDialog.OnPositiveListener() {
                                                 @Override
                                                 public void onClick(PromptDialog dialog) {
-                                                    dialog.dismiss();
+                                                    if (CheckValues.isFromSavedFrom) {
+                                                        showDialog.dismiss();
+                                                        startActivity(new Intent(Poaching.this, SavedFormsActivity.class));
+                                                        finish();
+                                                    } else {
+                                                        dialog.dismiss();
+                                                    }
                                                 }
                                             }).show();
                                     dataBaseConserVationTracking.close();
@@ -729,6 +766,9 @@ public class Poaching extends AppCompatActivity implements AdapterView.OnItemSel
             imageName = (String) bundle.get("photo");
             String gpsLocationtoParse = (String) bundle.get("gps");
 
+            formid = (String) bundle.get("dbID");
+            formNameSavedForm = (String) bundle.get("formName");
+
             String status = (String) bundle.get("status");
             if(status.equals("Sent")){
                 save.setEnabled(false);
@@ -766,6 +806,8 @@ public class Poaching extends AppCompatActivity implements AdapterView.OnItemSel
     //new adjustment
     public void parseArrayGPS(String arrayToParse) {
         try {
+            jsonLatLangArray = arrayToParse;
+
             JSONArray array = new JSONArray(arrayToParse);
             for (int i = 0; i < array.length(); ++i) {
                 JSONObject item1 = null;
