@@ -62,8 +62,10 @@ import java.util.List;
 
 import javax.net.ssl.HttpsURLConnection;
 
+import com.naxa.conservationtrackingapp.activities.SavedFormsActivity;
 import com.naxa.conservationtrackingapp.database.DataBaseConserVationTracking;
 import com.naxa.conservationtrackingapp.dialog.Default_DIalog;
+import com.naxa.conservationtrackingapp.forest.Cf_Detail;
 import com.naxa.conservationtrackingapp.model.CheckValues;
 import com.naxa.conservationtrackingapp.model.Constants;
 import com.naxa.conservationtrackingapp.model.StaticListOfCoordinates;
@@ -90,6 +92,9 @@ public class HWCEndowmentFund extends AppCompatActivity implements AdapterView.O
     String jsonToSend, photoTosend;
     String imagePath, encodedImage = null, imageName = "no_photo";
     ImageButton photo;
+
+    String formNameSavedForm, formid;
+
 
     public static final int GEOPOINT_RESULT_CODE = 1994;
     public static final String LOCATION_RESULT = "LOCATION_RESULT";
@@ -160,6 +165,9 @@ public class HWCEndowmentFund extends AppCompatActivity implements AdapterView.O
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        CheckValues.isFromSavedFrom = false;
+
 
         tvProjectCode = (AutoCompleteTextView) findViewById(R.id.HWCEndoFundProjectCode);
         spinnerLandscape = (Spinner) findViewById(R.id.hwc_endowment_fund_landscape);
@@ -321,7 +329,10 @@ public class HWCEndowmentFund extends AppCompatActivity implements AdapterView.O
                         others_name = tvOthersName.getText().toString();
                         others_no = tvOthersNo.getText().toString();
 
-                        jsonLatLangArray = jsonArrayGPS.toString();
+
+                        if (!CheckValues.isFromSavedFrom) {
+                            jsonLatLangArray = jsonArrayGPS.toString();
+                        }
 
                         convertDataToJson();
 
@@ -334,6 +345,17 @@ public class HWCEndowmentFund extends AppCompatActivity implements AdapterView.O
                         final EditText FormNameToInput = (EditText) showDialog.findViewById(R.id.input_tableName);
                         final EditText dateToInput = (EditText) showDialog.findViewById(R.id.input_date);
                         FormNameToInput.setText("HWC Endowment Fund");
+
+
+                        if (CheckValues.isFromSavedFrom) {
+                            if (formNameSavedForm == null | formNameSavedForm.equals("")) {
+                                FormNameToInput.setText("HWC Endowment Fund");
+                            } else {
+                                FormNameToInput.setText(formNameSavedForm);
+                            }
+                        }
+
+
 
                         long date = System.currentTimeMillis();
 
@@ -363,6 +385,18 @@ public class HWCEndowmentFund extends AppCompatActivity implements AdapterView.O
                                     DataBaseConserVationTracking dataBaseConserVationTracking = new DataBaseConserVationTracking(context);
                                     dataBaseConserVationTracking.open();
                                     long id = dataBaseConserVationTracking.insertIntoTable_Main(data);
+                                    dataBaseConserVationTracking.close();
+
+
+                                    if (CheckValues.isFromSavedFrom) {
+
+                                        DataBaseConserVationTracking dataBaseConserVationTracking1 = new DataBaseConserVationTracking(context);
+                                        dataBaseConserVationTracking1.open();
+                                        int updated_id = (int) dataBaseConserVationTracking1.updateTable_DeleteFlag(formid);
+                                        dataBaseConserVationTracking.close();
+                                    }
+
+
 
                                     new PromptDialog(HWCEndowmentFund.this)
                                             .setDialogType(PromptDialog.DIALOG_TYPE_SUCCESS)
@@ -372,8 +406,13 @@ public class HWCEndowmentFund extends AppCompatActivity implements AdapterView.O
                                             .setPositiveListener("okay", new PromptDialog.OnPositiveListener() {
                                                 @Override
                                                 public void onClick(PromptDialog dialog) {
-                                                    dialog.dismiss();
-                                                }
+                                                    if (CheckValues.isFromSavedFrom) {
+                                                        showDialog.dismiss();
+                                                        startActivity(new Intent(HWCEndowmentFund.this, SavedFormsActivity.class));
+                                                        finish();
+                                                    } else {
+                                                        dialog.dismiss();
+                                                    }                                                }
                                             }).show();
                                     dataBaseConserVationTracking.close();
                                     showDialog.dismiss();
@@ -599,6 +638,9 @@ public class HWCEndowmentFund extends AppCompatActivity implements AdapterView.O
             String jsonToParse = (String) bundle.get("JSON1");
             String gpsLocationtoParse = (String) bundle.get("gps");
 
+            formid = (String) bundle.get("dbID");
+            formNameSavedForm = (String) bundle.get("formName");
+
             String status = (String) bundle.get("status");
             if(status.equals("Sent")){
                 save.setEnabled(false);
@@ -624,6 +666,8 @@ public class HWCEndowmentFund extends AppCompatActivity implements AdapterView.O
     //new adjustment
     public void parseArrayGPS(String arrayToParse) {
         try {
+            jsonLatLangArray = arrayToParse;
+
             JSONArray array = new JSONArray(arrayToParse);
             for (int i = 0; i < array.length(); ++i) {
                 JSONObject item1 = null;

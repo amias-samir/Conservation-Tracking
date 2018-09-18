@@ -35,8 +35,10 @@ import com.naxa.conservationtrackingapp.GeoPointActivity;
 import com.naxa.conservationtrackingapp.R;
 import com.naxa.conservationtrackingapp.activities.GPS_TRACKER_FOR_POINT;
 import com.naxa.conservationtrackingapp.activities.MapPointActivity;
+import com.naxa.conservationtrackingapp.activities.SavedFormsActivity;
 import com.naxa.conservationtrackingapp.database.DataBaseConserVationTracking;
 import com.naxa.conservationtrackingapp.dialog.Default_DIalog;
+import com.naxa.conservationtrackingapp.forest.Cf_Detail;
 import com.naxa.conservationtrackingapp.model.CheckValues;
 import com.naxa.conservationtrackingapp.model.Constants;
 import com.naxa.conservationtrackingapp.model.StaticListOfCoordinates;
@@ -132,6 +134,9 @@ public class ElephantActivityRecordingCSUActivity extends AppCompatActivity impl
     Context context = this;
     String jsonToSend;
 
+    String formNameSavedForm, formid;
+
+
     private int year;
     private int month;
     private int day;
@@ -205,6 +210,9 @@ public class ElephantActivityRecordingCSUActivity extends AppCompatActivity impl
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        CheckValues.isFromSavedFrom = false;
+
 
         //        set date and time
         setCurrentDateOnView();
@@ -748,7 +756,10 @@ public class ElephantActivityRecordingCSUActivity extends AppCompatActivity impl
             Toast.makeText(getApplicationContext(), "Please end GPS Tracking.", Toast.LENGTH_SHORT).show();
         } else {
             if (isGpsTaken) {
-                jsonLatLangArray = jsonArrayGPS.toString();
+
+                if (!CheckValues.isFromSavedFrom) {
+                    jsonLatLangArray = jsonArrayGPS.toString();
+                }
 
                 convertDataToJsonSave();
 
@@ -761,6 +772,16 @@ public class ElephantActivityRecordingCSUActivity extends AppCompatActivity impl
                 final EditText FormNameToInput = (EditText) showDialog.findViewById(R.id.input_tableName);
                 final EditText dateToInput = (EditText) showDialog.findViewById(R.id.input_date);
                 FormNameToInput.setText("Elephant Activity Recording");
+
+                if (CheckValues.isFromSavedFrom) {
+                    if (formNameSavedForm == null | formNameSavedForm.equals("")) {
+                        FormNameToInput.setText("Elephant Activity Recording");
+                    } else {
+                        FormNameToInput.setText(formNameSavedForm);
+                    }
+                }
+
+
 
                 long date = System.currentTimeMillis();
 
@@ -790,6 +811,18 @@ public class ElephantActivityRecordingCSUActivity extends AppCompatActivity impl
                             DataBaseConserVationTracking dataBaseConserVationTracking = new DataBaseConserVationTracking(context);
                             dataBaseConserVationTracking.open();
                             long id = dataBaseConserVationTracking.insertIntoTable_Main(data);
+                            dataBaseConserVationTracking.close();
+
+
+                            if (CheckValues.isFromSavedFrom) {
+
+                                DataBaseConserVationTracking dataBaseConserVationTracking1 = new DataBaseConserVationTracking(context);
+                                dataBaseConserVationTracking1.open();
+                                int updated_id = (int) dataBaseConserVationTracking1.updateTable_DeleteFlag(formid);
+                                dataBaseConserVationTracking.close();
+                            }
+
+
 
                             new PromptDialog(ElephantActivityRecordingCSUActivity.this)
                                     .setDialogType(PromptDialog.DIALOG_TYPE_SUCCESS)
@@ -799,8 +832,13 @@ public class ElephantActivityRecordingCSUActivity extends AppCompatActivity impl
                                     .setPositiveListener("okay", new PromptDialog.OnPositiveListener() {
                                         @Override
                                         public void onClick(PromptDialog dialog) {
-                                            dialog.dismiss();
-                                        }
+                                            if (CheckValues.isFromSavedFrom) {
+                                                showDialog.dismiss();
+                                                startActivity(new Intent(ElephantActivityRecordingCSUActivity.this, SavedFormsActivity.class));
+                                                finish();
+                                            } else {
+                                                dialog.dismiss();
+                                            }                                        }
                                     }).show();
                             dataBaseConserVationTracking.close();
                             showDialog.dismiss();
@@ -1031,6 +1069,9 @@ public class ElephantActivityRecordingCSUActivity extends AppCompatActivity impl
             String jsonToParse = (String) bundle.get("JSON1");
             String gpsLocationtoParse = (String) bundle.get("gps");
 
+            formid = (String) bundle.get("dbID");
+            formNameSavedForm = (String) bundle.get("formName");
+
 
             try {
                 //new adjustment
@@ -1125,6 +1166,8 @@ public class ElephantActivityRecordingCSUActivity extends AppCompatActivity impl
     public void parseArrayGPS(String arrayToParse) {
         Log.e(TAG, "parseArrayGPS: " + arrayToParse);
         try {
+            jsonLatLangArray = arrayToParse;
+
             JSONArray array = new JSONArray(arrayToParse);
             for (int i = 0; i < array.length(); ++i) {
                 JSONObject item1 = null;

@@ -521,6 +521,33 @@ public class Fragment_Not_Sent_Forms extends Fragment {
                 intent26.putExtra("formName" , formName) ;
                 startActivity(intent26);
                 break;
+
+            case "90" :
+                Intent intent90 = new Intent(getActivity(), EWSEquipmentStatusRecordingActivity.class);
+                intent90.putExtra("JSON1", jsonData);
+                intent90.putExtra("photo", photo);
+                intent90.putExtra("gps" , gps) ;
+                intent90.putExtra("status" , status) ;
+                intent90.putExtra("dbID" , dbID) ;
+                intent90.putExtra("formName" , formName) ;
+                startActivity(intent90);
+                break;
+
+            case "91" :
+                Intent intent91 = new Intent(getActivity(), ElephantActivityRecordingCSUActivity.class);
+                intent91.putExtra("JSON1", jsonData);
+                intent91.putExtra("photo", photo);
+                intent91.putExtra("gps" , gps) ;
+                intent91.putExtra("status" , status) ;
+                intent91.putExtra("dbID" , dbID) ;
+                intent91.putExtra("formName" , formName) ;
+                startActivity(intent91);
+                break;
+
+
+
+
+
             case "51" :
                 Intent intent51 = new Intent(getActivity(), BiogasDetail.class);
                 intent51.putExtra("JSON1", jsonData);
