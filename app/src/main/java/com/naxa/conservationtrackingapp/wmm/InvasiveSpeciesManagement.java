@@ -78,6 +78,7 @@ import java.util.concurrent.TimeUnit;
 
 import javax.net.ssl.HttpsURLConnection;
 
+import com.naxa.conservationtrackingapp.activities.SavedFormsActivity;
 import com.naxa.conservationtrackingapp.application.ApplicationClass;
 import com.naxa.conservationtrackingapp.database.DataBaseConserVationTracking;
 import com.naxa.conservationtrackingapp.dialog.Default_DIalog;
@@ -108,6 +109,8 @@ public class InvasiveSpeciesManagement extends AppCompatActivity implements Adap
     Context context = this;
     GpsTracker gps;
     String jsonToSend, photoTosend;
+
+    String formNameSavedForm, formid;
 
     String imagePath, imagePathMonitoring, encodedImage = null, encodedImageCompleted = null, encodedImageMonitoring = null, imageName = "no_photo", imageNameCompleted = "no_photo", imageNameMonitoring = "no_photo";
     ImageButton photo, photoCompleted, photoMonitoring;
@@ -183,6 +186,9 @@ public class InvasiveSpeciesManagement extends AppCompatActivity implements Adap
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        CheckValues.isFromSavedFrom = false;
+
 
         tvProjectCode = (AutoCompleteTextView) findViewById(R.id.ProjectCode);
         spinnerLandscape = (Spinner) findViewById(R.id.wmm_invasive_species_management_detail_landscape);
@@ -378,7 +384,11 @@ public class InvasiveSpeciesManagement extends AppCompatActivity implements Adap
                         monitoring_date = tvMonitoringDate.getText().toString();
                         recommendation_detail = tvRecommendationDetail.getText().toString();
                         others = tvOthers.getText().toString();
-                        jsonLatLangArray = jsonArrayGPS.toString();
+
+                        if (!CheckValues.isFromSavedFrom) {
+                            jsonLatLangArray = jsonArrayGPS.toString();
+                        }
+
                         fund_tal = tvFundTal.getText().toString();
                         fund_community = tvFundCommunity.getText().toString();
                         fund_others = tvFundOthers.getText().toString();
@@ -394,6 +404,14 @@ public class InvasiveSpeciesManagement extends AppCompatActivity implements Adap
                         final EditText FormNameToInput = (EditText) showDialog.findViewById(R.id.input_tableName);
                         final EditText dateToInput = (EditText) showDialog.findViewById(R.id.input_date);
                         FormNameToInput.setText("Invasive Species Management");
+
+                        if (CheckValues.isFromSavedFrom) {
+                            if (formNameSavedForm == null | formNameSavedForm.equals("")) {
+                                FormNameToInput.setText("Invasive Species Management");
+                            } else {
+                                FormNameToInput.setText(formNameSavedForm);
+                            }
+                        }
 
                         long date = System.currentTimeMillis();
 
@@ -423,6 +441,16 @@ public class InvasiveSpeciesManagement extends AppCompatActivity implements Adap
                                     DataBaseConserVationTracking dataBaseConserVationTracking = new DataBaseConserVationTracking(context);
                                     dataBaseConserVationTracking.open();
                                     long id = dataBaseConserVationTracking.insertIntoTable_Main(data);
+                                    dataBaseConserVationTracking.close();
+
+
+                                    if (CheckValues.isFromSavedFrom) {
+
+                                        DataBaseConserVationTracking dataBaseConserVationTracking1 = new DataBaseConserVationTracking(context);
+                                        dataBaseConserVationTracking1.open();
+                                        int updated_id = (int) dataBaseConserVationTracking1.updateTable_DeleteFlag(formid);
+                                        dataBaseConserVationTracking.close();
+                                    }
 
                                     new PromptDialog(InvasiveSpeciesManagement.this)
                                             .setDialogType(PromptDialog.DIALOG_TYPE_SUCCESS)
@@ -432,8 +460,13 @@ public class InvasiveSpeciesManagement extends AppCompatActivity implements Adap
                                             .setPositiveListener("okay", new PromptDialog.OnPositiveListener() {
                                                 @Override
                                                 public void onClick(PromptDialog dialog) {
-                                                    dialog.dismiss();
-                                                }
+                                                    if (CheckValues.isFromSavedFrom) {
+                                                        showDialog.dismiss();
+                                                        startActivity(new Intent(InvasiveSpeciesManagement.this, SavedFormsActivity.class));
+                                                        finish();
+                                                    } else {
+                                                        dialog.dismiss();
+                                                    }                                                }
                                             }).show();
                                     dataBaseConserVationTracking.close();
                                     showDialog.dismiss();
@@ -950,6 +983,9 @@ public class InvasiveSpeciesManagement extends AppCompatActivity implements Adap
             String imageNameall = (String) bundle.get("photo");
             String gpsLocationtoParse = (String) bundle.get("gps");
 
+            formid = (String) bundle.get("dbID");
+            formNameSavedForm = (String) bundle.get("formName");
+
             String status = (String) bundle.get("status");
             if (status.equals("Sent")) {
                 save.setEnabled(false);
@@ -1015,6 +1051,8 @@ public class InvasiveSpeciesManagement extends AppCompatActivity implements Adap
     //new adjustment
     public void parseArrayGPS(String arrayToParse) {
         try {
+            jsonLatLangArray = arrayToParse;
+
             JSONArray array = new JSONArray(arrayToParse);
             for (int i = 0; i < array.length(); ++i) {
                 JSONObject item1 = null;

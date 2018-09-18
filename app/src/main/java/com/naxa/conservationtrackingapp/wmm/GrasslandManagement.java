@@ -51,9 +51,11 @@ import com.naxa.conservationtrackingapp.R;
 import com.naxa.conservationtrackingapp.activities.CalculateAreaUsinGPS;
 import com.naxa.conservationtrackingapp.activities.GpsTracker;
 import com.naxa.conservationtrackingapp.activities.MapPolyLineActivity;
+import com.naxa.conservationtrackingapp.activities.SavedFormsActivity;
 import com.naxa.conservationtrackingapp.application.ApplicationClass;
 import com.naxa.conservationtrackingapp.database.DataBaseConserVationTracking;
 import com.naxa.conservationtrackingapp.dialog.Default_DIalog;
+import com.naxa.conservationtrackingapp.forest.Cf_Detail;
 import com.naxa.conservationtrackingapp.forest.ForestProctection;
 import com.naxa.conservationtrackingapp.model.CheckValues;
 import com.naxa.conservationtrackingapp.model.Constants;
@@ -136,6 +138,8 @@ public class GrasslandManagement extends AppCompatActivity implements AdapterVie
     double distance;
     double area_using_Gps;
 
+    String formNameSavedForm, formid;
+
     String projectCode;
     String landscape;
     String other_landscape;
@@ -188,6 +192,9 @@ public class GrasslandManagement extends AppCompatActivity implements AdapterVie
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        CheckValues.isFromSavedFrom = false;
+
 
         geoPointPolyLineActivity = new GeoPointPolyLineActivity();
 
@@ -386,7 +393,9 @@ public class GrasslandManagement extends AppCompatActivity implements AdapterVie
                         fund_others = tvFundOthers.getText().toString();
                         species_name = tvSpeciesName.getText().toString();
 
-                        jsonLatLangArray = jsonArrayGPS.toString();
+                        if (!CheckValues.isFromSavedFrom) {
+                            jsonLatLangArray = jsonArrayGPS.toString();
+                        }
 
                         convertDataToJson();
 
@@ -399,6 +408,14 @@ public class GrasslandManagement extends AppCompatActivity implements AdapterVie
                         final EditText FormNameToInput = (EditText) showDialog.findViewById(R.id.input_tableName);
                         final EditText dateToInput = (EditText) showDialog.findViewById(R.id.input_date);
                         FormNameToInput.setText("Grassland Management");
+
+                        if (CheckValues.isFromSavedFrom) {
+                            if (formNameSavedForm == null | formNameSavedForm.equals("")) {
+                                FormNameToInput.setText("Grassland Management");
+                            } else {
+                                FormNameToInput.setText(formNameSavedForm);
+                            }
+                        }
 
                         long date = System.currentTimeMillis();
 
@@ -428,6 +445,16 @@ public class GrasslandManagement extends AppCompatActivity implements AdapterVie
                                     DataBaseConserVationTracking dataBaseConserVationTracking = new DataBaseConserVationTracking(context);
                                     dataBaseConserVationTracking.open();
                                     long id = dataBaseConserVationTracking.insertIntoTable_Main(data);
+                                    dataBaseConserVationTracking.close();
+
+
+                                    if (CheckValues.isFromSavedFrom) {
+
+                                        DataBaseConserVationTracking dataBaseConserVationTracking1 = new DataBaseConserVationTracking(context);
+                                        dataBaseConserVationTracking1.open();
+                                        int updated_id = (int) dataBaseConserVationTracking1.updateTable_DeleteFlag(formid);
+                                        dataBaseConserVationTracking.close();
+                                    }
 
                                     new PromptDialog(GrasslandManagement.this)
                                             .setDialogType(PromptDialog.DIALOG_TYPE_SUCCESS)
@@ -437,8 +464,13 @@ public class GrasslandManagement extends AppCompatActivity implements AdapterVie
                                             .setPositiveListener("okay", new PromptDialog.OnPositiveListener() {
                                                 @Override
                                                 public void onClick(PromptDialog dialog) {
-                                                    dialog.dismiss();
-                                                }
+                                                    if (CheckValues.isFromSavedFrom) {
+                                                        showDialog.dismiss();
+                                                        startActivity(new Intent(GrasslandManagement.this, SavedFormsActivity.class));
+                                                        finish();
+                                                    } else {
+                                                        dialog.dismiss();
+                                                    }                                                }
                                             }).show();
                                     dataBaseConserVationTracking.close();
                                     showDialog.dismiss();
@@ -899,6 +931,9 @@ public class GrasslandManagement extends AppCompatActivity implements AdapterVie
             String imageNameall = (String) bundle.get("photo");
             String gpsLocationtoParse = (String) bundle.get("gps");
 
+            formid = (String) bundle.get("dbID");
+            formNameSavedForm = (String) bundle.get("formName");
+
             String status = (String) bundle.get("status");
             if (status.equals("Sent")) {
                 save.setEnabled(false);
@@ -983,6 +1018,8 @@ public class GrasslandManagement extends AppCompatActivity implements AdapterVie
     //new adjustment
     public void parseArrayGPS(String arrayToParse) {
         try {
+            jsonLatLangArray = arrayToParse;
+
             JSONArray array = new JSONArray(arrayToParse);
             for (int i = 0; i < array.length(); ++i) {
                 JSONObject item1 = null;

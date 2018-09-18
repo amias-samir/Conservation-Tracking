@@ -77,9 +77,11 @@ import java.util.List;
 
 import javax.net.ssl.HttpsURLConnection;
 
+import com.naxa.conservationtrackingapp.activities.SavedFormsActivity;
 import com.naxa.conservationtrackingapp.application.ApplicationClass;
 import com.naxa.conservationtrackingapp.database.DataBaseConserVationTracking;
 import com.naxa.conservationtrackingapp.dialog.Default_DIalog;
+import com.naxa.conservationtrackingapp.forest.Cf_Detail;
 import com.naxa.conservationtrackingapp.model.CheckValues;
 import com.naxa.conservationtrackingapp.model.Constants;
 import com.naxa.conservationtrackingapp.model.StaticListOfCoordinates;
@@ -101,6 +103,9 @@ public class WildlifeMortalityDetails extends AppCompatActivity implements Adapt
     Context context = this;
     GPS_TRACKER_FOR_POINT gps;
     String jsonToSend, photoTosend;
+
+    String formNameSavedForm, formid;
+
     String imagePath, encodedImage = null, imageName = "no_photo";
     ImageButton photo;
     boolean isGpsTracking = false;
@@ -173,6 +178,9 @@ public class WildlifeMortalityDetails extends AppCompatActivity implements Adapt
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        CheckValues.isFromSavedFrom = false;
+
 
         tvProjectCode = (AutoCompleteTextView) findViewById(R.id.ProjectCode);
         spinnerLandscape = (Spinner) findViewById(R.id.wmm_wildlife_mortality_detail_landscape);
@@ -363,7 +371,11 @@ public class WildlifeMortalityDetails extends AppCompatActivity implements Adapt
                         number = tvNumber.getText().toString();
                         others = tvOthers.getText().toString();
                         source_of_info_others_specify= tvSourceofInformationOthers.getText().toString();
-                        jsonLatLangArray = jsonArrayGPS.toString();
+
+                        if (!CheckValues.isFromSavedFrom) {
+                            jsonLatLangArray = jsonArrayGPS.toString();
+                        }
+
                         fund_tal = tvFundTal.getText().toString();
                         fund_community = tvFundCommunity.getText().toString();
                         fund_others = tvFundOthers.getText().toString();
@@ -380,6 +392,15 @@ public class WildlifeMortalityDetails extends AppCompatActivity implements Adapt
                         final EditText FormNameToInput = (EditText) showDialog.findViewById(R.id.input_tableName);
                         final EditText dateToInput = (EditText) showDialog.findViewById(R.id.input_date);
                         FormNameToInput.setText("Wildlife Mortality Details");
+
+                        if (CheckValues.isFromSavedFrom) {
+                            if (formNameSavedForm == null | formNameSavedForm.equals("")) {
+                                FormNameToInput.setText("Wildlife Mortality Details");
+                            } else {
+                                FormNameToInput.setText(formNameSavedForm);
+                            }
+                        }
+
 
                         long date = System.currentTimeMillis();
 
@@ -408,6 +429,16 @@ public class WildlifeMortalityDetails extends AppCompatActivity implements Adapt
                                     DataBaseConserVationTracking dataBaseConserVationTracking = new DataBaseConserVationTracking(context);
                                     dataBaseConserVationTracking.open();
                                     long id = dataBaseConserVationTracking.insertIntoTable_Main(data);
+                                    dataBaseConserVationTracking.close();
+
+
+                                    if (CheckValues.isFromSavedFrom) {
+
+                                        DataBaseConserVationTracking dataBaseConserVationTracking1 = new DataBaseConserVationTracking(context);
+                                        dataBaseConserVationTracking1.open();
+                                        int updated_id = (int) dataBaseConserVationTracking1.updateTable_DeleteFlag(formid);
+                                        dataBaseConserVationTracking.close();
+                                    }
 
                                     new PromptDialog(WildlifeMortalityDetails.this)
                                             .setDialogType(PromptDialog.DIALOG_TYPE_SUCCESS)
@@ -417,8 +448,13 @@ public class WildlifeMortalityDetails extends AppCompatActivity implements Adapt
                                             .setPositiveListener("okay", new PromptDialog.OnPositiveListener() {
                                                 @Override
                                                 public void onClick(PromptDialog dialog) {
-                                                    dialog.dismiss();
-                                                }
+                                                    if (CheckValues.isFromSavedFrom) {
+                                                        showDialog.dismiss();
+                                                        startActivity(new Intent(WildlifeMortalityDetails.this, SavedFormsActivity.class));
+                                                        finish();
+                                                    } else {
+                                                        dialog.dismiss();
+                                                    }                                                }
                                             }).show();
                                     dataBaseConserVationTracking.close();
                                     showDialog.dismiss();
@@ -819,6 +855,9 @@ public class WildlifeMortalityDetails extends AppCompatActivity implements Adapt
             imageName = (String) bundle.get("photo");
             String gpsLocationtoParse = (String) bundle.get("gps");
 
+            formid = (String) bundle.get("dbID");
+            formNameSavedForm = (String) bundle.get("formName");
+
             String status = (String) bundle.get("status");
             if(status.equals("Sent")){
                 save.setEnabled(false);
@@ -856,6 +895,8 @@ public class WildlifeMortalityDetails extends AppCompatActivity implements Adapt
     //new adjustment
     public void parseArrayGPS(String arrayToParse) {
         try {
+            jsonLatLangArray = arrayToParse;
+
             JSONArray array = new JSONArray(arrayToParse);
             for (int i = 0; i < array.length(); ++i) {
                 JSONObject item1 = null;
@@ -869,7 +910,7 @@ public class WildlifeMortalityDetails extends AppCompatActivity implements Adapt
 //            mMap.addMarker(new MarkerOptions().position(location).title("Start"));
 
             }
-        } catch (JSONException e) {
+        } catch (JSONException | NullPointerException e) {
             e.printStackTrace();
         }
     }

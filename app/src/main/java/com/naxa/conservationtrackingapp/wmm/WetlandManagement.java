@@ -79,9 +79,11 @@ import java.util.concurrent.TimeUnit;
 
 import javax.net.ssl.HttpsURLConnection;
 
+import com.naxa.conservationtrackingapp.activities.SavedFormsActivity;
 import com.naxa.conservationtrackingapp.application.ApplicationClass;
 import com.naxa.conservationtrackingapp.database.DataBaseConserVationTracking;
 import com.naxa.conservationtrackingapp.dialog.Default_DIalog;
+import com.naxa.conservationtrackingapp.forest.Cf_Detail;
 import com.naxa.conservationtrackingapp.forest.ForestProctection;
 import com.naxa.conservationtrackingapp.model.CheckValues;
 import com.naxa.conservationtrackingapp.model.Constants;
@@ -109,6 +111,8 @@ public class WetlandManagement extends AppCompatActivity implements AdapterView.
     Context context = this;
     GpsTracker gps;
     String jsonToSend, photoTosend;
+
+    String formNameSavedForm, formid;
 
     String imagePath, imagePathMonitoring, encodedImage = null, encodedImageCompleted = null, encodedImageMonitoring = null, imageName = "no_photo", imageNameCompleted = "no_photo", imageNameMonitoring = "no_photo";
     ImageButton photo, photoCompleted, photoMonitoring;
@@ -183,6 +187,9 @@ public class WetlandManagement extends AppCompatActivity implements AdapterView.
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        CheckValues.isFromSavedFrom = false;
+
 
         tvProjectCode = (AutoCompleteTextView) findViewById(R.id.ProjectCode);
         spinnerLandscape = (Spinner) findViewById(R.id.wmm_wetland_management_detail_landscape);
@@ -376,7 +383,9 @@ public class WetlandManagement extends AppCompatActivity implements AdapterView.
                         other_restoration = tvOtherRestoration.getText().toString();
                         others = tvOthers.getText().toString();
 
-                        jsonLatLangArray = jsonArrayGPS.toString();
+                        if (!CheckValues.isFromSavedFrom) {
+                            jsonLatLangArray = jsonArrayGPS.toString();
+                        }
 
                         Log.d(TAG, "onClick: "+jsonLatLangArray);
                         Log.d(TAG, "onClick: "+jsonArrayGPS.toString());
@@ -397,6 +406,14 @@ public class WetlandManagement extends AppCompatActivity implements AdapterView.
                         final EditText FormNameToInput = (EditText) showDialog.findViewById(R.id.input_tableName);
                         final EditText dateToInput = (EditText) showDialog.findViewById(R.id.input_date);
                         FormNameToInput.setText("Wetland Management");
+
+                        if (CheckValues.isFromSavedFrom) {
+                            if (formNameSavedForm == null | formNameSavedForm.equals("")) {
+                                FormNameToInput.setText("Wetland Management");
+                            } else {
+                                FormNameToInput.setText(formNameSavedForm);
+                            }
+                        }
 
                         long date = System.currentTimeMillis();
 
@@ -427,6 +444,16 @@ public class WetlandManagement extends AppCompatActivity implements AdapterView.
                                     DataBaseConserVationTracking dataBaseConserVationTracking = new DataBaseConserVationTracking(context);
                                     dataBaseConserVationTracking.open();
                                     long id = dataBaseConserVationTracking.insertIntoTable_Main(data);
+                                    dataBaseConserVationTracking.close();
+
+
+                                    if (CheckValues.isFromSavedFrom) {
+
+                                        DataBaseConserVationTracking dataBaseConserVationTracking1 = new DataBaseConserVationTracking(context);
+                                        dataBaseConserVationTracking1.open();
+                                        int updated_id = (int) dataBaseConserVationTracking1.updateTable_DeleteFlag(formid);
+                                        dataBaseConserVationTracking.close();
+                                    }
 
                                     new PromptDialog(WetlandManagement.this)
                                             .setDialogType(PromptDialog.DIALOG_TYPE_SUCCESS)
@@ -436,8 +463,13 @@ public class WetlandManagement extends AppCompatActivity implements AdapterView.
                                             .setPositiveListener("okay", new PromptDialog.OnPositiveListener() {
                                                 @Override
                                                 public void onClick(PromptDialog dialog) {
-                                                    dialog.dismiss();
-                                                }
+                                                    if (CheckValues.isFromSavedFrom) {
+                                                        showDialog.dismiss();
+                                                        startActivity(new Intent(WetlandManagement.this, SavedFormsActivity.class));
+                                                        finish();
+                                                    } else {
+                                                        dialog.dismiss();
+                                                    }                                                }
                                             }).show();
                                     dataBaseConserVationTracking.close();
                                     showDialog.dismiss();
@@ -945,6 +977,9 @@ public class WetlandManagement extends AppCompatActivity implements AdapterView.
             String imageNameall = (String) bundle.get("photo");
             String gpsLocationtoParse = (String) bundle.get("gps");
 
+            formid = (String) bundle.get("dbID");
+            formNameSavedForm = (String) bundle.get("formName");
+
             String status = (String) bundle.get("status");
             if(status.equals("Sent")){
                 save.setEnabled(false);
@@ -1027,6 +1062,8 @@ public class WetlandManagement extends AppCompatActivity implements AdapterView.
     //new adjustment
     public void parseArrayGPS(String arrayToParse) {
         try {
+            jsonLatLangArray = arrayToParse;
+
             JSONArray array = new JSONArray(arrayToParse);
             for (int i = 0; i < array.length(); ++i) {
                 JSONObject item1 = null;
@@ -1207,14 +1244,15 @@ public class WetlandManagement extends AppCompatActivity implements AdapterView.
         name_of_wetland = jsonObj.getString("name_of_wetland");
         district = jsonObj.getString("district");
         activity_type = jsonObj.getString("activity_type");
-        restoration_type = jsonObj.getString("restoration_type");
-        other_restoration = jsonObj.getString("other_restoration");
+
         vdc = jsonObj.getString("vdc");
         date = jsonObj.getString("date");
         wildlife_use = jsonObj.getString("wildlife_use");
         wetland_status = jsonObj.getString("wetland_status");
         monitoring_date = jsonObj.getString("monitoring_date");
         others = jsonObj.getString("others");
+
+
 
         finalLat = Double.parseDouble(jsonObj.getString("latitude"));
         finalLong = Double.parseDouble(jsonObj.getString("longitude"));
@@ -1226,7 +1264,6 @@ public class WetlandManagement extends AppCompatActivity implements AdapterView.
         fund_others = jsonObj.getString("fund_others");
         species_name = jsonObj.getString("species_name");
 
-        Log.e("wetland_", "Parsed data " + agreement_no + grantee_name + fiscal_year);
 
 
         tvProjectCode.setText(projectCode);
@@ -1237,7 +1274,6 @@ public class WetlandManagement extends AppCompatActivity implements AdapterView.
         tvDate.setText(date);
         tvNameOfz.setText(name_park_bz_cf);
         tvWetlandName.setText(name_of_wetland);
-        tvOtherRestoration.setText(other_restoration);
         tvDistrictname.setText(district);
         tvNameOfVdc.setText(vdc);
         tvMonitoringDate.setText(monitoring_date);
@@ -1266,8 +1302,15 @@ public class WetlandManagement extends AppCompatActivity implements AdapterView.
         int spinactivity_type = spinactivity_typeAdpt.getPosition(activity_type);
         spinneractivity_type.setSelection(spinactivity_type);
 
-        int sinnerrestoration = spinRestorationAdpt.getPosition(restoration_type);
-        spinnerRestoration.setSelection(sinnerrestoration);
+if(activity_type.equals("Restoration")) {
+    restoration_type = jsonObj.getString("restoration_type");
+    other_restoration = jsonObj.getString("other_restoration");
+    tvOtherRestoration.setText(other_restoration);
+
+    Log.e("wetland_", "Parsed data " + agreement_no + grantee_name + fiscal_year);
+    int sinnerrestoration = spinRestorationAdpt.getPosition(restoration_type);
+    spinnerRestoration.setSelection(sinnerrestoration);
+}
 
         int spinWildlifeUse = spinWildLifeUseAdpt.getPosition(wildlife_use);
         spinnerWildlifeUse.setSelection(spinWildlifeUse);
