@@ -84,6 +84,7 @@ import com.naxa.conservationtrackingapp.model.Constants;
 import com.naxa.conservationtrackingapp.model.StaticListOfCoordinates;
 import com.naxa.conservationtrackingapp.wildlife_monitoring_techniques.HumanDisturbance;
 
+import Utls.UserNameAndPasswordUtils;
 import cn.refactor.lib.colordialog.PromptDialog;
 
 /**
@@ -211,33 +212,36 @@ public class ICSDetails extends AppCompatActivity implements AdapterView.OnItemS
                     if (isGpsTaken) {
 
 
-                        DisplayMetrics metrics = context.getResources().getDisplayMetrics();
-                        int width = metrics.widthPixels;
-                        int height = metrics.heightPixels;
+//                        DisplayMetrics metrics = context.getResources().getDisplayMetrics();
+//                        int width = metrics.widthPixels;
+//                        int height = metrics.heightPixels;
+//
+//                        final Dialog showDialog = new Dialog(context);
+//
+//                        showDialog.setContentView(R.layout.login_layout);
+//                        final EditText userName = (EditText) showDialog.findViewById(R.id.input_userName);
+//                        final EditText password = (EditText) showDialog.findViewById(R.id.input_password);
+//
+//                        AppCompatButton logIn = (AppCompatButton) showDialog.findViewById(R.id.login_button);
+//                        showDialog.setTitle("Authentication");
+//                        showDialog.setCancelable(true);
+//                        showDialog.show();
+//                        showDialog.getWindow().setLayout((6 * width) / 7, LinearLayout.LayoutParams.WRAP_CONTENT);
+//
+//                        logIn.setOnClickListener(new View.OnClickListener() {
+//
+//                            @Override
+//                            public void onClick(View v) {
+//                                // TODO Auto-generated method stub
+//                                String userN = userName.getText().toString();
+//                                String passW = password.getText().toString();
 
-                        final Dialog showDialog = new Dialog(context);
-
-                        showDialog.setContentView(R.layout.login_layout);
-                        final EditText userName = (EditText) showDialog.findViewById(R.id.input_userName);
-                        final EditText password = (EditText) showDialog.findViewById(R.id.input_password);
-
-                        AppCompatButton logIn = (AppCompatButton) showDialog.findViewById(R.id.login_button);
-                        showDialog.setTitle("Authentication");
-                        showDialog.setCancelable(true);
-                        showDialog.show();
-                        showDialog.getWindow().setLayout((6 * width) / 7, LinearLayout.LayoutParams.WRAP_CONTENT);
-
-                        logIn.setOnClickListener(new View.OnClickListener() {
-
-                            @Override
-                            public void onClick(View v) {
-                                // TODO Auto-generated method stub
-                                String userN = userName.getText().toString();
-                                String passW = password.getText().toString();
+                        String userN = UserNameAndPasswordUtils.getUserNameAndPassword(context).get(0);
+                        String passW = UserNameAndPasswordUtils.getUserNameAndPassword(context).get(1);
                                 if (userN == null || userN.equals("") || passW == null || passW.equals("")) {
                                     Toast.makeText(context, "Either your user name or password is empty.Please fill the required field. ", Toast.LENGTH_SHORT).show();
                                 } else {
-                                    showDialog.dismiss();
+//                                    showDialog.dismiss();
                                     projectCode = tvProjectCode.getText().toString();
                                     other_landscape = tvOtherLandscape.getText().toString();
                                     funding_source = tvFundingSource.getText().toString();
@@ -266,8 +270,8 @@ public class ICSDetails extends AppCompatActivity implements AdapterView.OnItemS
                                     convertDataToJson();
                                     sendDatToserver();
                                 }
-                            }
-                        });
+//                            }
+//                        });
                     } else {
                         Toast.makeText(getApplicationContext(), "You need to take at least one gps cooordinate", Toast.LENGTH_SHORT).show();
                     }
