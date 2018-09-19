@@ -66,8 +66,10 @@ import java.util.concurrent.ScheduledExecutorService;
 
 import javax.net.ssl.HttpsURLConnection;
 
+import com.naxa.conservationtrackingapp.activities.SavedFormsActivity;
 import com.naxa.conservationtrackingapp.database.DataBaseConserVationTracking;
 import com.naxa.conservationtrackingapp.dialog.Default_DIalog;
+import com.naxa.conservationtrackingapp.forest.Cf_Detail;
 import com.naxa.conservationtrackingapp.model.CheckValues;
 import com.naxa.conservationtrackingapp.model.Constants;
 import com.naxa.conservationtrackingapp.model.StaticListOfCoordinates;
@@ -89,6 +91,9 @@ public class TigerTrappingDetail extends AppCompatActivity implements AdapterVie
     Context context = this;
     GPS_TRACKER_FOR_POINT gps;
     String jsonToSend, photoTosend;
+
+    String formNameSavedForm, formid;
+
 
     public static final int GEOPOINT_RESULT_CODE = 1994;
     public static final String LOCATION_RESULT = "LOCATION_RESULT";
@@ -158,6 +163,9 @@ public class TigerTrappingDetail extends AppCompatActivity implements AdapterVie
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        CheckValues.isFromSavedFrom = false;
+
 
         tvProjectCode = (AutoCompleteTextView) findViewById(R.id.ProjectCode);
         spinnerLandscape = (Spinner) findViewById(R.id.tiger_camera_detail_landscape);
@@ -337,7 +345,10 @@ public class TigerTrappingDetail extends AppCompatActivity implements AdapterVie
                         fund_community = tvFundCommunity.getText().toString();
                         fund_others = tvFundOthers.getText().toString();
 
-                        jsonLatLangArray = jsonArrayGPS.toString();
+
+                        if (!CheckValues.isFromSavedFrom) {
+                            jsonLatLangArray = jsonArrayGPS.toString();
+                        }
 
                         convertDataToJson();
 
@@ -350,6 +361,14 @@ public class TigerTrappingDetail extends AppCompatActivity implements AdapterVie
                         final EditText FormNameToInput = (EditText) showDialog.findViewById(R.id.input_tableName);
                         final EditText dateToInput = (EditText) showDialog.findViewById(R.id.input_date);
                         FormNameToInput.setText("Camera Trapping Details");
+
+                        if (CheckValues.isFromSavedFrom) {
+                            if (formNameSavedForm == null | formNameSavedForm.equals("")) {
+                                FormNameToInput.setText("Camera Trapping Details");
+                            } else {
+                                FormNameToInput.setText(formNameSavedForm);
+                            }
+                        }
 
                         long date = System.currentTimeMillis();
 
@@ -379,6 +398,16 @@ public class TigerTrappingDetail extends AppCompatActivity implements AdapterVie
                                     DataBaseConserVationTracking dataBaseConserVationTracking = new DataBaseConserVationTracking(context);
                                     dataBaseConserVationTracking.open();
                                     long id = dataBaseConserVationTracking.insertIntoTable_Main(data);
+                                    dataBaseConserVationTracking.close();
+
+
+                                    if (CheckValues.isFromSavedFrom) {
+
+                                        DataBaseConserVationTracking dataBaseConserVationTracking1 = new DataBaseConserVationTracking(context);
+                                        dataBaseConserVationTracking1.open();
+                                        int updated_id = (int) dataBaseConserVationTracking1.updateTable_DeleteFlag(formid);
+                                        dataBaseConserVationTracking.close();
+                                    }
 
                                     new PromptDialog(TigerTrappingDetail.this)
                                             .setDialogType(PromptDialog.DIALOG_TYPE_SUCCESS)
@@ -388,8 +417,13 @@ public class TigerTrappingDetail extends AppCompatActivity implements AdapterVie
                                             .setPositiveListener("okay", new PromptDialog.OnPositiveListener() {
                                                 @Override
                                                 public void onClick(PromptDialog dialog) {
-                                                    dialog.dismiss();
-                                                }
+                                                    if (CheckValues.isFromSavedFrom) {
+                                                        showDialog.dismiss();
+                                                        startActivity(new Intent(TigerTrappingDetail.this, SavedFormsActivity.class));
+                                                        finish();
+                                                    } else {
+                                                        dialog.dismiss();
+                                                    }                                                }
                                             }).show();
                                     dataBaseConserVationTracking.close();
                                     showDialog.dismiss();
@@ -670,6 +704,9 @@ public class TigerTrappingDetail extends AppCompatActivity implements AdapterVie
             String jsonToParse = (String) bundle.get("JSON1");
             String gpsLocationtoParse = (String) bundle.get("gps");
 
+            formid = (String) bundle.get("dbID");
+            formNameSavedForm = (String) bundle.get("formName");
+
             String status = (String) bundle.get("status");
             if(status.equals("Sent")){
                 save.setEnabled(false);
@@ -696,6 +733,8 @@ public class TigerTrappingDetail extends AppCompatActivity implements AdapterVie
     //new adjustment
     public void parseArrayGPS(String arrayToParse) {
         try {
+            jsonLatLangArray = arrayToParse;
+
             JSONArray array = new JSONArray(arrayToParse);
             for (int i = 0; i < array.length(); ++i) {
                 JSONObject item1 = null;

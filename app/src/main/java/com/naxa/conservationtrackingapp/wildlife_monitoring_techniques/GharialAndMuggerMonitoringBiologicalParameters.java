@@ -65,8 +65,10 @@ import java.util.concurrent.TimeUnit;
 
 import javax.net.ssl.HttpsURLConnection;
 
+import com.naxa.conservationtrackingapp.activities.SavedFormsActivity;
 import com.naxa.conservationtrackingapp.database.DataBaseConserVationTracking;
 import com.naxa.conservationtrackingapp.dialog.Default_DIalog;
+import com.naxa.conservationtrackingapp.forest.Cf_Detail;
 import com.naxa.conservationtrackingapp.model.CheckValues;
 import com.naxa.conservationtrackingapp.model.Constants;
 import com.naxa.conservationtrackingapp.model.StaticListOfCoordinates;
@@ -91,6 +93,9 @@ public class GharialAndMuggerMonitoringBiologicalParameters extends AppCompatAct
     PendingIntent pendingIntent;
     BroadcastReceiver mReceiver;
     AlarmManager alarmManager;
+
+    String formNameSavedForm, formid;
+
 
     public static final int GEOPOINT_RESULT_CODE = 1994;
     public static final String LOCATION_RESULT = "LOCATION_RESULT";
@@ -149,8 +154,9 @@ public class GharialAndMuggerMonitoringBiologicalParameters extends AppCompatAct
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        CheckValues.isFromSavedFrom = false;
 
         tvProjectCode = (AutoCompleteTextView) findViewById(R.id.ProjectCode);
         spinnerLandscape = (Spinner) findViewById(R.id.wmt_gmm_biological_parameters_detail_landscape);
@@ -269,7 +275,10 @@ public class GharialAndMuggerMonitoringBiologicalParameters extends AppCompatAct
                         fund_community = tvFundCommunity.getText().toString();
                         fund_others = tvFundOthers.getText().toString();
 
-                        jsonLatLangArray = jsonArrayGPS.toString();
+
+                        if (!CheckValues.isFromSavedFrom) {
+                            jsonLatLangArray = jsonArrayGPS.toString();
+                        }
 
                         convertDataToJson();
 
@@ -282,6 +291,14 @@ public class GharialAndMuggerMonitoringBiologicalParameters extends AppCompatAct
                         final EditText FormNameToInput = (EditText) showDialog.findViewById(R.id.input_tableName);
                         final EditText dateToInput = (EditText) showDialog.findViewById(R.id.input_date);
                         FormNameToInput.setText("Crocodile Monitoring Details");
+
+                        if (CheckValues.isFromSavedFrom) {
+                            if (formNameSavedForm == null | formNameSavedForm.equals("")) {
+                                FormNameToInput.setText("Crocodile Monitoring Details");
+                            } else {
+                                FormNameToInput.setText(formNameSavedForm);
+                            }
+                        }
 
                         long date = System.currentTimeMillis();
 
@@ -311,6 +328,17 @@ public class GharialAndMuggerMonitoringBiologicalParameters extends AppCompatAct
                                     DataBaseConserVationTracking dataBaseConserVationTracking = new DataBaseConserVationTracking(context);
                                     dataBaseConserVationTracking.open();
                                     long id = dataBaseConserVationTracking.insertIntoTable_Main(data);
+                                    dataBaseConserVationTracking.close();
+
+
+                                    if (CheckValues.isFromSavedFrom) {
+
+                                        DataBaseConserVationTracking dataBaseConserVationTracking1 = new DataBaseConserVationTracking(context);
+                                        dataBaseConserVationTracking1.open();
+                                        int updated_id = (int) dataBaseConserVationTracking1.updateTable_DeleteFlag(formid);
+                                        dataBaseConserVationTracking.close();
+                                    }
+
 
                                     new PromptDialog(GharialAndMuggerMonitoringBiologicalParameters.this)
                                             .setDialogType(PromptDialog.DIALOG_TYPE_SUCCESS)
@@ -320,8 +348,13 @@ public class GharialAndMuggerMonitoringBiologicalParameters extends AppCompatAct
                                             .setPositiveListener("okay", new PromptDialog.OnPositiveListener() {
                                                 @Override
                                                 public void onClick(PromptDialog dialog) {
-                                                    dialog.dismiss();
-                                                }
+                                                    if (CheckValues.isFromSavedFrom) {
+                                                        showDialog.dismiss();
+                                                        startActivity(new Intent(GharialAndMuggerMonitoringBiologicalParameters.this, SavedFormsActivity.class));
+                                                        finish();
+                                                    } else {
+                                                        dialog.dismiss();
+                                                    }                                                }
                                             }).show();
                                     dataBaseConserVationTracking.close();
                                     showDialog.dismiss();
@@ -702,6 +735,9 @@ public class GharialAndMuggerMonitoringBiologicalParameters extends AppCompatAct
             String jsonToParse = (String) bundle.get("JSON1");
             String gpsLocationtoParse = (String) bundle.get("gps");
 
+            formid = (String) bundle.get("dbID");
+            formNameSavedForm = (String) bundle.get("formName");
+
             String status = (String) bundle.get("status");
             if(status.equals("Sent")){
                 save.setEnabled(false);
@@ -873,6 +909,8 @@ public class GharialAndMuggerMonitoringBiologicalParameters extends AppCompatAct
 
     public void parseArrayGPS(String arrayToParse) {
         try {
+            jsonLatLangArray = arrayToParse;
+
             JSONArray array = new JSONArray(arrayToParse);
             for (int i = 0; i < array.length(); ++i) {
                 JSONObject item1 = null;

@@ -517,7 +517,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="45dp"
                                 android:hint="If yes, number of people mobilized?"
-                                android:inputType="text"
+                                android:inputType="number"
                                 android:visibility="gone" />
                         </android.support.design.widget.TextInputLayout>
                     </RelativeLayout>

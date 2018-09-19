@@ -78,10 +78,12 @@ import java.util.List;
 
 import javax.net.ssl.HttpsURLConnection;
 
+import com.naxa.conservationtrackingapp.activities.SavedFormsActivity;
 import com.naxa.conservationtrackingapp.adapter.RecyclerListAdapterSpeciesNN;
 import com.naxa.conservationtrackingapp.application.ApplicationClass;
 import com.naxa.conservationtrackingapp.database.DataBaseConserVationTracking;
 import com.naxa.conservationtrackingapp.dialog.Default_DIalog;
+import com.naxa.conservationtrackingapp.forest.Cf_Detail;
 import com.naxa.conservationtrackingapp.model.CheckValues;
 import com.naxa.conservationtrackingapp.model.Constants;
 import com.naxa.conservationtrackingapp.model.SpeciesNaNumModel;
@@ -105,6 +107,9 @@ public class VegetationAndInvasiveSpeciesSampling extends AppCompatActivity impl
     String jsonToSend, photoTosend;
     String imagePath, encodedImage = null, imageName = "no_photo";
     ImageButton photo;
+
+    String formNameSavedForm, formid;
+
 
     public static final int GEOPOINT_RESULT_CODE = 1994;
     public static final String LOCATION_RESULT = "LOCATION_RESULT";
@@ -213,6 +218,9 @@ public class VegetationAndInvasiveSpeciesSampling extends AppCompatActivity impl
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        CheckValues.isFromSavedFrom = false;
+
 
         /**
          * @Author Susan Lama: Adding Dynamic EditText View initialization
@@ -628,7 +636,10 @@ public class VegetationAndInvasiveSpeciesSampling extends AppCompatActivity impl
                         fund_community = tvFundCommunity.getText().toString();
                         fund_others = tvFundOthers.getText().toString();
 
-                        jsonLatLangArray = jsonArrayGPS.toString();
+
+                        if (!CheckValues.isFromSavedFrom) {
+                            jsonLatLangArray = jsonArrayGPS.toString();
+                        }
 
                         convertDataToJson();
 
@@ -641,6 +652,14 @@ public class VegetationAndInvasiveSpeciesSampling extends AppCompatActivity impl
                         final EditText FormNameToInput = (EditText) showDialog.findViewById(R.id.input_tableName);
                         final EditText dateToInput = (EditText) showDialog.findViewById(R.id.input_date);
                         FormNameToInput.setText("Vegetation And Invasive Species Sampling");
+
+                        if (CheckValues.isFromSavedFrom) {
+                            if (formNameSavedForm == null | formNameSavedForm.equals("")) {
+                                FormNameToInput.setText("Vegetation And Invasive Species Sampling");
+                            } else {
+                                FormNameToInput.setText(formNameSavedForm);
+                            }
+                        }
 
                         long date = System.currentTimeMillis();
 
@@ -670,6 +689,16 @@ public class VegetationAndInvasiveSpeciesSampling extends AppCompatActivity impl
                                     DataBaseConserVationTracking dataBaseConserVationTracking = new DataBaseConserVationTracking(context);
                                     dataBaseConserVationTracking.open();
                                     long id = dataBaseConserVationTracking.insertIntoTable_Main(data);
+                                    dataBaseConserVationTracking.close();
+
+
+                                    if (CheckValues.isFromSavedFrom) {
+
+                                        DataBaseConserVationTracking dataBaseConserVationTracking1 = new DataBaseConserVationTracking(context);
+                                        dataBaseConserVationTracking1.open();
+                                        int updated_id = (int) dataBaseConserVationTracking1.updateTable_DeleteFlag(formid);
+                                        dataBaseConserVationTracking.close();
+                                    }
 
                                     new PromptDialog(VegetationAndInvasiveSpeciesSampling.this)
                                             .setDialogType(PromptDialog.DIALOG_TYPE_SUCCESS)
@@ -679,8 +708,13 @@ public class VegetationAndInvasiveSpeciesSampling extends AppCompatActivity impl
                                             .setPositiveListener("okay", new PromptDialog.OnPositiveListener() {
                                                 @Override
                                                 public void onClick(PromptDialog dialog) {
-                                                    dialog.dismiss();
-                                                }
+                                                    if (CheckValues.isFromSavedFrom) {
+                                                        showDialog.dismiss();
+                                                        startActivity(new Intent(VegetationAndInvasiveSpeciesSampling.this, SavedFormsActivity.class));
+                                                        finish();
+                                                    } else {
+                                                        dialog.dismiss();
+                                                    }                                                }
                                             }).show();
                                     dataBaseConserVationTracking.close();
                                     showDialog.dismiss();
@@ -1010,6 +1044,10 @@ public class VegetationAndInvasiveSpeciesSampling extends AppCompatActivity impl
             imageName = (String) bundle.get("photo");
             String gpsLocationtoParse = (String) bundle.get("gps");
             String status = (String) bundle.get("status");
+
+            formid = (String) bundle.get("dbID");
+            formNameSavedForm = (String) bundle.get("formName");
+
             if(status.equals("Sent")){
                 save.setEnabled(false);
                 send.setEnabled(false);
@@ -1046,6 +1084,8 @@ public class VegetationAndInvasiveSpeciesSampling extends AppCompatActivity impl
     //new adjustment
     public void parseArrayGPS(String arrayToParse) {
         try {
+            jsonLatLangArray = arrayToParse;
+
             JSONArray array = new JSONArray(arrayToParse);
             for (int i = 0; i < array.length(); ++i) {
                 JSONObject item1 = null;
