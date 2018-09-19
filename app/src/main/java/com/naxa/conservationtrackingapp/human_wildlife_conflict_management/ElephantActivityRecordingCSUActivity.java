@@ -782,7 +782,6 @@ public class ElephantActivityRecordingCSUActivity extends AppCompatActivity impl
                 }
 
 
-
                 long date = System.currentTimeMillis();
 
                 SimpleDateFormat sdf = new SimpleDateFormat("MMM dd, yyyy h:mm a");
@@ -823,7 +822,6 @@ public class ElephantActivityRecordingCSUActivity extends AppCompatActivity impl
                             }
 
 
-
                             new PromptDialog(ElephantActivityRecordingCSUActivity.this)
                                     .setDialogType(PromptDialog.DIALOG_TYPE_SUCCESS)
                                     .setAnimationEnable(true)
@@ -838,7 +836,8 @@ public class ElephantActivityRecordingCSUActivity extends AppCompatActivity impl
                                                 finish();
                                             } else {
                                                 dialog.dismiss();
-                                            }                                        }
+                                            }
+                                        }
                                     }).show();
                             dataBaseConserVationTracking.close();
                             showDialog.dismiss();
@@ -882,23 +881,23 @@ public class ElephantActivityRecordingCSUActivity extends AppCompatActivity impl
 //                        // TODO Auto-generated method stub
                 String userN = UserNameAndPasswordUtils.getUserNameAndPassword(context).get(0);
                 String passW = UserNameAndPasswordUtils.getUserNameAndPassword(context).get(1);
-                        if (userN == null || userN.equals("") || passW == null || passW.equals("")) {
-                            Toast.makeText(context, "Either your user name or password is empty.Please fill the required field. ", Toast.LENGTH_SHORT).show();
-                        } else {
+                if (userN == null || userN.equals("") || passW == null || passW.equals("")) {
+                    Toast.makeText(context, "Either your user name or password is empty.Please fill the required field. ", Toast.LENGTH_SHORT).show();
+                } else {
 //                            showDialog.dismiss();
 
-                            userNameToSend = userN;
-                            passwordToSend = passW;
+                    userNameToSend = userN;
+                    passwordToSend = passW;
 
-                            Log.e("SEND", "Clicked");
-                            mProgressDlg = new ProgressDialog(context);
-                            mProgressDlg.setMessage("Please Wait...");
-                            mProgressDlg.setIndeterminate(false);
-                            mProgressDlg.setCancelable(false);
-                            mProgressDlg.show();
-                            convertDataToJsonSend();
-                            sendDatToserver();
-                        }
+                    Log.e("SEND", "Clicked");
+                    mProgressDlg = new ProgressDialog(context);
+                    mProgressDlg.setMessage("Please Wait...");
+                    mProgressDlg.setIndeterminate(false);
+                    mProgressDlg.setCancelable(false);
+                    mProgressDlg.show();
+                    convertDataToJsonSend();
+                    sendDatToserver();
+                }
 //                    }
 //                });
 

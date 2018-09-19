@@ -91,6 +91,7 @@ import cn.refactor.lib.colordialog.PromptDialog;
  * Created by ramaan on 1/18/2016.
  */
 public class InstitutionalSupport extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+    private static final String TAG = "InstitutionalSupport";
     Toolbar toolbar;
     int CAMERA_PIC_REQUEST = 2;
     int CAMERA_PIC_REQUEST_B = 3;
@@ -884,14 +885,14 @@ public class InstitutionalSupport extends AppCompatActivity implements AdapterVi
             header.put("project_code", projectCode);
             header.put("landscape", landscape + ":  " + other_landscape);
             header.put("funding_source", funding_source);
-            header.put("specify_activity", specify_activity);
+//            header.put("specify_activity", specify_activity);
             header.put("agreement_no", agreement_no);
             header.put("grantee_name", grantee_name);
             header.put("fiscal_year", fiscal_year);
             header.put("district", district);
             header.put("vdc", vdc);
             header.put("name_bz_nf_cf", name_bz_nf_cf);
-            header.put("activity", activity);
+            header.put("activity", spinnerActivity.getSelectedItem().toString() + ":  "+specify_activity);
             header.put("number", number);
             header.put("funding_tal", funding_tal);
             header.put("funding_community", funding_community);
@@ -902,6 +903,7 @@ public class InstitutionalSupport extends AppCompatActivity implements AdapterVi
             post_dict.put("formdata", header);
 
             jsonToSend = post_dict.toString();
+            Log.d(TAG, "convertDataToJson: "+jsonToSend);
 
             photo_dict.put("photo", encodedImage);
             photo_dict.put("photo2", encodedImageMonitoring);
@@ -940,7 +942,7 @@ public class InstitutionalSupport extends AppCompatActivity implements AdapterVi
         landscape = jsonObj.getString("landscape");
         funding_source = jsonObj.getString("funding_source");
         agreement_no = jsonObj.getString("agreement_no");
-        specify_activity = jsonObj.getString("specify_activity");
+//        specify_activity = jsonObj.getString("specify_activity");
         grantee_name = jsonObj.getString("grantee_name");
         fiscal_year = jsonObj.getString("fiscal_year");
         district = jsonObj.getString("district");
@@ -959,7 +961,7 @@ public class InstitutionalSupport extends AppCompatActivity implements AdapterVi
 
         tvProjectCode.setText(projectCode);
         tvFundingSource.setText(funding_source);
-        tvSpecifyActivity.setText(specify_activity);
+//        tvSpecifyActivity.setText(specify_activity);
         tvAgreementNo.setText(agreement_no);
         tvGranteeName.setText(grantee_name);
         tvFiscalYear.setText(fiscal_year);
@@ -981,22 +983,37 @@ public class InstitutionalSupport extends AppCompatActivity implements AdapterVi
             tvOtherLandscape.setVisibility(View.GONE);
 
         } else {
-
             int setlandscape = landscapeAdpt.getPosition(actions[0]);
             spinnerLandscape.setSelection(setlandscape);
             tvOtherLandscape.setText(actions[1]);
 
         }
 
-        int forConPos = singleSpinnerAdpt.getPosition(activity);
-        spinnerActivity.setSelection(forConPos);
+        String[] equipmentActivity = activity.split(":  ");
+        if (equipmentActivity[0].equals("Computer") || equipmentActivity[0].equals("Stationary") ||
+                equipmentActivity[0].equals("Books") || equipmentActivity[0].equals("Furniture")) {
 
-
-        if (activity.equals("Others")) {
-            tvSpecifyActivity.setVisibility(View.VISIBLE);
-        } else {
+            int setactivity = singleSpinnerAdpt.getPosition(actions[0]);
+            spinnerActivity.setSelection(setactivity);
             tvSpecifyActivity.setVisibility(View.GONE);
+
+        } else {
+            int setactivity = singleSpinnerAdpt.getPosition(actions[0]);
+            Log.d(TAG, "parseJson: "+setactivity);
+            spinnerActivity.setSelection(setactivity);
+            tvSpecifyActivity.setText(actions[1]);
+
         }
+
+//        int forConPos = singleSpinnerAdpt.getPosition(activity);
+//        spinnerActivity.setSelection(forConPos);
+//
+//
+//        if (activity.equals("Others")) {
+//            tvSpecifyActivity.setVisibility(View.VISIBLE);
+//        } else {
+//            tvSpecifyActivity.setVisibility(View.GONE);
+//        }
 
     }
 
