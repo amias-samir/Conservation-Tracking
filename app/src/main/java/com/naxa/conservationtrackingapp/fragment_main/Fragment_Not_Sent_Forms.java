@@ -297,6 +297,7 @@ public class Fragment_Not_Sent_Forms extends Fragment {
                 intent5.putExtra("JSON1", jsonData);
                 intent5.putExtra("photo" , photo);
                 intent5.putExtra("status" , status) ;
+                intent5.putExtra("gps" , gps) ;
                 intent5.putExtra("dbID" , dbID) ;
                 intent5.putExtra("formName" , formName) ;
                 startActivity(intent5);

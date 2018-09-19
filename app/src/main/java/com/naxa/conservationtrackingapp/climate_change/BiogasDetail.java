@@ -47,9 +47,11 @@ import com.naxa.conservationtrackingapp.R;
 import com.naxa.conservationtrackingapp.activities.GPS_Point_Activity;
 import com.naxa.conservationtrackingapp.activities.GPS_TRACKER_FOR_POINT;
 import com.naxa.conservationtrackingapp.activities.MapPointActivity;
+import com.naxa.conservationtrackingapp.activities.SavedFormsActivity;
 import com.naxa.conservationtrackingapp.application.ApplicationClass;
 import com.naxa.conservationtrackingapp.database.DataBaseConserVationTracking;
 import com.naxa.conservationtrackingapp.dialog.Default_DIalog;
+import com.naxa.conservationtrackingapp.forest.Cf_Detail;
 import com.naxa.conservationtrackingapp.model.CheckValues;
 import com.naxa.conservationtrackingapp.model.Constants;
 import com.naxa.conservationtrackingapp.model.StaticListOfCoordinates;
@@ -108,6 +110,8 @@ public class BiogasDetail extends AppCompatActivity implements AdapterView.OnIte
     public static final String LOCATION_RESULT = "LOCATION_RESULT";
     Context context = this;
 
+    String formNameSavedForm, formid;
+
 
     ArrayList<LatLng> listCf = new ArrayList<LatLng>();
     List<Location> gpslocation = new ArrayList<>();
@@ -139,6 +143,9 @@ public class BiogasDetail extends AppCompatActivity implements AdapterView.OnIte
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        CheckValues.isFromSavedFrom = false;
+
 
         tvAgreement_no = (AutoCompleteTextView) findViewById(R.id.cc_biogas_detail_Agreement_No);
         spinnerLandscape = (Spinner) findViewById(R.id.cc_biogas_detail_landscape);
@@ -306,7 +313,11 @@ public class BiogasDetail extends AppCompatActivity implements AdapterView.OnIte
                         district = tvDistrictname.getText().toString();
                         vdc = tvNameOfVdc.getText().toString();
                         date = tvDate.getText().toString();
-                        jsonLatLangArray = jsonArrayGPS.toString();
+
+                        if (!CheckValues.isFromSavedFrom) {
+                            jsonLatLangArray = jsonArrayGPS.toString();
+                        }
+
                         beneficiaries_name = tvBeneficiariesName.getText().toString();
                         tal = tvTal.getText().toString();
                         community_contribution = tvCommunityContribution.getText().toString();
@@ -326,6 +337,15 @@ public class BiogasDetail extends AppCompatActivity implements AdapterView.OnIte
                         final EditText FormNameToInput = (EditText) showDialog.findViewById(R.id.input_tableName);
                         final EditText dateToInput = (EditText) showDialog.findViewById(R.id.input_date);
                         FormNameToInput.setText("Bio Gas Details");
+
+
+                        if (CheckValues.isFromSavedFrom) {
+                            if (formNameSavedForm == null | formNameSavedForm.equals("")) {
+                                FormNameToInput.setText("Bio Gas Details");
+                            } else {
+                                FormNameToInput.setText(formNameSavedForm);
+                            }
+                        }
 
                         long date = System.currentTimeMillis();
 
@@ -355,6 +375,17 @@ public class BiogasDetail extends AppCompatActivity implements AdapterView.OnIte
                                     DataBaseConserVationTracking dataBaseConserVationTracking = new DataBaseConserVationTracking(context);
                                     dataBaseConserVationTracking.open();
                                     long id = dataBaseConserVationTracking.insertIntoTable_Main(data);
+                                    dataBaseConserVationTracking.close();
+
+
+                                    if (CheckValues.isFromSavedFrom) {
+
+                                        DataBaseConserVationTracking dataBaseConserVationTracking1 = new DataBaseConserVationTracking(context);
+                                        dataBaseConserVationTracking1.open();
+                                        int updated_id = (int) dataBaseConserVationTracking1.updateTable_DeleteFlag(formid);
+                                        dataBaseConserVationTracking.close();
+                                    }
+
 
                                     new PromptDialog(BiogasDetail.this)
                                             .setDialogType(PromptDialog.DIALOG_TYPE_SUCCESS)
@@ -364,8 +395,13 @@ public class BiogasDetail extends AppCompatActivity implements AdapterView.OnIte
                                             .setPositiveListener("okay", new PromptDialog.OnPositiveListener() {
                                                 @Override
                                                 public void onClick(PromptDialog dialog) {
-                                                    dialog.dismiss();
-                                                }
+                                                    if (CheckValues.isFromSavedFrom) {
+                                                        showDialog.dismiss();
+                                                        startActivity(new Intent(BiogasDetail.this, SavedFormsActivity.class));
+                                                        finish();
+                                                    } else {
+                                                        dialog.dismiss();
+                                                    }                                                }
                                             }).show();
 
                                     dataBaseConserVationTracking.close();
@@ -727,6 +763,9 @@ public class BiogasDetail extends AppCompatActivity implements AdapterView.OnIte
             String gpsLocationtoParse = (String) bundle.get("gps");
             startGps.setText("Location Recorded");
 
+            formid = (String) bundle.get("dbID");
+            formNameSavedForm = (String) bundle.get("formName");
+
             String status = (String) bundle.get("status");
             if (status.equals("Sent")) {
                 save.setEnabled(false);
@@ -764,6 +803,8 @@ public class BiogasDetail extends AppCompatActivity implements AdapterView.OnIte
     //new adjustment
     public void parseArrayGPS(String arrayToParse) {
         try {
+            jsonLatLangArray = arrayToParse;
+
             JSONArray array = new JSONArray(arrayToParse);
             for (int i = 0; i < array.length(); ++i) {
                 JSONObject item1 = null;

@@ -53,6 +53,8 @@ import com.naxa.conservationtrackingapp.forest.NurseryDetails;
 import com.naxa.conservationtrackingapp.forest.PlantationDetail;
 import com.naxa.conservationtrackingapp.human_wildlife_conflict_management.AlternativeCropSupport;
 import com.naxa.conservationtrackingapp.human_wildlife_conflict_management.CropDepredation;
+import com.naxa.conservationtrackingapp.human_wildlife_conflict_management.EWSEquipmentStatusRecordingActivity;
+import com.naxa.conservationtrackingapp.human_wildlife_conflict_management.ElephantActivityRecordingCSUActivity;
 import com.naxa.conservationtrackingapp.human_wildlife_conflict_management.HWCEndowmentFund;
 import com.naxa.conservationtrackingapp.human_wildlife_conflict_management.HWCMitigationSupport;
 import com.naxa.conservationtrackingapp.human_wildlife_conflict_management.HumanCasualty;
@@ -62,6 +64,8 @@ import com.naxa.conservationtrackingapp.model.SavedFormParameters;
 import com.naxa.conservationtrackingapp.wildlife_monitoring_techniques.GharialAndMuggerMonitoringAnthropogenicParameters;
 import com.naxa.conservationtrackingapp.wildlife_monitoring_techniques.GharialAndMuggerMonitoringBiologicalParameters;
 import com.naxa.conservationtrackingapp.wildlife_monitoring_techniques.HumanDisturbance;
+import com.naxa.conservationtrackingapp.wildlife_monitoring_techniques.ScatCollectionDetailsActivity;
+import com.naxa.conservationtrackingapp.wildlife_monitoring_techniques.SnowLeopardPreyBaseMonitoringActivity;
 import com.naxa.conservationtrackingapp.wildlife_monitoring_techniques.SpeciesOccupancySurvey;
 import com.naxa.conservationtrackingapp.wildlife_monitoring_techniques.TigerPreyBaseMonitoring;
 import com.naxa.conservationtrackingapp.wildlife_monitoring_techniques.TigerTrappingDetail;
@@ -292,6 +296,7 @@ public class Fragment_Sent_Forms extends Fragment {
                 Intent intent5 = new Intent(getActivity(), ForestIntegLivestocManagement.class);
                 intent5.putExtra("JSON1", jsonData);
                 intent5.putExtra("photo" , photo);
+                intent5.putExtra("gps" , gps);
                 intent5.putExtra("status" , status) ;
                 intent5.putExtra("dbID" , dbID) ;
                 intent5.putExtra("formName" , formName) ;
@@ -695,6 +700,51 @@ public class Fragment_Sent_Forms extends Fragment {
                 intent87.putExtra("dbID" , dbID) ;
                 intent87.putExtra("formName" , formName) ;
                 startActivity(intent87);
+                break;
+
+
+            case "88" :
+                Intent intent88 = new Intent(getActivity(), ScatCollectionDetailsActivity.class);
+                intent88.putExtra("JSON1", jsonData);
+                intent88.putExtra("photo", photo);
+                intent88.putExtra("gps" , gps) ;
+                intent88.putExtra("status" , status) ;
+                intent88.putExtra("dbID" , dbID) ;
+                intent88.putExtra("formName" , formName) ;
+                startActivity(intent88);
+                break;
+
+            case "89" :
+                Intent intent89 = new Intent(getActivity(), SnowLeopardPreyBaseMonitoringActivity.class);
+                intent89.putExtra("JSON1", jsonData);
+                intent89.putExtra("photo", photo);
+                intent89.putExtra("gps" , gps) ;
+                intent89.putExtra("status" , status) ;
+                intent89.putExtra("dbID" , dbID) ;
+                intent89.putExtra("formName" , formName) ;
+                startActivity(intent89);
+                break;
+
+            case "90" :
+                Intent intent90 = new Intent(getActivity(), EWSEquipmentStatusRecordingActivity.class);
+                intent90.putExtra("JSON1", jsonData);
+                intent90.putExtra("photo", photo);
+                intent90.putExtra("gps" , gps) ;
+                intent90.putExtra("status" , status) ;
+                intent90.putExtra("dbID" , dbID) ;
+                intent90.putExtra("formName" , formName) ;
+                startActivity(intent90);
+                break;
+
+            case "91" :
+                Intent intent91 = new Intent(getActivity(), ElephantActivityRecordingCSUActivity.class);
+                intent91.putExtra("JSON1", jsonData);
+                intent91.putExtra("photo", photo);
+                intent91.putExtra("gps" , gps) ;
+                intent91.putExtra("status" , status) ;
+                intent91.putExtra("dbID" , dbID) ;
+                intent91.putExtra("formName" , formName) ;
+                startActivity(intent91);
                 break;
 
             case "100" :
