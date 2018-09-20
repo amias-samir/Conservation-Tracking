@@ -3,7 +3,9 @@ package com.naxa.conservationtrackingapp.activities;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
+import android.content.pm.ActivityInfo;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
@@ -51,6 +53,8 @@ public class MapPolyLineActivity extends FragmentActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
         setContentView(R.layout.activity_map);
         list = StaticListOfCoordinates.getList();
         Log.e("GPS ARRAY", list.toString());

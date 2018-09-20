@@ -487,11 +487,10 @@
         </activity>
         <activity
             android:name=".activities.MapPolyLineActivity"
-            android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Dialog" />
         <activity
             android:name=".activities.MapPointActivity"
-            android:screenOrientation="portrait"
+
             android:theme="@android:style/Theme.Dialog" />
         <activity
             android:name=".activities.SavedFormsActivity"
