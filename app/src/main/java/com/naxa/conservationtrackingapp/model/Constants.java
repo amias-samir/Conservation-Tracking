@@ -159,6 +159,7 @@ public class Constants {
     public static String[] TYPES_OF_POACHING = {"Gun Shot", "Poacher(s) Camp", "Snares", "Poacher(s) Activities", "Others"};
 
     public static String[] HABITAT_TYPE = {"SF-Sal Forest",  "MF-Mixed Forest", "RF-Riverine Forest", "TG-Tall Grassland", "SG–Short Grassland", "W-Wetland", "S-Streambed"};
+    public static String[] CAMERA_TRAPPING_HABITAT_TYPE = {"SF-Sal Forest",  "MF-Mixed Forest", "RF-Riverine Forest", "TG-Tall Grassland", "SG–Short Grassland", "W-Wetland", "S-Streambed", "Alpine Grassland", "Shurbland", "Barren Land", "Sub Alpine Forest"};
 
     public static String[] TERRAIN = {"Hilly", "Flat", "Streambed"};
     public static String[] SLOPE = {"0-30", "30-60", "60-90"};

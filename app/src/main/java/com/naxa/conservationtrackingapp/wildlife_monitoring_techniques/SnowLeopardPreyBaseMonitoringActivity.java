@@ -20,6 +20,7 @@ import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -27,6 +28,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
@@ -38,7 +40,6 @@ import com.naxa.conservationtrackingapp.activities.MapPointActivity;
 import com.naxa.conservationtrackingapp.activities.SavedFormsActivity;
 import com.naxa.conservationtrackingapp.database.DataBaseConserVationTracking;
 import com.naxa.conservationtrackingapp.dialog.Default_DIalog;
-import com.naxa.conservationtrackingapp.forest.Cf_Detail;
 import com.naxa.conservationtrackingapp.model.CheckValues;
 import com.naxa.conservationtrackingapp.model.Constants;
 import com.naxa.conservationtrackingapp.model.StaticListOfCoordinates;
@@ -68,13 +69,22 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.refactor.lib.colordialog.PromptDialog;
+
 /**
  * Created by samir on 1/28/2018.
  */
-public class SnowLeopardPreyBaseMonitoringActivity extends AppCompatActivity {
+public class SnowLeopardPreyBaseMonitoringActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     @BindView(R.id.snow_leopard_prey_base_project_code)
     AutoCompleteTextView tvProjectCode;
+    @BindView(R.id.landScape)
+    TextView landScape;
+    @BindView(R.id.snow_leopard_prey_base_landscape)
+    Spinner spinnerLandscape;
+    @BindView(R.id.OtherlandscapeName)
+    AutoCompleteTextView tvOtherlandscapeName;
+    @BindView(R.id.snow_leopard_prey_base_fundingSource)
+    AutoCompleteTextView tvFundingSource;
     private String TAG = "ScatCollectionDetailsActivity";
 
     @BindView(R.id.snow_leopard_prey_base_observer_name)
@@ -177,14 +187,16 @@ public class SnowLeopardPreyBaseMonitoringActivity extends AppCompatActivity {
     String formNameSavedForm, formid;
 
 
-    String dataSentStatus = "", dateString;
+    String dataSentStatus = "", dateString, landscape = "";
     String userNameToSend, passwordToSend;
     JSONArray jsonArrayGPS = new JSONArray();
 
-    ArrayAdapter useOfGrazingLandAdpt, habitatTypeAdpt, aspectAdpt, slopeAdpt;
+    ArrayAdapter landscapeAdpt, useOfGrazingLandAdpt, habitatTypeAdpt, aspectAdpt, slopeAdpt;
 
     String KEY_OBSERVER_NAME = "observer_name",
             KEY_PROJECT_CODE = "project_code",
+            KEY_LANDSCAPE = "landscape",
+            KEY_FUNDING_SOURCE = "funding_source",
             KEY_DATE = "date",
             KEY_GROUP_NO = "group_no",
             KEY_OBSERVER_NO = "observer_no",
@@ -235,6 +247,13 @@ public class SnowLeopardPreyBaseMonitoringActivity extends AppCompatActivity {
         setStarTimeOnView();
         setEndTimeOnView();
         addListenerOnButton();
+
+        landscapeAdpt = new ArrayAdapter<String>(this,
+                android.R.layout.simple_spinner_item, Constants.LANDSCAPE);
+        landscapeAdpt
+                .setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerLandscape.setAdapter(landscapeAdpt);
+        spinnerLandscape.setOnItemSelectedListener(this);
 
         //        useOfGrazingLandAdpt spinner
         useOfGrazingLandAdpt = new ArrayAdapter<String>(this,
@@ -594,6 +613,8 @@ public class SnowLeopardPreyBaseMonitoringActivity extends AppCompatActivity {
             JSONObject header = new JSONObject();
 
             header.put(KEY_PROJECT_CODE, tvProjectCode.getText().toString());
+            header.put(KEY_LANDSCAPE, landscape + ":  " + tvOtherlandscapeName.getText().toString());
+            header.put(KEY_FUNDING_SOURCE, tvFundingSource.getText().toString());
             header.put(KEY_OBSERVER_NAME, tvObserverName.getText().toString());
             header.put(KEY_DATE, tvDate.getText().toString());
             header.put(KEY_GROUP_NO, tvGroupNo.getText().toString());
@@ -730,7 +751,8 @@ public class SnowLeopardPreyBaseMonitoringActivity extends AppCompatActivity {
                                                 finish();
                                             } else {
                                                 dialog.dismiss();
-                                            }                                        }
+                                            }
+                                        }
                                     }).show();
                             dataBaseConserVationTracking.close();
                             showDialog.dismiss();
@@ -773,23 +795,23 @@ public class SnowLeopardPreyBaseMonitoringActivity extends AppCompatActivity {
 //                        // TODO Auto-generated method stub
                 String userN = UserNameAndPasswordUtils.getUserNameAndPassword(context).get(0);
                 String passW = UserNameAndPasswordUtils.getUserNameAndPassword(context).get(1);
-                        if (userN == null || userN.equals("") || passW == null || passW.equals("")) {
-                            Toast.makeText(context, "Either your user name or password is empty.Please fill the required field. ", Toast.LENGTH_SHORT).show();
-                        } else {
+                if (userN == null || userN.equals("") || passW == null || passW.equals("")) {
+                    Toast.makeText(context, "Either your user name or password is empty.Please fill the required field. ", Toast.LENGTH_SHORT).show();
+                } else {
 //                            showDialog.dismiss();
 
-                            userNameToSend = userN;
-                            passwordToSend = passW;
+                    userNameToSend = userN;
+                    passwordToSend = passW;
 
-                            Log.e("SEND", "Clicked");
-                            mProgressDlg = new ProgressDialog(context);
-                            mProgressDlg.setMessage("Please Wait...");
-                            mProgressDlg.setIndeterminate(false);
-                            mProgressDlg.setCancelable(false);
-                            mProgressDlg.show();
-                            convertDataToJson();
-                            sendDatToserver();
-                        }
+                    Log.e("SEND", "Clicked");
+                    mProgressDlg = new ProgressDialog(context);
+                    mProgressDlg.setMessage("Please Wait...");
+                    mProgressDlg.setIndeterminate(false);
+                    mProgressDlg.setCancelable(false);
+                    mProgressDlg.show();
+                    convertDataToJson();
+                    sendDatToserver();
+                }
 //                    }
 //                });
             } else {
@@ -806,6 +828,28 @@ public class SnowLeopardPreyBaseMonitoringActivity extends AppCompatActivity {
             RestApii restApii = new RestApii();
             restApii.execute();
         }
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        int SpinnerID = parent.getId();
+
+        if (SpinnerID == R.id.snow_leopard_prey_base_landscape) {
+            landscape = Constants.LANDSCAPE[position];
+            Log.d(TAG, "onItemSelected: " + landscape);
+
+            if (landscape.equals("Others")) {
+                tvOtherlandscapeName.setVisibility(View.VISIBLE);
+            } else {
+                tvOtherlandscapeName.setVisibility(View.GONE);
+                tvOtherlandscapeName.setText("");
+            }
+        }
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
     }
 
     private class RestApii extends AsyncTask<String, Void, String> {
@@ -836,7 +880,7 @@ public class SnowLeopardPreyBaseMonitoringActivity extends AppCompatActivity {
             try {
                 text = POST(getString(R.string.api_host_url));
                 JSONObject jsonObject = new JSONObject(text);
-                Log.e(TAG, "doInBackground: "+text );
+                Log.e(TAG, "doInBackground: " + text);
                 dataSentStatus = jsonObject.getString("data");
 
 
@@ -962,7 +1006,7 @@ public class SnowLeopardPreyBaseMonitoringActivity extends AppCompatActivity {
             formNameSavedForm = (String) bundle.get("formName");
 
             String status = (String) bundle.get("status");
-            if(status.equals("Sent")){
+            if (status.equals("Sent")) {
                 btnSave.setEnabled(false);
                 btnSend.setEnabled(false);
             }
@@ -1015,6 +1059,7 @@ public class SnowLeopardPreyBaseMonitoringActivity extends AppCompatActivity {
         tvElevation.setText(jsonObj.getString(KEY_ELEVATION));
 
         tvProjectCode.setText(jsonObj.getString(KEY_PROJECT_CODE));
+        tvFundingSource.setText(jsonObj.getString(KEY_FUNDING_SOURCE));
         tvObserverName.setText(jsonObj.getString(KEY_OBSERVER_NAME));
         tvDate.setText(jsonObj.getString(KEY_DATE));
         tvGridId.setText(jsonObj.getString(KEY_GRID_ID));
@@ -1039,6 +1084,25 @@ public class SnowLeopardPreyBaseMonitoringActivity extends AppCompatActivity {
         tvUnidentifiedNo.setText(jsonObj.getString(KEY_UNIDENTIFIED_NO));
         tvTotalNumbers.setText(jsonObj.getString(KEY_TOTAL_NO));
         tvDistanceToCliff.setText(jsonObj.getString(KEY_DISTANCE_TO_CLIFF));
+
+
+
+        landscape = jsonObj.getString(KEY_LANDSCAPE);
+        String[] actions = landscape.split(":  ");
+        if (actions[0].equals("TAL PABZ") || actions[0].equals("TAL CBRP") ||
+                actions[0].equals("SHL") || actions[0].equals("CHAL") || actions[0].equals("NML")) {
+
+            int setlandscape = landscapeAdpt.getPosition(actions[0]);
+            spinnerLandscape.setSelection(setlandscape);
+            tvOtherlandscapeName.setVisibility(View.GONE);
+
+        } else {
+
+            int setlandscape = landscapeAdpt.getPosition(actions[0]);
+            spinnerLandscape.setSelection(setlandscape);
+            tvOtherlandscapeName.setText(actions[1]);
+
+        }
 
         //set spinner
         int useOfGrazingLandPos = useOfGrazingLandAdpt.getPosition(jsonObj.getString(KEY_USE_OF_GRAZING_LAND));

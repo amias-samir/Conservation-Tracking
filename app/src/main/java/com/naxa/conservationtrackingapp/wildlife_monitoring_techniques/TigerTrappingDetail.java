@@ -204,7 +204,7 @@ public class TigerTrappingDetail extends AppCompatActivity implements AdapterVie
         spinnerLandscape.setOnItemSelectedListener(this);
 
         habitatTypeAdapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_spinner_item, Constants.HABITAT_TYPE);
+                android.R.layout.simple_spinner_item, Constants.CAMERA_TRAPPING_HABITAT_TYPE);
         habitatTypeAdapter
                 .setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         habitatType.setAdapter(habitatTypeAdapter);
@@ -547,7 +547,18 @@ public class TigerTrappingDetail extends AppCompatActivity implements AdapterVie
                 case 6:
                     habitat_type = "S-Streambed";
                     break;
-
+                case 7:
+                    habitat_type = "Alpine Grassland";
+                    break;
+                    case 8:
+                    habitat_type = "Shurbland";
+                    break;
+                    case 9:
+                    habitat_type = "Barren Land";
+                    break;
+                    case 10:
+                    habitat_type = "Sub Alpine Forest";
+                    break;
             }
         }
         if (spinnerId == R.id.tiger_camera_detail_terrain) {

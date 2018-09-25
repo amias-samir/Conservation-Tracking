@@ -8,8 +8,8 @@ android {
         applicationId "com.naxa.conservationtrackingapp"
         minSdkVersion 15
         targetSdkVersion 27
-        versionCode 19
-        versionName "1.2.6"
+        versionCode 20
+        versionName "1.2.7"
         multiDexEnabled true
     }
 

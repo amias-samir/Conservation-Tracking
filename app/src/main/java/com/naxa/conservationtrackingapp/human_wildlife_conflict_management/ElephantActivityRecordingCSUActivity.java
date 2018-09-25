@@ -27,6 +27,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
@@ -38,7 +39,6 @@ import com.naxa.conservationtrackingapp.activities.MapPointActivity;
 import com.naxa.conservationtrackingapp.activities.SavedFormsActivity;
 import com.naxa.conservationtrackingapp.database.DataBaseConserVationTracking;
 import com.naxa.conservationtrackingapp.dialog.Default_DIalog;
-import com.naxa.conservationtrackingapp.forest.Cf_Detail;
 import com.naxa.conservationtrackingapp.model.CheckValues;
 import com.naxa.conservationtrackingapp.model.Constants;
 import com.naxa.conservationtrackingapp.model.StaticListOfCoordinates;
@@ -75,6 +75,14 @@ public class ElephantActivityRecordingCSUActivity extends AppCompatActivity impl
     Button btnGpsStart;
     @BindView(R.id.elephant_recording_preview_map)
     Button btnPreviewMap;
+    @BindView(R.id.landScape)
+    TextView landScape;
+    @BindView(R.id.elephant_recording_landscape)
+    Spinner spinnerLandscape;
+    @BindView(R.id.OtherlandscapeName)
+    AutoCompleteTextView tvOtherlandscapeName;
+    @BindView(R.id.elephant_recording_fundingSource)
+    AutoCompleteTextView tvFundingSource;
     private String TAG = "ElephantActivityRecordingCSU";
 
     @BindView(R.id.elephant_recording_project_code)
@@ -163,15 +171,17 @@ public class ElephantActivityRecordingCSUActivity extends AppCompatActivity impl
 
     StringBuilder stringBuilder = new StringBuilder();
     String dataSentStatus = "", dateString;
-    String userNameToSend, passwordToSend;
+    String userNameToSend, passwordToSend, landccape = "";
 
-    ArrayAdapter potentialAttractantsAdpt, elephantsReactionDuringEntryAdpt, elephantsReactionAfterEnryAdpt;
-    String potentialAttractants = "", elephntsReactionDuring = "", elephantsReactionAfter = "";
+    ArrayAdapter landscapeAdpt, potentialAttractantsAdpt, elephantsReactionDuringEntryAdpt, elephantsReactionAfterEnryAdpt;
+    String potentialAttractants = "", elephntsReactionDuring = "", elephantsReactionAfter = "", landscape = "";
 
     String making_noise = "no", throwing_flame_torches = "no", throwing_stones = "no", using_mega_torches = "no", inform_park = "no", other_reaction_by_people = "no";
 
     String KEY_PROJECT_CODE = "project_code",
             KEY_DATE = "date",
+            KEY_LANDSCAPE = "landscape",
+            KEY_FUNDING_SOURCE = "funding_source",
             KEY_TIME = "time",
             KEY_POTENTIAL_ATTRACTANTS = "potential_attractants",
             KEY_POTENTIAL_ATTRACTANTS_OTHER = "potential_attractants_other",
@@ -218,6 +228,13 @@ public class ElephantActivityRecordingCSUActivity extends AppCompatActivity impl
         setCurrentDateOnView();
         setStarTimeOnView();
         addListenerOnButton();
+
+        landscapeAdpt = new ArrayAdapter<String>(this,
+                android.R.layout.simple_spinner_item, Constants.LANDSCAPE);
+        landscapeAdpt
+                .setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerLandscape.setAdapter(landscapeAdpt);
+        spinnerLandscape.setOnItemSelectedListener(this);
 
         //        potential attractants spinner
         potentialAttractantsAdpt = new ArrayAdapter<String>(this,
@@ -523,6 +540,19 @@ public class ElephantActivityRecordingCSUActivity extends AppCompatActivity impl
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         int SpinnerID = parent.getId();
+
+        if (SpinnerID == R.id.elephant_recording_landscape) {
+            landscape = Constants.LANDSCAPE[position];
+            Log.d(TAG, "onItemSelected: " + landscape);
+
+            if (landscape.equals("Others")) {
+                tvOtherlandscapeName.setVisibility(View.VISIBLE);
+            } else {
+                tvOtherlandscapeName.setVisibility(View.GONE);
+                tvOtherlandscapeName.setText("");
+            }
+        }
+
         if (SpinnerID == R.id.elephant_recording_potential_attractants) {
             potentialAttractants = Constants.HWC_ELEPHANT_ACTIVITY_POTENTIAL_ATTRACTANTS[position];
             Log.d(TAG, "onItemSelected: " + potentialAttractants);
@@ -575,6 +605,8 @@ public class ElephantActivityRecordingCSUActivity extends AppCompatActivity impl
             JSONObject header = new JSONObject();
 
             header.put(KEY_PROJECT_CODE, tvProjectCode.getText().toString());
+            header.put(KEY_LANDSCAPE, landscape + ":  " + tvOtherlandscapeName.getText().toString());
+            header.put(KEY_FUNDING_SOURCE, tvFundingSource.getText().toString());
             header.put(KEY_DATE, tvDate.getText().toString());
             header.put(KEY_TIME, tvTime.getText().toString());
             header.put(KEY_POTENTIAL_ATTRACTANTS, spinnerPotentialAttractants.getSelectedItem().toString());
@@ -627,6 +659,8 @@ public class ElephantActivityRecordingCSUActivity extends AppCompatActivity impl
             JSONObject header = new JSONObject();
 
             header.put(KEY_PROJECT_CODE, tvProjectCode.getText().toString());
+            header.put(KEY_LANDSCAPE, landscape + ":  " + tvOtherlandscapeName.getText().toString());
+            header.put(KEY_FUNDING_SOURCE, tvFundingSource.getText().toString());
             header.put(KEY_DATE, tvDate.getText().toString());
             header.put(KEY_TIME, tvTime.getText().toString());
             header.put(KEY_POTENTIAL_ATTRACTANTS, spinnerPotentialAttractants.getSelectedItem().toString());
@@ -1100,6 +1134,7 @@ public class ElephantActivityRecordingCSUActivity extends AppCompatActivity impl
         finalLong = Double.parseDouble(jsonObj.getString(KEY_FINAL_LONG));
 
         tvProjectCode.setText(jsonObj.getString(KEY_PROJECT_CODE));
+        tvFundingSource.setText(jsonObj.getString(KEY_FUNDING_SOURCE));
         tvDate.setText(jsonObj.getString(KEY_DATE));
         tvTime.setText(jsonObj.getString(KEY_TIME));
         tvPotentialAttractantsOther.setText(jsonObj.getString(KEY_POTENTIAL_ATTRACTANTS_OTHER));
@@ -1117,6 +1152,23 @@ public class ElephantActivityRecordingCSUActivity extends AppCompatActivity impl
 
         tvElephantsReactionAfterEntrySpecifyOther.setText(jsonObj.getString(KEY_ELEPHANTS_REACTION_AFTER_ENTRY_SPECIFY_OTHER));
         tvElephantEnteredFromArea.setText(jsonObj.getString(KEY_ELEPHANT_ENTERED_FROM_AREA_ARE_NOT_COVERED));
+
+        landscape = jsonObj.getString(KEY_LANDSCAPE);
+        String[] actions = landscape.split(":  ");
+        if (actions[0].equals("TAL PABZ") || actions[0].equals("TAL CBRP") ||
+                actions[0].equals("SHL") || actions[0].equals("CHAL") || actions[0].equals("NML")) {
+
+            int setlandscape = landscapeAdpt.getPosition(actions[0]);
+            spinnerLandscape.setSelection(setlandscape);
+            tvOtherlandscapeName.setVisibility(View.GONE);
+
+        } else {
+
+            int setlandscape = landscapeAdpt.getPosition(actions[0]);
+            spinnerLandscape.setSelection(setlandscape);
+            tvOtherlandscapeName.setText(actions[1]);
+
+        }
 
 
         //set spinner

@@ -6,7 +6,6 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.location.Location;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -18,6 +17,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -25,6 +25,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.model.LatLng;
@@ -35,7 +36,6 @@ import com.naxa.conservationtrackingapp.activities.MapPointActivity;
 import com.naxa.conservationtrackingapp.activities.SavedFormsActivity;
 import com.naxa.conservationtrackingapp.database.DataBaseConserVationTracking;
 import com.naxa.conservationtrackingapp.dialog.Default_DIalog;
-import com.naxa.conservationtrackingapp.forest.Cf_Detail;
 import com.naxa.conservationtrackingapp.model.CheckValues;
 import com.naxa.conservationtrackingapp.model.Constants;
 import com.naxa.conservationtrackingapp.model.StaticListOfCoordinates;
@@ -56,7 +56,6 @@ import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.List;
 
 import javax.net.ssl.HttpsURLConnection;
 
@@ -70,10 +69,18 @@ import cn.refactor.lib.colordialog.PromptDialog;
  * Created by samir on 1/28/2018.
  */
 
-public class ScatCollectionDetailsActivity extends AppCompatActivity {
+public class ScatCollectionDetailsActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     @BindView(R.id.scat_collection_details_project_code)
     AutoCompleteTextView tvProjectCode;
+    @BindView(R.id.landScape)
+    TextView landScape;
+    @BindView(R.id.scat_collection_details_landscape)
+    Spinner spinnerLandscape;
+    @BindView(R.id.OtherlandscapeName)
+    AutoCompleteTextView tvOtherlandscapeName;
+    @BindView(R.id.scat_collection_details_fundingSource)
+    AutoCompleteTextView tvFundingSource;
     private String TAG = "ScatCollectionDetailsActivity";
 
     @BindView(R.id.scat_collection_details_name_of_collector)
@@ -140,12 +147,14 @@ public class ScatCollectionDetailsActivity extends AppCompatActivity {
     String latLangArray = "", jsonLatLangArray = "";
 
     String dataSentStatus = "", dateString;
-    String userNameToSend, passwordToSend;
+    String userNameToSend, passwordToSend, landscape = "";
     JSONArray jsonArrayGPS = new JSONArray();
 
-    ArrayAdapter segmentationAdpt, ageAdpt, siteTypeAdpt, associatedSignAdpt;
+    ArrayAdapter landscapeAdpt, segmentationAdpt, ageAdpt, siteTypeAdpt, associatedSignAdpt;
 
     String KEY_COLLECTOR_NAME = "collector_name",
+            KEY_LANDSCAPE = "landscape",
+            KEY_FUNDING_SOURCE = "funding_source",
             KEY_BLOCK_NAME = "block_name",
             KEY_GRID_NO = "grid_no",
             KEY_DATE = "date",
@@ -177,6 +186,13 @@ public class ScatCollectionDetailsActivity extends AppCompatActivity {
 
         setCurrentDateOnView();
         addListenerOnButton();
+
+        landscapeAdpt = new ArrayAdapter<String>(this,
+                android.R.layout.simple_spinner_item, Constants.LANDSCAPE);
+        landscapeAdpt
+                .setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerLandscape.setAdapter(landscapeAdpt);
+        spinnerLandscape.setOnItemSelectedListener(this);
 
 //        Segmentation spinner
         segmentationAdpt = new ArrayAdapter<String>(this,
@@ -414,6 +430,8 @@ public class ScatCollectionDetailsActivity extends AppCompatActivity {
             JSONObject header = new JSONObject();
 
             header.put(KEY_PROJECT_CODE, tvProjectCode.getText().toString());
+            header.put(KEY_LANDSCAPE, landscape + ":  " + tvOtherlandscapeName.getText().toString());
+            header.put(KEY_FUNDING_SOURCE, tvFundingSource.getText().toString());
             header.put(KEY_COLLECTOR_NAME, tvNameOfCollector.getText().toString());
             header.put(KEY_BLOCK_NAME, tvBlockName.getText().toString());
             header.put(KEY_GRID_NO, tvGridNo.getText().toString());
@@ -537,7 +555,8 @@ public class ScatCollectionDetailsActivity extends AppCompatActivity {
                                                 finish();
                                             } else {
                                                 dialog.dismiss();
-                                            }                                        }
+                                            }
+                                        }
                                     }).show();
                             dataBaseConserVationTracking.close();
                             showDialog.dismiss();
@@ -580,23 +599,23 @@ public class ScatCollectionDetailsActivity extends AppCompatActivity {
 //                        // TODO Auto-generated method stub
                 String userN = UserNameAndPasswordUtils.getUserNameAndPassword(context).get(0);
                 String passW = UserNameAndPasswordUtils.getUserNameAndPassword(context).get(1);
-                        if (userN == null || userN.equals("") || passW == null || passW.equals("")) {
-                            Toast.makeText(context, "Either your user name or password is empty.Please fill the required field. ", Toast.LENGTH_SHORT).show();
-                        } else {
+                if (userN == null || userN.equals("") || passW == null || passW.equals("")) {
+                    Toast.makeText(context, "Either your user name or password is empty.Please fill the required field. ", Toast.LENGTH_SHORT).show();
+                } else {
 //                            showDialog.dismiss();
 
-                            userNameToSend = userN;
-                            passwordToSend = passW;
+                    userNameToSend = userN;
+                    passwordToSend = passW;
 
-                            Log.e("SEND", "Clicked");
-                            mProgressDlg = new ProgressDialog(context);
-                            mProgressDlg.setMessage("Please Wait...");
-                            mProgressDlg.setIndeterminate(false);
-                            mProgressDlg.setCancelable(false);
-                            mProgressDlg.show();
-                            convertDataToJson();
-                            sendDatToserver();
-                        }
+                    Log.e("SEND", "Clicked");
+                    mProgressDlg = new ProgressDialog(context);
+                    mProgressDlg.setMessage("Please Wait...");
+                    mProgressDlg.setIndeterminate(false);
+                    mProgressDlg.setCancelable(false);
+                    mProgressDlg.show();
+                    convertDataToJson();
+                    sendDatToserver();
+                }
 //                    }
 //                });
             } else {
@@ -613,6 +632,28 @@ public class ScatCollectionDetailsActivity extends AppCompatActivity {
             RestApii restApii = new RestApii();
             restApii.execute();
         }
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        int SpinnerID = parent.getId();
+
+        if (SpinnerID == R.id.scat_collection_details_landscape) {
+            landscape = Constants.LANDSCAPE[position];
+            Log.d(TAG, "onItemSelected: " + landscape);
+
+            if (landscape.equals("Others")) {
+                tvOtherlandscapeName.setVisibility(View.VISIBLE);
+            } else {
+                tvOtherlandscapeName.setVisibility(View.GONE);
+                tvOtherlandscapeName.setText("");
+            }
+        }
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
     }
 
     private class RestApii extends AsyncTask<String, Void, String> {
@@ -642,7 +683,7 @@ public class ScatCollectionDetailsActivity extends AppCompatActivity {
 
             try {
                 text = POST(getString(R.string.api_host_url));
-                Log.e(TAG, "doInBackground: "+text );
+                Log.e(TAG, "doInBackground: " + text);
                 JSONObject jsonObject = new JSONObject(text);
                 dataSentStatus = jsonObject.getString("data");
 
@@ -770,7 +811,7 @@ public class ScatCollectionDetailsActivity extends AppCompatActivity {
             String status = (String) bundle.get("status");
 
 
-            if(status.equals("Sent")){
+            if (status.equals("Sent")) {
                 btnSave.setEnabled(false);
                 btnSend.setEnabled(false);
             }
@@ -822,6 +863,7 @@ public class ScatCollectionDetailsActivity extends AppCompatActivity {
         finalLong = Double.parseDouble(jsonObj.getString("longitude"));
 
         tvProjectCode.setText(jsonObj.getString(KEY_PROJECT_CODE));
+        tvFundingSource.setText(jsonObj.getString(KEY_FUNDING_SOURCE));
         tvNameOfCollector.setText(jsonObj.getString(KEY_COLLECTOR_NAME));
         tvBlockName.setText(jsonObj.getString(KEY_BLOCK_NAME));
         tvGridNo.setText(jsonObj.getString(KEY_GRID_NO));
@@ -833,6 +875,23 @@ public class ScatCollectionDetailsActivity extends AppCompatActivity {
         tvComments.setText(jsonObj.getString(KEY_COMMENTS));
 
 
+
+        landscape = jsonObj.getString(KEY_LANDSCAPE);
+        String[] actions = landscape.split(":  ");
+        if (actions[0].equals("TAL PABZ") || actions[0].equals("TAL CBRP") ||
+                actions[0].equals("SHL") || actions[0].equals("CHAL") || actions[0].equals("NML")) {
+
+            int setlandscape = landscapeAdpt.getPosition(actions[0]);
+            spinnerLandscape.setSelection(setlandscape);
+            tvOtherlandscapeName.setVisibility(View.GONE);
+
+        } else {
+
+            int setlandscape = landscapeAdpt.getPosition(actions[0]);
+            spinnerLandscape.setSelection(setlandscape);
+            tvOtherlandscapeName.setText(actions[1]);
+
+        }
         //set spinner
         int segmentationPos = segmentationAdpt.getPosition(jsonObj.getString(KEY_SEGMENTATION));
         spinnerSegmentation.setSelection(segmentationPos);

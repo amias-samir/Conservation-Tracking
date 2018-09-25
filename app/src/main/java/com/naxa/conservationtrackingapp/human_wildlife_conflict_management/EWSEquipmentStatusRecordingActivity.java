@@ -15,6 +15,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -22,6 +23,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.model.LatLng;
@@ -32,11 +34,9 @@ import com.naxa.conservationtrackingapp.activities.MapPointActivity;
 import com.naxa.conservationtrackingapp.activities.SavedFormsActivity;
 import com.naxa.conservationtrackingapp.database.DataBaseConserVationTracking;
 import com.naxa.conservationtrackingapp.dialog.Default_DIalog;
-import com.naxa.conservationtrackingapp.forest.Cf_Detail;
 import com.naxa.conservationtrackingapp.model.CheckValues;
 import com.naxa.conservationtrackingapp.model.Constants;
 import com.naxa.conservationtrackingapp.model.StaticListOfCoordinates;
-import com.naxa.conservationtrackingapp.wildlife_monitoring_techniques.ScatCollectionDetailsActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -63,13 +63,21 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.refactor.lib.colordialog.PromptDialog;
 
-public class EWSEquipmentStatusRecordingActivity extends AppCompatActivity {
+public class EWSEquipmentStatusRecordingActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     Toolbar toolbar;
     @BindView(R.id.ews_equipment_status_recording_GpsStart)
     Button btnGpsStart;
     @BindView(R.id.ews_equipment_status_recording_preview_map)
     Button btnPreviewMap;
+    @BindView(R.id.landScape)
+    TextView landScape;
+    @BindView(R.id.ews_equipment_status_recording_landscape)
+    Spinner spinnerLandscape;
+    @BindView(R.id.OtherlandscapeName)
+    AutoCompleteTextView tvOtherlandscapeName;
+    @BindView(R.id.ews_equipment_status_recording_fundingSource)
+    AutoCompleteTextView tvFundingSource;
 
     private String TAG = "EWSEquipmentStatusRecording";
 
@@ -125,12 +133,14 @@ public class EWSEquipmentStatusRecordingActivity extends AppCompatActivity {
 
 
     String dataSentStatus = "", dateString;
-    String userNameToSend, passwordToSend;
+    String userNameToSend, passwordToSend, landscape = "";
 
-    ArrayAdapter smsAdpt, alarmAdpt;
+    ArrayAdapter landscapeAdpt, smsAdpt, alarmAdpt;
 
     String KEY_PROJECT_CODE = "project_code",
             KEY_DATE = "date",
+            KEY_LANDSCAPE = "landscape",
+            KEY_FUNDING_SOURCE = "funding_source",
             KEY_SMS = "sms",
             KEY_ALARM = "alarm",
             KEY_EQUIPMENT = "equipment",
@@ -157,6 +167,13 @@ public class EWSEquipmentStatusRecordingActivity extends AppCompatActivity {
 
         setCurrentDateOnView();
         addListenerOnButton();
+
+        landscapeAdpt = new ArrayAdapter<String>(this,
+                android.R.layout.simple_spinner_item, Constants.LANDSCAPE);
+        landscapeAdpt
+                .setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerLandscape.setAdapter(landscapeAdpt);
+        spinnerLandscape.setOnItemSelectedListener(this);
 
         //        SMS spinner
         smsAdpt = new ArrayAdapter<String>(this,
@@ -305,6 +322,8 @@ public class EWSEquipmentStatusRecordingActivity extends AppCompatActivity {
             JSONObject header = new JSONObject();
 
             header.put(KEY_PROJECT_CODE, tvProjectCode.getText().toString());
+            header.put(KEY_LANDSCAPE, landscape + ":  " + tvOtherlandscapeName.getText().toString());
+            header.put(KEY_FUNDING_SOURCE, tvFundingSource.getText().toString());
             header.put(KEY_DATE, tvDate.getText().toString());
 
             header.put(KEY_SMS, spinnerSms.getSelectedItem().toString());
@@ -425,7 +444,6 @@ public class EWSEquipmentStatusRecordingActivity extends AppCompatActivity {
                 }
 
 
-
                 long date = System.currentTimeMillis();
 
                 SimpleDateFormat sdf = new SimpleDateFormat("MMM dd, yyyy h:mm a");
@@ -466,7 +484,6 @@ public class EWSEquipmentStatusRecordingActivity extends AppCompatActivity {
                             }
 
 
-
                             new PromptDialog(EWSEquipmentStatusRecordingActivity.this)
                                     .setDialogType(PromptDialog.DIALOG_TYPE_SUCCESS)
                                     .setAnimationEnable(true)
@@ -481,7 +498,8 @@ public class EWSEquipmentStatusRecordingActivity extends AppCompatActivity {
                                                 finish();
                                             } else {
                                                 dialog.dismiss();
-                                            }                                        }
+                                            }
+                                        }
                                     }).show();
                             dataBaseConserVationTracking.close();
                             showDialog.dismiss();
@@ -526,23 +544,23 @@ public class EWSEquipmentStatusRecordingActivity extends AppCompatActivity {
 //                        // TODO Auto-generated method stub
                 String userN = UserNameAndPasswordUtils.getUserNameAndPassword(context).get(0);
                 String passW = UserNameAndPasswordUtils.getUserNameAndPassword(context).get(1);
-                        if (userN == null || userN.equals("") || passW == null || passW.equals("")) {
-                            Toast.makeText(context, "Either your user name or password is empty.Please fill the required field. ", Toast.LENGTH_SHORT).show();
-                        } else {
+                if (userN == null || userN.equals("") || passW == null || passW.equals("")) {
+                    Toast.makeText(context, "Either your user name or password is empty.Please fill the required field. ", Toast.LENGTH_SHORT).show();
+                } else {
 //                            showDialog.dismiss();
 
-                            userNameToSend = userN;
-                            passwordToSend = passW;
+                    userNameToSend = userN;
+                    passwordToSend = passW;
 
-                            Log.e("SEND", "Clicked");
-                            mProgressDlg = new ProgressDialog(context);
-                            mProgressDlg.setMessage("Please Wait...");
-                            mProgressDlg.setIndeterminate(false);
-                            mProgressDlg.setCancelable(false);
-                            mProgressDlg.show();
-                            convertDataToJson();
-                            sendDatToserver();
-                        }
+                    Log.e("SEND", "Clicked");
+                    mProgressDlg = new ProgressDialog(context);
+                    mProgressDlg.setMessage("Please Wait...");
+                    mProgressDlg.setIndeterminate(false);
+                    mProgressDlg.setCancelable(false);
+                    mProgressDlg.show();
+                    convertDataToJson();
+                    sendDatToserver();
+                }
 //                    }
 //                });
             } else {
@@ -559,6 +577,28 @@ public class EWSEquipmentStatusRecordingActivity extends AppCompatActivity {
             RestApii restApii = new RestApii();
             restApii.execute();
         }
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        int SpinnerID = parent.getId();
+
+        if (SpinnerID == R.id.ews_equipment_status_recording_landscape) {
+            landscape = Constants.LANDSCAPE[position];
+            Log.d(TAG, "onItemSelected: " + landscape);
+
+            if (landscape.equals("Others")) {
+                tvOtherlandscapeName.setVisibility(View.VISIBLE);
+            } else {
+                tvOtherlandscapeName.setVisibility(View.GONE);
+                tvOtherlandscapeName.setText("");
+            }
+        }
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
     }
 
 
@@ -745,6 +785,7 @@ public class EWSEquipmentStatusRecordingActivity extends AppCompatActivity {
         finalLong = Double.parseDouble(jsonObj.getString(KEY_FINAL_LONG));
 
         tvProjectCode.setText(jsonObj.getString(KEY_PROJECT_CODE));
+        tvFundingSource.setText(jsonObj.getString(KEY_FUNDING_SOURCE));
         tvDate.setText(jsonObj.getString(KEY_DATE));
         tvEquipment.setText(jsonObj.getString(KEY_EQUIPMENT));
         tvConnection.setText(jsonObj.getString(KEY_CONNECTION));
@@ -752,6 +793,23 @@ public class EWSEquipmentStatusRecordingActivity extends AppCompatActivity {
         tvActionTaken.setText(jsonObj.getString(KEY_ACTION_TAKEN));
 
         tvCCTV.setText(jsonObj.getString(KEY_CCTV));
+
+        landscape = jsonObj.getString(KEY_LANDSCAPE);
+        String[] actions = landscape.split(":  ");
+        if (actions[0].equals("TAL PABZ") || actions[0].equals("TAL CBRP") ||
+                actions[0].equals("SHL") || actions[0].equals("CHAL") || actions[0].equals("NML")) {
+
+            int setlandscape = landscapeAdpt.getPosition(actions[0]);
+            spinnerLandscape.setSelection(setlandscape);
+            tvOtherlandscapeName.setVisibility(View.GONE);
+
+        } else {
+
+            int setlandscape = landscapeAdpt.getPosition(actions[0]);
+            spinnerLandscape.setSelection(setlandscape);
+            tvOtherlandscapeName.setText(actions[1]);
+
+        }
 
 
         //set spinner
