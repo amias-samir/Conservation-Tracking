@@ -13,6 +13,7 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.Toolbar;
@@ -37,6 +38,7 @@ import com.naxa.conservationtrackingapp.GeoPointActivity;
 import com.naxa.conservationtrackingapp.R;
 import com.naxa.conservationtrackingapp.activities.GPS_TRACKER_FOR_POINT;
 import com.naxa.conservationtrackingapp.activities.MapPointActivity;
+import com.naxa.conservationtrackingapp.activities.MapPolyLineActivity;
 import com.naxa.conservationtrackingapp.activities.SavedFormsActivity;
 import com.naxa.conservationtrackingapp.database.DataBaseConserVationTracking;
 import com.naxa.conservationtrackingapp.dialog.Default_DIalog;
@@ -68,6 +70,7 @@ import Utls.UserNameAndPasswordUtils;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import butterknife.Optional;
 import cn.refactor.lib.colordialog.PromptDialog;
 
 /**
@@ -85,6 +88,59 @@ public class SnowLeopardPreyBaseMonitoringActivity extends AppCompatActivity imp
     AutoCompleteTextView tvOtherlandscapeName;
     @BindView(R.id.snow_leopard_prey_base_fundingSource)
     AutoCompleteTextView tvFundingSource;
+    @BindView(R.id.snow_leopard_prey_base_species_added_no)
+    TextView tvSpeciesAddedNo;
+    @BindView(R.id.snow_leopard_prey_base_species_add_btn)
+    Button btnSpeciesAdd;
+
+    //    @Nullable
+//    @BindView(R.id.snow_leopard_prey_base_site)
+    AutoCompleteTextView tvSite;
+    //    @Nullable
+//    @BindView(R.id.snow_leopard_prey_base_female_no)
+    AutoCompleteTextView tvFemaleNo;
+    //    @Nullable
+//    @BindView(R.id.snow_leopard_prey_base_young_no)
+    AutoCompleteTextView tvYoungNo;
+    //    @Nullable
+//    @BindView(R.id.snow_leopard_prey_base_yearling_no)
+    AutoCompleteTextView tvYearlingNo;
+    //    @Nullable
+//    @BindView(R.id.snow_leopard_prey_base_young_male_no)
+    AutoCompleteTextView tvYoungMaleNo;
+    //    @Nullable
+//    @BindView(R.id.snow_leopard_prey_base_sub_adult_male_no)
+    AutoCompleteTextView tvSubAdultMaleNo;
+    //    @Nullable
+//    @BindView(R.id.snow_leopard_prey_base_adult_male_no)
+    AutoCompleteTextView tvAdultMaleNo;
+    //    @Nullable
+//    @BindView(R.id.snow_leopard_prey_base_unidentified_no)
+    AutoCompleteTextView tvUnidentifiedNo;
+    //    @Nullable
+//    @BindView(R.id.snow_leopard_prey_base_total_numbers)
+    AutoCompleteTextView tvTotalNumbers;
+    //    @Nullable
+//    @BindView(R.id.snow_leopard_prey_base_habitat_type)
+    Spinner spinnerHabitatType;
+    //    @Nullable
+//    @BindView(R.id.snow_leopard_prey_base_aspect)
+    Spinner spinnerAspect;
+    //    @Nullable
+//    @BindView(R.id.snow_leopard_prey_base_distance_to_cliff)
+    AutoCompleteTextView tvDistanceToCliff;
+    //    @Nullable
+//    @BindView(R.id.snow_leopard_prey_base_slope)
+    Spinner spinnerSlope;
+    //    @Nullable
+//    @BindView(R.id.snow_leopard_prey_base_species_GpsStart)
+    Button btnSpeciesGpsStart;
+    //    @Nullable
+//    @BindView(R.id.snow_leopard_prey_base_species_preview_map)
+    Button btnSpeciesPreviewMap;
+    //    @Nullable
+//    @BindView(R.id.snow_leopard_prey_base_dialog_add_species_button)
+    Button dialogAddSpeciesButton;
     private String TAG = "ScatCollectionDetailsActivity";
 
     @BindView(R.id.snow_leopard_prey_base_observer_name)
@@ -117,32 +173,34 @@ public class SnowLeopardPreyBaseMonitoringActivity extends AppCompatActivity imp
     Spinner spinnerUseOfGrazingLand;
     @BindView(R.id.snow_leopard_prey_base_grid_id)
     AutoCompleteTextView tvGridId;
-    @BindView(R.id.snow_leopard_prey_base_site)
-    AutoCompleteTextView tvSite;
-    @BindView(R.id.snow_leopard_prey_base_female_no)
-    AutoCompleteTextView tvFemaleNo;
-    @BindView(R.id.snow_leopard_prey_base_young_no)
-    AutoCompleteTextView tvYoungNo;
-    @BindView(R.id.snow_leopard_prey_base_yearling_no)
-    AutoCompleteTextView tvYearlingNo;
-    @BindView(R.id.snow_leopard_prey_base_young_male_no)
-    AutoCompleteTextView tvYoungMaleNo;
-    @BindView(R.id.snow_leopard_prey_base_sub_adult_male_no)
-    AutoCompleteTextView tvSubAdultMaleNo;
-    @BindView(R.id.snow_leopard_prey_base_adult_male_no)
-    AutoCompleteTextView tvAdultMaleNo;
-    @BindView(R.id.snow_leopard_prey_base_unidentified_no)
-    AutoCompleteTextView tvUnidentifiedNo;
-    @BindView(R.id.snow_leopard_prey_base_total_numbers)
-    AutoCompleteTextView tvTotalNumbers;
-    @BindView(R.id.snow_leopard_prey_base_habitat_type)
-    Spinner spinnerHabitatType;
-    @BindView(R.id.snow_leopard_prey_base_aspect)
-    Spinner spinnerAspect;
-    @BindView(R.id.snow_leopard_prey_base_distance_to_cliff)
-    AutoCompleteTextView tvDistanceToCliff;
-    @BindView(R.id.snow_leopard_prey_base_slope)
-    Spinner spinnerSlope;
+
+//    @BindView(R.id.snow_leopard_prey_base_site)
+//    AutoCompleteTextView tvSite;
+//    @BindView(R.id.snow_leopard_prey_base_female_no)
+//    AutoCompleteTextView tvFemaleNo;
+//    @BindView(R.id.snow_leopard_prey_base_young_no)
+//    AutoCompleteTextView tvYoungNo;
+//    @BindView(R.id.snow_leopard_prey_base_yearling_no)
+//    AutoCompleteTextView tvYearlingNo;
+//    @BindView(R.id.snow_leopard_prey_base_young_male_no)
+//    AutoCompleteTextView tvYoungMaleNo;
+//    @BindView(R.id.snow_leopard_prey_base_sub_adult_male_no)
+//    AutoCompleteTextView tvSubAdultMaleNo;
+//    @BindView(R.id.snow_leopard_prey_base_adult_male_no)
+//    AutoCompleteTextView tvAdultMaleNo;
+//    @BindView(R.id.snow_leopard_prey_base_unidentified_no)
+//    AutoCompleteTextView tvUnidentifiedNo;
+//    @BindView(R.id.snow_leopard_prey_base_total_numbers)
+//    AutoCompleteTextView tvTotalNumbers;
+//    @BindView(R.id.snow_leopard_prey_base_habitat_type)
+//    Spinner spinnerHabitatType;
+//    @BindView(R.id.snow_leopard_prey_base_aspect)
+//    Spinner spinnerAspect;
+//    @BindView(R.id.snow_leopard_prey_base_distance_to_cliff)
+//    AutoCompleteTextView tvDistanceToCliff;
+//    @BindView(R.id.snow_leopard_prey_base_slope)
+//    Spinner spinnerSlope;
+
     @BindView(R.id.snow_leopard_prey_base_save)
     Button btnSave;
     @BindView(R.id.snow_leopard_prey_base_send)
@@ -162,6 +220,8 @@ public class SnowLeopardPreyBaseMonitoringActivity extends AppCompatActivity imp
 
     boolean isGpsTracking = false;
     boolean isGpsTaken = false;
+    private boolean isGpsTaken1 = false;
+
     double initLat;
     double finalLat;
     double initLong;
@@ -186,6 +246,8 @@ public class SnowLeopardPreyBaseMonitoringActivity extends AppCompatActivity imp
 
     String formNameSavedForm, formid;
 
+    List<String> speciesSegmentList = new ArrayList<>();
+
 
     String dataSentStatus = "", dateString, landscape = "";
     String userNameToSend, passwordToSend;
@@ -207,6 +269,8 @@ public class SnowLeopardPreyBaseMonitoringActivity extends AppCompatActivity imp
     KEY_FINAL_LAT = "latitude",
             KEY_FINAL_LONG = "longitude",
             KEY_ELEVATION = "elevation",
+            KEY_NO_OF_SPECIES = "no_of_species",
+            KEY_ALL_SPECIES = "all_species",
 
     KEY_DISTRICT = "district",
             KEY_RURAL_MUNICIPALITY = "rural_municipality",
@@ -227,6 +291,8 @@ public class SnowLeopardPreyBaseMonitoringActivity extends AppCompatActivity imp
             KEY_ASPECT = "aspect",
             KEY_DISTANCE_TO_CLIFF = "distance_to_cliff",
             KEY_SLOPE = "slope";
+    private String all_segment = "";
+    private String no_of_segments = "";
 
 
     @Override
@@ -262,26 +328,26 @@ public class SnowLeopardPreyBaseMonitoringActivity extends AppCompatActivity imp
                 .setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerUseOfGrazingLand.setAdapter(useOfGrazingLandAdpt);
 
-        //        habitat spinner
-        habitatTypeAdpt = new ArrayAdapter<String>(this,
-                android.R.layout.simple_spinner_item, Constants.WMT_SNOW_LEOPARD_HABITAT_TYPE);
-        habitatTypeAdpt
-                .setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerHabitatType.setAdapter(habitatTypeAdpt);
-
-        //        aspect spinner
-        aspectAdpt = new ArrayAdapter<String>(this,
-                android.R.layout.simple_spinner_item, Constants.WMT_SNOW_LEOPARD_ASPECT);
-        aspectAdpt
-                .setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerAspect.setAdapter(aspectAdpt);
-
-        //        slope spinner
-        slopeAdpt = new ArrayAdapter<String>(this,
-                android.R.layout.simple_spinner_item, Constants.WMT_SNOW_LEOPARD_SLOPE);
-        slopeAdpt
-                .setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerSlope.setAdapter(slopeAdpt);
+//        //        habitat spinner
+//        habitatTypeAdpt = new ArrayAdapter<String>(this,
+//                android.R.layout.simple_spinner_item, Constants.WMT_SNOW_LEOPARD_HABITAT_TYPE);
+//        habitatTypeAdpt
+//                .setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//        spinnerHabitatType.setAdapter(habitatTypeAdpt);
+//
+//        //        aspect spinner
+//        aspectAdpt = new ArrayAdapter<String>(this,
+//                android.R.layout.simple_spinner_item, Constants.WMT_SNOW_LEOPARD_ASPECT);
+//        aspectAdpt
+//                .setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//        spinnerAspect.setAdapter(aspectAdpt);
+//
+//        //        slope spinner
+//        slopeAdpt = new ArrayAdapter<String>(this,
+//                android.R.layout.simple_spinner_item, Constants.WMT_SNOW_LEOPARD_SLOPE);
+//        slopeAdpt
+//                .setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//        spinnerSlope.setAdapter(slopeAdpt);
 
         btnPreviewMap.setEnabled(false);
 
@@ -290,7 +356,7 @@ public class SnowLeopardPreyBaseMonitoringActivity extends AppCompatActivity imp
 
     }
 
-    @OnClick({R.id.snow_leopard_prey_base_GpsStart, R.id.snow_leopard_prey_base_preview_map, R.id.snow_leopard_prey_base_save, R.id.snow_leopard_prey_base_send})
+    @OnClick({R.id.snow_leopard_prey_base_GpsStart, R.id.snow_leopard_prey_base_preview_map, R.id.snow_leopard_prey_base_save, R.id.snow_leopard_prey_base_send, R.id.snow_leopard_prey_base_species_add_btn})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.snow_leopard_prey_base_GpsStart:
@@ -308,6 +374,10 @@ public class SnowLeopardPreyBaseMonitoringActivity extends AppCompatActivity imp
 
             case R.id.snow_leopard_prey_base_send:
                 sendFORMDATA();
+                break;
+
+            case R.id.snow_leopard_prey_base_species_add_btn:
+                showAddSpeciesSeenDialog();
                 break;
         }
     }
@@ -355,13 +425,13 @@ public class SnowLeopardPreyBaseMonitoringActivity extends AppCompatActivity imp
             }
         });
 
-        tvTotalNumbers.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                countTotalSnowLeopardNumber();
-            }
-        });
+//        tvTotalNumbers.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//                countTotalSnowLeopardNumber();
+//            }
+//        });
 
     }
 
@@ -633,19 +703,22 @@ public class SnowLeopardPreyBaseMonitoringActivity extends AppCompatActivity imp
             header.put(KEY_USE_OF_GRAZING_LAND, spinnerUseOfGrazingLand.getSelectedItem().toString());
             header.put(KEY_GRID_ID, tvGridId.getText().toString());
 
-            header.put(KEY_SITE, tvSite.getText().toString());
-            header.put(KEY_FEMALE_NO, tvFemaleNo.getText().toString());
-            header.put(KEY_YOUNG_NO, tvYoungNo.getText().toString());
-            header.put(KEY_YEARLING_NO, tvYearlingNo.getText().toString());
-            header.put(KEY_YOUNG_MALE_NO, tvYoungMaleNo.getText().toString());
-            header.put(KEY_SUB_ADULT_MALE_NO, tvSubAdultMaleNo.getText().toString());
-            header.put(KEY_ADULT_MALE_NO, tvAdultMaleNo.getText().toString());
-            header.put(KEY_UNIDENTIFIED_NO, tvUnidentifiedNo.getText().toString());
-            header.put(KEY_TOTAL_NO, tvTotalNumbers.getText().toString());
-            header.put(KEY_HABITAT_TYPE, spinnerHabitatType.getSelectedItem().toString());
-            header.put(KEY_ASPECT, spinnerAspect.getSelectedItem().toString());
-            header.put(KEY_DISTANCE_TO_CLIFF, tvDistanceToCliff.getText().toString());
-            header.put(KEY_SLOPE, spinnerSlope.getSelectedItem().toString());
+//            header.put(KEY_SITE, tvSite.getText().toString());
+//            header.put(KEY_FEMALE_NO, tvFemaleNo.getText().toString());
+//            header.put(KEY_YOUNG_NO, tvYoungNo.getText().toString());
+//            header.put(KEY_YEARLING_NO, tvYearlingNo.getText().toString());
+//            header.put(KEY_YOUNG_MALE_NO, tvYoungMaleNo.getText().toString());
+//            header.put(KEY_SUB_ADULT_MALE_NO, tvSubAdultMaleNo.getText().toString());
+//            header.put(KEY_ADULT_MALE_NO, tvAdultMaleNo.getText().toString());
+//            header.put(KEY_UNIDENTIFIED_NO, tvUnidentifiedNo.getText().toString());
+//            header.put(KEY_TOTAL_NO, tvTotalNumbers.getText().toString());
+//            header.put(KEY_HABITAT_TYPE, spinnerHabitatType.getSelectedItem().toString());
+//            header.put(KEY_ASPECT, spinnerAspect.getSelectedItem().toString());
+//            header.put(KEY_DISTANCE_TO_CLIFF, tvDistanceToCliff.getText().toString());
+//            header.put(KEY_SLOPE, spinnerSlope.getSelectedItem().toString());
+
+            header.put(KEY_ALL_SPECIES, all_segment);
+            header.put(KEY_NO_OF_SPECIES, tvSpeciesAddedNo.getText().toString());
 
 
             post_dict.put("formdata", header);
@@ -851,6 +924,11 @@ public class SnowLeopardPreyBaseMonitoringActivity extends AppCompatActivity imp
     public void onNothingSelected(AdapterView<?> parent) {
 
     }
+
+    @OnClick(R.id.snow_leopard_prey_base_species_add_btn)
+    public void onViewClicked() {
+    }
+
 
     private class RestApii extends AsyncTask<String, Void, String> {
         protected String getASCIIContentFromEntity(HttpURLConnection entity)
@@ -1074,17 +1152,32 @@ public class SnowLeopardPreyBaseMonitoringActivity extends AppCompatActivity imp
         tvBlock.setText(jsonObj.getString(KEY_BLOCK));
         tvGridId.setText(jsonObj.getString(KEY_GRID_ID));
 
-        tvSite.setText(jsonObj.getString(KEY_SITE));
-        tvFemaleNo.setText(jsonObj.getString(KEY_FEMALE_NO));
-        tvYoungNo.setText(jsonObj.getString(KEY_YOUNG_NO));
-        tvYearlingNo.setText(jsonObj.getString(KEY_YEARLING_NO));
-        tvYoungMaleNo.setText(jsonObj.getString(KEY_YOUNG_MALE_NO));
-        tvSubAdultMaleNo.setText(jsonObj.getString(KEY_SUB_ADULT_MALE_NO));
-        tvAdultMaleNo.setText(jsonObj.getString(KEY_ADULT_MALE_NO));
-        tvUnidentifiedNo.setText(jsonObj.getString(KEY_UNIDENTIFIED_NO));
-        tvTotalNumbers.setText(jsonObj.getString(KEY_TOTAL_NO));
-        tvDistanceToCliff.setText(jsonObj.getString(KEY_DISTANCE_TO_CLIFF));
+//        tvSite.setText(jsonObj.getString(KEY_SITE));
+//        tvFemaleNo.setText(jsonObj.getString(KEY_FEMALE_NO));
+//        tvYoungNo.setText(jsonObj.getString(KEY_YOUNG_NO));
+//        tvYearlingNo.setText(jsonObj.getString(KEY_YEARLING_NO));
+//        tvYoungMaleNo.setText(jsonObj.getString(KEY_YOUNG_MALE_NO));
+//        tvSubAdultMaleNo.setText(jsonObj.getString(KEY_SUB_ADULT_MALE_NO));
+//        tvAdultMaleNo.setText(jsonObj.getString(KEY_ADULT_MALE_NO));
+//        tvUnidentifiedNo.setText(jsonObj.getString(KEY_UNIDENTIFIED_NO));
+//        tvTotalNumbers.setText(jsonObj.getString(KEY_TOTAL_NO));
+//        tvDistanceToCliff.setText(jsonObj.getString(KEY_DISTANCE_TO_CLIFF));
 
+        no_of_segments = jsonObj.getString(KEY_NO_OF_SPECIES);
+        all_segment = jsonObj.getString(KEY_ALL_SPECIES);
+
+        JSONArray jsonArray = new JSONArray(all_segment);
+        Log.e("ALL_SEGMENT_PARSE_JSON", "SAMIR_parseJson: " + jsonArray.length());
+
+        try {
+            tvSpeciesAddedNo.setText(no_of_segments);
+            for (int i = 0; i < jsonArray.length(); i++) {
+                speciesSegmentList.add(jsonArray.get(i).toString());
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
 
         landscape = jsonObj.getString(KEY_LANDSCAPE);
@@ -1117,4 +1210,163 @@ public class SnowLeopardPreyBaseMonitoringActivity extends AppCompatActivity imp
         int slopePos = slopeAdpt.getPosition(jsonObj.getString(KEY_SLOPE));
         spinnerSlope.setSelection(slopePos);
     }
+
+    private void showAddSpeciesSeenDialog() {
+        DisplayMetrics metrics = context.getResources().getDisplayMetrics();
+        int width = metrics.widthPixels;
+        int height = metrics.heightPixels;
+
+        final Dialog showDialog = new Dialog(context);
+        showDialog.setContentView(R.layout.snow_leopard_species_dialog);
+        final GPS_TRACKER_FOR_POINT gps1 = null;
+        final Button startGps1, previewMap1;
+        gps = new GPS_TRACKER_FOR_POINT(SnowLeopardPreyBaseMonitoringActivity.this);
+
+
+        Button btnOk = (Button) showDialog.findViewById(R.id.snow_leopard_prey_base_dialog_add_species_button);
+        tvSite =  showDialog.findViewById(R.id.snow_leopard_prey_base_site);
+        tvFemaleNo = showDialog.findViewById(R.id.snow_leopard_prey_base_female_no);
+        tvYoungNo = showDialog.findViewById(R.id.snow_leopard_prey_base_young_no);
+        tvYearlingNo = showDialog.findViewById(R.id.snow_leopard_prey_base_yearling_no);
+        tvYoungMaleNo = showDialog.findViewById(R.id.snow_leopard_prey_base_young_male_no);
+        tvSubAdultMaleNo = showDialog.findViewById(R.id.snow_leopard_prey_base_sub_adult_male_no);
+        tvAdultMaleNo = showDialog.findViewById(R.id.snow_leopard_prey_base_adult_male_no);
+        tvUnidentifiedNo = showDialog.findViewById(R.id.snow_leopard_prey_base_unidentified_no);
+        tvTotalNumbers = showDialog.findViewById(R.id.snow_leopard_prey_base_total_numbers);
+        tvDistanceToCliff = showDialog.findViewById(R.id.snow_leopard_prey_base_distance_to_cliff);
+
+        spinnerHabitatType = showDialog.findViewById(R.id.snow_leopard_prey_base_habitat_type);
+        spinnerAspect = showDialog.findViewById(R.id.snow_leopard_prey_base_aspect);
+        spinnerSlope = showDialog.findViewById(R.id.snow_leopard_prey_base_slope);
+
+        btnSpeciesGpsStart = showDialog.findViewById(R.id.snow_leopard_prey_base_species_GpsStart);
+        btnSpeciesPreviewMap = showDialog.findViewById(R.id.snow_leopard_prey_base_species_preview_map);
+
+        showDialog.setTitle("Add New Species");
+        showDialog.getActionBar();
+        showDialog.show();
+        showDialog.getWindow().setLayout((width), LinearLayout.LayoutParams.WRAP_CONTENT);
+
+        tvTotalNumbers.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                countTotalSnowLeopardNumber();
+            }
+        });
+
+        btnSpeciesGpsStart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                finalLat = gps.getLatitude();
+                finalLong = gps.getLongitude();
+                isGpsTaken1 = true;
+
+                Toast.makeText(
+                        getApplicationContext(),
+                        "Your Location is - \nLat: " + finalLat
+                                + "\nLong: " + finalLong, Toast.LENGTH_SHORT)
+                        .show();
+            }
+
+        });
+
+        btnSpeciesPreviewMap.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                gpslocation.clear();
+                StaticListOfCoordinates.setList(listCf);
+                startActivity(new Intent(SnowLeopardPreyBaseMonitoringActivity.this, MapPolyLineActivity.class));
+            }
+        });
+
+
+        //        habitat spinner
+        habitatTypeAdpt = new ArrayAdapter<String>(this,
+                android.R.layout.simple_spinner_item, Constants.WMT_SNOW_LEOPARD_HABITAT_TYPE);
+        habitatTypeAdpt
+                .setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerHabitatType.setAdapter(habitatTypeAdpt);
+
+        //        aspect spinner
+        aspectAdpt = new ArrayAdapter<String>(this,
+                android.R.layout.simple_spinner_item, Constants.WMT_SNOW_LEOPARD_ASPECT);
+        aspectAdpt
+                .setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerAspect.setAdapter(aspectAdpt);
+
+        //        slope spinner
+        slopeAdpt = new ArrayAdapter<String>(this,
+                android.R.layout.simple_spinner_item, Constants.WMT_SNOW_LEOPARD_SLOPE);
+        slopeAdpt
+                .setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerSlope.setAdapter(slopeAdpt);
+
+        btnOk.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                if (isGpsTaken1) {
+
+                    JSONObject memberObj = new JSONObject();
+                    try {
+
+                        memberObj.put(KEY_SITE, tvSite.getText().toString());
+                        memberObj.put(KEY_FEMALE_NO, tvFemaleNo.getText().toString());
+                        memberObj.put(KEY_YOUNG_NO, tvYoungNo.getText().toString());
+                        memberObj.put(KEY_YEARLING_NO, tvYearlingNo.getText().toString());
+                        memberObj.put(KEY_YOUNG_MALE_NO, tvYoungMaleNo.getText().toString());
+                        memberObj.put(KEY_SUB_ADULT_MALE_NO, tvSubAdultMaleNo.getText().toString());
+                        memberObj.put(KEY_ADULT_MALE_NO, tvAdultMaleNo.getText().toString());
+                        memberObj.put(KEY_UNIDENTIFIED_NO, tvUnidentifiedNo.getText().toString());
+                        memberObj.put(KEY_TOTAL_NO, tvTotalNumbers.getText().toString());
+                        memberObj.put(KEY_HABITAT_TYPE, spinnerHabitatType.getSelectedItem().toString());
+                        memberObj.put(KEY_ASPECT, spinnerAspect.getSelectedItem().toString());
+                        memberObj.put(KEY_DISTANCE_TO_CLIFF, tvDistanceToCliff.getText().toString());
+                        memberObj.put(KEY_SLOPE, spinnerSlope.getSelectedItem().toString());
+                        memberObj.put("latitude", finalLat);
+                        memberObj.put("longitude", finalLong);
+
+                        Log.e("all_species: ", memberObj.toString());
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    speciesSegmentList.add(memberObj.toString());
+                    all_segment = speciesSegmentList.toString();
+
+                    tvSpeciesAddedNo.setText(speciesSegmentList.size() + " Species added");
+                    showDialog.dismiss();
+                } else {
+                    Toast.makeText(getApplicationContext(), "Take at least one gps coordinate", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+    }
+
+//    @OnClick({ R.id.snow_leopard_prey_base_species_GpsStart, R.id.snow_leopard_prey_base_species_preview_map})
+//    public void onAddSpeciesViewClicked(View view) {
+//        switch (view.getId()) {
+//            case R.id.snow_leopard_prey_base_species_GpsStart:
+//                finalLat = gps.getLatitude();
+//                finalLong = gps.getLongitude();
+//                isGpsTaken1 = true;
+//
+//                Toast.makeText(
+//                        getApplicationContext(),
+//                        "Your Location is - \nLat: " + finalLat
+//                                + "\nLong: " + finalLong, Toast.LENGTH_SHORT)
+//                        .show();
+//                break;
+//
+//            case R.id.snow_leopard_prey_base_species_preview_map:
+//                gpslocation.clear();
+//                StaticListOfCoordinates.setList(listCf);
+//                startActivity(new Intent(SnowLeopardPreyBaseMonitoringActivity.this, MapPolyLineActivity.class));
+//                break;
+//        }
+//    }
 }

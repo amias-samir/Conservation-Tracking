@@ -1177,7 +1177,7 @@ public class HumanDisturbance extends AppCompatActivity implements AdapterView.O
         spinnerTypeOfPoaching.setAdapter(adptTypesOfPoaching);
         spinnerTypeOfPoaching.setOnItemSelectedListener(this);
 
-        showDialog.setTitle("Add New Segment");
+        showDialog.setTitle("Add New Species");
         showDialog.getActionBar();
         showDialog.show();
         showDialog.getWindow().setLayout((width), LinearLayout.LayoutParams.WRAP_CONTENT);
@@ -1259,16 +1259,6 @@ public class HumanDisturbance extends AppCompatActivity implements AdapterView.O
                 }
             }
         });
-
-
-//        cancel.setOnClickListener(new View.OnClickListener() {
-//
-//            @Override
-//            public void onClick(View v) {
-//                // TODO Auto-generated method stub
-//                showDialog.dismiss();
-//            }
-//        });
 
     }
 

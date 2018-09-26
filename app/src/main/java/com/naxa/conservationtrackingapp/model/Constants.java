@@ -160,6 +160,7 @@ public class Constants {
 
     public static String[] HABITAT_TYPE = {"SF-Sal Forest",  "MF-Mixed Forest", "RF-Riverine Forest", "TG-Tall Grassland", "SG–Short Grassland", "W-Wetland", "S-Streambed"};
     public static String[] CAMERA_TRAPPING_HABITAT_TYPE = {"SF-Sal Forest",  "MF-Mixed Forest", "RF-Riverine Forest", "TG-Tall Grassland", "SG–Short Grassland", "W-Wetland", "S-Streambed", "Alpine Grassland", "Shurbland", "Barren Land", "Sub Alpine Forest"};
+    public static String [] RUGGEDNESS = {"Very broken (VB)", "Moderately broken (MB)", "Broken (B)"};
 
     public static String[] TERRAIN = {"Hilly", "Flat", "Streambed"};
     public static String[] SLOPE = {"0-30", "30-60", "60-90"};
