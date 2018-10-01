@@ -510,13 +510,6 @@ public class WildlifeMortalityDetails extends AppCompatActivity implements Adapt
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
@@ -525,6 +518,10 @@ public class WildlifeMortalityDetails extends AppCompatActivity implements Adapt
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.app_update) {
+            return true;
+        }
+        if (id == android.R.id.home) {
+            onBackPressed();
             return true;
         }
 

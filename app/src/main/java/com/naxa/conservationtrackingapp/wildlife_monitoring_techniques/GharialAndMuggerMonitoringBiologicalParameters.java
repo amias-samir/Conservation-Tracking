@@ -518,12 +518,6 @@ public class GharialAndMuggerMonitoringBiologicalParameters extends AppCompatAct
         });
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -569,6 +563,10 @@ public class GharialAndMuggerMonitoringBiologicalParameters extends AppCompatAct
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.app_update) {
+            return true;
+        }
+        if (id == android.R.id.home) {
+            onBackPressed();
             return true;
         }
 

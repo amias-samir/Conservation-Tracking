@@ -587,13 +587,6 @@ public class GrasslandManagement extends AppCompatActivity implements AdapterVie
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
@@ -602,6 +595,10 @@ public class GrasslandManagement extends AppCompatActivity implements AdapterVie
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.app_update) {
+            return true;
+        }
+        if (id == android.R.id.home) {
+            onBackPressed();
             return true;
         }
 

@@ -460,12 +460,7 @@ public class InstitutionalSupport extends AppCompatActivity implements AdapterVi
         });
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -476,6 +471,10 @@ public class InstitutionalSupport extends AppCompatActivity implements AdapterVi
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.app_update) {
+            return true;
+        }
+        if (id == android.R.id.home) {
+            onBackPressed();
             return true;
         }
 

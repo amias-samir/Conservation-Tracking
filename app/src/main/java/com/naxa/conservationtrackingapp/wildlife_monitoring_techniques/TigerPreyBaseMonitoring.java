@@ -94,8 +94,8 @@ import cn.refactor.lib.colordialog.PromptDialog;
 public class TigerPreyBaseMonitoring extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     Toolbar toolbar;
     int CAMERA_PIC_REQUEST = 2;
-    Spinner spinnerLandscape, habitatType;
-    ArrayAdapter landscapeAdpt, habitatTypeAdapter;
+    Spinner spinnerLandscape, habitatType, spinnerRuggednessType;
+    ArrayAdapter landscapeAdpt, habitatTypeAdapter, ruggednessTypeAdpt;
     Button send, save, startGps, previewMap, btnAddSegment;
     ProgressDialog mProgressDlg;
     Context context = this;
@@ -149,6 +149,7 @@ public class TigerPreyBaseMonitoring extends AppCompatActivity implements Adapte
     String animal_bearing;
     String angular_sighting_distance;
     String habitat_type;
+    String ruggedness_type;
     String remarks;
     String fund_tal, fund_community, fund_others;
 
@@ -175,7 +176,7 @@ public class TigerPreyBaseMonitoring extends AppCompatActivity implements Adapte
     String dataSentStatus = "", dateString;
 
     List<String> speciesSegmentList = new ArrayList<>();
-    public String all_segment, no_of_segment_added = "";
+    public String all_segment = "", no_of_segment_added = "";
 
 
     @Override
@@ -219,6 +220,7 @@ public class TigerPreyBaseMonitoring extends AppCompatActivity implements Adapte
 
         tvNotes = (AutoCompleteTextView) findViewById(R.id.tiger_prey_base_remarks);
         habitatType = (Spinner) findViewById(R.id.tiger_prey_base_habitat_type);
+        spinnerRuggednessType = (Spinner) findViewById(R.id.tiger_prey_base_ruggedness_type);
         tvdate = (AutoCompleteTextView) findViewById(R.id.tiger_prey_base_date);
         tvtime_start = (AutoCompleteTextView) findViewById(R.id.tiger_prey_base_time_start);
         tvtime_end = (AutoCompleteTextView) findViewById(R.id.tiger_prey_base_time_end);
@@ -244,6 +246,13 @@ public class TigerPreyBaseMonitoring extends AppCompatActivity implements Adapte
                 .setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         habitatType.setAdapter(habitatTypeAdapter);
         habitatType.setOnItemSelectedListener(this);
+
+        ruggednessTypeAdpt = new ArrayAdapter<String>(this,
+                android.R.layout.simple_spinner_item, Constants.RUGGEDNESS);
+        ruggednessTypeAdpt
+                .setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerRuggednessType.setAdapter(ruggednessTypeAdpt);
+        spinnerRuggednessType.setOnItemSelectedListener(this);
 
         send = (Button) findViewById(R.id.tiger_prey_base_send);
         save = (Button) findViewById(R.id.tiger_prey_base_save);
@@ -514,13 +523,6 @@ public class TigerPreyBaseMonitoring extends AppCompatActivity implements Adapte
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
@@ -529,6 +531,10 @@ public class TigerPreyBaseMonitoring extends AppCompatActivity implements Adapte
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.app_update) {
+            return true;
+        }
+        if (id == android.R.id.home) {
+            onBackPressed();
             return true;
         }
 
@@ -571,7 +577,7 @@ public class TigerPreyBaseMonitoring extends AppCompatActivity implements Adapte
         if (spinnerId == R.id.tiger_prey_base_habitat_type) {
             switch (position) {
                 case 0:
-                    habitat_type = "SF - Sal com.naxa.conservationtracking.forest";
+                    habitat_type = "SF - Sal";
                     break;
                 case 1:
                     habitat_type = "MF - Mixed Forest";
@@ -593,12 +599,19 @@ public class TigerPreyBaseMonitoring extends AppCompatActivity implements Adapte
                     break;
             }
         }
+
+
+        if(spinnerId == R.id.tiger_prey_base_ruggedness_type){
+            ruggedness_type = spinnerRuggednessType.getSelectedItem().toString();
+        }
     }
 
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
 
     }
+
+
 
     @Override
     public void onBackPressed() {
@@ -936,6 +949,7 @@ public class TigerPreyBaseMonitoring extends AppCompatActivity implements Adapte
             header.put("weather", weather);
             header.put("date", date);
             header.put("habitat_type", habitat_type);
+            header.put("ruggedness_type", ruggedness_type);
             header.put("time_start", time_start);
             header.put("time_end", time_end);
 
@@ -987,7 +1001,7 @@ public class TigerPreyBaseMonitoring extends AppCompatActivity implements Adapte
         String data = jsonOb.getString("formdata");
         Log.e("PlantationDETAIL", "formdata : " + jsonOb.toString());
         JSONObject jsonObj = new JSONObject(data);
-        Log.e("PlantationDETAIL", "json : " + jsonObj.toString());
+        Log.e("TigerPreyBase", "json : " + jsonObj.toString());
 
         projectCode = jsonObj.getString("project_code");
         landscape = jsonObj.getString("landscape");
@@ -1007,6 +1021,12 @@ public class TigerPreyBaseMonitoring extends AppCompatActivity implements Adapte
         habitat_type = jsonObj.getString("habitat_type");
         time_start = jsonObj.getString("time_start");
         time_end = jsonObj.getString("time_end");
+
+        Log.e("TigerPreyBase", " before ruggedness json : " + data);
+
+        ruggedness_type = jsonObj.getString("ruggedness_type");
+        Log.e("TigerPreyBase", " after ruggedness json : " + ruggedness_type);
+
 
 
         no_of_segment_added = jsonObj.getString("no_of_segment_added");
@@ -1084,6 +1104,9 @@ public class TigerPreyBaseMonitoring extends AppCompatActivity implements Adapte
 
         int forConPos = habitatTypeAdapter.getPosition(habitat_type);
         habitatType.setSelection(forConPos);
+
+        int ruggednessTypePos = ruggednessTypeAdpt.getPosition(ruggedness_type);
+        spinnerRuggednessType.setSelection(ruggednessTypePos);
 
     }
 

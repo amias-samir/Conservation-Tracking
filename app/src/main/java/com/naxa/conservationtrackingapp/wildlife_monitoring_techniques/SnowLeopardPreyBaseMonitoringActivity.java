@@ -20,6 +20,7 @@ import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -93,54 +94,21 @@ public class SnowLeopardPreyBaseMonitoringActivity extends AppCompatActivity imp
     @BindView(R.id.snow_leopard_prey_base_species_add_btn)
     Button btnSpeciesAdd;
 
-    //    @Nullable
-//    @BindView(R.id.snow_leopard_prey_base_site)
     AutoCompleteTextView tvSite;
-    //    @Nullable
-//    @BindView(R.id.snow_leopard_prey_base_female_no)
     AutoCompleteTextView tvFemaleNo;
-    //    @Nullable
-//    @BindView(R.id.snow_leopard_prey_base_young_no)
     AutoCompleteTextView tvYoungNo;
-    //    @Nullable
-//    @BindView(R.id.snow_leopard_prey_base_yearling_no)
     AutoCompleteTextView tvYearlingNo;
-    //    @Nullable
-//    @BindView(R.id.snow_leopard_prey_base_young_male_no)
     AutoCompleteTextView tvYoungMaleNo;
-    //    @Nullable
-//    @BindView(R.id.snow_leopard_prey_base_sub_adult_male_no)
     AutoCompleteTextView tvSubAdultMaleNo;
-    //    @Nullable
-//    @BindView(R.id.snow_leopard_prey_base_adult_male_no)
     AutoCompleteTextView tvAdultMaleNo;
-    //    @Nullable
-//    @BindView(R.id.snow_leopard_prey_base_unidentified_no)
     AutoCompleteTextView tvUnidentifiedNo;
-    //    @Nullable
-//    @BindView(R.id.snow_leopard_prey_base_total_numbers)
     AutoCompleteTextView tvTotalNumbers;
-    //    @Nullable
-//    @BindView(R.id.snow_leopard_prey_base_habitat_type)
     Spinner spinnerHabitatType;
-    //    @Nullable
-//    @BindView(R.id.snow_leopard_prey_base_aspect)
     Spinner spinnerAspect;
-    //    @Nullable
-//    @BindView(R.id.snow_leopard_prey_base_distance_to_cliff)
     AutoCompleteTextView tvDistanceToCliff;
-    //    @Nullable
-//    @BindView(R.id.snow_leopard_prey_base_slope)
     Spinner spinnerSlope;
-    //    @Nullable
-//    @BindView(R.id.snow_leopard_prey_base_species_GpsStart)
     Button btnSpeciesGpsStart;
-    //    @Nullable
-//    @BindView(R.id.snow_leopard_prey_base_species_preview_map)
     Button btnSpeciesPreviewMap;
-    //    @Nullable
-//    @BindView(R.id.snow_leopard_prey_base_dialog_add_species_button)
-    Button dialogAddSpeciesButton;
     private String TAG = "ScatCollectionDetailsActivity";
 
     @BindView(R.id.snow_leopard_prey_base_observer_name)
@@ -524,6 +492,26 @@ public class SnowLeopardPreyBaseMonitoringActivity extends AppCompatActivity imp
             return String.valueOf(c);
         else
             return "0" + String.valueOf(c);
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.app_update) {
+            return true;
+        }
+        if (id == android.R.id.home) {
+            onBackPressed();
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
 

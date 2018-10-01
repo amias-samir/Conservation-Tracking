@@ -40,7 +40,7 @@
             android:value="@integer/google_play_services_version" />
 
         <activity
-            android:name=".activities.GPS_Check_Activity"
+            android:name=".activities.SplashActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait">
             <intent-filter>
@@ -51,9 +51,10 @@
         </activity>
         <activity
             android:exported="true"
-            android:name=".activities.SplashActivity"
+            android:name=".activities.GPS_Check_Activity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" />
+
         <activity
             android:exported="true"
             android:name=".MainActivity"
