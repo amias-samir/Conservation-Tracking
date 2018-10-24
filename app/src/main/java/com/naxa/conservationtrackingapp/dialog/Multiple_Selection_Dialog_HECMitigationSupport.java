@@ -2,6 +2,7 @@ package com.naxa.conservationtrackingapp.dialog;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
@@ -512,11 +513,20 @@ public class Multiple_Selection_Dialog_HECMitigationSupport {
             @Override
             public void onClick(View v) {
                 // TODO Auto-generated method stub
-                String to_return = "Electric- "+editText1.getText().toString()+", Solar- "+editText2.getText().toString()
-                        +", Bio Fencing- "+editText3.getText().toString() + ", Machan- "+editText4.getText().toString() +
-                        ", Trench- "+editText5.getText().toString() + ", Grain Storage- "+editText6.getText().toString()
-                        + ", Improved Corral- "+editText7.getText().toString() + ", Watch Tower- "+editText8.getText().toString()
-                        + ", Mesh Wire- "+editText9.getText().toString();
+
+                String return_1 = (TextUtils.isEmpty(editText1.getText().toString())) ?"": "Electric- "+editText1.getText().toString();
+                String return_2 = (TextUtils.isEmpty(editText2.getText().toString())) ?"": "Solar- "+editText2.getText().toString();
+                String return_3 = (TextUtils.isEmpty(editText3.getText().toString())) ?"": "Bio Fencing- "+editText3.getText().toString();
+                String return_4 = (TextUtils.isEmpty(editText4.getText().toString())) ?"": "Machan- "+editText4.getText().toString();
+                String return_5 = (TextUtils.isEmpty(editText5.getText().toString())) ?"": "Trench- "+editText5.getText().toString();
+                String return_6 = (TextUtils.isEmpty(editText6.getText().toString())) ?"": "Grain Storage- "+editText6.getText().toString();
+                String return_7 = (TextUtils.isEmpty(editText7.getText().toString())) ?"": "Improved Corral- "+editText7.getText().toString();
+                String return_8 = (TextUtils.isEmpty(editText8.getText().toString())) ?"": "Watch Towe- "+editText8.getText().toString();
+                String return_9 = (TextUtils.isEmpty(editText9.getText().toString())) ?"": "Mesh Wire- "+editText9.getText().toString();
+                
+
+                String to_return = return_1+return_2+return_3+return_4+return_5+return_6+return_7+return_8+return_9;
+
                 HWCMitigationSupport.fromMultipleSelectionDialog = to_return;
                 HWCMitigationSupport.tvNameAndNumber.setText(to_return);
 
