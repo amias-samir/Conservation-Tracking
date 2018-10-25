@@ -127,13 +127,59 @@
                 </LinearLayout>
             </android.support.v7.widget.CardView>
 
-            <!--get Gps Location House hold-->
+
             <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp"
+                card_view:cardBackgroundColor="@color/transparent"
+                card_view:cardElevation="1dp">
+            <!--gpsType-->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:layout_margin="@dimen/layout_margin"
+                android:padding="5dp">
+
+                <TextView
+                    android:id="@+id/tvGpsType"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/nursery_detail_landscape"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="5dp"
+                    android:text="GPS Type"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <Spinner
+                    android:id="@+id/genera_form_spinner_gps_type"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_toEndOf="@+id/landScape"
+                    android:layout_toRightOf="@+id/landScape" />
+
+            </RelativeLayout>
+            </android.support.v7.widget.CardView>
+
+            <!--get Gps Location -->
+            <android.support.v7.widget.CardView
+                android:id="@+id/gpsPointCardView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 card_view:cardBackgroundColor="@color/transparent"
                 card_view:cardElevation="1dp"
-                android:layout_margin="20dp">
+                android:layout_margin="20dp"
+                android:visibility="gone">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -173,6 +219,93 @@
 
                 </LinearLayout>
             </android.support.v7.widget.CardView>
+
+
+            <!--track Gps Location-->
+            <android.support.v7.widget.CardView
+                android:id="@+id/gpsTrackingCardView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                card_view:cardBackgroundColor="@color/transparent"
+                card_view:cardElevation="1dp"
+                android:visibility="gone">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="20dp"
+                    android:orientation="vertical"
+                    android:padding="5dp">
+
+                    <TextView
+                        android:id="@+id/general_form_GetGpsCoordinate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="@string/gps_tracking"
+                        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_centerVertical="true"
+                        android:layout_margin="@dimen/layout_margin"
+                        android:padding="5dp">
+
+                        <Button
+                            android:id="@+id/general_form_GpsTrackEnd"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_alignParentRight="true"
+                            android:background="@drawable/button_pressed_general_light"
+                            android:text="End"
+                            android:textColor="#ffffff" />
+
+                        <Button
+                            android:id="@+id/general_form_GpsTrackStart"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/button_pressed_general_light"
+                            android:text="Start"
+                            android:textColor="#ffffff" />
+
+                        <ProgressBar
+                            style="?android:attr/progressBarStyleSmall"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/progressBar"
+                            android:layout_centerVertical="true"
+                            android:layout_centerHorizontal="true" />
+
+                    </RelativeLayout>
+
+                    <Button
+                        android:id="@+id/general_form_preview_tracked_map"
+                        android:layout_width="212dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:background="@drawable/button_pressed_general_light"
+                        android:text="Preview Map"
+                        android:textColor="#ffffff" />
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="20dp">
+
+                        <TextView
+                            android:id="@+id/general_form_boundry_using_gps"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Area using GPS : " />
+                    </android.support.design.widget.TextInputLayout>
+
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
 
             <!--Photograph Of the Site-->
             <android.support.v7.widget.CardView

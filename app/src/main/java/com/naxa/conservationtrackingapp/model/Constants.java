@@ -7,6 +7,7 @@ public class Constants {
 
     public static String  hwcEndomentGPSPointKey = "" , hwcEndomentGPSTrakingKey = "" ;
 
+    public static String[] GPS_TYPE = { "Point", "Polygon"};
     public static String[] LANDSCAPE = { "TAL PABZ", "TAL CBRP", "SHL", "CHAL", "NML", "Others"};
 
     public static String[] statusOfFench = { "Good" , "Broken" };

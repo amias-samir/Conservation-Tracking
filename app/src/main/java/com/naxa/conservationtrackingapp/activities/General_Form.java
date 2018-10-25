@@ -8,7 +8,6 @@ import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -16,11 +15,10 @@ import android.location.Location;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Environment;
-import android.preference.PreferenceManager;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatButton;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
 import android.util.Base64;
 import android.util.DisplayMetrics;
@@ -28,6 +26,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -35,10 +34,21 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.model.LatLng;
+import com.naxa.conservationtrackingapp.GeoPointActivity;
+import com.naxa.conservationtrackingapp.PhoneUtils;
+import com.naxa.conservationtrackingapp.R;
+import com.naxa.conservationtrackingapp.application.ApplicationClass;
+import com.naxa.conservationtrackingapp.database.DataBaseConserVationTracking;
+import com.naxa.conservationtrackingapp.dialog.Default_DIalog;
+import com.naxa.conservationtrackingapp.model.CheckValues;
+import com.naxa.conservationtrackingapp.model.Constants;
+import com.naxa.conservationtrackingapp.model.StaticListOfCoordinates;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -58,31 +68,27 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.nio.DoubleBuffer;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 import javax.net.ssl.HttpsURLConnection;
 
-import com.naxa.conservationtrackingapp.GeoPointActivity;
-import com.naxa.conservationtrackingapp.PhoneUtils;
-import com.naxa.conservationtrackingapp.R;
-import com.naxa.conservationtrackingapp.application.ApplicationClass;
-import com.naxa.conservationtrackingapp.database.DataBaseConserVationTracking;
-import com.naxa.conservationtrackingapp.dialog.Default_DIalog;
-import com.naxa.conservationtrackingapp.model.CheckValues;
-import com.naxa.conservationtrackingapp.model.Constants;
-import com.naxa.conservationtrackingapp.model.StaticListOfCoordinates;
-import com.naxa.conservationtrackingapp.wildlife_monitoring_techniques.HumanDisturbance;
-
 import Utls.UserNameAndPasswordUtils;
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 import cn.refactor.lib.colordialog.PromptDialog;
 
 /**
  * Created by ramaan on 3/5/2016.
  */
-public class General_Form extends AppCompatActivity {
+public class General_Form extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     private static final String TAG = "General_Form";
     Toolbar toolbar;
     int CAMERA_PIC_REQUEST = 2;
@@ -91,6 +97,8 @@ public class General_Form extends AppCompatActivity {
     ProgressDialog mProgressDlg;
     Context context = this;
     GPS_TRACKER_FOR_POINT gps;
+    GpsTracker gpsTracker;
+
     String jsonToSend, photoTosend;
     String imagePath, encodedImage = null, imageName = "no_photo";
     ImageButton photo;
@@ -103,25 +111,35 @@ public class General_Form extends AppCompatActivity {
 
     boolean isGpsTracking = false;
     boolean isGpsTaken = false;
+    ScheduledExecutorService scheduleTaskExecutor = Executors.newScheduledThreadPool(5);
+
 
     double initLat;
     double finalLat;
     double initLong;
     double finalLong;
-    ImageView previewImageSite;
-    PendingIntent pendingIntent;
-    BroadcastReceiver mReceiver;
-    AlarmManager alarmManager;
+
     ArrayList<LatLng> listCf = new ArrayList<LatLng>();
     List<Location> gpslocation = new ArrayList<>();
     StringBuilder stringBuilder = new StringBuilder();
     String latLangArray = "", jsonLatLangArray;
+
+
+    ImageView previewImageSite;
+    PendingIntent pendingIntent;
+    BroadcastReceiver mReceiver;
+    AlarmManager alarmManager;
+
+
     String agreement_no;
     String project_name;
     String fiscal_year;
     String activity_name;
     String district_name;
     String vdc_name;
+    String gps_type;
+
+    double distance;
     double area_using_Gps;
 
     String name_bz_corridor;
@@ -132,17 +150,35 @@ public class General_Form extends AppCompatActivity {
     String test_field_4;
     String others;
     JSONArray jsonArrayGPS = new JSONArray();
-    TextView tvBoundryUsingGps;
     AutoCompleteTextView tvProject_name, tvFiscal_year, tvDistrictname, tvNameOfVdc,
             tvField1, tvField2, tvField3, tvField4, tvNotes;
 
+    ArrayAdapter gpsTypeAdpt;
+
     String userNameToSend, passwordToSend;
     String dataSentStatus = "", dateString;
+    @BindView(R.id.general_form_GpsTrackEnd)
+    Button btnGpsTrackEnd;
+    @BindView(R.id.general_form_GpsTrackStart)
+    Button btnGpsTrackStart;
+    @BindView(R.id.progressBar)
+    ProgressBar tracking;
+    @BindView(R.id.general_form_preview_tracked_map)
+    Button btnPreviewTrackedMap;
+    @BindView(R.id.general_form_boundry_using_gps)
+    TextView tvBoundryUsingGps;
+    @BindView(R.id.genera_form_spinner_gps_type)
+    Spinner spinnerGpsType;
+    @BindView(R.id.gpsPointCardView)
+    CardView gpsPointCardView;
+    @BindView(R.id.gpsTrackingCardView)
+    CardView gpsTrackingCardView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.general_form);
+        ButterKnife.bind(this);
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -168,7 +204,17 @@ public class General_Form extends AppCompatActivity {
         previewImageSite = (ImageView) findViewById(R.id.general_form_PhotographSiteimageViewPreview);
         previewImageSite.setVisibility(View.GONE);
 
+        gpsTypeAdpt = new ArrayAdapter<String>(this,
+                android.R.layout.simple_spinner_item, Constants.GPS_TYPE);
+        gpsTypeAdpt
+                .setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerGpsType.setAdapter(gpsTypeAdpt);
+        spinnerGpsType.setOnItemSelectedListener(this);
+
         initilizeUI();
+
+        tracking.setVisibility(View.INVISIBLE);
+
 
         send.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -252,7 +298,7 @@ public class General_Form extends AppCompatActivity {
                         district_name = tvDistrictname.getText().toString();
                         vdc_name = tvNameOfVdc.getText().toString();
 
-                        if(!CheckValues.isFromSavedFrom) {
+                        if (!CheckValues.isFromSavedFrom) {
                             jsonLatLangArray = jsonArrayGPS.toString();
                         }
                         test_field_1 = tvField1.getText().toString();
@@ -372,6 +418,9 @@ public class General_Form extends AppCompatActivity {
         startGps.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                initLat = 0.0; initLong = 0.0; finalLat = 0.0; finalLong = 0.0;
+                listCf.clear();
+                gpslocation.clear();
                 Intent toGeoPointActivity = new Intent(context, GeoPointActivity.class);
                 startActivityForResult(toGeoPointActivity, GEOPOINT_RESULT_CODE);
             }
@@ -470,15 +519,8 @@ public class General_Form extends AppCompatActivity {
 //                image_name_tv.setText(filePath);
                 imagePath = filePath;
                 addImage();
-//                Toast.makeText(getApplicationContext(), "" + encodedImage, Toast.LENGTH_SHORT).show();
-//                if (file_extn.equals("img") || file_extn.equals("jpg") || file_extn.equals("jpeg") || file_extn.equals("gif") || file_extn.equals("png")) {
-//                    //FINE
-//
-//                }
-//                else{
-//                    //NOT IN REQUIRED FORMAT
-//                }
             }
+
         if (requestCode == CAMERA_PIC_REQUEST) {
             if (resultCode == Activity.RESULT_OK) {
                 Bitmap thumbnail = (Bitmap) data.getExtras().get("data");
@@ -494,34 +536,54 @@ public class General_Form extends AppCompatActivity {
         if (requestCode == GEOPOINT_RESULT_CODE) {
             switch (resultCode) {
                 case RESULT_OK:
-                    String location = data.getStringExtra(LOCATION_RESULT);
 
-                    String string = location;
-                    String[] parts = string.split(" ");
-                    String split_lat = parts[0]; // 004
-                    String split_lon = parts[1]; // 034556
+                    if (gps_type.equals("Point")) {
 
-                    finalLat = Double.parseDouble(split_lat);
-                    finalLong = Double.parseDouble(split_lon);
+                        String location = data.getStringExtra(LOCATION_RESULT);
 
-                    LatLng d = new LatLng(finalLat, finalLong);
-                    //
-                    listCf.add(d);
-                    isGpsTaken = true;
+                        String string = location;
+                        String[] parts = string.split(" ");
+                        String split_lat = parts[0]; // 004
+                        String split_lon = parts[1]; // 034556
 
-                    if (!split_lat.equals("") && !split_lon.equals("")) {
-                        GPS_TRACKER_FOR_POINT.GPS_POINT_INITILIZED = true;
-                        try {
-                            JSONObject locationData = new JSONObject();
-                            locationData.put("latitude", finalLat);
-                            locationData.put("longitude", finalLong);
+                        finalLat = Double.parseDouble(split_lat);
+                        finalLong = Double.parseDouble(split_lon);
 
-                            jsonArrayGPS.put(locationData);
-                        } catch (JSONException e) {
-                            e.printStackTrace();
+                        LatLng d = new LatLng(finalLat, finalLong);
+                        //
+                        listCf.add(d);
+                        isGpsTaken = true;
+
+                        if (!split_lat.equals("") && !split_lon.equals("")) {
+                            GPS_TRACKER_FOR_POINT.GPS_POINT_INITILIZED = true;
+                            try {
+                                JSONObject locationData = new JSONObject();
+                                locationData.put("latitude", finalLat);
+                                locationData.put("longitude", finalLong);
+
+                                jsonArrayGPS.put(locationData);
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                            previewMap.setEnabled(true);
+                            startGps.setText("Location Recorded");
                         }
-                        previewMap.setEnabled(true);
-                        startGps.setText("Location Recorded");
+                    }else if(gps_type.equals("Polygon")){
+                        tracking.setVisibility(View.VISIBLE);
+                        isGpsTracking = true;
+                        listCf.clear();
+                        gpslocation.clear();
+                        gpsTracker = new GpsTracker(General_Form.this);
+                        if (gpsTracker.canGetLocation()) {
+
+                        } else {
+                            gpsTracker.showSettingsAlert();
+                        }
+
+                        UpdateData();//Update GPS coordinate background thread //Method
+
+                        btnGpsTrackEnd.setEnabled(true);
+                        btnGpsTrackStart.setEnabled(false);
                     }
 
 
@@ -660,12 +722,14 @@ public class General_Form extends AppCompatActivity {
             jsonLatLangArray = arrayToParse;
 
             JSONArray array = new JSONArray(arrayToParse);
+            Log.d(TAG, "parseArrayGPS: size" + array.length());
+
             for (int i = 0; i < array.length(); ++i) {
-                JSONObject item1 = null;
+                JSONArray item1 = null;
 
 
-                item1 = array.getJSONObject(i);
-                LatLng location = new LatLng(item1.getDouble("latitude"), item1.getDouble("longitude"));
+                item1 = array.getJSONArray(i);
+                LatLng location = new LatLng(Double.parseDouble(item1.get(0).toString()), Double.parseDouble(item1.get(1).toString()));
                 listCf.add(location);
 
 //            mMap.addMarker(new MarkerOptions().position(location).title("Start"));
@@ -688,6 +752,7 @@ public class General_Form extends AppCompatActivity {
         }
     }
 
+
     public void convertDataToJson() {
         //function in the activity that corresponds to the layout button
         JSONObject post_dict = new JSONObject();
@@ -705,8 +770,14 @@ public class General_Form extends AppCompatActivity {
             header.put("test_field_2", test_field_2);
             header.put("test_field_3", test_field_3);
             header.put("test_field_4", test_field_4);
+
             header.put("latitude", finalLat);
             header.put("longitude", finalLong);
+
+            header.put("gps_type", gps_type);
+            header.put("boundary", latLangArray);
+            header.put("area_gps", area_using_Gps);
+
             header.put("others", others);
             post_dict.put("formdata", header);
 
@@ -721,6 +792,7 @@ public class General_Form extends AppCompatActivity {
             e.printStackTrace();
         }
     }
+
 
     public void sendDatToserver() {
         if (jsonToSend.length() > 0) {
@@ -750,6 +822,12 @@ public class General_Form extends AppCompatActivity {
         test_field_4 = jsonObj.getString("test_field_4");
         finalLat = Double.parseDouble(jsonObj.getString("latitude"));
         finalLong = Double.parseDouble(jsonObj.getString("longitude"));
+
+        gps_type = jsonObj.getString("gps_type");
+        latLangArray = jsonObj.getString("boundary");
+        area_using_Gps = Double.parseDouble(jsonObj.getString("area_gps"));
+
+
         others = jsonObj.getString("others");
 
         Log.e("Plantationdetail", "Parsed data " + agreement_no + project_name + fiscal_year);
@@ -763,6 +841,183 @@ public class General_Form extends AppCompatActivity {
         tvField3.setText(test_field_3);
         tvField4.setText(test_field_4);
         tvNotes.setText(others);
+
+        int setGpsType = gpsTypeAdpt.getPosition(gps_type);
+        spinnerGpsType.setSelection(setGpsType);
+
+        tvBoundryUsingGps.setText("Area Using GPS : " + area_using_Gps + " (Hectares)");
+
+        if(gps_type.equals("Point")){
+            gpsPointCardView.setVisibility(View.VISIBLE);
+        }else if(gps_type.equals("Polygon")){
+            gpsTrackingCardView.setVisibility(View.VISIBLE);
+        }
+    }
+
+    @OnClick({R.id.general_form_GpsTrackEnd, R.id.general_form_GpsTrackStart, R.id.general_form_preview_tracked_map})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.general_form_GpsTrackEnd:
+                btnGpsTrackEnd.setEnabled(false);
+                tracking.setVisibility(View.INVISIBLE);
+                isGpsTracking = false;
+                startGps.setEnabled(true);
+
+                initLat = listCf.get(0).latitude;
+                initLong = listCf.get(0).longitude;
+
+                if (stringBuilder.length() > 0) {
+                    stringBuilder.deleteCharAt(stringBuilder.length() - 1);
+                    String gpsArray = stringBuilder.toString();
+                    StringBuilder sb = new StringBuilder();
+
+                    Log.e("gpsarray:", gpsArray);
+                    jsonLatLangArray = latLangArray;
+
+                    sb.append("[" + gpsArray + "]");
+                    latLangArray = sb.toString();
+                    Log.e("CFDETAIL", "" + latLangArray);
+
+                    area_using_Gps = 0.0001 * CalculateAreaUsinGPS.calculateAreaOfGPSPolygonOnEarthInSquareMeters(gpslocation);//Area in Hectares
+                    tvBoundryUsingGps.setText("Area Using GPS : " + area_using_Gps + " (Hectares)");
+
+                    float[] results = new float[1];
+                    Location.distanceBetween(
+                            initLat, initLong,
+                            finalLat, finalLong, results);
+                    distance = 0.001 * results[0];//Distance in Kilometers
+                    Default_DIalog.showDefaultDialog(context, R.string.gps_Info, "Distance measured (Kilometers) : " + (String.format("Value of a: %.8f", distance)) + "\nArea Calculated (Hectares): " + area_using_Gps);
+
+                } else {
+                    Default_DIalog.showDefaultDialog(context, R.string.gps_Info, "GPS is not initialized properly");
+
+                }
+                break;
+
+            case R.id.general_form_GpsTrackStart:
+                initLat = 0.0; initLong = 0.0; finalLat = 0.0; finalLong = 0.0;
+                listCf.clear();
+                gpslocation.clear();
+                Intent toGeoPointActivity = new Intent(context, GeoPointActivity.class);
+                startActivityForResult(toGeoPointActivity, GEOPOINT_RESULT_CODE);
+                break;
+
+            case R.id.general_form_preview_tracked_map:
+                gpslocation.clear();
+                StaticListOfCoordinates.setList(listCf);
+                startActivity(new Intent(General_Form.this, MapPolyLineActivity.class));
+                break;
+        }
+    }
+
+
+    private void UpdateData() {
+        mProgressDlg = new ProgressDialog(context);
+        mProgressDlg.setMessage("Acquiring GPS location\nPlease wait...");
+        mProgressDlg.setIndeterminate(false);
+        mProgressDlg.setCancelable(false);
+        mProgressDlg.show();
+
+        gpsTracker = new GpsTracker(General_Form.this);
+        if (gpsTracker.canGetLocation()) {
+
+            finalLat = gpsTracker.getLatitude();
+            finalLong = gpsTracker.getLongitude();
+
+            //Background thread
+            scheduleTaskExecutor.scheduleAtFixedRate(new Runnable() {
+
+                public void run() {
+
+                    runOnUiThread(new Runnable() {
+
+                        public void run() {
+
+                            if (finalLat == 0.0 || finalLong == 0.0) {
+
+                                gpsTracker = new GpsTracker(General_Form.this);
+                                if (gpsTracker.canGetLocation()) {
+                                    finalLat = gpsTracker.getLatitude();
+                                    finalLong = gpsTracker.getLongitude();
+
+                                    Log.e("latlang", " lat: " + finalLat + " long: "
+                                            + finalLong);
+
+                                }
+
+                            } else if (finalLat != 0 || finalLong != 0) {
+                                mProgressDlg.dismiss();
+                                gpsTracker = new GpsTracker(General_Form.this);
+                                if (gpsTracker.canGetLocation()) {
+                                    gpslocation.add(gpsTracker.getLocation());
+                                    finalLat = gpsTracker.getLatitude();
+                                    finalLong = gpsTracker.getLongitude();
+                                    if (finalLat != 0) {
+
+                                        try {
+                                            JSONObject data = new JSONObject();
+                                            data.put("latitude", finalLat);
+                                            data.put("longitude", finalLong);
+
+                                            jsonArrayGPS.put(data);
+                                        } catch (JSONException e) {
+                                            e.printStackTrace();
+                                        }
+
+                                        LatLng d = new LatLng(finalLat, finalLong);
+                                        isGpsTaken = true;
+                                        listCf.add(d);
+                                        Log.e("latlang", " lat: " + finalLat + " long: "
+                                                + finalLong);
+                                        stringBuilder.append("[" + finalLat + "," + finalLong + "]" + ",");
+
+                                    } else {
+                                        gpsTracker.showSettingsAlert();
+                                    }
+                                }
+                            }
+                        }
+
+                    });
+                }
+            }, 0, 5, TimeUnit.SECONDS);
+
+        } else {
+            try {
+                gpsTracker.showSettingsAlert();
+            } catch (NullPointerException e) {
+
+            }
+
+        }
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        int spinnerId = parent.getId();
+
+        if (spinnerId == R.id.genera_form_spinner_gps_type) {
+            switch (position) {
+                case 0:
+                    gps_type = "Point";
+                    gpsPointCardView.setVisibility(View.VISIBLE);
+                    gpsTrackingCardView.setVisibility(View.GONE);
+
+                    break;
+                case 1:
+                    gps_type = "Polygon";
+                    gpsTrackingCardView.setVisibility(View.VISIBLE);
+                    gpsPointCardView.setVisibility(View.GONE);
+                    break;
+
+            }
+        }
+
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
     }
 
     private class RestApii extends AsyncTask<String, Void, String> {
