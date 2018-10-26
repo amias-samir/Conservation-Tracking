@@ -100,6 +100,7 @@ import cn.refactor.lib.colordialog.PromptDialog;
  * Created by ramaan on 1/18/2016.
  */
 public class ForestProctection extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+    private static final String TAG ="ForestProctection" ;
     Toolbar toolbar;
     //change for more photos
     int CAMERA_PIC_REQUEST = 2;
@@ -1311,6 +1312,8 @@ public class ForestProctection extends AppCompatActivity implements AdapterView.
             post_dict.put("formdata", header);
 
             jsonToSend = post_dict.toString();
+
+            Log.d(TAG, "convertDataToJson: "+jsonToSend);
 
             photo_dict.put("photo", encodedImage);
             photo_dict.put("photo2", encodedImageCompleted);

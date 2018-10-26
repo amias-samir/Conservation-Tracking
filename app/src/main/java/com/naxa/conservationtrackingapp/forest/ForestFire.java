@@ -95,6 +95,7 @@ import cn.refactor.lib.colordialog.PromptDialog;
  * Created by ramaan on 1/18/2016.
  */
 public class ForestFire extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+    private static final String TAG = "ForestFire";
     Toolbar toolbar;
     int CAMERA_PIC_REQUEST = 2;
     Spinner spinnerLandscape, spinnermobilization, spinnercausesOfForestFire;
@@ -857,6 +858,8 @@ public class ForestFire extends AppCompatActivity implements AdapterView.OnItemS
             post_dict.put("formdata", header);
 
             jsonToSend = post_dict.toString();
+
+            Log.d(TAG, "convertDataToJson: "+jsonToSend);
 
             photo_dict.put("photo", encodedImage);
             photoTosend = photo_dict.toString();

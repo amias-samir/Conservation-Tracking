@@ -104,6 +104,7 @@ import cn.refactor.lib.colordialog.PromptDialog;
  * Created by ramaan on 1/18/2016.
  */
 public class HWCMitigationSupport extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+    private static final String TAG ="HWCMitigationSupport" ;
     Toolbar toolbar;
 
     //change for more photos
@@ -1168,6 +1169,8 @@ public class HWCMitigationSupport extends AppCompatActivity implements AdapterVi
 
             jsonToSend = post_dict.toString();
 
+            Log.d(TAG, "convertDataToJson: "+jsonToSend);
+
             photo_dict.put("photo", encodedImage);
             photo_dict.put("photo2", encodedImageCompleted);
             photo_dict.put("photo3", encodedImageMonitoring);
@@ -1267,7 +1270,8 @@ public class HWCMitigationSupport extends AppCompatActivity implements AdapterVi
             tvNameAndNumber.setText("");
             tvValue.setText("");
         } else {
-            String[] actions1 = activity_name.split("   ");
+            Log.e(TAG, "parseJson: "+activity_name );
+            String[] actions1 = activity_name.split("  ");
             tvNameAndNumber.setText(actions1[0]);
             tvValue.setText(actions1[1]);
         }

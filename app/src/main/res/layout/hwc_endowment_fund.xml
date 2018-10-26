@@ -583,7 +583,7 @@
                                 android:id="@+id/hwc_endowment_fund_FundOthers"
                                 android:layout_width="fill_parent"
                                 android:layout_height="wrap_content"
-                                android:hint="Other"
+                                android:hint="Other Fund"
                                 android:inputType="number"
                                 android:layout_marginTop="45dp"
                                 />

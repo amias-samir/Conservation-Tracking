@@ -1202,6 +1202,8 @@ public class WetlandManagement extends AppCompatActivity implements AdapterView.
 
             jsonToSend = post_dict.toString();
 
+            Log.d(TAG, "convertDataToJson: "+jsonToSend);
+
             photo_dict.put("photo", encodedImage);
             photo_dict.put("photo2", encodedImageCompleted);
             photo_dict.put("photo3", encodedImageMonitoring);

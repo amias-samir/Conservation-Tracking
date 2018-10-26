@@ -418,6 +418,7 @@ public class General_Form extends AppCompatActivity implements AdapterView.OnIte
         startGps.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                latLangArray = "";
                 initLat = 0.0; initLong = 0.0; finalLat = 0.0; finalLong = 0.0;
                 listCf.clear();
                 gpslocation.clear();
