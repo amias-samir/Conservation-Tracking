@@ -911,7 +911,7 @@ public class IllegalLogging extends AppCompatActivity implements AdapterView.OnI
             tvNameAndNumber.setText("");
             tvOtherQuantity.setText("");
         } else {
-            String[] actions1 = confiscated_items.split("   ");
+            String[] actions1 = confiscated_items.split(" : ");
             tvNameAndNumber.setText(actions1[0]);
             tvOtherQuantity.setText(actions1[1]);
         }

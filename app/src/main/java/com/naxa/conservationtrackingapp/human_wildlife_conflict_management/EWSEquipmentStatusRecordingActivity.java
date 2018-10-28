@@ -362,7 +362,7 @@ public class EWSEquipmentStatusRecordingActivity extends AppCompatActivity imple
 
             jsonToSend = post_dict.toString();
 
-            Log.d(TAG, "convertDataToJsonSave: " + jsonToSend);
+            Log.d(TAG, "convertDataToJson: " + jsonToSend);
 
         } catch (JSONException e) {
             e.printStackTrace();
