@@ -72,7 +72,9 @@ import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import javax.net.ssl.HttpsURLConnection;
 
@@ -168,6 +170,7 @@ public class CapacityBuilding extends AppCompatActivity implements AdapterView.O
     static final int DATE_DIALOG_ID = 11;
     static final int DATE_DIALOG_ID1 = 12;
     String dataSentStatus = "", dateString;
+    private String TAG = "CapacityBuilding";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -381,7 +384,6 @@ public class CapacityBuilding extends AppCompatActivity implements AdapterView.O
 
 
                         long date = System.currentTimeMillis();
-
                         SimpleDateFormat sdf = new SimpleDateFormat("MMM dd, yyyy h:mm a");
                         String dateString = sdf.format(date);
                         dateToInput.setText(dateString);

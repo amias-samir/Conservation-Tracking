@@ -10,6 +10,9 @@ import android.widget.TextView;
 
 import com.naxa.conservationtrackingapp.R;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import com.naxa.conservationtrackingapp.model.SavedFormParameters;
@@ -36,20 +39,19 @@ public class Not_Sent_Forms_Adapter extends RecyclerView.Adapter<Not_Sent_Forms_
 
         SavedFormParameters ci = colorList.get(i);
 
-        if(ci.status.equals("Not Sent")){
+        if (ci.status.equals("Not Sent")) {
 
 
+            contactViewHolder.formName.setText(ci.formName);
+            contactViewHolder.formDate.setText(ci.date);
+            contactViewHolder.formStatus.setText(ci.status);
 
-        contactViewHolder.formName.setText(ci.formName);
-        contactViewHolder.formDate.setText(ci.date);
-        contactViewHolder.formStatus.setText(ci.status);
-
-        if(ci.status.equals("Not Sent") ){
-            contactViewHolder.statusIcon.setImageResource(R.drawable.circuler_background_not_sent);
-        }
-        if(ci.status.equals("Sent")){
-            contactViewHolder.statusIcon.setImageResource(R.drawable.circuler_background_sent);
-        }
+            if (ci.status.equals("Not Sent")) {
+                contactViewHolder.statusIcon.setImageResource(R.drawable.circuler_background_not_sent);
+            }
+            if (ci.status.equals("Sent")) {
+                contactViewHolder.statusIcon.setImageResource(R.drawable.circuler_background_sent);
+            }
 
         }
 
@@ -65,7 +67,7 @@ public class Not_Sent_Forms_Adapter extends RecyclerView.Adapter<Not_Sent_Forms_
     }
 
     public static class ContactViewHolder extends RecyclerView.ViewHolder {
-        protected TextView formName , formDate, formStatus;
+        protected TextView formName, formDate, formStatus;
         protected ImageView statusIcon;
 
         protected CardView cardView;

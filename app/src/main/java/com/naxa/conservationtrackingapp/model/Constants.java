@@ -123,7 +123,7 @@ public class Constants {
     public static String[] WMT_GMM_BIOLOGICAL_ACTIVITY = {"Basking", "Fishing", "Swimming"};
     public static String[] WMT_GMM_BIOLOGICAL_SPECIES_NAME = {"Gharial", "Mugger"};
 
-    public static String[] WMT_GMM_ANTHROPOGENIC_HABITAT_TYPE = {"Sal com.naxa.conservationtracking.forest", "Mixed Forest", "Riverine Forest", "Tall Grassland", "Short Grassland", "Wetland", "Streambed"};
+    public static String[] WMT_GMM_ANTHROPOGENIC_HABITAT_TYPE = {"Sal", "Mixed Forest", "Riverine Forest", "Tall Grassland", "Short Grassland", "Wetland", "Streambed"};
     public static String[] WMT_GMM_ANTHROPOGENIC_PRESENCE_OF_GHARIAL = {"Yes", "No"};
     public static String[] WMT_GMM_ANTHROPOGENIC_RIVER_POLLUTION = {"Waste", "Effluents", "Domestic Sewage"};
     public static String[] WMT_GMM_ANTHROPOGENIC_PRESENCE_OF_SAND = {"Yes", "No"};
