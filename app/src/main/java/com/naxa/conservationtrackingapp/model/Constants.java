@@ -118,7 +118,7 @@ public class Constants {
     public static String[] CE_CEA_THEME_TYPE = {"Endangered spp", "Anti-poaching", "Forest conservation",  "Climate Change", "Water"};
     public static String[] CE_CEA_SUB_ACTIVITIES = {"Debate", "Essay writing", "Sports", "Poetry", "Cleaning campaign", "Plantation", "Birding", "Forest inventory", "Lok dohori", "Drama", "Others"};
 
-    public static String[] WMT_GMM_BIOLOGICAL_HABITAT_TYPE = {"Sal com.naxa.conservationtracking.forest", "Mixed Forest", "Riverine Forest", "Tall Grassland", "Short Grassland", "Wetland", "Streambed"};
+    public static String[] WMT_GMM_BIOLOGICAL_HABITAT_TYPE = {"Sal", "Mixed Forest", "Riverine Forest", "Tall Grassland", "Short Grassland", "Wetland", "Streambed"};
     public static String[] WMT_GMM_BIOLOGICAL_HABITAT_SUBSTRATUM = {"Sandy bank", "Grassy bank", "Muddy soil", "Gravel", "Pebbles", "Rocky area"};
     public static String[] WMT_GMM_BIOLOGICAL_ACTIVITY = {"Basking", "Fishing", "Swimming"};
     public static String[] WMT_GMM_BIOLOGICAL_SPECIES_NAME = {"Gharial", "Mugger"};
