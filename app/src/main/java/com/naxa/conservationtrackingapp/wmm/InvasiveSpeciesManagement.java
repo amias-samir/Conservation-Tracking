@@ -1188,6 +1188,7 @@ public class InvasiveSpeciesManagement extends AppCompatActivity implements Adap
             post_dict.put("formdata", header);
 
             jsonToSend = post_dict.toString();
+            Log.d("InvasiveSpecies", "convertDataToJson: "+jsonToSend);
 
             photo_dict.put("photo", encodedImage);
             photo_dict.put("photo2", encodedImageCompleted);
@@ -1279,10 +1280,10 @@ public class InvasiveSpeciesManagement extends AppCompatActivity implements Adap
             tvOtherLandscape.setText(actions[1]);
 
         }
-
+//        "Mix of Uprooting and Burning", "Others"
 
         String[] actions1 = management_practices.split(":  ");
-        if (actions1[0].equals("Uprooted") || actions1[0].equals("Burnt")) {
+        if (actions1[0].equals("Uprooted") || actions1[0].equals("Burnt") || actions1[0].equals("Mix of Uprooting and Burning") ) {
 
             int setforestfire = spinManagementPractAdpt.getPosition(actions1[0]);
             spinnerManagementPract.setSelection(setforestfire);
