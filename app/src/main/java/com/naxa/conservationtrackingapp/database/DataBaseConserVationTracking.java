@@ -119,7 +119,7 @@ public class DataBaseConserVationTracking extends ODKSQLiteOpenHelper {
 
 
         Date date = new Date(System.currentTimeMillis());
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:MM a", Locale.US);
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm a", Locale.US);
 
         String formatedDate = format.format(date);
 
