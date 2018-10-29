@@ -184,6 +184,8 @@ public class General_Form extends AppCompatActivity implements AdapterView.OnIte
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        CheckValues.isFromSavedFrom = false;
+
 
         tvProject_name = (AutoCompleteTextView) findViewById(R.id.general_form_Project_Name);
         tvFiscal_year = (AutoCompleteTextView) findViewById(R.id.general_form_fiscal_Year);
@@ -1043,7 +1045,7 @@ public class General_Form extends AppCompatActivity implements AdapterView.OnIte
         @Override
         protected String doInBackground(String... params) {
             // TODO Auto-generated method stub
-            String urll = "http://naxa.com.np/cta/api/enter_record";
+            String urll = getResources().getString(R.string.api_host_url);
 
             String text = null;
 
